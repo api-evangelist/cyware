@@ -42,5 +42,29 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cyware is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/cyware_stock/
+Cyware is a New York-headquartered cybersecurity company, founded in 2016, that builds an AI-powered
+threat intelligence and security operations platform for enterprise SOC teams, ISACs and ISAOs,
+government agencies, CERTs and MSSPs. The Cyware Intelligence Suite spans Intel Exchange (its threat
+intelligence platform, formerly CTIX), Collaborate, Orchestrate, Respond and Cyware AI.
+
+## What this profile covers
+
+| Surface | Where |
+|---|---|
+| Intel Exchange (CTIX) v3 Open API — 391 operations | `openapi/cyware-intel-exchange-openapi.yml` |
+| Orchestrate (CO) Open API — 47 operations | `openapi/cyware-orchestrate-openapi.yml` |
+| Cyware MCP Server — 40 tools, open source (MIT, Go) | `mcp/cyware-mcp.yml` |
+| MCP tool -> REST operation crosswalk | `mcp/cyware-tool-crosswalk.yml` |
+| Authentication (HMAC-SHA1 signed query string) | `authentication/cyware-authentication.yml` |
+| Cross-cutting conventions | `conventions/cyware-conventions.yml` |
+| Agent skills for five marquee flows | `skills/` |
+
+Cyware publishes **no OpenAPI document**. The two specifications here were assembled from Cyware's
+own published, structured API reference documents at `ctixapiv3.cyware.com` and
+`orchestrateapi.cyware.com` — each endpoint page is served as machine-readable markdown carrying a
+JSON endpoint model, and every page is indexed from that host's `llms.txt`. Paths, methods,
+parameters, descriptions, enumerations and examples are reproduced from those documents.
+
+- https://www.cyware.com/
+- https://techdocs.cyware.com/
+- https://forgeglobal.com/cyware_stock/ (secondary-market listing that surfaced this company)

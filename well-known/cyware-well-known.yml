@@ -1,0 +1,61 @@
+generated: '2026-08-04'
+method: probed
+source: live GET of /.well-known/* on every Cyware host in apis.yml
+summary: >-
+  No /.well-known discovery documents are published on any Cyware host. The marketing site
+  (www.cyware.com) answers 404 for every probed path. The two API reference hosts
+  (ctixapiv3.cyware.com and orchestrateapi.cyware.com) are Theneo single-page applications whose
+  catch-all route answers HTTP 200 with the full HTML docs shell for every /.well-known/* path —
+  that is an SPA false positive, not a discovery document, and each was rejected on body inspection
+  (content-type text/html, body begins with the docs shell, ~1MB and ~300KB respectively).
+  Recorded here as evidence of a genuine negative result; no WellKnown, SecurityTxt or AgentCard
+  pointer is wired in apis.yml because nothing was found.
+hosts:
+  - host: www.cyware.com
+    result: all 404
+  - host: cyware.com
+    result: all 404
+  - host: techdocs.cyware.com
+    result: all 403/404
+  - host: demo.cyware.com
+    result: all 403/404
+  - host: ctixapiv3.cyware.com
+    result: SPA catch-all returns 200 text/html for every path (rejected)
+  - host: orchestrateapi.cyware.com
+    result: SPA catch-all returns 200 text/html for every path (rejected)
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+    hosts_probed: [www.cyware.com, cyware.com, techdocs.cyware.com, demo.cyware.com]
+    found: false
+  - path: /.well-known/openid-configuration
+    status: 404
+    found: false
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    found: false
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    found: false
+  - path: /.well-known/api-catalog
+    status: 404
+    found: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    found: false
+  - path: /.well-known/mcp.json
+    status: 404
+    found: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    found: false
+    note: A2A 1.0.0 canonical path — no agent card served by Cyware.
+  - path: /.well-known/agent.json
+    status: 404
+    found: false
+    note: Pre-0.3 legacy agent card path — also absent.
+x-evidence:
+  fetched: '2026-08-04'
+  paths_probed: 9
+  hosts_probed: 6
+  hits: 0

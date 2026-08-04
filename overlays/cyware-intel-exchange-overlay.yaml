@@ -1,0 +1,64 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cyware Intel Exchange (CTIX) v3 Open API
+  version: 1.0.0
+extends: openapi/cyware-intel-exchange-openapi.yml
+x-generated: '2026-08-04'
+x-method: generated
+x-note: >-
+  Cyware publishes no OpenAPI document; the spec this overlay extends was assembled by API Evangelist
+  from Cyware's own structured per-endpoint reference documents at https://ctixapiv3.cyware.com. This
+  overlay records the API Evangelist annotations layered on top of that reconstruction — provenance,
+  the authentication contract that the reference states in prose, and the cross-cutting conventions
+  captured elsewhere in this repo. It never changes a path, method, parameter or schema.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provenance:
+        source_host: https://ctixapiv3.cyware.com
+        source_index: https://ctixapiv3.cyware.com/llms.txt
+        reference_pages_harvested: 562
+        endpoint_pages_with_a_contract: 445
+        operations_emitted: 391
+        paths_emitted: 292
+        duplicate_path_method_pages_merged: 54
+        harvested: '2026-08-04'
+        vendor_published_openapi: false
+      x-apievangelist-artifacts:
+        authentication: authentication/cyware-authentication.yml
+        conventions: conventions/cyware-conventions.yml
+        errors: errors/cyware-problem-types.yml
+        rate_limits: rate-limits/cyware-rate-limits.yml
+        lifecycle: lifecycle/cyware-lifecycle.yml
+        data_model: data-model/cyware-data-model.yml
+        conformance: conformance/cyware-conformance.yml
+        mcp: mcp/cyware-mcp.yml
+        tool_crosswalk: mcp/cyware-tool-crosswalk.yml
+        skills: skills/_index.yml
+  - target: $.info
+    update:
+      x-apievangelist-auth-contract:
+        style: signed-query-parameters
+        parameters: [AccessID, Expires, Signature]
+        algorithm: HMAC-SHA1 over "<AccessID>\n<Expires>", Base64 then URL encoded
+        signature_ttl_seconds: 30
+        docs: https://ctixapiv3.cyware.com/authentication
+        note: >-
+          OpenAPI cannot express a three-parameter signed request as a single securityScheme, so the
+          spec declares the AccessID query parameter as an apiKey scheme and this extension records
+          the full contract.
+  - target: $.info
+    update:
+      x-apievangelist-conventions:
+        pagination: {style: page-number, params: [page, page_size], page_size_max: 100,
+          envelope: [next, previous, page_size, total, results]}
+        timestamps: epoch-seconds
+        trailing_slash_paths: true
+        idempotency: none
+        problem_json: false
+        rate_limit_headers: none
+  - target: $.servers
+    update:
+      x-apievangelist-note: >-
+        Intel Exchange is tenant-hosted. There is no shared SaaS endpoint; the server variable must be
+        replaced with the customer's own Intel Exchange host.

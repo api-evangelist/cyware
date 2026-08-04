@@ -1,0 +1,61 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://techdocs.cyware.com/ctix/en/release-notes.html, https://techdocs.cyware.com/co/en/release-notes.html,
+  openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml
+summary: >-
+  Cyware ships tenant-installed products, so API lifecycle is product release lifecycle: the Open API
+  is versioned with the Intel Exchange / Orchestrate release train and documented in dated release
+  notes on techdocs. There is no published API deprecation policy, no Sunset/Deprecation header
+  support, no SLA document and no public status page.
+versioning:
+  intel_exchange:
+    scheme: product-release
+    current: '3.7.7'
+    reference_covers: 3.6.2 and later
+    api_generation: v3
+    docs: https://techdocs.cyware.com/ctix/en/release-notes.html
+    api_version_in_path: false
+  orchestrate:
+    scheme: uri-path
+    current: v1
+    also_present: v2 (POST /v2/events/ alongside POST /v1/events/)
+    docs: https://techdocs.cyware.com/co/en/release-notes.html
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No API deprecation or sunset policy is published for either Open API, and no operation in either
+    OpenAPI document is marked deprecated. The one deprecation concept in the product is a data-level
+    one — indicators can be deprecated/undeprecated
+    (POST /ingestion/threat-data/bulk-action/deprecate/ and .../un_deprecate/) — which is threat-data
+    hygiene, not API lifecycle. Orchestrate's v1-to-v2 events change is documented as a behaviour
+    change in the reference note rather than as a deprecation.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment. Availability terms sit inside the Master Services Agreement
+    (https://www.cyware.com/legal/msa), which is not a published uptime target.
+status_page: null
+status_page_note: >-
+  status.cyware.com resolves but returns HTTP 403 to anonymous requests, so there is no publicly
+  readable status page. The health surface Cyware does publish is per-tenant and inside the API
+  itself: GET /api/health-check/ (liveness) and GET /api/readiness-check/ (readiness, returning
+  per-dependency component health and 503 when any dependency is unreachable), plus GET /ping/.
+health_endpoints:
+  - operation: openapi/cyware-intel-exchange-openapi.yml#livenessCheck
+    path: GET /api/health-check/
+  - operation: openapi/cyware-intel-exchange-openapi.yml#readinessCheck
+    path: GET /api/readiness-check/
+  - operation: openapi/cyware-intel-exchange-openapi.yml#pingOpenapi
+    path: GET /ping/
+  - operation: openapi/cyware-orchestrate-openapi.yml#testConnectivity
+    path: GET /v1/test_connectivity/
+  - operation: openapi/cyware-orchestrate-openapi.yml#productReleaseVersion
+    path: GET /v1/release_version/
+support:
+  url: https://www.cyware.com/support
+changelog: changelog/cyware-changelog.yml

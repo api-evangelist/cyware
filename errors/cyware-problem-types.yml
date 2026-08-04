@@ -1,0 +1,95 @@
+generated: '2026-08-04'
+method: derived
+source: >-
+  openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml,
+  https://ctixapiv3.cyware.com/administration/audit-log-management/list-subscriber-logs
+format: vendor
+problem_json: false
+summary: >-
+  Cyware publishes no error reference for either Open API. Across 438 documented operations only
+  three non-2xx responses are modelled (one 400 in Intel Exchange, one 400 in Orchestrate, one 503
+  readiness response). The authoritative list of statuses the Open API actually returns is published
+  indirectly: the subscriber polling-log and API activity-log endpoints expose a response_code filter
+  whose enumeration is the set of HTTP statuses the platform records against Open API calls. That
+  enumeration is reproduced below as the de-facto status catalog, with the two modelled error bodies
+  captured verbatim. Nothing here is invented — where Cyware documents no title or remediation, the
+  field is left empty rather than filled in.
+envelope:
+  intel_exchange:
+    note: >-
+      No documented error envelope. Successful bodies are bare JSON objects or the
+      next/previous/page_size/total/results pagination envelope.
+  orchestrate:
+    shape:
+      result: object describing the failure
+      status_code: numeric HTTP status repeated in the body
+    example:
+      result:
+        non_field_error: This persistent list has associated playbooks
+      status_code: '400'
+    source_operation: openapi/cyware-orchestrate-openapi.yml#deletePersistentStorageObject
+status_codes:
+  source: >-
+    response_code enumeration on GET /publishing/subscriber/polling_logs/{subscriber_id}/ and
+    GET /event-logs/audit-logs/ — the statuses Cyware records for Open API traffic.
+  codes: [200, 201, 206, 400, 401, 402, 403, 404, 429, 500]
+problems:
+  - status: 400
+    title: Bad Request (Check if you have passed valid data)
+    documented: true
+    source_operation: openapi/cyware-intel-exchange-openapi.yml#performActionOnThreatDataObject
+  - status: 400
+    title: null
+    documented: true
+    detail_field: result.non_field_error
+    example_detail: This persistent list has associated playbooks
+    source_operation: openapi/cyware-orchestrate-openapi.yml#deletePersistentStorageObject
+  - status: 401
+    title: null
+    documented: false
+    likely_cause: >-
+      Missing, malformed or expired request signature. The Expires parameter is valid for at most 30
+      seconds, so a clock skew of more than that between client and tenant invalidates every call.
+    evidence: response_code enumeration
+  - status: 402
+    title: null
+    documented: false
+    evidence: response_code enumeration
+  - status: 403
+    title: null
+    documented: false
+    likely_cause: >-
+      The Open API credential's role does not grant the requested feature permission.
+    evidence: response_code enumeration
+  - status: 404
+    title: null
+    documented: false
+    evidence: response_code enumeration
+  - status: 429
+    title: null
+    documented: false
+    likely_cause: >-
+      Tenant-configured Open API rate limit exceeded for the minute, hour, day or month window.
+    see_also: rate-limits/cyware-rate-limits.yml
+    evidence: response_code enumeration
+  - status: 500
+    title: null
+    documented: false
+    evidence: response_code enumeration
+  - status: 503
+    title: Service unavailable - readiness check failed
+    documented: true
+    detail_field: components
+    note: >-
+      The readiness endpoint reports per-dependency health (database, ces and other components) and
+      returns 503 with status "unhealthy" when any dependency is unreachable.
+    source_operation: openapi/cyware-intel-exchange-openapi.yml#readinessCheck
+gaps:
+  - >-
+    No error code registry, no machine-readable error type identifiers and no remediation guidance
+    are published for either Open API.
+  - >-
+    401/403/404/429/500 are returned by the platform but are not modelled on any operation in the
+    reference, so a generated client has no error contract to bind to.
+  - >-
+    RFC 9457 application/problem+json is not used anywhere.

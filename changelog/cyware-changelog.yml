@@ -1,0 +1,64 @@
+generated: '2026-08-04'
+method: searched
+source: https://techdocs.cyware.com/ctix/en/release-notes.html
+docs:
+  intel_exchange: https://techdocs.cyware.com/ctix/en/release-notes.html
+  orchestrate: https://techdocs.cyware.com/co/en/release-notes.html
+scheme: product-release
+current_version: '3.7.7'
+product: Cyware Intel Exchange
+url_pattern: https://techdocs.cyware.com/ctix/en/release-notes-{version-with-hyphens}.html
+summary: >-
+  Cyware publishes per-release notes for Intel Exchange (and separately for Orchestrate) on its
+  techdocs site rather than an API changelog. The index lists 21 releases from 3.1 to 3.7.7. The
+  index page itself carries no publication dates — dates appear only inside individual release-note
+  pages — so no dates are recorded here rather than guessed.
+entries:
+  - version: '3.7.7'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-7-7.html
+    latest: true
+  - version: '3.7.6'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-7-6.html
+  - version: '3.7.5'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-7-5.html
+  - version: '3.7.4'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-7-4.html
+  - version: '3.7.1'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-7-1.html
+  - version: '3.6.3.3'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-6-3-3.html
+  - version: '3.6.2'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-6-2.html
+    note: The Intel Exchange v3 Open API reference states it covers 3.6.2 and later.
+  - version: '3.6.1'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-6-1.html
+  - version: '3.6.0'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-6-0.html
+  - version: '3.5.2'
+    date: null
+    url: https://techdocs.cyware.com/ctix/en/release-notes-3-5-2.html
+older_releases:
+  count: 12
+  range: 3.1 through 3.5.1
+  index: https://techdocs.cyware.com/ctix/en/release-notes.html
+api_breaking_changes_called_out:
+  - version: Orchestrate 3.5.9
+    change: >-
+      Webhook URLs generated in Orchestrate were changed to return a concise response (title,
+      readable_id, source and similar); removing /v2 from the webhook URL restores the detailed
+      response.
+    source: https://orchestrateapi.cyware.com/events/create-event
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://techdocs.cyware.com/ctix/en/release-notes.html
+  http_status: 200
+  releases_listed: 21

@@ -1,0 +1,49 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://ctixapiv3.cyware.com/administration/configuration/rate-limit/openapi-rate-limit-configuration-details,
+  https://ctixapiv3.cyware.com/administration/configuration/rate-limit/taxii-rate-limit-configuration-details
+docs: https://techdocs.cyware.com/en/299670-263327-setup-rate-limiting-for-open-api-and-taxii-servers.html
+model: tenant-configured
+summary: >-
+  Cyware does not publish a fixed public rate limit. Intel Exchange rate limits are set inside each
+  tenant, per Open API credential and per tenant, across minute, hour, day and month windows, and are
+  readable back through the configuration API. The values below are the ones Cyware ships in its own
+  reference examples for GET /rest-auth/rate-limit/openapi/ — treat them as the documented example
+  configuration, not as a contractual limit. Rate-limit state is not signalled in response headers;
+  exceeding a quota surfaces as HTTP 429.
+scopes:
+  - scope: open_api_credential
+    description: Per Open API credential quota.
+    limits:
+      - window: minute
+        limit_count: 100
+        field: openapi_cred_api_limit_per_minute
+      - window: hour
+        limit_count: 5000
+        field: openapi_cred_api_limit_per_hour
+      - window: day
+        limit_count: 30000
+        field: openapi_cred_api_limit_per_day
+  - scope: tenant
+    description: Aggregate tenant quota across all Open API credentials.
+    fields: [openapi_cred_limit_per_day, openapi_cred_limit_per_month]
+  - scope: taxii
+    description: Separate quota family for the TAXII server surface.
+    configuration_endpoint: GET /rest-auth/rate-limit/taxii/
+signalling:
+  headers: none documented
+  status_code: 429
+  note: >-
+    No RateLimit-Limit / RateLimit-Remaining / Retry-After headers are documented on either Open API,
+    so a client cannot see how close it is to a quota without reading the configuration endpoint.
+configuration_api:
+  - operation: openapi/cyware-intel-exchange-openapi.yml#openapiRateLimitConfigurationDetails
+    path: GET /rest-auth/rate-limit/openapi/
+  - operation: openapi/cyware-intel-exchange-openapi.yml#taxiiRateLimitConfigurationDetails
+    path: GET /rest-auth/rate-limit/taxii/
+x-evidence:
+  fetched: '2026-08-04'
+  note: >-
+    limit_count values are the example values published in Cyware's own API reference response for
+    the rate-limit configuration endpoint; they are configurable per tenant.

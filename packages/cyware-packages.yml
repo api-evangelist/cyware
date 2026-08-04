@@ -1,0 +1,83 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://pypi.org/project/cytaxii2/, https://pkg.go.dev/github.com/cyware-labs/cyware-mcpserver,
+  https://github.com/cyware-labs
+summary: >-
+  Cyware ships no general-purpose client SDK for either Open API — there is no cyware or ctix package
+  on npm, PyPI, Maven Central, NuGet, RubyGems, Packagist or crates.io. What Cyware Labs does publish
+  is a TAXII 2 client library on PyPI and the Go module behind its open-source MCP server, plus a
+  handful of open-source CLI and analysis tools on GitHub that are not pushed to a registry. Both
+  Open APIs are documented for direct HTTP use with hand-rolled HMAC-SHA1 signing (Python and Postman
+  pre-request snippets are published in the authentication pages).
+packages:
+  - language: python
+    registry: pypi
+    name: cytaxii2
+    version: 1.0.1
+    url: https://pypi.org/project/cytaxii2/
+    install: pip install cytaxii2
+    repository: https://github.com/cyware-labs/cytaxii2
+    license: MIT
+    official: true
+    scope: taxii-client
+    description: >-
+      TAXII 2 client created by Cyware Labs so developers can connect to a TAXII 2 server and perform
+      actions. Not an Intel Exchange Open API SDK — it speaks the TAXII 2 standard.
+  - language: go
+    registry: go-modules
+    name: github.com/cyware-labs/cyware-mcpserver
+    url: https://pkg.go.dev/github.com/cyware-labs/cyware-mcpserver
+    install: go install github.com/cyware-labs/cyware-mcpserver/cmd@latest
+    repository: https://github.com/cyware-labs/cyware-mcpserver
+    license: MIT
+    official: true
+    scope: mcp-server
+    description: >-
+      The Cyware MCP Server. Go module (Go 1.24.2+) exposing Intel Exchange and Orchestrate to LLM
+      agents as 40 MCP tools over stdio or SSE.
+source_only_tools:
+  - name: attack-cli
+    url: https://github.com/cyware-labs/attack-cli
+    language: python
+    official: true
+    description: CLI tool for the MITRE ATT&CK navigator.
+    registry: none
+  - name: STIXOps
+    url: https://github.com/cyware-labs/STIXOps
+    language: python
+    official: true
+    description: Tool to interact with STIX and perform operations on STIX objects.
+    registry: none
+  - name: ioc-analyzer
+    url: https://github.com/cyware-labs/ioc-analyzer
+    language: python
+    official: true
+    registry: none
+  - name: Ioc-extractor
+    url: https://github.com/cyware-labs/Ioc-extractor
+    language: python
+    official: true
+    description: Extracts IOCs from a URL or file.
+    registry: none
+  - name: ConnectorBox
+    url: https://github.com/cyware-labs/ConnectorBox
+    language: python
+    official: true
+    description: Scripts to query intelligence from various cyber security service providers.
+    registry: none
+not_found:
+  - registry: npm
+    queries: [cyware, '@cyware/sdk', ctix]
+    note: The npm package named "ctix" is unrelated (an index.ts generator by a third party).
+  - registry: pypi
+    queries: [cyware, ctix, ctix-sdk, cyware-tools, cytaxii]
+  - registry: maven-central
+  - registry: nuget
+  - registry: rubygems
+  - registry: packagist
+  - registry: crates.io
+x-evidence:
+  fetched: '2026-08-04'
+  github_org: https://github.com/cyware-labs
+  repos_scanned: 32

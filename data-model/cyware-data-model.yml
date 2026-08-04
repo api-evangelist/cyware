@@ -1,0 +1,220 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml
+summary: >-
+  Derived from the path templates and id-bearing response fields across the 438 documented
+  operations. Intel Exchange's core is a STIX 2.x object graph: a Threat Data Object (an SDO or SCO of
+  a given object_type) is the hub, everything else hangs off it — relations to other objects, tags,
+  watchlist and allowed-list membership, notes, tasks, enrichment results, sources, kill-chain
+  phases and confidence scores. Around that sit the publishing side (Intel Packages / shareable
+  intel, collections, subscribers, TAXII) and the administration side (users, groups, feed sources,
+  enrichment tools, rules). Orchestrate is a separate, smaller graph: Playbook, Playbook Result,
+  Node Result, App, App Action, App Instance, Event and Persistent List.
+id_conventions:
+  format: UUID v4 for platform objects
+  stix_format: "type--uuid for STIX objects (for example indicator--<uuid>)"
+  compound_addressing: >-
+    Threat data objects are addressed by the pair (object_type, object_id), not by a single opaque
+    id — for example GET /ingestion/threat-data/{object_type}/{object_id}/basic/.
+  human_id: readable_id appears on Orchestrate events and several Intel Exchange objects alongside
+    the UUID.
+entities:
+  - name: ThreatDataObject
+    domain: intel-exchange
+    key: [object_type, object_id]
+    note: The STIX SDO/SCO hub — indicator, malware, threat-actor, campaign, attack-pattern,
+      course-of-action, identity, infrastructure, location, report, sighting, tool, vulnerability,
+      relationship, plus custom objects.
+  - name: IntelPackage
+    domain: intel-exchange
+    key: intel-id
+    aka: shareable intel / detailed STIX submission
+  - name: Collection
+    domain: intel-exchange
+    key: collection_id
+  - name: Subscriber
+    domain: intel-exchange
+    key: subscriber_id
+  - name: Tag
+    domain: intel-exchange
+    key: tag_id
+  - name: TagGroup
+    domain: intel-exchange
+    key: id
+  - name: Rule
+    domain: intel-exchange
+    key: rule_id
+  - name: ThreatBulletin
+    domain: intel-exchange
+    key: threat_bulletin_id
+  - name: Report
+    domain: intel-exchange
+    key: report_id
+  - name: Dashboard
+    domain: intel-exchange
+    key: dashboard_id
+  - name: EnrichmentTool
+    domain: intel-exchange
+    key: app_id
+    aka: integration app
+  - name: EnrichmentAction
+    domain: intel-exchange
+    key: integration_action_id
+  - name: FeedSource
+    domain: intel-exchange
+    key: source_id
+    kinds: [api, stix, email, rss, web-scraper, information-sharing]
+  - name: PIR
+    domain: intel-exchange
+    key: pir_id
+    note: Priority Intelligence Requirement, with signals and entity matches.
+  - name: Signal
+    domain: intel-exchange
+    key: signal_id
+  - name: Note
+    domain: intel-exchange
+    key: note_id
+  - name: Task
+    domain: intel-exchange
+    key: task_id
+  - name: User
+    domain: intel-exchange
+    key: user_id
+  - name: UserGroup
+    domain: intel-exchange
+    key: group-id
+  - name: Tenant
+    domain: intel-exchange
+    key: tenant_id
+  - name: AttackTechnique
+    domain: intel-exchange
+    key: id
+    note: MITRE ATT&CK technique / tactic / software / group / mitigation.
+  - name: Playbook
+    domain: orchestrate
+    key: playbook_unique_id
+  - name: PlaybookResult
+    domain: orchestrate
+    key: playbook_result_unique_id
+  - name: NodeResult
+    domain: orchestrate
+    key: node_unique_id
+  - name: App
+    domain: orchestrate
+    key: app_unique_id
+  - name: AppAction
+    domain: orchestrate
+    key: action_id
+  - name: AppInstance
+    domain: orchestrate
+    key: instance_id
+  - name: Event
+    domain: orchestrate
+    key: event_unique_id
+  - name: PersistentList
+    domain: orchestrate
+    key: persistent_storage_unique_id
+relationships:
+  - from: ThreatDataObject
+    to: ThreatDataObject
+    kind: has_many
+    via: relations
+    evidence: GET /ingestion/threat-data/{object_type}/{object_id}/relations/
+  - from: ThreatDataObject
+    to: Tag
+    kind: has_many
+    via: tags
+    evidence: POST /ingestion/threat-data/bulk-action/{action_type}/ with action_type=add_tag
+  - from: ThreatDataObject
+    to: FeedSource
+    kind: has_many
+    via: source_details
+    evidence: GET /ingestion/threat-data/{object_type}/{object_id}/source_details/
+  - from: ThreatDataObject
+    to: Note
+    kind: has_many
+    via: note_id
+  - from: ThreatDataObject
+    to: Task
+    kind: has_many
+    via: task_id
+    evidence: POST /ingestion/tasks/bulk-action/add_task/
+  - from: ThreatDataObject
+    to: AttackTechnique
+    kind: has_many
+    via: kill_chain_phases
+    evidence: GET /ingestion/threat-data/{object_type}/{object_id}/kill_chain_phases/
+  - from: ThreatDataObject
+    to: EnrichmentTool
+    kind: has_many
+    via: enrichment
+    evidence: GET /integration/apps/update/threatdata/
+  - from: IntelPackage
+    to: ThreatDataObject
+    kind: has_many
+    via: relationship SDOs
+    evidence: GET /ingestion/shareable-intel/{intel-id}/relationship/
+  - from: Collection
+    to: IntelPackage
+    kind: has_many
+    via: publishing
+  - from: Subscriber
+    to: Collection
+    kind: has_many
+    via: polling
+    evidence: GET /publishing/subscriber/polling_logs/{subscriber_id}/
+  - from: Rule
+    to: ThreatDataObject
+    kind: has_many
+    via: run_rule
+    evidence: POST /ingestion/threat-data/bulk-action/run_rule/
+  - from: TagGroup
+    to: Tag
+    kind: has_many
+    via: tag-category
+  - from: PIR
+    to: Signal
+    kind: has_many
+    via: signal_id
+  - from: PIR
+    to: ThreatDataObject
+    kind: has_many
+    via: entity matches
+  - from: EnrichmentTool
+    to: EnrichmentAction
+    kind: has_many
+    via: action_configs
+    evidence: GET /integration/apps/{integration_app_id}/action_configs/
+  - from: User
+    to: UserGroup
+    kind: has_many
+    via: groups
+  - from: Playbook
+    to: PlaybookResult
+    kind: has_many
+    via: playbook_unique_id
+  - from: PlaybookResult
+    to: NodeResult
+    kind: has_many
+    via: node_unique_id
+  - from: App
+    to: AppAction
+    kind: has_many
+    via: app-actions
+  - from: App
+    to: AppInstance
+    kind: has_many
+    via: app-instances
+  - from: Event
+    to: Playbook
+    kind: has_many
+    via: trigger labels
+    evidence: POST /v1/webhooks/data-labels/
+  - from: PersistentList
+    to: Playbook
+    kind: has_many
+    via: associated playbooks
+    evidence: GET /v1/storage-manager/{persistent_storage_unique_id}/playbooks/
+operations_by_domain:
+  intel-exchange: 391
+  orchestrate: 47

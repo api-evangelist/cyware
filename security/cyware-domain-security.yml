@@ -1,0 +1,31 @@
+generated: '2026-08-04'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.cyware.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 19 17:07:06 2026 GMT
+  hsts: null
+- host: ctixapiv3.cyware.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 29 13:23:08 2026 GMT
+  hsts: null
+- host: demo.cyware.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Mar 10 23:59:59 2027 GMT
+  hsts: null
+domains:
+- domain: cyware.com
+  dnssec: true
+  caa:
+  - 0 issue "pki.goog"
+  - 0 issue "amazon.com"
+  - 0 issue "digicert.com"
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

@@ -1,23 +1,207 @@
 aid: cyware
 name: Cyware
-description: 'Cyware is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Cyware is a New York-headquartered cybersecurity company, founded in 2016, that builds an AI-powered
+  threat intelligence and security operations platform for enterprise SOC teams, ISACs and ISAOs,
+  government agencies, CERTs and MSSPs. The Cyware Intelligence Suite spans Intel Exchange (its threat
+  intelligence platform, formerly CTIX), Collaborate (bi-directional threat sharing for member
+  communities), Orchestrate (security orchestration and automation), Respond (incident case management)
+  and Cyware AI (agentic security analyst workflows). The platform ingests, deduplicates, enriches,
+  scores and operationalizes structured and unstructured cyber threat intelligence using STIX 2.x,
+  TAXII 2.x and MITRE ATT&CK, and pushes it into SIEM, EDR, firewall and ITSM tooling through 400+
+  integrations. Programmatic access is delivered through the Intel Exchange v3 Open API and the
+  Orchestrate Open API — both tenant-hosted, both authenticated with HMAC-SHA1 signed Open API
+  credentials — plus an open-source Model Context Protocol server that exposes threat-intelligence and
+  playbook actions to LLM agents.
+image: https://www.cyware.com/assets/images/cyware.svg
 url: https://raw.githubusercontent.com/api-evangelist/cyware/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Company
-apis: []
+  - threat-intelligence
+  - cyber-threat-intelligence
+  - cybersecurity
+  - security-operations
+  - threat-intelligence-platform
+  - stix
+  - taxii
+  - mitre-attack
+  - soar
+  - security-orchestration
+  - incident-response
+  - threat-intelligence-sharing
+  - isac
+  - indicators-of-compromise
+  - mcp
+  - agentic-ai
+apis:
+  - name: Cyware Intel Exchange (CTIX) v3 Open API
+    description: >-
+      The public Open API for Cyware Intel Exchange, Cyware's threat intelligence platform. Covers threat
+      data objects and their relations, quick-add and detailed STIX intel submission, intel import,
+      enrichment tools and policies, correlation rules, tags and tag groups, watchlists, allowed and
+      false-positive indicators, threat bulletins, threat investigation, threat mailbox, PIR management
+      and signals, MITRE ATT&CK navigator data, dashboards, reports, collection and subscriber
+      administration, and TAXII publishing. Intel Exchange is deployed per tenant, so the base URL is the
+      customer's own Intel Exchange host with the API mounted at /ctixapi. Requests are authenticated
+      with Open API credentials using an AccessID, an Expires epoch (max 30 seconds ahead) and an
+      HMAC-SHA1 Signature passed as query parameters.
+    humanURL: https://ctixapiv3.cyware.com/
+    baseURL: https://demo.cyware.com/ctixapi
+    tags:
+      - threat-intelligence
+      - cyber-threat-intelligence
+      - threat-intelligence-platform
+      - stix
+      - taxii
+      - mitre-attack
+      - indicators-of-compromise
+      - threat-intelligence-sharing
+    properties:
+      - type: OpenAPI
+        url: openapi/cyware-intel-exchange-openapi.yml
+      - type: Documentation
+        url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+      - type: APIReference
+        url: https://ctixapiv3.cyware.com/
+      - type: Authentication
+        url: authentication/cyware-authentication.yml
+      - type: Conventions
+        url: conventions/cyware-conventions.yml
+      - type: ErrorCatalog
+        url: errors/cyware-problem-types.yml
+      - type: DataModel
+        url: data-model/cyware-data-model.yml
+      - type: Overlay
+        url: overlays/cyware-intel-exchange-overlay.yaml
+      - type: LLMsTxt
+        url: llms/cyware-intel-exchange-api-llms.txt
+  - name: Cyware Orchestrate (CO) Open API
+    description: >-
+      The public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and
+      response platform. Covers playbook listing, execution, run logs, node results, exports and bulk
+      termination; app integrations including apps, app actions, app instances, action execution and
+      custom app import; source events and event ingestion; persistent lists via the storage manager;
+      code snippets; custom email templates; tags; and orchestration analytics. Orchestrate is deployed
+      per tenant, with the API mounted at /soarapi and authenticated with HMAC-SHA1 signed Open API
+      credentials (access_id, expires, signature).
+    humanURL: https://orchestrateapi.cyware.com/
+    baseURL: https://demo.cyware.com/soarapi
+    tags:
+      - soar
+      - security-orchestration
+      - incident-response
+      - security-operations
+      - automation
+    properties:
+      - type: OpenAPI
+        url: openapi/cyware-orchestrate-openapi.yml
+      - type: Documentation
+        url: https://techdocs.cyware.com/co/en/product-documentation.html
+      - type: APIReference
+        url: https://orchestrateapi.cyware.com/
+      - type: Authentication
+        url: authentication/cyware-authentication.yml
+      - type: Webhooks
+        url: asyncapi/cyware-orchestrate-webhooks.yml
+      - type: Overlay
+        url: overlays/cyware-orchestrate-overlay.yaml
+      - type: LLMsTxt
+        url: llms/cyware-orchestrate-api-llms.txt
+  - name: Cyware MCP Server
+    description: >-
+      Open-source Model Context Protocol server, written in Go and published under MIT by Cyware Labs,
+      that exposes Cyware Intel Exchange and Cyware Orchestrate to LLM agents as MCP tools. Self-hosted
+      alongside the customer's own tenant over stdio or SSE transport; 40 tools cover CQL search, threat
+      data object details and relations, bulk threat-data actions, tag management, enrichment tools and
+      enrichment execution, quick-add intel, and Orchestrate playbook and app-action execution.
+    humanURL: https://github.com/cyware-labs/cyware-mcpserver
+    baseURL: https://github.com/cyware-labs/cyware-mcpserver
+    tags:
+      - mcp
+      - agentic-ai
+      - threat-intelligence
+      - security-operations
+    properties:
+      - type: MCPServer
+        url: mcp/cyware-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/cyware-tool-crosswalk.yml
+      - type: SourceCode
+        url: https://github.com/cyware-labs/cyware-mcpserver
+      - type: Documentation
+        url: https://github.com/cyware-labs/cyware-mcpserver/blob/main/README.md
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+  - FN: APIs.json
+    email: info@apis.io
 common:
-- type: Website
-  url: https://forgeglobal.com/cyware_stock/
+  - type: Website
+    url: https://www.cyware.com/
+  - type: DeveloperPortal
+    url: https://techdocs.cyware.com/
+  - type: Documentation
+    url: https://techdocs.cyware.com/index.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: GettingStarted
+    url: https://techdocs.cyware.com/ctix/en/api-documentation.html
+  - type: Support
+    url: https://www.cyware.com/support
+  - type: Blog
+    url: https://www.cyware.com/blog
+  - type: GitHubOrganization
+    url: https://github.com/cyware-labs
+  - type: Pricing
+    url: https://www.cyware.com/pricing
+  - type: SignUp
+    url: https://www.cyware.com/book-a-demo
+  - type: TermsOfService
+    url: https://www.cyware.com/legal/acceptable-use-policy
+  - type: PrivacyPolicy
+    url: https://www.cyware.com/legal/privacy-policy
+  - type: Compliance
+    url: https://www.cyware.com/compliance
+  - type: TrustCenter
+    url: security/cyware-trust-center.yml
+  - type: LLMsTxt
+    url: llms/cyware-llms.txt
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/cyware-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/cyware-changelog.yml
+  - type: Conformance
+    url: conformance/cyware-conformance.yml
+  - type: Packages
+    url: packages/cyware-packages.yml
+  - type: SDKs
+    url: packages/cyware-packages.yml
+  - type: RateLimits
+    url: rate-limits/cyware-rate-limits.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: DomainSecurity
+    url: security/cyware-domain-security.yml
+  - type: Overlay
+    url: overlays/cyware-intel-exchange-overlay.yaml
+  - type: Overlay
+    url: overlays/cyware-orchestrate-overlay.yaml
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 28
+  pass: local-v1

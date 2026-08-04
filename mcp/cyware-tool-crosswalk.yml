@@ -1,0 +1,289 @@
+generated: '2026-08-04'
+method: derived
+source: mcp/cyware-mcp.yml + openapi/cyware-intel-exchange-openapi.yml + openapi/cyware-orchestrate-openapi.yml
+summary: >-
+  Binds every tool registered by the open-source Cyware MCP server to the Intel Exchange and
+  Orchestrate operations that back it. Bindings were read from the server's Go source (each tool
+  carries the literal endpoint path it calls), then matched against the operationIds in the two
+  OpenAPI documents in this repo. Two things this crosswalk makes visible: (1) the MCP server covers
+  roughly 8% of the published REST surface — 40 tools against 438 documented operations — and is
+  concentrated on threat-data triage, tagging, enrichment and playbook execution; (2) several
+  Orchestrate tools call internal product paths (integrations/apps/, playbooks/, execute/,
+  /soarapi/integrations/sync-exec-action/, /cpapi/rest-auth/*) that are NOT the documented v1 Open API
+  paths, so those bindings are semantic rather than literal and are marked medium confidence.
+surfaces:
+  openapi:
+    - file: openapi/cyware-intel-exchange-openapi.yml
+      operations: 391
+      gated: false
+      note: Reference is public; calling it requires a tenant and Open API credentials.
+    - file: openapi/cyware-orchestrate-openapi.yml
+      operations: 47
+      gated: false
+  graphql: null
+  mcp:
+    server: cyware-mcpserver
+    transport: [stdio, sse]
+    hosted_endpoint: null
+    gated: true
+    note: >-
+      Self-hosted only, so there is no anonymous tools/list to introspect; the tool set and its
+      inputSchemas were read from the published source rather than from a live handshake.
+coverage:
+  tools_named: 40
+  tools_bound: 35
+  mcp_only: 5
+  rest_ops_total: 438
+  rest_ops_with_a_tool: 27
+crosswalk:
+  - tool: logged-in-user-details
+    category: identity
+    rest: [signedInUserDetails]
+    binding: rest
+    confidence: high
+    note: GET /rest-auth/user-details/
+  - tool: get-ctix-user-list
+    category: identity
+    rest: [retrieveUsers]
+    binding: rest
+    confidence: high
+    note: GET /rest-auth/users/
+  - tool: get-ctix-user-group-list
+    category: identity
+    rest: [listGroups]
+    binding: rest
+    confidence: high
+    note: GET /rest-auth/groups/
+  - tool: get-cql-query-search-result
+    category: search
+    rest: [listThreatData]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/threat-data/list/ with a CQL query payload.
+  - tool: get-threat-data-object-details
+    category: threat-data
+    rest: [listThreatDataObjectDetails, threatDataObjectAdvancedDetails]
+    binding: rest
+    confidence: high
+    note: GET /ingestion/threat-data/{object_type}/{object_id}/basic/ and /advanced-details/
+  - tool: get-threat-data-object-relations
+    category: threat-data
+    rest: [listRelationsOfThreatDataObject]
+    binding: rest
+    confidence: high
+    note: GET /ingestion/threat-data/{object_type}/{object_id}/relations/
+  - tool: threat-data-list-bulk-action-add-tag
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/threat-data/bulk-action/{action_type}/ with action_type=add_tag
+  - tool: threat-data-list-bulk-mark-indicator-allowed
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=whitelist
+  - tool: threat-data-list-bulk-unmark-indicator-allowed
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=un_whitelist
+  - tool: threat-data-list-bulk-manual-review
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=manual_review
+  - tool: threat-data-list-bulk-mark-false-positive
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=false_positive
+  - tool: threat-data-list-bulk-unmark-false-positive
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=un_false_positive
+  - tool: threat-data-list-bulk-update-analyst-tlp
+    category: threat-data-bulk
+    rest: [bulkAddTlp]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/threat-data/bulk-action/analyst_tlp/
+  - tool: threat-data-list-bulk-update-analyst-score
+    category: threat-data-bulk
+    rest: [bulkAddAnalystScore]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/threat-data/bulk-action/analyst_score/
+  - tool: threat-data-list-bulk-deprecate
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=deprecate
+  - tool: threat-data-list-bulk-undeprecate
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=un_deprecate
+  - tool: threat-data-list-bulk-add-watchlist
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=watchlist
+  - tool: threat-data-list-bulk-remove-watchlist
+    category: threat-data-bulk
+    rest: [bulkAddRemoveAllowedIndicators]
+    binding: rest
+    confidence: high
+    note: action_type=un_watchlist
+  - tool: threat-data-list-bulk-add-relation
+    category: threat-data-bulk
+    rest: [bulkAddRelation]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/threat-data/bulk-action/add_relation/
+  - tool: create-tag-in-ctix
+    category: tags
+    rest: [createTag]
+    binding: rest
+    confidence: high
+    note: POST /ingestion/tags/
+  - tool: get-ctix-tags-list
+    category: tags
+    rest: [retrieveTags]
+    binding: rest
+    confidence: high
+    note: GET /ingestion/tags/
+  - tool: get-enrichment-tools-list
+    category: enrichment
+    rest: [retrieveConfiguredTools]
+    binding: rest
+    confidence: high
+    note: GET /integration/apps/
+  - tool: get-enrichment-tool-details
+    category: enrichment
+    rest: [retrieveApplicationDetails]
+    binding: rest
+    confidence: high
+    note: GET /integration/apps/detail/{app_id}/
+  - tool: get-enrichment-tool-action-configs
+    category: enrichment
+    rest: [retrieveActionConfiguration]
+    binding: rest
+    confidence: high
+    note: GET /integration/apps/{integration_app_id}/action_configs/
+  - tool: enrichment-tool-supported-for-threat-data-object
+    category: enrichment
+    rest: [enrichmentTools1]
+    binding: rest
+    confidence: medium
+    note: GET /integration/apps/actions/ filtered by threat data object type.
+  - tool: enrich-threat-data-object
+    category: enrichment
+    rest: [enrichThreatData]
+    binding: rest
+    confidence: high
+    note: GET /integration/apps/update/threatdata/
+  - tool: quick-add-intel-create
+    category: intel-creation
+    rest: [quickAddIntel]
+    binding: rest
+    confidence: high
+    note: POST /conversion/quick-intel/create-stix/
+  - tool: get-co-playbooks-list
+    category: orchestration
+    rest: [openPlaybook, getPlaybook]
+    binding: rest
+    confidence: medium
+    note: >-
+      The server calls the internal playbooks/ path rather than the documented
+      GET /v1/playbook/ - same capability, different route.
+  - tool: get-co-playbook-details
+    category: orchestration
+    rest: [openPlaybook]
+    binding: rest
+    confidence: medium
+  - tool: execute-playbook-in-co
+    category: orchestration
+    rest: [runPlaybook]
+    binding: rest
+    confidence: medium
+    note: Server calls playbooks/{id}/execute/; documented Open API route is POST /v1/playbook/run/.
+  - tool: get-co-apps-list
+    category: orchestration
+    rest: [getApps]
+    binding: rest
+    confidence: medium
+    note: Server calls integrations/apps/; documented route is GET /v1/integrations/apps/.
+  - tool: get-co-app-details
+    category: orchestration
+    rest: [getAppDetails]
+    binding: rest
+    confidence: medium
+  - tool: get-co-actions-of-app
+    category: orchestration
+    rest: [getAppActions]
+    binding: rest
+    confidence: medium
+    note: Server calls integrations/app-action/.
+  - tool: get-co-app-action-details
+    category: orchestration
+    rest: [getActionDetails]
+    binding: rest
+    confidence: medium
+  - tool: get-instances-of-co-app
+    category: orchestration
+    rest: [listAppInstances, getAppInstanceDetails]
+    binding: rest
+    confidence: medium
+    note: Server calls integrations/app-instance/.
+mcp_only:
+  - tool: get-available-relation-type
+    reason: >-
+      Calls GET /ingestion/threat-data/relationship-types/, a relationship-vocabulary route that does
+      not appear anywhere in the published Intel Exchange API reference.
+  - tool: execute-action-of-co-app
+    reason: >-
+      Calls /soarapi/integrations/sync-exec-action/, a synchronous action-execution route that is not
+      in the published Orchestrate Open API reference (the documented equivalent, POST
+      /v1/integrations/actions/execute/, is a different route with a different contract).
+  - tool: cql-ctix-grammar-rules
+    reason: >-
+      Returns the Cyware Query Language grammar the agent needs to build a CQL query. It is served
+      from a grammar file compiled into the MCP server, not from any REST operation.
+  - tool: convert-date-string-to-epoch
+    reason: Local utility implemented in the MCP server; no API call.
+  - tool: get-epoch-with-delta-from-now
+    reason: Local utility implemented in the MCP server; no API call.
+rest_only:
+  - capability: Detailed STIX submission
+    operations_approx: 116
+    note: >-
+      The whole detailed-submission surface (drafts, per-STIX-object create/update/delete for
+      indicators, malware, threat actors, campaigns, attack patterns, relationships and more) has no
+      MCP tool; quick-add-intel-create is the only intel-creation tool.
+  - capability: Platform administration
+    operations_approx: 96
+    note: >-
+      Collections, subscribers, TAXII configuration, feed sources, enrichment policy, custom
+      entities, audit logs, rate limits, certificates and tenant configuration are REST only.
+  - capability: PIR management and signals
+    operations_approx: 27
+  - capability: Allowed / ignored indicator management
+    operations_approx: 17
+  - capability: MITRE ATT&CK navigator
+    operations_approx: 11
+  - capability: Threat bulletins, reports, dashboards, threat mailbox, threat investigation, rules,
+      watchlists, RSS feeds, tag groups
+    operations_approx: 120
+  - capability: Orchestrate persistent lists, code snippets, custom email templates, source events,
+      analytics, app import/export
+    operations_approx: 30

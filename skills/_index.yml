@@ -1,0 +1,37 @@
+generated: '2026-08-04'
+method: generated
+source: openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml
+note: >-
+  Cyware publishes no AGENTS.md or provider-authored agent skills. These are API Evangelist
+  generated operating instructions for the five marquee Cyware flows, grounded in operationIds that
+  were verified to exist verbatim in the OpenAPI documents in this repo.
+skills:
+  - file: cyware-triage-indicator.md
+    name: Triage an indicator in Cyware Intel Exchange
+    api: openapi/cyware-intel-exchange-openapi.yml
+    operations: [listThreatData, listThreatDataObjectDetails, listRelationsOfThreatDataObject,
+      retrieveConfiguredTools, enrichThreatData, retrieveEnrichmentStatus, bulkAddTlp,
+      bulkAddAnalystScore, bulkAddRemoveAllowedIndicators]
+  - file: cyware-quick-add-intel.md
+    name: Create intel in Cyware Intel Exchange with Quick Add Intel
+    api: openapi/cyware-intel-exchange-openapi.yml
+    operations: [createParseIocsTask, quickAddIntel, createIntelViaOpenApi,
+      retrieveQuickAddIntelStatus, retrieveQuickAddIntelRelationObjects, listCountryCodes,
+      listRegions]
+  - file: cyware-manage-allowed-indicators.md
+    name: Manage the allowed-indicator (false-positive) list in Cyware Intel Exchange
+    api: openapi/cyware-intel-exchange-openapi.yml
+    operations: [listSupportedAllowedIndicatorTypes, parseIoc, reasonsList, createReason,
+      addIndicatorsToAllowedList, verifyAllowedIndicators, listAllowedIndicators,
+      allowedIndicatorDetails, updateAllowedIndicator, deleteAllowedIndicator, bulkAction]
+  - file: cyware-publish-and-share-intel.md
+    name: Publish and share intel through Intel Exchange collections and TAXII
+    api: openapi/cyware-intel-exchange-openapi.yml
+    operations: [listCollections, createCollection, updateCollection, listRelationshipSdo,
+      createRelationshipSdo, listSubscriberLogs, taxiiConfigurationDetails, retrieveCertificate]
+  - file: cyware-run-orchestrate-playbook.md
+    name: Run a Cyware Orchestrate playbook and read the result
+    api: openapi/cyware-orchestrate-openapi.yml
+    operations: [testConnectivity, productReleaseVersion, getPlaybook, openPlaybook, runPlaybook,
+      listPlaybookRunLogs, getPlaybookResult, getPlaybookDetailRunLog, getNodeResultDetails,
+      bulkTerminateApiView, getApps, getAppActions, listAppInstances, executeAction]

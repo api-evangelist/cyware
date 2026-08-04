@@ -1,0 +1,104 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://www.cyware.com/llms.txt, https://ctixapiv3.cyware.com/, https://www.cyware.com/compliance,
+  openapi/cyware-intel-exchange-openapi.yml
+summary: >-
+  Cyware's conformance story is threat-intelligence-standards-first: STIX 2.x and TAXII 2.x are the
+  product's core interchange contract and MITRE ATT&CK is a first-class data model inside it. The
+  cross-cutting web-API standards are almost entirely absent — no OAuth2/OIDC, no RFC 9457, no
+  JSON:API, no OpenAPI published by the vendor itself.
+standards:
+  - id: stix-2
+    name: STIX 2.x (OASIS Structured Threat Information Expression)
+    conforms: true
+    evidence: >-
+      Intel Exchange stores, converts and shares threat data as STIX; the detailed-submission API
+      exposes per-SDO create/update/delete for indicators, malware, threat actors, campaigns,
+      attack patterns, identities, infrastructure, tools, vulnerabilities and relationships, and
+      quick-add intel emits STIX (POST /conversion/quick-intel/create-stix/). Listed as a Core
+      Standard in Cyware's own llms.txt.
+  - id: stix-1
+    name: STIX 1.x / CybOX / MAEC / OpenIOC
+    conforms: true
+    evidence: >-
+      The API reference states Intel Exchange converts, stores and organizes threat data across
+      STIX 1.x, STIX 2.0, XML, JSON, CybOX, OpenIOC and MAEC; three export operations return
+      application/xml. cyware-labs also maintains forks of the OASIS cti-stix-elevator and
+      cti-stix-slider conversion tools.
+  - id: taxii-2
+    name: TAXII 2.x (OASIS Trusted Automated Exchange of Intelligence Information)
+    conforms: true
+    evidence: >-
+      Dedicated TAXII server configuration, collection and subscriber management, polling logs and
+      a separate TAXII rate-limit family in the Open API; cyware-labs publishes cytaxii2, a TAXII 2
+      client library, on PyPI.
+  - id: mitre-attack
+    name: MITRE ATT&CK
+    conforms: true
+    evidence: >-
+      An entire ATT&CK Navigator API section (tactics, techniques, software, groups, mitigations,
+      layer export, relations) plus custom kill-chain administration.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 securityScheme in either OpenAPI document and no OAuth flow documented. Both Open
+      APIs authenticate with an HMAC-SHA1 signed query string.
+  - id: oidc
+    conforms: false
+    evidence: >-
+      No /.well-known/openid-configuration on any Cyware host. SSO into the product UI supports
+      SAML 2.0, Microsoft Entra ID, Google Sign-In and LDAP, but that is user login, not API auth.
+  - id: saml2
+    name: SAML 2.0 (product sign-in, not API auth)
+    conforms: true
+    evidence: >-
+      Configure SAML 2.0 as the Authentication Method, Configure Microsoft Entra ID, Configure
+      Google Sign-In and Configure LDAP in the Intel Exchange administration documentation.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No application/problem+json anywhere; errors are undocumented vendor JSON.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header support documented.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt on any Cyware host.
+  - id: json-api
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: scim2
+    conforms: false
+    evidence: >-
+      User and group management exists (/rest-auth/users/, /rest-auth/groups/) but on vendor paths
+      and a vendor schema, not SCIM 2.0.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      Cyware publishes no OpenAPI or Swagger document. Its reference sites (Theneo) serve a
+      structured per-endpoint model as markdown, which is what the specs in this repo were built
+      from, but no downloadable spec is offered at any probed location.
+  - id: asyncapi
+    conforms: false
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      cyware-labs/cyware-mcpserver, an MIT-licensed Go MCP server exposing 40 tools over stdio/SSE
+      for Intel Exchange and Orchestrate.
+  - id: a2a
+    name: A2A Agent-to-Agent
+    conforms: false
+    evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host.
+  - id: llms-txt
+    conforms: true
+    evidence: >-
+      Three llms.txt documents published — www.cyware.com/llms.txt (company), and one per API
+      reference host (ctixapiv3.cyware.com, orchestrateapi.cyware.com), the latter two indexing every
+      endpoint page as machine-readable markdown.
+compliance_programs:
+  artifact: security/cyware-trust-center.yml
+  url: https://www.cyware.com/compliance
+  certifications: [SOC 2 Type 2, ISO/IEC 27001:2022, VPAT / Section 508 (in progress), Privacy Shield]
+  claimed_in_llms_txt: [FedRAMP Ready, StateRAMP / GovRAMP]

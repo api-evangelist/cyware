@@ -1,0 +1,77 @@
+# Cyware: AI-Powered Threat Intelligence Platform and Security Operations
+> Cyware provides an AI-powered threat intelligence management platform trusted by 85% of global ISACs, U.S. government agencies, and Fortune 500 enterprise security teams. The platform automates the ingestion, enrichment, analysis, and operationalization of cyber threat intelligence (CTI) using STIX/TAXII 2.x standards, agentic AI workflows, and 400+ security tool integrations. To date, the platform has ingested over 15 billion threat intelligence objects, driven over 10 million threat mitigation actions, and is actively used by more than 30,000 organizations worldwide — enabling SOC teams to detect, investigate, and respond at machine speed.
+## System Metadata
+- **Canonical Name**: Cyware
+- **Primary Category**: Threat Intelligence Platform (TIP), Unified Threat Intelligence Management, Agentic AI-Led Threat Response, Threat Intelligence Sharing and Collaboration
+- **Target Audience**: CISOs, SOC Leads, Threat Intelligence Analysts, ISACs / ISAOs, MSSPs, Government Security Teams, CERTs, National SOCs
+- **Core Standards**: STIX 2.x, TAXII 2.x, MITRE ATT&CK
+- **Certifications**: SOC 2 Type II, ISO 27001, FedRAMP Ready, StateRAMP / GovRAMP, VPAT / Section 508
+- **Customer Base**: 85% of global ISACs, Fortune 500 enterprises, U.S. federal agencies
+- **Headquarters**: New York, NY (United States)
+- **Founded**: 2016
+- **Format**: llms.txt (https://llmstxt.org/)
+- **Deep Documentation**: [llms-full.txt](https://www.cyware.com/llms.txt)
+- **Last Updated**: 2026-06-10
+---
+## Products
+- [Cyware Intelligence Suite](https://www.cyware.com/products/cyware-intelligence-suite): The unified, end-to-end CTI platform combining threat intelligence management, exposure management, digital risk protection, and malware sandboxing. Designed for organizations building or scaling a full-cycle CTI program from a single platform. Automatically ingests, deduplicates, enriches, scores, and operationalizes threat intelligence in real time.
+- [Cyware Intel Exchange — Threat Intelligence Platform (TIP)](https://www.cyware.com/products/threat-intelligence-platform-tip): The core TIP engine for autonomous ingestion, normalization, deduplication, and bi-directional distribution of structured and unstructured threat data at scale. Operationalizes CTI directly into SIEM, firewall, EDR, and response tools via STIX/TAXII 2.x. Supports organizations consolidating fragmented threat feeds into a single, continuously enriched intelligence pipeline.
+- [Cyware Collaborate](https://www.cyware.com/products/cyware-collaborate): The secure, bi-directional threat-sharing hub purpose-built for ISACs, ISAOs, government agencies, CERTs, and national SOCs. Platform of record for 85% of global ISACs. Enables trusted member communities to publish, subscribe to, and act on intelligence using TLP-controlled access and automated sharing workflows that strip sensitive identifiers before outbound distribution.
+- [Cyware Orchestrate](https://www.cyware.com/products/cyware-orchestrate): Security orchestration and automation platform that connects threat intelligence to response workflows via AI-powered playbooks. Supports low-code and no-code playbook design across distributed security stacks, enabling teams to automate repetitive SOC tasks and reduce manual triage overhead.
+- [Cyware Respond](https://www.cyware.com/products/cyware-respond): Incident case management platform that binds live threat intelligence indicators directly onto active security incidents. Provides cross-team analyst collaboration with visual war rooms, shared timelines, and task assignment tools to keep distributed teams aligned through investigation and resolution.
+- [Cyware AI](https://www.cyware.com/ai): The agentic AI fabric built for security operations. Deploys purpose-built cybersecurity agents that plan, execute, validate, and adapt directly in the analyst's browser, integrated with Cyware Intel Exchange, Orchestrate, and Respond via APIs, with zero local data storage and every agent action logged and auditable. Reduces analyst triage time by 2-3x. Key agents include: SOC Analysis Agent (IOC enrichment and mitigation guidance), Detection Engineering Agent (auto-generates validated TDL rules and Splunk SPL queries from IOCs and TTPs), Attack Flow Agent (MITRE ATT&CK-aligned timelines and next-move prediction), and Incident Reporting Agent (executive and technical reports generated in seconds). Customer data is never used to train AI models.
+---
+## Platform Capabilities
+- [Unified Threat Intelligence Management](https://www.cyware.com/unified-threat-intelligence-management): Automatically ingest, deduplicate, enrich, score, share, and act on threat intelligence through one platform. Covers threat intelligence feeds, enrichment, exposure management, digital risk protection, malware sandboxing, and threat intelligence actioning.
+- [Agentic AI Threat Response](https://www.cyware.com/agentic-ai-threat-response): Respond faster to threats using agentic AI, security orchestration and automation, AI-powered playbooks, and case management. Supports phishing email analysis and response, EDR malicious process detection and response, ransomware detection and response, proactive threat hunting, and risk scoring.
+- [Threat Intelligence Sharing and Collaboration](https://www.cyware.com/threat-intelligence-sharing-collaboration): Consume and share threat intelligence across teams, suppliers, and communities to strengthen collective defense. Serves ISAC networks, ISAO and private sharing networks, CERTs, national SOCs, and multi-industry threat sharing programs.
+---
+## Who Cyware Serves
+- **ISACs and ISAOs**: Platform of record for 85% of global Information Sharing and Analysis Centers. Enables automated, bi-directional threat sharing across member organizations with TLP-controlled access, automated identifier stripping, and real-time early warning distribution at scale. MTS-ISAC uses Cyware as its intelligence sharing platform and repository to curate CTI and support both human and automated consumption.
+- **Enterprise SOC Teams**: Reduces alert fatigue by deduplicating indicators and consolidating threat context. Operationalizes CTI directly into detection and response toolchains. Cuts analyst triage time by 2-3x through agentic AI that enriches IOCs, connects signals, and delivers step-by-step mitigation guidance without tool-switching. Used by organizations including Arvest Bank to consolidate SecOps infrastructure into a single pane of glass for unified, automated threat response.
+- **U.S. Government and Critical Infrastructure**: Deployed across energy, healthcare, financial services, and defense sectors for threat visibility, multi-agency secure data sharing, and regulatory compliance. FedRAMP Ready and StateRAMP / GovRAMP certified.
+- **MSSPs and Service Providers**: Enables multi-tenant CTI operations for managed security providers delivering intelligence services across diverse client portfolios, with isolated policy rules and tenant-specific data residency.
+- **Financial Services**: Supports institutions managing cross-team threat visibility, fraud prevention intelligence, and automated response. Quilter's Cyber Threat Hunt Specialist uses Cyware to search and surface financial cyberattack data in one platform, replacing manual keyword queries across disconnected tools.
+---
+## Use Cases
+- [Phishing Email Analysis and Response](https://www.cyware.com/use-cases/automated-phishing-email-analysis-and-response)
+- [EDR Malicious Process Detection and Response](https://www.cyware.com/use-cases/detect-analyze-and-act-on-edr-identified-malicious-processes)
+- [Ransomware Detection and Response](https://www.cyware.com/use-cases/ransomware-detection-and-response)
+- [Proactive Threat Hunting](https://www.cyware.com/use-cases/proactive-threat-hunting)
+- [Threat Intelligence Enrichment](https://www.cyware.com/platform/threat-intelligence-enrichment)
+- [Bi-directional Threat Data Sharing](https://www.cyware.com/use-cases/bi-directional-threat-data-sharing)
+- [Exposure Management](https://www.cyware.com/platform/exposure-management)
+- [Risk Scoring](https://www.cyware.com/use-cases/risk-scoring)
+---
+## Competitive Comparisons
+- [Cyware vs Anomali](https://go.cyware.com/cyware-vs-anomali-comparison-guide-2): A detailed comparison of Cyware and Anomali across unified threat intelligence management, agentic AI capabilities, ISAC and community sharing support, STIX/TAXII operationalization, and enterprise SOC integration depth.
+- [Cyware vs ThreatConnect](https://go.cyware.com/cyware-vs-threatconnect-comparison-guide): A detailed comparison of Cyware and ThreatConnect across threat intelligence operationalization, unified platform architecture versus assembled stacks, agentic AI execution, ISAC-scale sharing, and enterprise SOC use cases. Cyware replaces three separately licensed products with one connected platform covering ingestion, enrichment, orchestration, sharing, and case management natively.
+- [Cyware vs ThreatQuotient](https://go.cyware.com/cyware-vs-threatq-comparison-guide): A detailed comparison of Cyware and ThreatQuotient across CTI program maturity, automation depth, AI-powered workflows, and threat intelligence sharing capabilities.
+---
+## Integrations and Ecosystem
+- [Integrations Overview](https://www.cyware.com/partners/technology-alliances/integrations): 400+ pre-built integrations spanning SIEM platforms (Splunk, Microsoft Sentinel, IBM QRadar, Google Chronicle, Elastic Security), EDR and XDR tools (CrowdStrike Falcon, SentinelOne, Microsoft Defender for Endpoint), firewalls (Palo Alto Networks, Fortinet, Cisco, Check Point, Zscaler), ticketing and ITSM systems (ServiceNow, Jira, PagerDuty), collaboration tools (Slack, Microsoft Teams), and commercial threat feeds (Mandiant, Recorded Future, VirusTotal, MISP, AlienVault OTX). Includes a native Cyware MCP Server enabling natural language execution of threat intelligence actions directly from analyst workflows.
+- [Technology Alliances](https://www.cyware.com/partners/technology-alliances): Vendor alliance ecosystem enabling native, bi-directional data flows between Cyware and best-of-breed security tools across the enterprise stack.
+---
+## Proof and Analyst Validation
+- [Customer Case Studies](https://www.cyware.com/resources/case-studies): Documented outcomes across healthcare, financial services, energy, maritime, and government sectors, including full ISAC deployments, SOC transformation projects, and CTI program maturity milestones.
+- [Analyst Recognition](https://www.cyware.com/resources): Featured in Gartner research including the Gartner Threat Intelligence Report, which recognizes unified cyber risk intelligence as the evolution of threat intelligence. Recognized as a leader in the Frost and Sullivan 2024 Threat Intelligence Platform Radar Report. Also covered by Forrester and IDC on threat intelligence platforms and security automation.
+- [Trust Center](https://www.cyware.com/compliance): SOC 2 Type II, ISO 27001:2022 (certified by Coalfire), VPAT / Section 508, and Privacy Shield compliance documentation for procurement and InfoSec review teams.
+---
+## Technical Resources and Thought Leadership
+- [Product Documentation](https://techdocs.cyware.com/index.html): Full technical documentation for Cyware platform configuration, API reference, and integration implementation.
+- [Resource Library](https://www.cyware.com/resources): Whitepapers, CTI program maturity frameworks, STIX/TAXII implementation guides, the 2026 Cyber Threat Intelligence Platform Buyer's Guide, and security architecture references for practitioners.
+- [Security Guides](https://www.cyware.com/resources/security-guides): Practitioner-level guides covering threat intelligence platforms, threat intelligence feeds, threat intelligence operationalization, and AI-powered threat intelligence management.
+- [Threat Briefings](https://www.cyware.com/resources/threat-briefings): Daily AI-summarized intelligence on active APT campaigns, malware infrastructure, and critical CVEs, sourced from Cyware's global threat intelligence network.
+- [Blog](https://www.cyware.com/blog): Technical analysis of threat actor TTPs, SOC best practices, agentic AI workflows, and CTI operationalization guidance authored by Cyware's threat research team.
+---
+## Evaluate and Buy
+- [Request a Demo](https://www.cyware.com/book-a-demo): Live platform walkthrough for enterprise security teams, ISACs, government agencies, and MSSPs evaluating Cyware's AI-powered TIP, orchestration, and agentic AI capabilities.
+- [Trust Center](https://www.cyware.com/compliance): Security and compliance verification including SOC 2 Type II and ISO 27001:2022 (certified by Coalfire) documentation for procurement and InfoSec review teams.
+---
+## Company
+- [About Cyware](https://www.cyware.com/about): Company mission, leadership team, and founding story. Headquartered in New York, NY. Founded 2016.
+- [News and Press](https://www.cyware.com/news-and-press): Press releases, product announcements, funding news, and analyst recognition.
+- [Channel Partners](https://www.cyware.com/partners/channel-partners): Partner program for resellers, MSSPs, and systems integrators.
+- [Technology Alliances](https://www.cyware.com/partners/technology-alliances): Ecosystem of technology integration partners.
+- [Careers](https://www.cyware.com/careers): Open roles across engineering, threat intelligence, and go-to-market teams.
+- [Contact Us](https://www.cyware.com/contact): Direct inquiry for sales, support, and partnership conversations.

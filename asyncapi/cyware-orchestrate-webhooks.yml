@@ -1,0 +1,79 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://orchestrateapi.cyware.com/webhooks, https://orchestrateapi.cyware.com/events,
+  https://techdocs.cyware.com/ctix/en/supported-actions-for-webhooks.html
+spec_type: Webhooks
+asyncapi: null
+summary: >-
+  Cyware publishes no AsyncAPI document and no event-streaming contract. The event surface it does
+  publish is webhook-shaped and mostly INBOUND: Orchestrate mints per-trigger webhook URLs that
+  third-party tools POST into to raise events, which then fire playbooks. Intel Exchange separately
+  lets an administrator configure outbound webhook connections from the UI, but Cyware does not
+  publish the payload schema or the event catalog for those, so only the configuration surface is
+  recorded here. Recorded honestly as a webhook catalog, not as an AsyncAPI.
+direction_summary:
+  inbound: >-
+    Orchestrate webhook ingestion — documented, with request contracts (Webhooks section of the
+    Orchestrate API reference, 3 documented operations plus the /v1/events/ and /v2/events/ REST
+    creators).
+  outbound: >-
+    Intel Exchange webhook connections — configurable in the product (Administration > Integration
+    Management > Webhooks: Add New Webhook, Supported Actions for Webhooks) but the event types and
+    payload schema are not published.
+inbound_webhooks:
+  base: >-
+    A tenant-specific webhook URL minted per trigger in the Orchestrate UI, of the form
+    https://<co_host>/soarapi/webhooks_auth/events/?token=<webhook-token>
+  authentication:
+    parameter: token
+    location: query
+    required: true
+    note: The webhook token is retrieved from the Orchestrate application when the trigger is created.
+  endpoints:
+    - name: Create event through app and action identifier
+      method: POST
+      path: "{webhook_url}/{app-identifier}/{action-identifier}/"
+      operation: openapi/cyware-orchestrate-openapi.yml#webhooksCreateEventV2
+      body: [data (required), title, source, severity, labels]
+    - name: Create event through payload
+      method: POST
+      path: "{webhook_url}/"
+      operation: openapi/cyware-orchestrate-openapi.yml#createEventsThroughPayloadV2
+    - name: Webhook connectivity test
+      method: GET
+      path: "{webhook_url}/test_connectivity/"
+      operation: openapi/cyware-orchestrate-openapi.yml#webhooksTestConnectivity
+    - name: Create event (REST v1)
+      method: POST
+      path: /v1/events/
+      operation: openapi/cyware-orchestrate-openapi.yml#createEvent
+    - name: Create event (REST v2)
+      method: POST
+      path: /v2/events/
+      operation: openapi/cyware-orchestrate-openapi.yml#createEventV2
+    - name: Configure trigger data labels
+      method: POST
+      path: /v1/webhooks/data-labels/
+      operation: openapi/cyware-orchestrate-openapi.yml#configureEvent
+      note: Attaches labels to a trigger so incoming events route to the right playbooks.
+  response_shape_change:
+    since: Orchestrate v3.5.9
+    note: >-
+      Webhook URLs generated from that release return a concise response (title, readable_id, source
+      and similar). Removing /v2 from the webhook URL restores the detailed response.
+outbound_webhooks:
+  product: Cyware Intel Exchange
+  configuration_docs: https://techdocs.cyware.com/ctix/en/webhooks.html
+  supported_actions_docs: https://techdocs.cyware.com/ctix/en/supported-actions-for-webhooks.html
+  published_event_catalog: false
+  published_payload_schema: false
+  note: >-
+    The "Supported Actions for Webhooks" page documents management actions on webhook connections
+    (edit, delete, filter), not the events delivered. No event type list and no payload schema is
+    published, so none is asserted here.
+gaps:
+  - No AsyncAPI document for any Cyware surface.
+  - No published event catalog or payload schema for Intel Exchange outbound webhooks.
+  - No delivery guarantees, retry policy or signature verification scheme documented for either
+    direction; inbound authentication is a bearer-style token in the query string.

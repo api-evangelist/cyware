@@ -1,0 +1,64 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Cyware Orchestrate (CO) Open API
+  version: 1.0.0
+extends: openapi/cyware-orchestrate-openapi.yml
+x-generated: '2026-08-04'
+x-method: generated
+x-note: >-
+  Cyware publishes no OpenAPI document for Orchestrate; the spec this overlay extends was assembled
+  by API Evangelist from Cyware's own structured per-endpoint reference documents at
+  https://orchestrateapi.cyware.com. This overlay records API Evangelist annotations only — it never
+  changes a path, method, parameter or schema.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provenance:
+        source_host: https://orchestrateapi.cyware.com
+        source_index: https://orchestrateapi.cyware.com/llms.txt
+        reference_pages_harvested: 73
+        endpoint_pages_with_a_contract: 62
+        operations_emitted: 47
+        paths_emitted: 43
+        duplicate_path_method_pages_merged: 15
+        harvested: '2026-08-04'
+        vendor_published_openapi: false
+        note: >-
+          The 13 analytics reference pages all document the same route
+          (GET /v1/analytics/data-source/) with different query parameters, which is why the merged
+          count is high relative to the operation count; the alternates are preserved on the
+          operation as x-alternate-documents.
+      x-apievangelist-artifacts:
+        authentication: authentication/cyware-authentication.yml
+        conventions: conventions/cyware-conventions.yml
+        webhooks: asyncapi/cyware-orchestrate-webhooks.yml
+        lifecycle: lifecycle/cyware-lifecycle.yml
+        data_model: data-model/cyware-data-model.yml
+        mcp: mcp/cyware-mcp.yml
+        tool_crosswalk: mcp/cyware-tool-crosswalk.yml
+        skills: skills/_index.yml
+  - target: $.info
+    update:
+      x-apievangelist-auth-contract:
+        style: signed-query-parameters
+        parameters: [access_id, expires, signature]
+        algorithm: Base64(HMAC-SHA1(secret_key, "<access_id>\n<expires>"))
+        signature_ttl_seconds: 30
+        docs: https://orchestrateapi.cyware.com/authentication
+        note: >-
+          Webhook ingestion endpoints are the exception — they authenticate with a per-trigger token
+          query parameter rather than a signature.
+  - target: $.info
+    update:
+      x-apievangelist-agent-safety:
+        high_consequence_operations: [runPlaybook, executeAction, bulkTerminateApiView,
+          installCustomApps, createAppInstance]
+        note: >-
+          These operations execute real actions against production security infrastructure. Any agent
+          binding to this API should require explicit human approval before invoking them; see
+          skills/cyware-run-orchestrate-playbook.md.
+  - target: $.servers
+    update:
+      x-apievangelist-note: >-
+        Orchestrate is tenant-hosted. There is no shared SaaS endpoint; the server variable must be
+        replaced with the customer's own Orchestrate host.

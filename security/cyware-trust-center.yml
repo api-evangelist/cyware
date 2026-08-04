@@ -1,0 +1,59 @@
+generated: '2026-08-04'
+method: searched
+source: https://www.cyware.com/compliance
+url: https://www.cyware.com/compliance
+name: Cyware Certifications and Compliance
+summary: >-
+  Cyware publishes a compliance page rather than a hosted trust portal (no trust.cyware.com or
+  security.cyware.com host exists). The page names the attestations and certifications Cyware holds
+  and directs procurement and InfoSec reviewers to request documentation through Contact Us; the
+  reports themselves are not self-serve downloadable.
+certifications:
+  - name: SOC 2 Type 2
+    status: certified
+    note: >-
+      Third-party audit covering security, availability, processing integrity, confidentiality and
+      privacy.
+  - name: ISO/IEC 27001:2022
+    status: certified
+    auditor: Coalfire
+    note: Information Security Management System certification.
+  - name: VPAT / Section 508
+    status: in-progress
+    note: >-
+      Cyware states it is pursuing certification for accessibility compliance under Section 508 of
+      the Rehabilitation Act and the WCAG guidelines.
+  - name: Privacy Shield
+    status: participant
+claimed_elsewhere:
+  - name: FedRAMP Ready
+    source: https://www.cyware.com/llms.txt
+    note: >-
+      Listed under Certifications in Cyware's own llms.txt system metadata; not restated on the
+      /compliance page and not verified against the FedRAMP marketplace in this pass.
+  - name: StateRAMP / GovRAMP
+    source: https://www.cyware.com/llms.txt
+    note: Listed in Cyware's llms.txt; not restated on the /compliance page.
+self_serve_documents: false
+security_contact: null
+notes: >-
+  No security.txt, no published vulnerability disclosure policy and no bug bounty program were found
+  on any Cyware host. The only vulnerability reporting instruction Cyware publishes is repository
+  scoped — cyware-labs/cyware-mcpserver/SECURITY.md asks reporters to file a GitHub issue titled
+  "Vulnerability:<title>" — which is not an organization-wide disclosure policy, so no Security or
+  VulnerabilityDisclosure pointer is wired.
+x-evidence:
+  - source: https://www.cyware.com/compliance
+    http_status: 200
+    fetched: '2026-08-04'
+    keywords: [soc 2 type 2, iso 27001:2022, coalfire, vpat, section 508, privacy shield]
+  - source: https://www.cyware.com/llms.txt
+    http_status: 200
+    fetched: '2026-08-04'
+    keywords: [soc 2 type ii, iso 27001, fedramp ready, stateramp, govramp]
+  - source: https://github.com/cyware-labs/cyware-mcpserver/blob/main/SECURITY.md
+    http_status: 200
+    fetched: '2026-08-04'
+    scope: single repository
+  - probe: trust.cyware.com / security.cyware.com
+    result: no such host

@@ -1,0 +1,119 @@
+generated: '2026-08-04'
+method: derived
+source: >-
+  openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml,
+  https://ctixapiv3.cyware.com/authentication, https://orchestrateapi.cyware.com/authentication
+docs:
+  - https://ctixapiv3.cyware.com/authentication
+  - https://orchestrateapi.cyware.com/authentication
+  - https://techdocs.cyware.com/ctix/en/configure-open-api.html
+summary: >-
+  Both Cyware Open APIs are tenant-hosted Django-style REST APIs with trailing-slash paths, JSON
+  request and response bodies, offset pagination, epoch-second timestamps and query-parameter
+  request signing. There is no idempotency contract, no request-id tracing header, no RFC 9457
+  problem+json envelope and no rate-limit response headers documented on either surface.
+authentication:
+  style: signed-query-parameters
+  scheme: HMAC-SHA1 request signature over "<access_id>\n<expires>", Base64 then URL encoded
+  transport: query string (not headers)
+  parameters:
+    intel_exchange: [AccessID, Expires, Signature]
+    orchestrate: [access_id, expires, signature]
+  credential_expiry: signature valid for at most 30 seconds from issue
+  credential_provisioning: >-
+    Open API credentials (access ID + secret key) are generated inside the tenant under the Open API
+    module; roles and feature permissions are attached to the credential.
+  alternates:
+    - Session/bearer token taken from the Authorization header of a product API call (used by the
+      MCP server's "token" auth mode).
+    - Basic username/password (MCP server "basic" auth mode).
+  artifact: authentication/cyware-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    Neither API reference documents an idempotency key, and no Idempotency-Key parameter appears in
+    either OpenAPI document. Bulk actions are the closest thing to a safe retry unit: they take an
+    explicit list of object ids (or all_objects: true with a filter) and are naturally re-appliable
+    because they set state rather than increment it. Creation endpoints (quick add intel, detailed
+    STIX submission, Orchestrate events) have no dedupe key exposed to the caller.
+pagination:
+  style: page-number
+  parameters:
+    - name: page
+      default: '1'
+    - name: page_size
+      default: '10'
+      max: 100
+  response_fields: [next, previous, page_size, total, results]
+  note: >-
+    221 of the Intel Exchange reference pages declare page/page_size. The next/previous fields carry
+    a relative URL with the query string already applied, or null on the first/last page.
+sorting_and_filtering:
+  sort_parameter: sort
+  sort_convention: "field for ascending, -field for descending (for example -created)"
+  common_filters: [created_from, created_to, timestamp_from, timestamp_to, is_active, action,
+    entity_type, response_code, request_method]
+  query_language:
+    name: Cyware Query Language (CQL)
+    used_by: POST /ingestion/threat-data/list/
+    note: >-
+      Threat-data search is expressed as a CQL query in the request body rather than as query
+      parameters. The MCP server ships the CQL grammar as its own tool (cql-ctix-grammar-rules) so an
+      agent can construct a valid query.
+timestamps:
+  format: epoch seconds (integer)
+  fields: [created, modified, expiry_time, beginning_time, timestamp]
+  note: >-
+    Every documented time field is an epoch integer, not ISO 8601. The MCP server ships two utility
+    tools (convert-date-string-to-epoch, get-epoch-with-delta-from-now) purely to bridge this.
+identifiers:
+  style: UUID v4 for platform objects; STIX 2.x identifiers (type--uuid) for threat objects
+  path_params: [object_id, object_type, collection_id, subscriber_id, user_id, tag_id, app_id,
+    integration_app_id, playbook_unique_id, instance_id, unique_id]
+request_tracing:
+  request_id_header: null
+  note: >-
+    No correlation or request-id header is documented. Server-side, every Open API call is written to
+    the API activity log, which is itself queryable (GET /event-logs/audit-logs/,
+    GET /rest-auth/logs/user/{user_id}/, GET /publishing/subscriber/polling_logs/{subscriber_id}/)
+    with the api path, method, response code, process time and user recorded — that log is the
+    substitute for client-side trace ids.
+versioning:
+  intel_exchange:
+    scheme: product-release
+    current: '3.7.7'
+    api_version_in_path: false
+    note: >-
+      The Open API is versioned with the product, not in the URL. The reference states it covers
+      Intel Exchange 3.6.2 and later. The reference host name (ctixapiv3) carries the v3 generation.
+  orchestrate:
+    scheme: uri-path
+    current: v1
+    note: Paths are prefixed /v1/; a small number of endpoints have a /v2/ variant (POST /v2/events/).
+error_handling:
+  envelope: vendor
+  problem_json: false
+  note: >-
+    Errors are not modelled in the reference — only two 400 responses and one 503 appear across 438
+    documented operations. The set of status codes the platform returns is published indirectly, as
+    the response_code filter enum on the subscriber polling log endpoint.
+  artifact: errors/cyware-problem-types.yml
+rate_limiting:
+  model: tenant-configured quotas
+  scopes: [per Open API credential, per tenant, TAXII servers]
+  windows: [minute, hour, day, month]
+  response_headers: none documented
+  status_code: 429
+  artifact: rate-limits/cyware-rate-limits.yml
+  docs: https://techdocs.cyware.com/ctix/en/configure-open-api-rate-limits.html
+content_types:
+  request: application/json (multipart/form-data for file import)
+  response: application/json (application/xml on three STIX 1.x export operations)
+webhooks:
+  artifact: asyncapi/cyware-orchestrate-webhooks.yml
+cross_links:
+  authentication: authentication/cyware-authentication.yml
+  errors: errors/cyware-problem-types.yml
+  lifecycle: lifecycle/cyware-lifecycle.yml
+  rate_limits: rate-limits/cyware-rate-limits.yml
+  data_model: data-model/cyware-data-model.yml

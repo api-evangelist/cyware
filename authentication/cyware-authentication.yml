@@ -1,0 +1,28 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cyware-intel-exchange-openapi.yml, openapi/cyware-orchestrate-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ctixOpenApiSignature
+  type: apiKey
+  in: query
+  parameter: AccessID
+  description: 'Intel Exchange Open API credentials. Every request carries three query parameters:
+    AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most
+    30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with
+    the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+  sources:
+  - openapi/cyware-intel-exchange-openapi.yml
+- name: coOpenApiSignature
+  type: apiKey
+  in: query
+  parameter: access_id
+  description: Orchestrate Open API credentials. Every request carries access_id, expires (epoch,
+    current time + up to 30 seconds) and signature query parameters, where StringToSign = access_id
+    + "\n" + expires and Signature = Base64(HMAC-SHA1(secret_key, StringToSign)). See https://orchestrateapi.cyware.com/authentication
+  sources:
+  - openapi/cyware-orchestrate-openapi.yml
