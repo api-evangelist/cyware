@@ -38,108 +38,1130 @@ tags:
   - mcp
   - agentic-ai
 apis:
-  - name: Cyware Intel Exchange (CTIX) v3 Open API
-    description: >-
-      The public Open API for Cyware Intel Exchange, Cyware's threat intelligence platform. Covers threat
-      data objects and their relations, quick-add and detailed STIX intel submission, intel import,
-      enrichment tools and policies, correlation rules, tags and tag groups, watchlists, allowed and
-      false-positive indicators, threat bulletins, threat investigation, threat mailbox, PIR management
-      and signals, MITRE ATT&CK navigator data, dashboards, reports, collection and subscriber
-      administration, and TAXII publishing. Intel Exchange is deployed per tenant, so the base URL is the
-      customer's own Intel Exchange host with the API mounted at /ctixapi. Requests are authenticated
-      with Open API credentials using an AccessID, an Expires epoch (max 30 seconds ahead) and an
-      HMAC-SHA1 Signature passed as query parameters.
-    humanURL: https://ctixapiv3.cyware.com/
-    baseURL: https://demo.cyware.com/ctixapi
-    tags:
-      - threat-intelligence
-      - cyber-threat-intelligence
-      - threat-intelligence-platform
-      - stix
-      - taxii
-      - mitre-attack
-      - indicators-of-compromise
-      - threat-intelligence-sharing
-    properties:
-      - type: OpenAPI
-        url: openapi/cyware-intel-exchange-openapi.yml
-      - type: Documentation
-        url: https://techdocs.cyware.com/ctix/en/product-documentation.html
-      - type: APIReference
-        url: https://ctixapiv3.cyware.com/
-      - type: Authentication
-        url: authentication/cyware-authentication.yml
-      - type: Conventions
-        url: conventions/cyware-conventions.yml
-      - type: ErrorCatalog
-        url: errors/cyware-problem-types.yml
-      - type: DataModel
-        url: data-model/cyware-data-model.yml
-      - type: Overlay
-        url: overlays/cyware-intel-exchange-overlay.yaml
-      - type: LLMsTxt
-        url: llms/cyware-intel-exchange-api-llms.txt
-  - name: Cyware Orchestrate (CO) Open API
-    description: >-
-      The public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and
-      response platform. Covers playbook listing, execution, run logs, node results, exports and bulk
-      termination; app integrations including apps, app actions, app instances, action execution and
-      custom app import; source events and event ingestion; persistent lists via the storage manager;
-      code snippets; custom email templates; tags; and orchestration analytics. Orchestrate is deployed
-      per tenant, with the API mounted at /soarapi and authenticated with HMAC-SHA1 signed Open API
-      credentials (access_id, expires, signature).
-    humanURL: https://orchestrateapi.cyware.com/
-    baseURL: https://demo.cyware.com/soarapi
-    tags:
-      - soar
-      - security-orchestration
-      - incident-response
-      - security-operations
-      - automation
-    properties:
-      - type: OpenAPI
-        url: openapi/cyware-orchestrate-openapi.yml
-      - type: Documentation
-        url: https://techdocs.cyware.com/co/en/product-documentation.html
-      - type: APIReference
-        url: https://orchestrateapi.cyware.com/
-      - type: Authentication
-        url: authentication/cyware-authentication.yml
-      - type: Webhooks
-        url: asyncapi/cyware-orchestrate-webhooks.yml
-      - type: Overlay
-        url: overlays/cyware-orchestrate-overlay.yaml
-      - type: LLMsTxt
-        url: llms/cyware-orchestrate-api-llms.txt
-  - name: Cyware MCP Server
-    description: >-
-      Open-source Model Context Protocol server, written in Go and published under MIT by Cyware Labs,
-      that exposes Cyware Intel Exchange and Cyware Orchestrate to LLM agents as MCP tools. Self-hosted
-      alongside the customer's own tenant over stdio or SSE transport; 40 tools cover CQL search, threat
-      data object details and relations, bulk threat-data actions, tag management, enrichment tools and
-      enrichment execution, quick-add intel, and Orchestrate playbook and app-action execution.
-    humanURL: https://github.com/cyware-labs/cyware-mcpserver
-    baseURL: https://github.com/cyware-labs/cyware-mcpserver
-    tags:
-      - mcp
-      - agentic-ai
-      - threat-intelligence
-      - security-operations
-    properties:
-      - type: MCPServer
-        url: mcp/cyware-mcp.yml
-      - type: ToolCrosswalk
-        url: mcp/cyware-tool-crosswalk.yml
-      - type: SourceCode
-        url: https://github.com/cyware-labs/cyware-mcpserver
-      - type: Documentation
-        url: https://github.com/cyware-labs/cyware-mcpserver/blob/main/README.md
+- name: Cyware MCP Server
+  description: >-
+    Open-source Model Context Protocol server, written in Go and published under MIT by Cyware Labs, that
+    exposes Cyware Intel Exchange and Cyware Orchestrate to LLM agents as MCP tools. Self-hosted alongside
+    the customer's own tenant over stdio or SSE transport; 40 tools cover CQL search, threat data object
+    details and relations, bulk threat-data actions, tag management, enrichment tools and enrichment execution,
+    quick-add intel, and Orchestrate playbook and app-action execution.
+  humanURL: https://github.com/cyware-labs/cyware-mcpserver
+  baseURL: https://github.com/cyware-labs/cyware-mcpserver
+  tags:
+  - mcp
+  - agentic-ai
+  - threat-intelligence
+  - security-operations
+  properties:
+  - type: MCPServer
+    url: mcp/cyware-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/cyware-tool-crosswalk.yml
+  - type: SourceCode
+    url: https://github.com/cyware-labs/cyware-mcpserver
+  - type: Documentation
+    url: https://github.com/cyware-labs/cyware-mcpserver/blob/main/README.md
+- aid: cyware:cyware-administration-api
+  name: Cyware Administration API
+  description: Administration
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Administration
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-administration-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-allowed-indicators-api
+  name: Cyware Allowed Indicators API
+  description: Allowed Indicators
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Allowed Indicators
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-allowed-indicators-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-analytics-api
+  name: Cyware Analytics API
+  description: Analytics
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-att-ck-navigator-api
+  name: Cyware ATT&CK Navigator API
+  description: ATT&CK Navigator
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - ATT&CK Navigator
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-att-ck-navigator-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-authentication-api
+  name: Cyware Authentication API
+  description: Authentication
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-code-snippets-api
+  name: Cyware Code Snippets API
+  description: Code Snippets
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Code Snippets
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-code-snippets-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-create-intel-via-open-api-api
+  name: Cyware Create Intel via Open API API
+  description: Create Intel via Open API
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Create Intel via Open API
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-create-intel-via-open-api-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-custom-email-templates-api
+  name: Cyware Custom Email Templates API
+  description: Custom Email Templates
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Custom Email Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-custom-email-templates-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-dashboards-api
+  name: Cyware Dashboards API
+  description: Dashboards
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-detailed-submission-api
+  name: Cyware Detailed Submission API
+  description: Detailed Submission
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Detailed Submission
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-detailed-submission-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-events-api
+  name: Cyware Events API
+  description: Events
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-events-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-fang-defang-api
+  name: Cyware Fang/Defang API
+  description: Fang/Defang
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Fang/Defang
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-fang-defang-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-global-notes-api
+  name: Cyware Global Notes API
+  description: Global Notes
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Global Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-global-notes-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-global-tasks-api
+  name: Cyware Global Tasks API
+  description: Global Tasks
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Global Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-global-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-import-intel-api
+  name: Cyware Import Intel API
+  description: Import Intel
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Import Intel
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-import-intel-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-integrations-api
+  name: Cyware Integrations API
+  description: Integrations
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-persistent-list-api
+  name: Cyware Persistent List API
+  description: Persistent List
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Persistent List
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-persistent-list-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-ping-api
+  name: Cyware Ping API
+  description: Ping
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-ping-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-pir-api
+  name: Cyware PIR API
+  description: PIR
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - PIR
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-pir-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-playbooks-api
+  name: Cyware Playbooks API
+  description: Playbooks
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Playbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-playbooks-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-quick-add-intel-api
+  name: Cyware Quick Add Intel API
+  description: Quick Add Intel
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Quick Add Intel
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-quick-add-intel-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-reports-api
+  name: Cyware Reports API
+  description: Reports
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-reports-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-rss-feeds-api
+  name: Cyware RSS Feeds API
+  description: RSS Feeds
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - RSS Feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-rss-feeds-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-rules-api
+  name: Cyware Rules API
+  description: Rules
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-rules-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-status-check-api
+  name: Cyware Status Check API
+  description: Status Check
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Status Check
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-status-check-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-tag-groups-api
+  name: Cyware Tag Groups API
+  description: Tag Groups
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Tag Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-tag-groups-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-tags-api
+  name: Cyware Tags API
+  description: Tags
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-tags-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-threat-bulletin-api
+  name: Cyware Threat Bulletin API
+  description: Threat Bulletin
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Threat Bulletin
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-threat-bulletin-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-threat-data-api
+  name: Cyware Threat Data API
+  description: Threat Data
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Threat Data
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-threat-data-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-threat-data-objects-api
+  name: Cyware Threat Data Objects API
+  description: Threat Data Objects
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Threat Data Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-threat-data-objects-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-threat-investigation-api
+  name: Cyware Threat Investigation API
+  description: Threat Investigation
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Threat Investigation
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-threat-investigation-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-threat-mailbox-api
+  name: Cyware Threat Mailbox API
+  description: Threat Mailbox
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Threat Mailbox
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-threat-mailbox-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-watchlist-api
+  name: Cyware Watchlist API
+  description: Watchlist
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Watchlist
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-watchlist-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
+- aid: cyware:cyware-webhooks-api
+  name: Cyware Webhooks API
+  description: Webhooks
+  humanURL: https://ctixapiv3.cyware.com/
+  baseURL: https://demo.cyware.com/ctixapi
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/cyware-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://techdocs.cyware.com/ctix/en/product-documentation.html
+  - type: APIReference
+    url: https://ctixapiv3.cyware.com/
+  - type: Authentication
+    url: authentication/cyware-authentication.yml
+  - type: Conventions
+    url: conventions/cyware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cyware-problem-types.yml
+  - type: DataModel
+    url: data-model/cyware-data-model.yml
+  - type: LLMsTxt
+    url: llms/cyware-intel-exchange-api-llms.txt
+  - type: Documentation
+    url: https://techdocs.cyware.com/co/en/product-documentation.html
+  - type: APIReference
+    url: https://orchestrateapi.cyware.com/
+  - type: Webhooks
+    url: asyncapi/cyware-orchestrate-webhooks.yml
+  - type: LLMsTxt
+    url: llms/cyware-orchestrate-api-llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
   - FN: APIs.json
     email: info@apis.io
 common:
+  - type: IssueTracker
+    url: https://github.com/cyware-labs/cyware-mcpserver/issues
+  - type: SecurityPolicy
+    url: https://github.com/cyware-labs/cyware-mcpserver/blob/main/SECURITY.md
+  - type: License
+    name: MIT
+    url: https://github.com/cyware-labs/cyware-mcpserver/blob/main/LICENSE
   - type: Website
     url: https://www.cyware.com/
   - type: DeveloperPortal
