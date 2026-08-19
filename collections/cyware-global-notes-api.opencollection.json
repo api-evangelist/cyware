@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Global Notes API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Notes List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/notes/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the notes in a threat data object."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of notes to retrieve on each page."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a threat data object to retrieve the associated notes."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to retrieve the associated notes."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start date of the notes created state in epoch format to filter notes."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end date of the notes created date in epoch format to filter notes."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search in notes."
+              }
+            ]
+          },
+          "docs": "This API endpoint retrieves a list of global notes."
+        },
+        {
+          "info": {
+            "name": "Add Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/notes/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a note to a threat data object."
+        },
+        {
+          "info": {
+            "name": "Bulk Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/ingestion-api/bulk-notes/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates notes in bulk for multiple threat data objects."
+        },
+        {
+          "info": {
+            "name": "Get Note Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/notes/:note_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a note to retrieve the details."
+              }
+            ]
+          },
+          "docs": "This API endpoint retrieves the details of a specific note identified by the `note_id`."
+        },
+        {
+          "info": {
+            "name": "Update Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/notes/:note_id/",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a note to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a note."
+        },
+        {
+          "info": {
+            "name": "Delete Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/notes/:note_id/",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a note to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a note by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

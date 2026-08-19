@@ -1,0 +1,3541 @@
+{
+  "item": [
+    {
+      "id": "b3bd5d40-36bb-4962-a6e0-efecb1326f1d",
+      "name": "PIR",
+      "description": {
+        "content": "PIR",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7648c411-3319-4fd4-b34c-2fbee6d2ce20",
+          "name": "Login",
+          "request": {
+            "name": "Login",
+            "description": {
+              "content": "Authenticates a user against the API Gateway and returns a session token. Store the token and pass it as `CYW <token>` in the `Authorization` header for all subsequent API calls.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>The login endpoint is served under <code class=\"slate-code\">/cpapi</code>, not under the <code class=\"slate-code\">/cpapi/cpir</code> prefix used by all other PIR endpoints.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cpapi",
+                "rest-auth",
+                "login",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b59db7c-b4f6-493a-830b-e24036eb0310",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cpapi",
+                    "rest-auth",
+                    "login",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"e1a2b3c4d5f6...\",\n  \"email\": \"john.doe@example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dfe83f7-c6de-499f-932f-c767c4887740",
+          "name": "Bulk Delink Entities",
+          "request": {
+            "name": "Bulk Delink Entities",
+            "description": {
+              "content": "Manually remove one or more intelligence objects from a PIR by setting their link status to `manual_delink`. Delinked entities are permanently suppressed from auto-relinking on future sweep cycles unless manually linked again. Triggers a match snapshot write on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "matches",
+                "delink",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57dcabad-a6ef-4f09-ab9c-75d476697796",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "matches",
+                    "delink",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_ids\": [\n    \"ces-chunk-abc123\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"updated\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ee18be7-7ecc-4f29-9467-11b060d3e593",
+          "name": "Bulk Link Entities",
+          "request": {
+            "name": "Bulk Link Entities",
+            "description": {
+              "content": "Manually links one or more intelligence objects to a PIR by setting their link status to `manual_link`. The entities must already exist as match records for the PIR. If an entity is not a match record for this PIR, it is silently skipped, and the `updated` count reflects only the entities that were actually changed. Triggers a match snapshot write on success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "matches",
+                "link",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e8a46bd-df53-47c4-83c6-c8ec18e3cef1",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "matches",
+                    "link",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_ids\": [\n    \"ces-chunk-abc123\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"updated\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edea62fb-695c-4d31-81ef-44041c3ae9ee",
+          "name": "List Entity Matches for PIR",
+          "request": {
+            "name": "List Entity Matches for PIR",
+            "description": {
+              "content": "Returns the intelligence objects currently matched to a specific PIR, ordered by relevance score in descending by default. At least one of `include__object_type`, `object_type`, or `entity_kind` is required; omitting all three returns `400` `CPIR-002`.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">object_type</code> now applies AND semantics across multiple values. Because each matched row holds a single object type, a multi-value AND is structurally unsatisfiable and always returns an empty result. Use <code class=\"slate-code\">include__object_type</code> for OR filtering across multiple types. Single-value <code class=\"slate-code\">object_type</code> is unaffected.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "matches",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_object_type",
+                  "value": "<string>",
+                  "description": "Pass a comma-separated list of object types. Returns matches whose type is any of the listed values (OR semantics)."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Pass a single object type. Returns matches of exactly that type. Takes precedence over `include__object_type` when both are present. Do not pass multiple comma-separated values; multi-value AND always returns an empty result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_kind",
+                  "value": "<string>",
+                  "description": "Pass an entity kind to expand to all object types within that kind."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Pass the page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<string>",
+                  "description": "Pass the number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "overview",
+                  "value": "<string>",
+                  "description": "Pass `true` to return the top 7 matches by sort order, ignoring pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "-score",
+                  "description": "Pass the sort order."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a keyword for a case-insensitive substring search across entity name, tags, and source tags."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9481cb3-ba67-4b8c-9d45-ce3dce4cfe73",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "matches",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "overview",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-score"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"ces_entity_id\": \"ces-chunk-abc123\",\n      \"object_id\": \"obj-lockbit-3\",\n      \"object_type\": \"malware\",\n      \"source_product_type\": \"malware\",\n      \"score\": 0.91,\n      \"link_status\": \"auto_link\",\n      \"first_matched_at\": \"2026-05-15T10:00:00Z\",\n      \"last_matched_at\": \"2026-05-19T14:00:00Z\",\n      \"metadata\": {\n        \"object_type\": \"malware\",\n        \"tlp\": \"amber\",\n        \"source_name\": [\n          \"feed-a\"\n        ],\n        \"risk_severity\": \"high\",\n        \"name\": \"LockBit 3.0\",\n        \"tags\": [\n          \"ransomware\"\n        ],\n        \"description_preview\": \"LockBit 3.0 ransomware variant observed targeting...\",\n        \"collection_id\": \"col-123\",\n        \"source_id\": \"src-9\",\n        \"source_tags\": [\n          \"apac\"\n        ],\n        \"cvss_score\": 8.6,\n        \"object_created_at\": \"2026-05-15T10:00:00Z\",\n        \"object_modified_at\": \"2026-05-18T12:30:00Z\"\n      }\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "354e6987-7af8-4790-b4b2-066cb04abc24",
+          "name": "Top Objects by Type (Cross-PIR)",
+          "request": {
+            "name": "Top Objects by Type (Cross-PIR)",
+            "description": {
+              "content": "Returns intelligence objects of a given type ranked by the number of active PIRs they are linked to. Use this for a tenant-wide view of which objects are most broadly relevant across all requirements. Pass `overview=true` to retrieve the top 7 objects for use in dashboard widgets, bypassing standard pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "matches",
+                ":object_type",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Pass the page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<string>",
+                  "description": "Pass the number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "Boolean",
+                  "value": "<string>",
+                  "description": "Pass `true` to return the top 7 objects by `link_count`, ignoring pagination. Intended for dashboard widget use."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a keyword for a case-insensitive substring search across object name, tags, and source tags."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the object type as a path parameter. Unknown values return an empty result set without an error."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1dc7a04-878c-427b-8e40-232361bf5f34",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "matches",
+                    ":object_type",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Boolean",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the object type as a path parameter. Unknown values return an empty result set without an error."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"object_id\": \"obj-lockbit-3\",\n      \"object_type\": \"malware\",\n      \"link_count\": 5,\n      \"first_matched_at\": \"2026-05-15T10:00:00Z\",\n      \"metadata\": {\n        \"object_type\": \"malware\",\n        \"tlp\": \"amber\",\n        \"source_name\": [\n          \"feed-a\"\n        ],\n        \"risk_severity\": \"high\",\n        \"name\": \"LockBit 3.0\",\n        \"tags\": [\n          \"ransomware\"\n        ],\n        \"description_preview\": \"LockBit 3.0 ransomware variant observed targeting...\",\n        \"collection_id\": \"col-123\",\n        \"source_id\": \"src-9\",\n        \"source_tags\": [\n          \"apac\"\n        ],\n        \"cvss_score\": 8.6,\n        \"object_created_at\": \"2026-05-15T10:00:00Z\",\n        \"object_modified_at\": \"2026-05-18T12:30:00Z\"\n      }\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "155cc17f-9174-4b81-a7bc-b2e397686c4c",
+          "name": "Analyse Intent",
+          "request": {
+            "name": "Analyse Intent",
+            "description": {
+              "content": "Evaluates a proposed intent string across four quality dimensions without persisting any data. Returns a composite quality score, per-dimension scores, suggested improvements, and a suggested title and category. Use this before creating or updating a PIR to surface gaps in the intent before committing.\n\nRequires LiteLLM. When the LLM is unavailable, all dimension scores and the quality score return as zero and a default set of suggestion chips is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "analyze-intent",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"intent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc825d93-87bc-46c3-a81b-3e72faac1ac0",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "analyze-intent",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"Track APT29 against US government\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quality_dimensions\": {\n    \"scope_clarity\": 2,\n    \"threat_focus\": 2,\n    \"specificity\": 1,\n    \"atomicity\": 1\n  },\n  \"quality_score\": 75,\n  \"suggestion_chips\": null,\n  \"suggested_title\": \"APT29 Operations Targeting U.S. Government\",\n  \"suggested_categories\": [\n    {\n      \"id\": \"3Er8ytk1jNEZhNEfemagu4y0JxO\",\n      \"name\": \"Advanced Persistent Threats (APTs)\"\n    }\n  ],\n  \"low_confidence\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f114f0f-15b3-409d-887d-ca3b6f239af7",
+          "name": "Check Overlap",
+          "request": {
+            "name": "Check Overlap",
+            "description": {
+              "content": "Checks whether a proposed intent semantically duplicates one or more existing PIRs in the tenant. Returns overlapping PIRs ranked by similarity score. Use this during PIR creation to identify consolidation opportunities before committing to a new requirement. When checking overlap for an existing PIR during an update, pass `exclude_pir_id` to exclude it from the results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "check-overlap",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"intent\": \"<string>\",\n  \"exclude_pir_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5335ba2-dced-4ac3-86b5-050937684076",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "check-overlap",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"Monitor LockBit ransomware\",\n  \"exclude_pir_id\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"pir_id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n      \"readable_id\": \"PIR001\",\n      \"title\": \"LockBit Ransomware Campaign\",\n      \"score\": 0.87,\n      \"overlap_band\": \"high\"\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "faae1022-74df-41ec-956e-21ca72b0fd1e",
+          "name": "Create PIR",
+          "request": {
+            "name": "Create PIR",
+            "description": {
+              "content": "Creates a new Priority Intelligence Requirement for the authenticated tenant. On creation, an embedding job is queued in the Central Embedding Service (CES), and a match sweep runs automatically once the embedding completes.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">category_ids</code> is required when <code class=\"slate-code\">status</code> is <code class=\"slate-code\">active</code>. A PIR activated without categories returns <code class=\"slate-code\">400 CPIR-002</code>.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"intent\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"sharing_policy\": \"org\",\n  \"time_duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b9c9238-1eff-4859-9410-aceb61303b72",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Ransomware Campaign Tracking\",\n  \"intent\": \"Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC\",\n  \"priority\": \"high\",\n  \"sharing_policy\": \"org\",\n  \"time_duration\": 604800\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n  \"readable_id\": \"PIR001\",\n  \"tenant_id\": \"tnt_3dzc1updqqaxspfvsdpxh4q5m8p\",\n  \"title\": \"Ransomware Campaign Tracking\",\n  \"intent\": \"Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC\",\n  \"priority\": \"high\",\n  \"status\": \"active\",\n  \"owner_id\": \"01KR3SG8X0CYQNG4YGYQ28R76Y\",\n  \"sharing_policy\": \"org\",\n  \"quality_score\": 0,\n  \"embedding_status\": \"pending\",\n  \"created_at\": \"0001-01-01T00:00:00Z\",\n  \"updated_at\": \"0001-01-01T00:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2238cd3e-cd76-4e1e-8374-755c186b0700",
+          "name": "List PIRs",
+          "request": {
+            "name": "List PIRs",
+            "description": {
+              "content": "Returns a paginated list of PIRs visible to the authenticated user within their tenant. Supports filtering by status, priority, health band, and keyword search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Pass the lifecycle status to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Pass the priority to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Pass the health band to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a keyword for a case-insensitive substring search on the PIR title."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Pass the sort field and direction. Unknown values silently fall back to the default."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e83139fc-19c3-4135-8e36-6c0fd73e7361",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n      \"readable_id\": \"PIR001\",\n      \"tenant_id\": \"tnt_3dzc1updqqaxspfvsdpxh4q5m8p\",\n      \"title\": \"Ransomware Campaign Tracking\",\n      \"intent\": \"Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC\",\n      \"priority\": \"high\",\n      \"status\": \"active\",\n      \"owner_id\": \"01KR3SG8X0CYQNG4YGYQ28R76Y\",\n      \"sharing_policy\": \"org\",\n      \"quality_score\": 82,\n      \"time_duration\": 604800,\n      \"embedding_status\": \"completed\",\n      \"created_at\": \"2026-05-10T09:12:00Z\",\n      \"updated_at\": \"2026-05-12T07:00:00Z\",\n      \"last_activity_at\": \"2026-05-19T14:57:35.332419Z\",\n      \"last_match_sweep_at\": \"2026-05-19T14:00:00Z\",\n      \"health\": \"healthy\",\n      \"signal_count\": 4\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bce6dd6-c9d4-493a-b686-c4a9bf12ff37",
+          "name": "Enhance Intent",
+          "request": {
+            "name": "Enhance Intent",
+            "description": {
+              "content": "Rewrites a vague or incomplete intent into a precise, well-structured monitoring requirement using an LLM. Returns the enhanced text for analyst review before it is committed. Only `intent` is required. Passing quality context from a prior Analyze Intent call focuses the rewrite on the weakest dimensions.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Returns <code class=\"slate-code\">500</code> when LiteLLM is unavailable.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "enhance-intent",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"intent\": \"<string>\",\n  \"quality_dimensions\": {\n    \"scope_clarity\": \"<number>\",\n    \"threat_focus\": \"<number>\",\n    \"specificity\": \"<number>\",\n    \"atomicity\": \"<number>\"\n  },\n  \"quality_score\": \"<number>\",\n  \"suggestion_chips\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe0043eb-0cff-467b-a4d4-7ad3fa79f3ee",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "enhance-intent",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"track APT activity\",\n  \"quality_dimensions\": {\n    \"scope_clarity\": 1,\n    \"threat_focus\": 2,\n    \"specificity\": 0,\n    \"atomicity\": 2\n  },\n  \"quality_score\": 62.5,\n  \"suggestion_chips\": [\n    \"Narrow the geographic or sector scope\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"original_intent\": \"Track APT29 against US government\",\n  \"enhanced_intent\": \"Monitor APT29 (Cozy Bear) intrusion campaigns targeting U.S. federal government networks, focusing on spearphishing, credential theft, and cloud-service abuse TTPs.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cbac787-2447-4dd7-9a50-d592fdbbab9b",
+          "name": "Get PIR by ID",
+          "request": {
+            "name": "Get PIR by ID",
+            "description": {
+              "content": "Returns the full details of a single PIR. Accepts either a KSUID or a human-readable ID such as `PIR001`. Returns `404 CPIR-003` , if the PIR does not exist or belongs to a different tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e5566105-192f-4d6b-ad6a-9a214e6102fd",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n  \"readable_id\": \"PIR001\",\n  \"tenant_id\": \"tnt_3dzc1updqqaxspfvsdpxh4q5m8p\",\n  \"title\": \"Ransomware Campaign Tracking\",\n  \"intent\": \"Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC\",\n  \"priority\": \"high\",\n  \"status\": \"active\",\n  \"owner_id\": \"01KR3SG8X0CYQNG4YGYQ28R76Y\",\n  \"sharing_policy\": \"org\",\n  \"quality_score\": 82,\n  \"time_duration\": 604800,\n  \"embedding_status\": \"completed\",\n  \"created_at\": \"2026-05-10T09:12:00Z\",\n  \"updated_at\": \"2026-05-12T07:00:00Z\",\n  \"last_activity_at\": \"2026-05-19T14:57:35.332419Z\",\n  \"last_match_sweep_at\": \"2026-05-19T14:00:00Z\",\n  \"health\": \"\",\n  \"signal_count\": 4\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78ad9d9e-2923-488a-a53e-297062fc3921",
+          "name": "Update PIR",
+          "request": {
+            "name": "Update PIR",
+            "description": {
+              "content": "Updates the mutable fields of an existing PIR. This is a partial update; only fields present in the request body are applied. Omitted fields retain their current values. `intent` is the only required field. Changing it re-queues the CES embedding job and triggers a new match sweep cycle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"intent\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"sharing_policy\": \"<string>\",\n  \"time_duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6d2a338-5af7-45ac-ab13-c60c9daad4c1",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"updated intent\",\n  \"priority\": \"critical\",\n  \"sharing_policy\": \"org\",\n  \"time_duration\": 2592000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n  \"readable_id\": \"PIR001\",\n  \"tenant_id\": \"tnt_3dzc1updqqaxspfvsdpxh4q5m8p\",\n  \"title\": \"Ransomware Campaign Tracking\",\n  \"intent\": \"updated intent\",\n  \"priority\": \"critical\",\n  \"status\": \"active\",\n  \"owner_id\": \"01KR3SG8X0CYQNG4YGYQ28R76Y\",\n  \"sharing_policy\": \"org\",\n  \"quality_score\": 82,\n  \"time_duration\": 2592000,\n  \"embedding_status\": \"completed\",\n  \"created_at\": \"2026-05-10T09:12:00Z\",\n  \"updated_at\": \"2026-05-12T07:00:00Z\",\n  \"last_activity_at\": \"2026-05-19T14:57:35.332419Z\",\n  \"last_match_sweep_at\": \"2026-05-19T14:00:00Z\",\n  \"health\": \"healthy\",\n  \"signal_count\": 4\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "470fa4b0-8c17-4f24-b305-23bd1a1fb631",
+          "name": "Update PIR Status",
+          "request": {
+            "name": "Update PIR Status",
+            "description": {
+              "content": "Transitions a PIR to a new lifecycle status. Status changes affect whether the PIR participates in match sweeps and signal evaluation and may trigger side effects such as auto-resolving open signals.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Lifecycle States\" iconUrl=\"\"><p>State</p>\n<p>Behaviour</p>\n<p>Match Sweeps</p>\n<p><code class=\"slate-code\">draft</code></p>\n<p>Saved but not yet submitted for monitoring.</p>\n<p>Excluded</p>\n<p><code class=\"slate-code\">active</code></p>\n<p>Fully operational. Requires at least one category; returns <code class=\"slate-code\">400</code> <code class=\"slate-code\">CPIR-002</code> otherwise.</p>\n<p>Included</p>\n<p><code class=\"slate-code\">inactive</code></p>\n<p>Temporarily suspended. Open signals are auto-resolved on transition.</p>\n<p>Excluded</p>\n<p><code class=\"slate-code\">expired</code></p>\n<p>End-of-life. Open signals are auto-resolved and the CES record is deprecated.</p>\n<p>Excluded</p>\n<p><code class=\"slate-code\">deleted</code></p>\n<p>Soft-deleted. Excluded from list results. Open signals are auto-resolved and matches are marked removed.</p>\n<p>Excluded</p>\n<p></p></AccordionItem>\n</Accordion>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "status",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3634fab2-4603-4264-95a2-4a37841505b3",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "status",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"inactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e6ad8ee-f586-4fda-b819-0900ba7a4d76",
+          "name": "Get PIR Health Score",
+          "request": {
+            "name": "Get PIR Health Score",
+            "description": {
+              "content": "Returns the most recent health snapshot for a specific PIR. The health score is computed by the Health Worker on a schedule and after each match sweep. Returns `404` `CPIR-003` until the Health Worker has run at least once for the PIR.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "health",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc7bdee9-6bc9-4e07-940f-fbc839861eba",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "health",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pir_id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n  \"score_total\": 72,\n  \"band\": \"healthy\",\n  \"coverage\": 80,\n  \"freshness\": 65,\n  \"confidence\": 70,\n  \"velocity\": 75,\n  \"detection_readiness\": 68,\n  \"computed_at\": \"2026-05-12T07:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e10a416-f170-4fa9-8b4f-47ef60fcf76d",
+          "name": "Most-Active PIRs",
+          "request": {
+            "name": "Most-Active PIRs",
+            "description": {
+              "content": "Returns up to 5 PIRs ranked by the most recent signal emission time. Use this to populate the Most Active PIRs widget on the dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "metrics",
+                "most-active",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d6cb123-96d4-4a86-9299-8bd97c70baa9",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "metrics",
+                    "most-active",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"pir_id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n      \"readable_id\": \"PIR001\",\n      \"title\": \"LockBit Ransomware Campaign\",\n      \"last_signal_type\": \"emerging_threat\",\n      \"last_signal_type_label\": \"Emerging Threat\",\n      \"last_emitted_at\": \"2026-05-19T14:57:35.332419Z\",\n      \"health_band\": \"healthy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73819026-bafc-4b56-a367-9695469ecc5e",
+          "name": "Per-PIR Signal Count",
+          "request": {
+            "name": "Per-PIR Signal Count",
+            "description": {
+              "content": "Returns the count of signals in `triggered` or `acknowledged` status for a specific PIR.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "metrics",
+                "signals-count",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37c340e3-e73c-499d-8d99-ec746563ff3e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "metrics",
+                    "signals-count",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45ed2311-b695-4220-a25a-f0981c5c46a7",
+          "name": "Per-PIR Top Prioritized Signals",
+          "request": {
+            "name": "Per-PIR Top Prioritized Signals",
+            "description": {
+              "content": "Returns the top-prioritized signals for a specific PIR using the same ranking logic as the tenant-wide endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "metrics",
+                "signals-prioritized",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "618e090d-12f8-436a-9092-9531aad732b9",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "metrics",
+                    "signals-prioritized",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_count\": 4,\n  \"results\": [\n    {\n      \"signal_id\": \"sig-1\",\n      \"title\": \"Emerging Threat\",\n      \"description\": \"...\",\n      \"signal_type\": \"emerging_threat\",\n      \"severity\": \"crisis\",\n      \"status\": \"triggered\",\n      \"confidence\": 92.5,\n      \"emitted_at\": \"2026-05-19T14:57:35.332419Z\",\n      \"recommended_actions\": [\n        \"Validate match relevance to each affected PIR\"\n      ],\n      \"rank_score\": 5,\n      \"pir_ids\": [\n        \"3DwpvMWyNIuf33QFpyRJXIcKYVB\"\n      ],\n      \"associated_pirs_count\": 1,\n      \"associated_pirs\": [\n        {\n          \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n          \"readable_id\": \"PIR001\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "585c4e34-a6a0-4294-90ed-59778209447f",
+          "name": "PIR Health Aggregate",
+          "request": {
+            "name": "PIR Health Aggregate",
+            "description": {
+              "content": "Returns the count of active PIRs in each health band plus the 7-day change in unhealthy PIRs. Use this to populate the Health Status widget on the dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                "metrics",
+                "health",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c604da9b-46df-471b-8aaa-3b5a9db1dd76",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    "metrics",
+                    "health",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"counts\": {\n    \"healthy\": 12,\n    \"degrading\": 4,\n    \"unhealthy\": 2,\n    \"unknown\": 1\n  },\n  \"unhealthy_delta_7d\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03b4d715-cec8-45aa-b84f-32f1c92063c8",
+          "name": "PIR Trends (7-day)",
+          "request": {
+            "name": "PIR Trends (7-day)",
+            "description": {
+              "content": "Returns the 7-day link and delink deltas for matched intelligence objects of a specific PIR. The response is a flat object: top-level keys carry the overall totals, and one additional key per active object type carries a per-type breakdown. Object types with no activity in the window are omitted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pirs",
+                ":pir_id",
+                "trends",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pir_id",
+                  "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ca1e294-321c-4fc1-abf5-9c39694d9fb4",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pirs",
+                    ":pir_id",
+                    "trends",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pir_id",
+                      "description": "(Required) Pass the KSUID or human-readable ID of the PIR as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 43,\n  \"delta_link\": 6,\n  \"delta_delink\": 1,\n  \"delta_manual_delink\": 1,\n  \"baseline_at\": 1715635200000,\n  \"malware\": {\n    \"total\": 4,\n    \"delta_link\": 2,\n    \"delta_delink\": 0,\n    \"delta_manual_delink\": 0\n  },\n  \"report\": {\n    \"total\": 8,\n    \"delta_link\": 0,\n    \"delta_delink\": 2,\n    \"delta_manual_delink\": 1\n  },\n  \"vulnerability\": {\n    \"total\": 31,\n    \"delta_link\": 4,\n    \"delta_delink\": 0,\n    \"delta_manual_delink\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96f07815-4850-440f-a0ed-2f8e1f8414c9",
+          "name": "Active Signal Count",
+          "request": {
+            "name": "Active Signal Count",
+            "description": {
+              "content": "Returns the count of signals in `triggered` or `acknowledged` status across the tenant. This is the same value surfaced as the open signals count in the dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                "metrics",
+                "count",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0263e4c-96a9-4137-8a83-3a5c96cbc2e5",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "metrics",
+                    "count",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 17\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af1e39ed-dfd3-4f92-a898-806b1293d778",
+          "name": "List Signals (Tenant-wide)",
+          "request": {
+            "name": "List Signals (Tenant-wide)",
+            "description": {
+              "content": "Returns a paginated list of all signals across the tenant. Filter parameters that accept multiple values use OR semantics; repeat the parameter to filter by more than one value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<string>",
+                  "description": "Pass the number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filter by severity level."
+                },
+                {
+                  "disabled": false,
+                  "key": "signal_type",
+                  "value": "<string>",
+                  "description": "Filter by signal type."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by signal status."
+                },
+                {
+                  "disabled": false,
+                  "key": "emitted_from",
+                  "value": "<string>",
+                  "description": "Pass an RFC3339 timestamp as the inclusive start of the emission date range."
+                },
+                {
+                  "disabled": false,
+                  "key": "emitted_to",
+                  "value": "<string>",
+                  "description": "Pass an RFC3339 timestamp as the inclusive end of the emission date range."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a keyword for a case-insensitive substring search on the signal title."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31590728-7812-4709-a9c0-ac609edf7b9c",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emitted_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emitted_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"3Esig000000000000000000001\",\n      \"title\": \"Emerging Threat\",\n      \"description\": \"New activity detected across linked objects for this PIR.\",\n      \"signal_type\": \"emerging_threat\",\n      \"severity\": \"critical\",\n      \"status\": \"triggered\",\n      \"confidence\": 88,\n      \"recommended_actions\": [\n        \"Validate match relevance to each affected PIR\"\n      ],\n      \"pir_ids\": [\n        \"3DwpvMWyNIuf33QFpyRJXIcKYVB\"\n      ],\n      \"associated_pirs_count\": 1,\n      \"associated_pirs\": [\n        {\n          \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n          \"readable_id\": \"PIR001\"\n        }\n      ],\n      \"emitted_at\": \"2026-05-19T14:57:35.332419Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa944d3a-8780-4b48-b1d5-d076e5f16960",
+          "name": "Top Prioritized Signals (Tenant-wide)",
+          "request": {
+            "name": "Top Prioritized Signals (Tenant-wide)",
+            "description": {
+              "content": "Returns the top 3 signals across the tenant ranked by a composite of severity and confidence. Only signals in triggered or acknowledged status are eligible. Use this to power the prioritised signals widget on the dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                "metrics",
+                "prioritized",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6398a316-13be-4c1a-9241-7fafaab5011a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "metrics",
+                    "prioritized",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_count\": 4,\n  \"results\": [\n    {\n      \"signal_id\": \"sig-1\",\n      \"title\": \"Emerging Threat\",\n      \"description\": \"...\",\n      \"signal_type\": \"emerging_threat\",\n      \"severity\": \"crisis\",\n      \"status\": \"triggered\",\n      \"confidence\": 92.5,\n      \"emitted_at\": \"2026-05-19T14:57:35.332419Z\",\n      \"recommended_actions\": [\n        \"Validate match relevance to each affected PIR\"\n      ],\n      \"rank_score\": 5,\n      \"pir_ids\": [\n        \"3DwpvMWyNIuf33QFpyRJXIcKYVB\"\n      ],\n      \"associated_pirs_count\": 2,\n      \"associated_pirs\": [\n        {\n          \"id\": \"3DwpvMWyNIuf33QFpyRJXIcKYVB\",\n          \"readable_id\": \"PIR001\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd0725ce-0e38-41ac-84c0-e9408aa176aa",
+          "name": "Update Signal Status",
+          "request": {
+            "name": "Update Signal Status",
+            "description": {
+              "content": "Transitions a signal to a new status. Not all transitions are permitted; see the transition rules below. Returns `409` `CPIR-007` when the transition is not allowed from the signal's current state.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Transition Rules\" iconUrl=\"\"><p>Target status</p>\n<p>Allowed from</p>\n<p>Failure</p>\n<p><code class=\"slate-code\">acknowledged</code></p>\n<p><code class=\"slate-code\">triggered</code> only</p>\n<p><code class=\"slate-code\">409</code> <code class=\"slate-code\">CPIR-007</code> with \"signal is not in triggered state\"</p>\n<p><code class=\"slate-code\">resolved</code></p>\n<p><code class=\"slate-code\">triggered</code> or <code class=\"slate-code\">acknowledged</code></p>\n<p><code class=\"slate-code\">409</code> <code class=\"slate-code\">CPIR-007</code> with \"signal cannot be resolved from its current state\"</p>\n<p><code class=\"slate-code\">dismissed</code></p>\n<p>Any status</p>\n<p>N/A</p>\n<p></p></AccordionItem>\n</Accordion>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                ":signal_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signal_id",
+                  "description": "(Required) Pass the signal identifier as a path parameter."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1506149-a50c-413c-9b20-41de091cf4a9",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signal_id",
+                      "description": "(Required) Pass the signal identifier as a path parameter."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"acknowledged\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"acknowledged\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a8943a6-e6c6-48bf-86de-5eddbcde3c50",
+          "name": "Liveness Check",
+          "request": {
+            "name": "Liveness Check",
+            "description": {
+              "content": "Confirms the service process is running. Does not probe downstream dependencies. Used by the container orchestrator as a process-level health check.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "health-check",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31f4c123-f577-4460-89b5-461af7995e50",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "health-check",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f19e20bb-bd3e-4bb7-871c-915d987c8d1c",
+          "name": "Prometheus Metrics",
+          "request": {
+            "name": "Prometheus Metrics",
+            "description": {
+              "content": "Exposes operational metrics in Prometheus text exposition format. Served on a dedicated port (\\`:2424\\`) separate from the API port. Both the API server and the worker binary expose this endpoint independently on their own `:2424` ports.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "619a4d78-12d9-4b49-839b-6718dbe7c68c",
+              "name": "Returns Prometheus text format. Metric namespaces:\n\nHELP cpir_http_requests_total Total HTTP requests.\nTYPE cpir_http_requests_total counter\ncpir_http_requests_total{method=\"GET\",route=\"/api/v1/pirs/\",status=\"200\"} 1423\nHELP cpir_db_query_duration_seconds DB query duration.\nTYPE cpir_db_query_duration_seconds histogram\ncpir_db_query_duration_seconds_bucket{op=\"select\",table=\"pirs\",le=\"0.005\"} 892",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cb3e5c3-6f49-4225-9b65-1df5cd9470b9",
+          "name": "Readiness Check",
+          "request": {
+            "name": "Readiness Check",
+            "description": {
+              "content": "Confirms that the service and its dependencies, the database (via PgBouncer) and the Central Embedding Service (CES), are reachable. Returns `200` only when all dependencies are healthy; returns `503` when any dependency is down. Used by the orchestrator to gate traffic routing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "readiness-check",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "697b0b65-dc71-4d52-b635-eca159663c21",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "readiness-check",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"components\": {\n    \"database\": \"ok\",\n    \"ces\": \"ok\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f09cf27-1498-4276-9edf-b10882f7e448",
+              "name": "HTTP 503 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "readiness-check",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unhealthy\",\n  \"components\": {\n    \"database\": \"ok\",\n    \"ces\": \"unhealthy\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0ac2423-8c8b-4684-8500-21b921208921",
+          "name": "Get Tenant Configuration",
+          "request": {
+            "name": "Get Tenant Configuration",
+            "description": {
+              "content": "Returns the tenant's CES tuning parameters, escalation thresholds, and telemetry configuration. The telemetry fields are passed through to the frontend to enable click-event capture and are not stored per tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "tenant",
+                "configuration",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71631b72-c3df-42af-8793-bf40919c2242",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "tenant",
+                    "configuration",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vector_min_score\": {\n    \"global\": 0.78,\n    \"per_entity\": {\n      \"threat_object\": 0.7,\n      \"alert\": 0.6\n    }\n  },\n  \"top_k\": {\n    \"global\": 100,\n    \"per_entity\": {\n      \"threat_object\": 20,\n      \"alert\": 30\n    }\n  },\n  \"base_config\": {\n    \"pir__max_active\": 1000\n  },\n  \"auto_escalation_count\": 2,\n  \"auto_escalation_window_hours\": 4,\n  \"telemetry_token\": \"<per-product token>\",\n  \"telemetry_type\": \"mixpanel\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb5299d2-dd67-4824-aea9-68cbb8838fc7",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open PIR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

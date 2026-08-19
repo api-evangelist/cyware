@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Persistent List API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Persistent List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Persistent Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the persistent lists."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the title or query string to search for a persistent list."
+              }
+            ]
+          },
+          "docs": "Returns a list of persistent lists."
+        },
+        {
+          "info": {
+            "name": "Create a Persistent List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a persistent list in Orchestrate."
+        },
+        {
+          "info": {
+            "name": "Get Persistent List Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/:persistent_storage_unique_id/",
+            "params": [
+              {
+                "name": "persistent_storage_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific persistent list."
+        },
+        {
+          "info": {
+            "name": "Delete Persistent Storage Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/:persistent_storage_unique_id/",
+            "params": [
+              {
+                "name": "persistent_storage_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a persistent list by passing the unique ID. You can delete the persistent list only if it is not used in a playbook. A successful request returns a 200 status code, else the response includes a `non_field_error` object."
+        },
+        {
+          "info": {
+            "name": "Get Persistent List Slugs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/slugs/"
+          },
+          "docs": "Returns a list of persistent list slugs."
+        },
+        {
+          "info": {
+            "name": "Get Playbooks Count Associated with Persistent List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/:persistent_storage_unique_id/playbook-count/",
+            "params": [
+              {
+                "name": "persistent_storage_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the persistent list. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the playbook count containing the specified persistent list."
+        },
+        {
+          "info": {
+            "name": "Get Playbooks Associated with Persistent List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/storage-manager/:persistent_storage_unique_id/playbooks/",
+            "params": [
+              {
+                "name": "persistent_storage_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the persistent list to retrieve the associated playbooks. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of playbooks that contain the specified persistent list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

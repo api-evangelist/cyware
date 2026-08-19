@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "3642738d-0df2-48ab-8ba6-f92288f44000",
+      "name": "Authentication",
+      "description": {
+        "content": "Authentication",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e1c45b65-1f1b-476d-b7e6-b136dc74af51",
+          "name": "Product Release Version",
+          "request": {
+            "name": "Product Release Version",
+            "description": {
+              "content": "Returns the current version of the Orchestrate application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "release_version",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bab0552-ffe5-4128-9b6f-19c4a0da6a28",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "release_version",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"release_version\": \"3.0.4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6e62a83-1818-4f12-8ab7-c13aaa2e616f",
+          "name": "Test Connectivity",
+          "request": {
+            "name": "Test Connectivity",
+            "description": {
+              "content": "Returns the status of the test connectivity with the Orchestrate application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "test_connectivity",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d54e365-29f3-40c0-b921-30c9a2dc255b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "test_connectivity",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0e64b7b6-640b-4b69-8a06-8ff48f960543",
+    "name": "Cyware Orchestrate (CO) Open Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

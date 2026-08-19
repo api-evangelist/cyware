@@ -1,0 +1,1598 @@
+{
+  "item": [
+    {
+      "id": "0d3e253f-51b3-40a2-91a3-a11daf32b20c",
+      "name": "ATT&CK Navigator",
+      "description": {
+        "content": "ATT&CK Navigator",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f053a562-c1fc-4dcc-b7b7-78c384e9d8fd",
+          "name": "Get ATT&CK Layer Details",
+          "request": {
+            "name": "Get ATT&CK Layer Details",
+            "description": {
+              "content": "Returns the details of a custom ATT&CK layer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "attack-layer",
+                ":layer_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "layer_id",
+                  "description": "(Required) Pass the unique identifier of attack layer."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b916255-f0e4-4ea0-bc4c-888cf84e304b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "attack-layer",
+                    ":layer_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "layer_id",
+                      "description": "(Required) Pass the unique identifier of attack layer."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_by\": {\n    \"email\": \"localsystem@cyware.com\",\n    \"first_name\": \"local\",\n    \"id\": \"04e46a4a-6618-42b5-a6da-ee280d103e1e\",\n    \"last_name\": \"system\"\n  },\n  \"description\": \"attack layer\",\n  \"domain\": \"enterprise\",\n  \"editable\": \"true\",\n  \"id\": \"de4261a1-5c27-4dae-b1a7-e00b9389f188\",\n  \"layout\": {},\n  \"pinned\": \"true\",\n  \"shared_type\": \"private\",\n  \"shared_users\": [],\n  \"title\": \"attack layer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "feeec864-b55a-45d0-acdf-57b776153794",
+          "name": "Get ATT&CK Layers List",
+          "request": {
+            "name": "Get ATT&CK Layers List",
+            "description": {
+              "content": "Returns a list of custom ATT&CK layers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "attack-layer",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "enterprise",
+                  "description": "Pass the ATT&CK domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a query text to search layers based on the title."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49b04962-9db9-480c-ab4a-e66f9b0c1f57",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "attack-layer",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "domain",
+                      "value": "enterprise"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"created_by\": {\n        \"email\": \"localsystem@cyware.com\",\n        \"first_name\": \"local\",\n        \"id\": \"04e46a4a-6618-42b5-a6da-ee280d103e1e\",\n        \"last_name\": \"system\"\n      },\n      \"description\": \"attack layer\",\n      \"domain\": \"enterprise\",\n      \"editable\": \"true\",\n      \"id\": \"de4261a1-5c27-4dae-b1a7-e00b9389f188\",\n      \"layout\": {},\n      \"pinned\": \"true\",\n      \"shared_type\": \"private\",\n      \"shared_users\": [],\n      \"title\": \"attack layer\"\n    }\n  ],\n  \"total\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e478620a-502c-4312-b058-8f0e102ddec6",
+          "name": "Get Filters",
+          "request": {
+            "name": "Get Filters",
+            "description": {
+              "content": "Returns the filter options of various filters available for ATT&CK Navigator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                ":filter",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter",
+                  "description": "(Required) Pass a filter to retrieve the values."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0de7dc3-5b54-440a-8543-435841d40d01",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    ":filter",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter",
+                      "description": "(Required) Pass a filter to retrieve the values."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"attack-navigator/software/?page=2&page_size=10\",\n  \"previous\": {},\n  \"total\": 545,\n  \"page_size\": 10,\n  \"results\": [\n    {\n      \"id\": \"7b22e8a0-eed6-425b-b508-ecb0cc060696\",\n      \"name\": \"Empire\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecb8b573-cab9-4cb8-acca-7226b96783a3",
+          "name": "Get IOC Heat Map",
+          "request": {
+            "name": "Get IOC Heat Map",
+            "description": {
+              "content": "Returns relation statistics for the IOC heat map.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "tactic-technique-ioc-heat",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87d1d2b7-5707-4465-a4ed-06a7f4e0c2f8",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "tactic-technique-ioc-heat",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0cfb937f-61ef-49d2-a236-aa0b40eb643e:ac4814d2-c855-4e06-985e-53a22690fcb8\": {\n    \"indicator_count\": \"1\",\n    \"malware_count\": \"1\",\n    \"threat_actor_count\": \"0\",\n    \"incident_count\": \"0\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b57310c-f1e4-466b-9f05-080a171c8a37",
+          "name": "Get Tactics",
+          "request": {
+            "name": "Get Tactics",
+            "description": {
+              "content": "Returns a list of ATT&CK tactics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "tactics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "enterprise",
+                  "description": "Pass the ATT&CK domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a query text to search tactics based on the name."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32188765-25e9-427b-bcb9-322ce7ca390b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "tactics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "domain",
+                      "value": "enterprise"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"name\": \"Initial Access\",\n    \"slug\": \"initial-access\",\n    \"domain\": \"mitre-enterprise\",\n    \"url\": \"https://attack.mitre.org/tactics/TA0001\",\n    \"id\": \"04611a47-dce4-4258-93cd-467adb3218fe\"\n  },\n  \"1\": {\n    \"name\": \"Impact\",\n    \"slug\": \"impact\",\n    \"domain\": \"mitre-enterprise\",\n    \"url\": \"https://attack.mitre.org/tactics/TA0040\",\n    \"id\": \"a9d26108-4a19-49cd-9fb8-25d2a561f21d\"\n  },\n  \"2\": {\n    \"name\": \"Reconnaissance\",\n    \"slug\": \"reconnaissance\",\n    \"domain\": \"mitre-enterprise\",\n    \"url\": \"https://attack.mitre.org/tactics/TA0043\",\n    \"id\": \"844f5561-ca18-4c00-9a89-95d14ec26de8\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d7c2fa9-e7ae-4760-9e42-98660fd75253",
+          "name": "Get ATT&CK Techniques List",
+          "request": {
+            "name": "Get ATT&CK Techniques List",
+            "description": {
+              "content": "Returns a list of ATT&CK techniques.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "techniques",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "enterprise",
+                  "description": "Pass the ATT&CK domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a query text to search techniques based on the title."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass the technique type to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65505064-a8f9-4406-8f05-0b135f54315d",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "techniques",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "domain",
+                      "value": "enterprise"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"name\": \"Sample Technique 1\",\n      \"id\": \"cb37e7ca-00fd-4916-a408-a9cad1f1ba05\",\n      \"type\": \"custom\",\n      \"tactics\": [\n        \"1f8dd4c5-0a04-4253-a84b-a93ada73425b\"\n      ],\n      \"apt_count\": \"1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bd137d4-6fd4-4297-bb86-e8bb5a321822",
+          "name": "Get Sub-techniques List",
+          "request": {
+            "name": "Get Sub-techniques List",
+            "description": {
+              "content": "Returns details of all the sub-techniques.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "sub-techniques",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "enterprise",
+                  "description": "Pass the ATT&CK domain."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31b52f57-9d21-4670-99e5-b5dce437c745",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "sub-techniques",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "domain",
+                      "value": "enterprise"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"458e6e6f-00a3-4474-9273-530833952266\": [\n    {\n      \"name\": \"Setuid and Setgid\",\n      \"id\": \"2a4f6845-f4e2-4c55-bd14-62b44601bb58\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1aa1cd1c-ebbe-4260-ad77-ddc71de1a5bb",
+          "name": "Get References",
+          "request": {
+            "name": "Get References",
+            "description": {
+              "content": "Returns the references of an attack technique.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "techniques",
+                ":id",
+                "reference",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the unique ID of a technique."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1be9d271-744a-4dbd-a972-3096aa32fb68",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "techniques",
+                    ":id",
+                    "reference",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the unique ID of a technique."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": 6,\n  \"page_size\": 10,\n  \"results\": [\n    {\n      \"url\": \"https://attack.mitre.org/techniques/T1098/002\",\n      \"external_id\": \"T1098.002\",\n      \"source_name\": \"mitre-attack\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fc78f47-db27-4720-8633-2d9025396a95",
+          "name": "Get Relation List",
+          "request": {
+            "name": "Get Relation List",
+            "description": {
+              "content": "Returns a list of threat data objects related to a technique.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "techniques",
+                ":id",
+                "relation",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tactic_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the ID of the associated tactic."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass the type of threat data object for which you want to retrieve the relations."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the unique ID of a technique."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42c2f846-fd49-4d8d-be1a-85374f278e44",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "techniques",
+                    ":id",
+                    "relation",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tactic_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the unique ID of a technique."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": \"1\",\n  \"page_size\": \"10\",\n  \"results\": [\n    {\n      \"object_id\": \"a3ec75a2-7ba2-4d78-baea-e9ea3168dbdf\",\n      \"object_type\": \"indicator\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77bde969-75a4-4302-b4f7-ec7fd523e8c7",
+          "name": "Get Sub-technique Details",
+          "request": {
+            "name": "Get Sub-technique Details",
+            "description": {
+              "content": "Returns the details of a sub-technique.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "sub-techniques",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the unique ID of a sub-technique."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93b6f9c9-b891-4a10-9ed1-2b9a8ab2d102",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "sub-techniques",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the unique ID of a sub-technique."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"An attacker might use setuid or setgid bits to run programs with higher privileges. This lets their malware act like it’s being run by another user, helping it do things it normally couldn’t—like bypassing restrictions or accessing sensitive data.\",\n  \"modified\": \"1643003227\",\n  \"mitigation\": [\n    {\n      \"id\": \"2db9cd8e-1564-4ea1-8f1c-a7454ff4ed58\",\n      \"name\": \"Operating System Configuration\",\n      \"description\": \"Make configuration changes related to the operating system or a common feature of the operating system that result in system hardening against techniques.\"\n    }\n  ],\n  \"detection\": \"Monitor the file system for files that have the setuid or setgid bits set. Monitor for execution of utilities, like chmod, and their command-line arguments to look for setuid or setguid bits being set.\",\n  \"technique_id\": \"2a4f6845-f4e2-4c55-bd14-62b44601bb58\",\n  \"tactics\": [\n    {\n      \"name\": \"Defense Evasion\",\n      \"id\": \"b1949554-4733-4130-aa3e-1a4d74ec50fe\"\n    }\n  ],\n  \"platforms\": [\n    {\n      \"id\": \"760f87e5-11e3-40d6-be72-ad9e0c1e4473\",\n      \"name\": \"Linux\"\n    }\n  ],\n  \"softwares\": [\n    {\n      \"id\": \"94f3f42e-a063-416a-a5f4-34249fac5aa2\",\n      \"name\": \"Keydnap\"\n    }\n  ],\n  \"data_source\": [\n    {\n      \"id\": \"a462338b-2c05-46de-92c4-1cd4138f62f4\",\n      \"name\": \"Command: Command Execution\"\n    }\n  ],\n  \"defense_bypassed\": [],\n  \"details_page_link\": \"https://attack.mitre.org/techniques/T1548/001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed8482f4-f985-47eb-a9e7-5521f8657ce0",
+          "name": "Get Technique Details",
+          "request": {
+            "name": "Get Technique Details",
+            "description": {
+              "content": "Returns the details of a technique.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "attack-navigator",
+                "techniques",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the unique ID of a technique."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8cdc70a-8f1a-44f7-841a-204b940b1d8e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "attack-navigator",
+                    "techniques",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the unique ID of a technique."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"\\nAdversaries may deliver payloads to remote systems by adding content to shared storage locations, such as network drives or internal code repositories. Content stored on network drives or in other shared locations may be tainted by adding malicious programs, scripts, or exploit code to otherwise valid files. Once a user opens the shared tainted content, the malicious portion can be executed to run the adversary's code on a remote system. Adversaries may use tainted shared content to move laterally.\\n\\nA directory share pivot is a variation on this technique that uses several other techniques to propagate malware when users access a shared network directory. It uses [Shortcut Modification](https://attack.mitre.org/techniques/T1547/009) of directory .LNK files that use [Masquerading](https://attack.mitre.org/techniques/T1036) to look like the real directories, which are hidden through [Hidden Files and Directories](https://attack.mitre.org/techniques/T1564/001). The malicious .LNK-based directories have an embedded command that executes the hidden malware file in the directory and then opens the real intended directory so that the user's expected action still occurs. When used with frequently used network directories, the technique may result in frequent reinfections and broad access to systems and potentially to new and higher privileged accounts. (Citation: Retwin Directory Share Pivot)\\n\\nAdversaries may also compromise shared network directories through binary infections by appending or prepending its code to the healthy binary on the shared network directory. The malware may modify the original entry point (OEP) of the healthy binary to ensure that it is executed before the legitimate code. The infection could continue to spread via the newly infected file when it is executed by a remote system. These infections may target both binary and non-binary formats that end with extensions including, but not limited to, .EXE, .DLL, .SCR, .BAT, and/or .VBS.\",\n  \"modified\": 1643003123,\n  \"mitigation\": [\n    {\n      \"id\": \"bccd4ae3-c804-4022-bc20-835faa63a3f3\",\n      \"name\": \"Taint Shared Content Mitigation\",\n      \"description\": \"Protect shared folders by minimizing users who have write access. Use utilities that detect or mitigate common features used in exploitation, such as the Microsoft Enhanced Mitigation Experience Toolkit (EMET).\\n\\nReduce potential lateral movement risk by using web-based document management and collaboration services that do not use network file and directory sharing.\\n\\nIdentify potentially malicious software that may be used to taint content or may result from it and audit and/or block the unknown programs by using whitelisting (Citation: Beechey 2010) tools, like AppLocker, (Citation: Windows Commands JPCERT) (Citation: NSA MS AppLocker) or Software Restriction Policies (Citation: Corio 2008) where appropriate. (Citation: TechNet Applocker vs SRP)\"\n    }\n  ],\n  \"detection\": \"Processes that write or overwrite many files to a network shared directory may be suspicious. Monitor processes that are executed from removable media for malicious or abnormal activity such as network connections due to Command and Control and possible network Discovery techniques.\\n\\nFrequently scan shared network directories for malicious files, hidden files, .LNK files, and other file types that may not typical exist in directories used to share specific types of content.\",\n  \"technique_id\": \"a394e341-d1f4-4f13-8094-ae101dd50740\",\n  \"tactics\": [\n    {\n      \"name\": \"Lateral Movement\",\n      \"id\": \"d0c6dcdd-3bdd-497b-86f1-f1ee848408c3\"\n    }\n  ],\n  \"platforms\": [\n    {\n      \"id\": \"760f87e5-11e3-40d6-be72-ad9e0c1e4473\",\n      \"name\": \"Linux\"\n    }\n  ],\n  \"softwares\": [\n    {\n      \"id\": \"f35c4233-1896-480e-a149-55cef35a5253\",\n      \"name\": \"Miner-C\"\n    }\n  ],\n  \"data_source\": [\n    {\n      \"id\": \"301d9128-d905-47ea-9db5-f025d599cbf9\",\n      \"name\": \"Process: Process Creation\"\n    }\n  ],\n  \"defense_bypassed\": [],\n  \"details_page_link\": \"https://attack.mitre.org/techniques/T1080\",\n  \"task\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "faa1e1c8-3387-42a6-8009-b93367b26cf3",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open ATT&CK Navigator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

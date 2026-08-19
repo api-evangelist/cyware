@@ -1,0 +1,3342 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Administration API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Configuration Change Log List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/event-logs/audit-logs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve logs."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of logs to retrieve per page."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of a user to filter logs."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format from which you want to retrieve logs."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format until which you want to retrieve logs."
+              },
+              {
+                "name": "section",
+                "value": "",
+                "type": "query",
+                "description": "Pass the configuration section to filter logs. To retrieve the name of the sections, use the **GET List Configuration Sections API**."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Pass the action type to filter logs."
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the entity type of the configuration that is modified."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of a field to filter logs."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the parameter to sort logs. By default logs are returned in descending order (latest logs are returned first) based on the created time."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search logs."
+              }
+            ]
+          },
+          "docs": "Returns a list of logs of the configuration changes in the platform."
+        },
+        {
+          "info": {
+            "name": "Get Configuration Section List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/event-logs/audit-logs/utilities/section/",
+            "params": [
+              {
+                "name": "page ",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve per page."
+              }
+            ]
+          },
+          "docs": "Returns the name of the configuration sections in the platform."
+        },
+        {
+          "info": {
+            "name": "Get Subscriber Log List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/polling_logs/:subscriber_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve logs."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of logs to retrieve on each page."
+              },
+              {
+                "name": "timestamp_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format from which you want to retrieve logs."
+              },
+              {
+                "name": "timestamp_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format until which you want to retrieve logs."
+              },
+              {
+                "name": "response_code",
+                "value": "",
+                "type": "query",
+                "description": "Pass the HTTP status code to filter logs."
+              },
+              {
+                "name": "request_method",
+                "value": "",
+                "type": "query",
+                "description": "Pass the HTTP request method to filter logs."
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of a collection to filter logs."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Pass the action type of the subscriber."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the parameter to sort logs. By default logs are returned in descending order (latest logs are returned first) based on the created time."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search logs."
+              },
+              {
+                "name": "subscriber_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a subscriber."
+              }
+            ]
+          },
+          "docs": "Returns a list of activity logs of a subscriber on the platform."
+        },
+        {
+          "info": {
+            "name": "Get User Activity Log List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/logs/user/:user_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve logs."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of logs to retrieve on each page."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the parameter to sort logs. By default logs are returned in descending order (latest logs are returned first) based on the created time."
+              },
+              {
+                "name": "timestamp_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format from which you want to retrieve logs."
+              },
+              {
+                "name": "timestamp_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format until which you want to retrieve logs."
+              },
+              {
+                "name": "response",
+                "value": "",
+                "type": "query",
+                "description": "Pass the HTTP status code to filter logs."
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Pass the HTTP request method to filter logs."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search logs."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a user."
+              }
+            ]
+          },
+          "docs": "Returns a list of activity logs of a user on the platform."
+        },
+        {
+          "info": {
+            "name": "Get Certificate List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/certificate/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of certificates available in the Intel Exchange platform."
+        },
+        {
+          "info": {
+            "name": "Get Collections List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/collection/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the page size of response."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-created` to sort by created date in descending order. Pass `created` to sort by created date in ascending order."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active collections."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created from time to retrieve collection based on the created date."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created to time to retrieve collection based on the created date."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of collection."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword to search collections based on the title."
+              },
+              {
+                "name": "nominal",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve collections with the ID and name of the collections."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of collections in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Create Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/publishing/collection/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a STIX collection in the Intel Exchange application."
+        },
+        {
+          "info": {
+            "name": "Update Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/publishing/collection/:collection_id/",
+            "params": [
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the collection to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to update any attributes of a collection."
+        },
+        {
+          "info": {
+            "name": "Get Custom Scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/custom-score/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns all the custom scores."
+        },
+        {
+          "info": {
+            "name": "Create Custom Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/custom-score/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom score. You can add a maximum of five custom scores."
+        },
+        {
+          "info": {
+            "name": "Update Custom Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/custom-score/:custom_score_id/",
+            "params": [
+              {
+                "name": "custom_score_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a custom score to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a custom score."
+        },
+        {
+          "info": {
+            "name": "Get Ingestion Service Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns config for ingestion service."
+        },
+        {
+          "info": {
+            "name": "Get OpenAPI Rate Limit Configuration Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/rate-limit/openapi/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns details about the OpenAPI rate limits configuration."
+        },
+        {
+          "info": {
+            "name": "Get TAXII Rate Limit Configuration Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/rate-limit/taxii/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns details about TAXII configuration rate limits."
+        },
+        {
+          "info": {
+            "name": "Get API Expiry Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/email/notifications/openapi/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the system notification configuration for the OpenAPI expiry report."
+        },
+        {
+          "info": {
+            "name": "Get Feed Source Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/email/notifications/feed-sources/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the system notification configuration for email feed sources."
+        },
+        {
+          "info": {
+            "name": "Get Internal Failure Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/email/notifications/internal-failure-reports/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the system notification configuration for internal failure reports."
+        },
+        {
+          "info": {
+            "name": "Get Table Layout Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/layout-config/",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "The component for which the layout config needs to be fetched."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Fetches details about layout configurations for the given component."
+        },
+        {
+          "info": {
+            "name": "Get TAXII Configuration Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves the configuration details of the TAXII server on the platform."
+        },
+        {
+          "info": {
+            "name": "Get Authentication Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/auth-config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve per page."
+              }
+            ]
+          },
+          "docs": "Returns the authentication configuration."
+        },
+        {
+          "info": {
+            "name": "Get Component Configuration Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/component-config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns details about the Tenant component configuration."
+        },
+        {
+          "info": {
+            "name": "Get Firewall Configuration Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/tenant/config/access-restriction/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the firewall rules defined for a Tenant. This API either allows all the requested IPs or Countries to access the application or blocks all the IPs or Countries."
+        },
+        {
+          "info": {
+            "name": "Get Tenant Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/tenant/config/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve per page."
+              }
+            ]
+          },
+          "docs": "Returns the configurations related to the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Custom Attributes List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-attribute/",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-ctix_modified` to sort records by the last modified date in descending order. Pass `ctix_modified` to sort records by the last modified date in ascending order."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "ctix_created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_from` time in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "ctix_created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_to time` in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass a number for the respective attribute type."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass a number for the respective status."
+              },
+              {
+                "name": "manual",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve custom attributes manually created by users. Pass false to retrieve custom attributes created by the system."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword to search for attributes by the title."
+              },
+              {
+                "name": "ctix_modified_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_from` time in epoch format to filter records based on the Intel Exchange modified time."
+              },
+              {
+                "name": "ctix_modified_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_to` time in epoch format to filter records based on the Intel Exchange modified time."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom attributes from the platform."
+        },
+        {
+          "info": {
+            "name": "Create Custom Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-attribute/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a custom attribute in the platform."
+        },
+        {
+          "info": {
+            "name": "Get Custom Attribute Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-attribute/:custom_attribute_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "custom_attribute_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a custom attribute."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a custom attribute."
+        },
+        {
+          "info": {
+            "name": "Update Custom Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-attribute/:attribute_id/",
+            "params": [
+              {
+                "name": "attribute_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the custom attribute."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a custom attribute."
+        },
+        {
+          "info": {
+            "name": "Get Custom Kill Chain List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/kill-chain/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "custom",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve kill chains manually created by users. Pass false to retrieve system-created kill chains."
+              },
+              {
+                "name": "ctix_created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_from` time in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "ctix_created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_to` time in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "ctix_modified_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_from` time in epoch format to filter records based on the Intel Exchange modified time."
+              },
+              {
+                "name": "ctix_modified_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_to` time in epoch format to filter records based on the Intel Exchange modified time."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter records based on the creator."
+              },
+              {
+                "name": "modified_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter records based on the modifier."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-ctix_created` to sort records by the last modified date in descending order. Pass `ctix_created` to sort records by the last modified date in ascending order."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword to search for kill chains by the title."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of custom kill chains from the platform."
+        },
+        {
+          "info": {
+            "name": "Create Custom Kill Chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/kill-chain/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a custom kill chain with the phases of the kill chain."
+        },
+        {
+          "info": {
+            "name": "Get Custom Objects List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-object/",
+            "params": [
+              {
+                "name": "manual",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve custom attributes manually created by users. Pass false to retrieve custom attributes created by the system."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword to search for objects by the title."
+              },
+              {
+                "name": "ctix_created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_from` time in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "ctix_created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_to` time in epoch format to filter records based on the Intel Exchange created time."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-ctix_modified` to sort records by the last modified date in descending order. Pass `ctix_modified` to sort records by the last modified date in ascending order."
+              },
+              {
+                "name": "ctix_modified_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_from` time in epoch format to filter records based on the Intel Exchange modified time."
+              },
+              {
+                "name": "ctix_modified_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `modified_to` time in epoch format to filter records based on the Intel Exchange modified time."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of custom objects from the platform."
+        },
+        {
+          "info": {
+            "name": "Create Custom Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-object/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a custom object by providing valid data."
+        },
+        {
+          "info": {
+            "name": "Get Custom Object Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-object/:custom_object_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "custom_object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a custom object."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a custom object."
+        },
+        {
+          "info": {
+            "name": "Update Custom Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/configuration/custom-object/:custom_object_id/",
+            "params": [
+              {
+                "name": "custom_object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a custom object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a custom object."
+        },
+        {
+          "info": {
+            "name": "Get Enriched Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/enrichment/enrichment-object/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve enriched objects."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of enriched objects to be retrieved on each page."
+              },
+              {
+                "name": "tool",
+                "value": "",
+                "type": "query",
+                "description": "Pass the tool ID to filter enriched objects by the tool used for enrichment."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object type to retrieve objects by object type."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object ID to retrieve the enriched data of the object."
+              }
+            ]
+          },
+          "docs": "Retrieves the enriched data in a paginated format."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Object Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/enrichment/enrichment-object-detail/:object_id/:tool_id/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object ID to retrieve the enrichment details."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of the object to retrieve enrichment details."
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the tool ID to retrieve the enrichment details."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object ID to retrieve the enrichment details."
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the tool ID to retrieve the enrichment details."
+              }
+            ]
+          },
+          "docs": "Retrieves the enrichment data for the given object and tool ID."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/enrichment/:object_type/:object_id/stats/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type of the threat data object."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object ID of the threat data object."
+              }
+            ]
+          },
+          "docs": "Retrieves enrichment statistics for a provided object ID and the object type. Enrichment statistics include the verdict, number of sources that enriched the object, and their statuses."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/enrichment/status/:object_id/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object ID to fetch the enrichment status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object ID to fetch the enrichment status."
+              }
+            ]
+          },
+          "docs": "Retrieves the enrichment status."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/policy/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the enrichment policy name to retrieve the policy."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active policies, else pass false."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to retrieve policies created by the particular user."
+              },
+              {
+                "name": "updated_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to retrieve policies updated by the particular user."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created from date in epoch format to retrieve policies created in the provided timestamp."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created date in epoch format to retrieve policies created in the provided timestamp."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-ctix_created` to sort records by the last modified date in descending order. Pass `ctix_created` to sort records by the last modified date in ascending order."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object type to filter the enrichment policies on the object type specified in the policy, such as IP, hash, domain, or URL."
+              },
+              {
+                "name": "published_collections",
+                "value": "",
+                "type": "query",
+                "description": "Pass the collection ID to filter the enrichment policies based on published collection IDs."
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the collection ID to filter the enrichment policies based on the collection ID."
+              },
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the source ID to filter the enrichment policies based on the source ID."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Lists the enrichment policies in the Intel Exchange application."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Policy Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/policy/:policy_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of policy to view the details."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an enrichment policy."
+        },
+        {
+          "info": {
+            "name": "Get Enrichment Tool List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/actions/",
+            "params": [
+              {
+                "name": "action_name",
+                "value": "",
+                "type": "query",
+                "description": "Specify a list of comma-separated action names."
+              },
+              {
+                "name": "full_list",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve tools grouped by individual actions rather than as a flat list."
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of the component to return only those enrichment tools that are applicable to that specific module.  For example, if you specify the component as investigation,  it returns only those apps whose enrichment is supported in threat investigation."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of enrichment tools configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Update Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/actions/",
+            "params": [
+              {
+                "name": "integration_app_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the third-party tool."
+              },
+              {
+                "name": "integration_action_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the action of tool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a particular action of an account."
+        },
+        {
+          "info": {
+            "name": "Get API Feed List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of available API feed source integrations."
+        },
+        {
+          "info": {
+            "name": "Get Accounts of an API Feed Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/:app_id/accounts/",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the API feed connector."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the API feed connector account."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed connector."
+              }
+            ]
+          },
+          "docs": "Returns all the API feed accounts configured for an API feed connector."
+        },
+        {
+          "info": {
+            "name": "Get Action Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/:app_id/action_configs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the API feed source. You can retrieve the ID using the **List API Feeds API**."
+              }
+            ]
+          },
+          "docs": "Returns all available actions and feed channels of API feed source."
+        },
+        {
+          "info": {
+            "name": "Get API Feed Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/:app_id/accounts/:account_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed connector. You can retrieve this ID using the **List API Feeds API**."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed connector instance."
+              }
+            ]
+          },
+          "docs": "Returns the saved details of an API feed account of an API feed connector."
+        },
+        {
+          "info": {
+            "name": "Get API Feed Channel Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/:app_id/actions/",
+            "params": [
+              {
+                "name": "third_party_config_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the API feed account."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed connector."
+              }
+            ]
+          },
+          "docs": "Returns the saved configuration for all the feed channels of an API feed account."
+        },
+        {
+          "info": {
+            "name": "Get API Feed Action Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/:app_id/actions/:action_id/",
+            "params": [
+              {
+                "name": "third_party_config_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the API feed account."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID for the API feed connector."
+              },
+              {
+                "name": "action_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed connector action."
+              }
+            ]
+          },
+          "docs": "Returns the saved configuration of a given feed channel of an API feed account."
+        },
+        {
+          "info": {
+            "name": "Get API Feed Source Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/apps/detail/:app_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the API feed source. You can use the **List API Feeds API** to retrieve the `app_id`."
+              }
+            ]
+          },
+          "docs": "Returns configuration details of an API feed connector."
+        },
+        {
+          "info": {
+            "name": "Get Risk List for API Feed Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/api-feeds/get_values/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve API feeds."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of API feeds to be retrieved on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique API feed connector ID."
+              },
+              {
+                "name": "action_name",
+                "value": "",
+                "type": "query",
+                "description": "Pass the action name of the API feed connector."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the account ID of the API feed connector."
+              }
+            ]
+          },
+          "docs": "Returns all the available risk list values for a particular API feed connector."
+        },
+        {
+          "info": {
+            "name": "Get Email Feed Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email_accounts/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass any keyword to filter email feed source."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active email feed sources. Else false."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the Email feed source."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of Email feed sources to be retrieved on each page."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of email sources configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Email Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/:email_source_id/folders/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "email_source_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the email source ID to retrieve details of the email source."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of the folders of an email source."
+        },
+        {
+          "info": {
+            "name": "Get Email Source Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email_accounts/:emailsource_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "emailsource_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the email source ID to retrieve details of the email source."
+              }
+            ]
+          },
+          "docs": "Returns the API details of an email source."
+        },
+        {
+          "info": {
+            "name": "Get RSS Feed Source Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/rss_feed/:feed_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the RSS feed source."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of RSS feed sources to be retrieved on each page."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter the RSS feed source."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter the RSS feed source."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search the RSS feed source based on the title."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active RSS feed sources, else false."
+              },
+              {
+                "name": "feed_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the RSS feed ID."
+              }
+            ]
+          },
+          "docs": "Returns the details for a particular RSS feed source."
+        },
+        {
+          "info": {
+            "name": "Get RSS Feed Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/rss_feed/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the RSS feed source."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of RSS feed sources to be retrieved on each page."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter the RSS feed source."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter the RSS feed source."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search RSS feed source based on the title."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active RSS feed sources, else false."
+              }
+            ]
+          },
+          "docs": "Retrieves the RSS feed sources."
+        },
+        {
+          "info": {
+            "name": "Get Source Weightage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/source-weightage/api_feeds/",
+            "params": [
+              {
+                "name": "page ",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Retrieves the confidence score of the source from different sources.\n\nYou can use different endpoints to retrieve the confidence score of different sources as follows:\n\n*   `email_accounts`\n    \n*   `rss_feeds`\n    \n*   `webhook`"
+        },
+        {
+          "info": {
+            "name": "Get STIX Source Categories List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/category/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "STIX sources are classified into categories such as Community, Open Source, Subscriber, and System feed. Use this API to retrieve a list of all available STIX source categories."
+        },
+        {
+          "info": {
+            "name": "Get STIX Source Collection List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/collection/",
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the source to retrieve the associated collections. To get the source ID, use **Retrieve Collection Details** endpoint. Example, *c05571da-f7dc-4ba4-a1d6-b8f58d341d7f*."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the source category to filter result. To get the category ID use **List STIX Source Category** endpoint. Example, *55463f1c-18b6-4188-ac9c-06bfa70c8abf*."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `polling.last_polling_time` to sort records in descending order, showing the most recent records first.\nPass `polling.last_polling_time` to sort records in ascending order, displaying the oldest records first."
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to retrieve collections associated with a specific STIX source. You can filter results by source category, paginate through the list of collections, and view detailed information such as collection ID, name, host, polling status, and subscriber details."
+        },
+        {
+          "info": {
+            "name": "Get STIX Source List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/custom_stix_sources/",
+            "params": [
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format. For example, *165432121*."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a STIX source category to filter results. To get the ID, use the **List STIX Source Collection** endpoint. Example, *6ec60fb7-fd90-4f4f-a8df-640b43a2428b*."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve for each page. Example, *10*."
+              },
+              {
+                "name": "taxii_option",
+                "value": "",
+                "type": "query",
+                "description": "Pass the STIX version to filter sources. To get the version, use the **Retrieve Collection Details**."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format. For example, *165432121*."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword to search the STIX source name. For example, *import*."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the result. Example, *1*."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom STIX sources configured in the platform."
+        },
+        {
+          "info": {
+            "name": "Get Collection Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/collection/:collection_id/",
+            "params": [
+              {
+                "name": "page ",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "collection_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a collection. To obtain the pass ID, use **List STIX Source Collection** endpoint. Example, *113340be-862f-4196-9f13-3312bbf82752*."
+              }
+            ]
+          },
+          "docs": "Returns the details of a STIX source collection."
+        },
+        {
+          "info": {
+            "name": "Get Action Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/:integration_app_id/action_configs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve per page."
+              },
+              {
+                "name": "integration_app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the third-party tool."
+              }
+            ]
+          },
+          "docs": "Retrieves all the actions of an account."
+        },
+        {
+          "info": {
+            "name": "Get Action Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/:integration_app_id/actions/:integration_action_id/",
+            "params": [
+              {
+                "name": "third_party_config_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the account ID in the query parameters to refine your results based on a particular account."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "integration_app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the third-party tool"
+              },
+              {
+                "name": "integration_action_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the action."
+              }
+            ]
+          },
+          "docs": "Returns the details of actions that are defined for an account of a tool."
+        },
+        {
+          "info": {
+            "name": "Get Rule Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/rule-actions/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of rule actions that are associated with third-party application integrations configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Accounts List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/:app_id/accounts/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the tool to retrieve the account details."
+              }
+            ]
+          },
+          "docs": "Returns the list of all accounts configured for a tool."
+        },
+        {
+          "info": {
+            "name": "Test Connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/test-connectivity/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint tests the credentials of an account."
+        },
+        {
+          "info": {
+            "name": "Get All Available Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/tools/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of all available tools and some parameters."
+        },
+        {
+          "info": {
+            "name": "Get Application Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/detail/:app_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the application ID to retrieve details."
+              }
+            ]
+          },
+          "docs": "Returns the details of the configured applications."
+        },
+        {
+          "info": {
+            "name": "Get Configured Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search the tool."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Pass the category of the tool to retrieve"
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active tools, else false."
+              },
+              {
+                "name": "nominal",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve ID, title, and slug name of the tools."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the tools."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of tools to be retrieved on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of configured tools in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get SIEM/SOAR Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/actioned/",
+            "params": [
+              {
+                "name": "nominal",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve ID, title, and slug name of the tools."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the tools."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of tools to be retrieved on each page."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active tools, else false."
+              }
+            ]
+          },
+          "docs": "Returns the list of tools classified under the SIEM (Security Information and Event Management) or the SOAR (Security Orchestration and Automation Response) category."
+        },
+        {
+          "info": {
+            "name": "Get Tool Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/category/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns categories and their subcategories for tools configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Update Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/reset_tool/:app_id/",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the tool ID to update the status."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of the tool to active or inactive. Resetting a tool can erase saved accounts, credentials, and other data."
+        },
+        {
+          "info": {
+            "name": "Get Webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/webhooks/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve API feeds."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of API feeds to be retrieved on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of all webhooks configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Web Scraper Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/web-scrapper/collection/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Retrieves all collections present in the web scraper."
+        },
+        {
+          "info": {
+            "name": "Refresh Ingestion Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/ingestion-overview/refresh/"
+          },
+          "docs": "Triggers a recomputation of the ingestion overview data.\n\n### Changelog\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Release v3.7.7.1\" iconUrl=\"\"><p>Added a new endpoint to refresh the ingestion data in License Management.</p></AccordionItem>\n</Accordion>"
+        },
+        {
+          "info": {
+            "name": "Retrieve Ingestion Overview Dara",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/ingestion-overview/data/"
+          },
+          "docs": "Retrieves ingestion counts broken down by source and collection across three time windows.\n\n### Changelog\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Release v3.7.7.1\" iconUrl=\"\"><p>Added a new endpoint for retrieving the ingestion data in License Management.</p></AccordionItem>\n</Accordion>"
+        },
+        {
+          "info": {
+            "name": "Get Resource Details List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/resource/list/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns constraints are configured by the LMS server."
+        },
+        {
+          "info": {
+            "name": "Get Tenant Permit Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/tenant-permit/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns details about the tenant license."
+        },
+        {
+          "info": {
+            "name": "Synchronize LMS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/sync-lms/"
+          },
+          "docs": "Synchronizes LMS server data with the Intel Exchange application."
+        },
+        {
+          "info": {
+            "name": "Get Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter the results by the Subscriber ID."
+              },
+              {
+                "name": "organization_name",
+                "value": "",
+                "type": "query",
+                "description": "Pass the organization name to filter subscribers."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active subscribers. Pass false to retrieve inactive subscribers."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter subscribers by the created time."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter subscribers by the created time."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-created` to sort subscribers in descending order based on the created time. Pass `created` to sort subscribers in ascending order."
+              },
+              {
+                "name": "last_pull_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last pulled from time in epoch format to filter subscribers by the last pull time."
+              },
+              {
+                "name": "last_pull_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last pull time in epoch format to filter subscribers by the last pull time."
+              },
+              {
+                "name": "nominal",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve only the name and ID of the subscribers."
+              }
+            ]
+          },
+          "docs": "Returns a list of subscribers configured in the Intel Exchange platform."
+        },
+        {
+          "info": {
+            "name": "Get Inboxing Subscribers Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/inboxing-report/",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status of the subscribers to retrieve the report."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of a subscriber to retrieve the inboxing records."
+              },
+              {
+                "name": "collection_name",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of a collection to filter results."
+              },
+              {
+                "name": "stix_version",
+                "value": "",
+                "type": "query",
+                "description": "Pass the STIX version of the inboxed objects to filter results."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the inboxing start date in epoch format to filter results."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the inboxing end date in epoch format to filter results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of active and inactive inboxing subscribers configured in Intel Exchange for a specific time frame."
+        },
+        {
+          "info": {
+            "name": "Get Polling Subscribers Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/polling-report/",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status of the subscribers to retrieve the report."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of a subscriber to retrieve the polling records."
+              },
+              {
+                "name": "collection_name",
+                "value": "",
+                "type": "query",
+                "description": "Pass the name of a collection to filter results."
+              },
+              {
+                "name": "stix_version",
+                "value": "",
+                "type": "query",
+                "description": "Pass the STIX version of the inboxed objects to filter results."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the polling start date in epoch format to filter results."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the polling end date in epoch format to filter results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of active and inactive polling subscribers configured in Intel Exchange for a specific time frame."
+        },
+        {
+          "info": {
+            "name": "Get Subscriber Weightage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/source-weightage/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Retrieve the source confidence score of the subscribers configured in the platform."
+        },
+        {
+          "info": {
+            "name": "Update Subscriber Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/publishing/subscriber/:subscriber_id/",
+            "params": [
+              {
+                "name": "subscriber_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a subscriber to update the status."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of a subscriber to active or inactive."
+        },
+        {
+          "info": {
+            "name": "Get Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of tags to be retrieved on each page."
+              },
+              {
+                "name": "tag_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of tag to be retrieved."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the sorting order of results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve tags."
+              },
+              {
+                "name": "modified_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the modified from in epoch format to filter tags."
+              },
+              {
+                "name": "modified_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the modified time in epoch format to filter tags."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter tags."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter tags."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the creator to filter tags."
+              },
+              {
+                "name": "modified_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the modifier to filter tags."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve enabled tags. Pass false to retrieve disabled tags."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search tags based on the title."
+              }
+            ]
+          },
+          "docs": "Returns all tags from Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get User Groups List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/groups/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to navigate through the paginated results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to filter user groups created by a specific user."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the Unix timestamp to filter user groups created after this point in time."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the Unix timestamp to filter user groups created before this point in time."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve only active user groups. Pass false to retrieve only inactive user groups."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a search keyword to filter user groups by name. The search is case-insensitive."
+              }
+            ]
+          },
+          "docs": "Returns the user groups in Intel Exchange in a paginated form."
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/groups/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a user group in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get User Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/groups/:group-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the user group to view its details."
+              }
+            ]
+          },
+          "docs": "Returns the details of a user group."
+        },
+        {
+          "info": {
+            "name": "Update User Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/groups/:group-id/",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the user group to update its details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of the user groups like name, active status, and permissions."
+        },
+        {
+          "info": {
+            "name": "Get Components List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/components/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Lists all the available permissions that can be assigned to a group."
+        },
+        {
+          "info": {
+            "name": "Update User Status in Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/users/bulk-actions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform bulk operations like activating, deactivating, and unblocking the users."
+        },
+        {
+          "info": {
+            "name": "Get Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/users/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the epoch time to filter users created after this timestamp."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the epoch time to filter users created before this timestamp."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to include only active users in the response."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the field to sort the user listing based on the field provided. The order can be reversed by prepending `-` before the key. For example, `-created`."
+              },
+              {
+                "name": "invited_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to filter users who were invited by a specific user."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a search keyword to filter users by matching `first_name`, `last_name`, or `email`. The search is case-insensitive."
+              },
+              {
+                "name": "is_blocked",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve only blocked users. Pass false to retrieve only unblocked users."
+              },
+              {
+                "name": "invite_status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the invite status to filter users based on whether they have accepted the invite."
+              },
+              {
+                "name": "activity_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the epoch timestamp to filter users who have been active after this point in time."
+              },
+              {
+                "name": "activity_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the epoch timestamp to filter users who have been active before this point in time."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Pass the permission group ID to filter users belonging to a specific group."
+              }
+            ]
+          },
+          "docs": "Returns the list of Intel Exchange users in a paginated format."
+        },
+        {
+          "info": {
+            "name": "Add User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/users/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a user in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Signed in User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/user-details/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Retrieves details of the currently logged-in user."
+        },
+        {
+          "info": {
+            "name": "Get User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/users/:user-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the user to retrieve details."
+              }
+            ]
+          },
+          "docs": "Returns the user details of a user."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/rest-auth/users/:user-id/",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the user to update details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

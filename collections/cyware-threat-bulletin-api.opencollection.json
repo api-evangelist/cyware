@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Bulletin API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Bulletin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Threat Bulletin List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a query text to search for threat bulletin names."
+              },
+              {
+                "name": "received",
+                "value": "",
+                "type": "query",
+                "description": "Pass a true to retrieve received threat bulletins only."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass a true to retrieve active threat bulletins only."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve threat bulletins."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of threat bulletins to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of threat bulletins with details."
+        },
+        {
+          "info": {
+            "name": "Create Threat Bulletin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a threat bulletin."
+        },
+        {
+          "info": {
+            "name": "Download Threat Bulletin Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/:threat_bulletin_id/attachments/:attachment_id/download/",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pass the download token."
+              },
+              {
+                "name": "threat_bulletin_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat bulletin."
+              },
+              {
+                "name": "attachment_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of an attachment."
+              }
+            ]
+          },
+          "docs": "Downloads an attachment from a threat bulletin."
+        },
+        {
+          "info": {
+            "name": "Get Threat Bulletin Attachments List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/:threat_bulletin_id/attachments/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "threat_bulletin_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat bulletin."
+              }
+            ]
+          },
+          "docs": "Returns all attachments of one threat bulletin."
+        },
+        {
+          "info": {
+            "name": "Send Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/send-email/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends the threat bulletin to internal and external recipients through email."
+        },
+        {
+          "info": {
+            "name": "Get Threat Bulletin Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/:threat_bulletin_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "threat_bulletin_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat bulletin."
+              }
+            ]
+          },
+          "docs": "Returns the details of a threat bulletin."
+        },
+        {
+          "info": {
+            "name": "Update Threat Bulletin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/:threat_bulletin_id/",
+            "params": [
+              {
+                "name": "threat_bulletin_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat bulletin ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the threat bulletin."
+        },
+        {
+          "info": {
+            "name": "Get Token to Download Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/threat-bulletin/:threat_bulletin_id/attachments/link/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "threat_bulletin_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat bulletin."
+              }
+            ]
+          },
+          "docs": "Returns the token to download the attachments of a threat bulletin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

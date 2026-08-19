@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "5843216c-5bbb-4870-9bb1-d246f46d4582",
+      "name": "Create Intel via Open API",
+      "description": {
+        "content": "Create Intel via Open API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c59c5c79-5a8f-46b4-a3f2-d2be33249c05",
+          "name": "Create Intel via Open API",
+          "request": {
+            "name": "Create Intel via Open API",
+            "description": {
+              "content": "Create intel with additional details such as the source and collection. You can also include details for each object, such as description, notes, custom attributes, and more.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"The All SDOs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">all_sdos</code> object accepts <code class=\"slate-code\">all_iocs</code> and the SDO type as the key, and a list of objects for the respective IOC and SDO type.</p>\n<p>For a list of the supported SDO types, refer to the following table.</p>\n<p>Title</p>\n<p>SDO Key</p>\n<p>Vulnerability</p>\n<p><code class=\"slate-code\">vulnerabilities</code></p>\n<p>Malware</p>\n<p><code class=\"slate-code\">malwares</code></p>\n<p>Campaign</p>\n<p><code class=\"slate-code\">campaigns</code></p>\n<p>Threat Actor</p>\n<p><code class=\"slate-code\">threat_actor</code></p>\n<p>Intrusion Set</p>\n<p><code class=\"slate-code\">intrusion_sets</code></p>\n<p>Attack Pattern</p>\n<p><code class=\"slate-code\">attack_patterns</code></p>\n<p>Incident</p>\n<p><code class=\"slate-code\">incidents</code></p>\n<p>Course of Action</p>\n<p><code class=\"slate-code\">course_of_actions</code></p>\n<p>Identity</p>\n<p><code class=\"slate-code\">identities</code></p>\n<p>Tool</p>\n<p><code class=\"slate-code\">tools</code></p>\n<p>Infrastructure</p>\n<p><code class=\"slate-code\">infrastructures</code></p>\n<p>Location</p>\n<p><code class=\"slate-code\">locations</code></p>\n<p>Malware Analysis</p>\n<p><code class=\"slate-code\">malware_analysis</code></p>\n<p>Custom Objects</p>\n<p><code class=\"slate-code\">custom_objects</code></p>\n<p>File</p>\n<p><code class=\"slate-code\">files</code></p>\n<p>Grouping</p>\n<p><code class=\"slate-code\">groupings</code></p>\n<p>Indicator</p>\n<p><code class=\"slate-code\">indicators</code></p>\n<p>Marking Definition</p>\n<p><code class=\"slate-code\">marking_definitions</code></p>\n<p>Note</p>\n<p><code class=\"slate-code\">notes</code></p>\n<p>Observed Data</p>\n<p><code class=\"slate-code\">observed_datas</code></p>\n<p>Opinion</p>\n<p><code class=\"slate-code\">opinions</code></p>\n<p>Relatioship</p>\n<p><code class=\"slate-code\">relationships</code></p>\n<p>Observables</p>\n<p><code class=\"slate-code\">cyber_observables</code></p>\n<p>Software</p>\n<p><code class=\"slate-code\">softwares</code></p></AccordionItem>\n<AccordionItem title=\"The All IOCs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">all_iocs</code> object accepts the IOC type as the key and a list of objects for the respective IOC type.</p>\n<p>For a list of the supported IOC types, refer to the following table.</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ipv4</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domain</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">url</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">email_address</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p>\n<p></p></AccordionItem>\n</Accordion>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "open-api",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"source\": \"Miscellaneous\",\n  \"collection\": \"Free Text\",\n  \"metadata\": {\n    \"confidence\": \"null\",\n    \"tlp\": \"<string>\",\n    \"labels\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"all_sdos\": {\n    \"all_iocs\": {\n      \"ipv4\": [\n        {\n          \"value\": \"<string>\",\n          \"description\": \"<string>\",\n          \"is_false_positive\": \"false\",\n          \"notes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"description\": \"<string>\",\n          \"is_false_positive\": \"false\",\n          \"notes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"ipv6\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"domain\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"url\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"email_address\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"md5\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"sha1\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"sha224\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"sha256\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"sha384\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"sha512\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ],\n      \"ssdeep\": [\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        },\n        {\n          \"value\": \"<string>\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"<string>\"\n          }\n        }\n      ]\n    },\n    \"vulnerabilities\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"malwares\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"campaigns\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"threat_actors\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"intrusion_sets\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"attack_patterns\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"course_of_actions\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"identities\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"tools\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ],\n    \"locations\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        },\n        \"type\": \"<string>\",\n        \"latitude\": \"<number>\",\n        \"longitude\": \"<number>\"\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        },\n        \"type\": \"<string>\",\n        \"latitude\": \"<number>\",\n        \"longitude\": \"<number>\"\n      }\n    ],\n    \"malware_analysis\": [\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      },\n      {\n        \"value\": \"<string>\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57b6ad97-04c1-4053-bfb5-9689d084846e",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "open-api",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"Open API Source\",\n  \"collection\": \"API Import\",\n  \"metadata\": {\n    \"confidence\": \"80\",\n    \"tlp\": \"RED\",\n    \"labels\": [\n      \"open_api_objects\"\n    ]\n  },\n  \"title\": \"new intel\",\n  \"all_sdos\": {\n    \"all_iocs\": {\n      \"ipv4\": [\n        {\n          \"value\": \"1.2.34.21\",\n          \"description\": \"sample description\",\n          \"is_false_positive\": \"true\",\n          \"notes\": [\n            \"This is a sample Note attached to this indicator!\"\n          ],\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"ipv6\": [\n        {\n          \"value\": \"7b6f:e96a:991b:e1f8:6e50:9bf6:3c7:2922\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"domain\": [\n        {\n          \"value\": \"abc.com\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"url\": [\n        {\n          \"value\": \"http://www.abc.com\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"email_address\": [\n        {\n          \"value\": \"john.doe@cyware.com\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"md5\": [\n        {\n          \"value\": \"00616b4b72c8a1da89ed3840fa7313e1\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"sha1\": [\n        {\n          \"value\": \"434c2da14ed0326cd2536a51a50341c8877cabe9\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"sha224\": [\n        {\n          \"value\": \"90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"sha256\": [\n        {\n          \"value\": \"003b3e35daeb64f1608b31e98db56044c0294703dfc39ce31e25b2ac66933699\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"sha384\": [\n        {\n          \"value\": \"f2360531b6d70f20650e28f79c3e327c107842379a5ece06b0485aa21bf10ef0a0f307e50752550daab99f5bb6afb7ea\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"sha512\": [\n        {\n          \"value\": \"0ef857c3298a01de7e7cf21d60b38709adf28ae711d1e72be1f43a91b18ed1c4956fd75294db5b40bf241f50507abdccdd133364cfef6f6e5c9b908279816223\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ],\n      \"ssdeep\": [\n        {\n          \"value\": \"3:BWcSn:EcSn\",\n          \"custom_attributes\": {\n            \"x_custom_attribute1\": \"sample value 1\"\n          }\n        }\n      ]\n    },\n    \"vulnerabilities\": [\n      {\n        \"value\": \"vul1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"malwares\": [\n      {\n        \"value\": \"malware1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"campaigns\": [\n      {\n        \"value\": \"campaign1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"threat_actors\": [\n      {\n        \"value\": \"threatactor1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"intrusion_sets\": [\n      {\n        \"value\": \"intrusionset1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"attack_patterns\": [\n      {\n        \"value\": \"attackpattern1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"course_of_actions\": [\n      {\n        \"value\": \"coa1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"identities\": [\n      {\n        \"value\": \"iden1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"tools\": [\n      {\n        \"value\": \"tool1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ],\n    \"locations\": [\n      {\n        \"value\": \"loc1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        },\n        \"type\": \"latitude-longitude\",\n        \"latitude\": \"21.12\",\n        \"longitude\": \"12.12\"\n      }\n    ],\n    \"malware_analysis\": [\n      {\n        \"value\": \"ma1\",\n        \"custom_attributes\": {\n          \"x_custom_attribute1\": \"sample value 1\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Intel creation is in progress.\",\n  \"task_id\": \"99771bd8-2fda-4433-9cc9-1fa82befeaec\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca25eda1-bb54-40f8-bffe-9c5707970b78",
+          "name": "With Source and Collection ID",
+          "request": {
+            "name": "With Source and Collection ID",
+            "description": {
+              "content": "Use this API to ingest a STIX bundle into Intel Exchange by specifying the source and collection ID. A STIX bundle can include any combination of STIX Domain Objects (SDOs). For more information on supported objects, see the [STIX documentation](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html).\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>If you pass an invalid or missing <code class=\"slate-code\">source_id</code> or <code class=\"slate-code\">collection_id</code>, the bundle is ingested with the source set to <strong class=\"slate-bold\">Import</strong> and the collection set to <strong class=\"slate-bold\">STIX2</strong>.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "ingestion-api",
+                "ingest_bundle",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_id\": \"<string>\",\n  \"source_type\": \"<string>\",\n  \"collection_id\": \"<string>\",\n  \"bundle\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"objects\": [\n      {\n        \"type\": \"<string>\",\n        \"spec_version\": \"<string>\",\n        \"id\": \"<string>\",\n        \"created\": \"<string>\",\n        \"modified\": \"<string>\",\n        \"pattern\": \"<string>\",\n        \"pattern_type\": \"<string>\",\n        \"valid_from\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pattern_version\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"spec_version\": \"<string>\",\n        \"id\": \"<string>\",\n        \"created\": \"<string>\",\n        \"modified\": \"<string>\",\n        \"pattern\": \"<string>\",\n        \"pattern_type\": \"<string>\",\n        \"valid_from\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pattern_version\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e6ba9b6-d84e-4fa5-97b9-a573012f93a1",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "ingestion-api",
+                    "ingest_bundle",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_id\": \"d2ab6414-416d-4dba-a23c-fde56a75a17a\",\n  \"source_type\": \"CUSTOM_STIX_SOURCES\",\n  \"collection_id\": \"7e8fbe54-abf1-4f5b-82b0-21eb7d9e7fdc\",\n  \"bundle\": {\n    \"type\": \"bundle\",\n    \"id\": \"bundle--73128ede-df7b-42cb-b073-a04b59acf898\",\n    \"objects\": [\n      {\n        \"type\": \"indicator\",\n        \"spec_version\": \"2.1\",\n        \"id\": \"indicator--88359550-45b9-41d3-9bbd-69bfbb994593\",\n        \"created\": \"2024-09-30T10:42:06.935776Z\",\n        \"modified\": \"2024-09-30T10:42:06.935776Z\",\n        \"name\": \"205.165.206.118\",\n        \"pattern\": \"[ipv4-addr:value = '205.165.206.118']\",\n        \"pattern_type\": \"stix\",\n        \"pattern_version\": \"2.1\",\n        \"valid_from\": \"2024-09-30T10:42:06.935776Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Successfully sent bundle to ingestion.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "341e6a2c-3d50-42c0-b552-c568992c3bb9",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Create Intel via Open API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

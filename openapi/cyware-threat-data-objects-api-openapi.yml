@@ -1,0 +1,3543 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Threat Data Objects API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Threat Data Objects
+  description: Threat Data Objects
+paths:
+  /ingestion/actions/:
+    get:
+      operationId: listActions
+      summary: Get Actions List
+      tags:
+      - Threat Data Objects
+      description: Retrieves a list of actions performed on a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/actions/list-actions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve actions.
+          default: '1'
+        description: Pass the page number to retrieve actions.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of actions to retrieve on each page.
+          default: '10'
+        description: Pass the number of actions to retrieve on each page.
+      - name: app_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the app type that performed the action. Example, *ctix*.
+        description: Pass the app type that performed the action. Example, *ctix*.
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+      - name: object_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+      - name: action_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the type of actions to retrieve.
+          enum:
+          - manual
+          - automatic
+          default: automatic
+          examples:
+          - manual
+        description: Pass the type of actions to retrieve.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL for the next page.
+                    examples:
+                    - actions/?page=2&page_size=10&object_id=2ba4f90f-5827-431a-8e38-740c0f3fe647&object_type=indicator
+                  page_size:
+                    type: number
+                    description: Returns the number of records in the response.
+                    examples:
+                    - 10
+                  previous:
+                    type: object
+                    description: Returns the URL of the previous page.
+                  results:
+                    type: array
+                    description: Returns the details of the action performed.
+                    items:
+                      type: object
+                      properties:
+                        action_name:
+                          type: string
+                          description: Returns the action name.
+                          examples:
+                          - Update Indicators Allowed (Add)
+                        action_type:
+                          type: string
+                          description: Returns the action type.
+                          enum:
+                          - automatic
+                          - manual
+                          examples:
+                          - automatic
+                        actioned_by:
+                          type: object
+                          description: Returns the details of the user who performed the action.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address.
+                              examples:
+                              - john.doe@example.com
+                            first_name:
+                              type: string
+                              description: Returns the first name.
+                              examples:
+                              - John
+                            id:
+                              type: string
+                              description: Returns the user ID.
+                              examples:
+                              - f5b3d63c-8bb5-44c5-9699-7e82d3810d6d
+                            last_name:
+                              type: string
+                              description: Returns the last name.
+                              examples:
+                              - Doe
+                        actioned_on:
+                          type: number
+                          description: Returns the epoch timestamp of the actioning date and time.
+                          examples:
+                          - 1744974108
+                        app_name:
+                          type: string
+                          description: Returns the name of the application, such as Pfense, QRadar, and more.
+                          examples:
+                          - CTIX
+                        app_type:
+                          type: string
+                          description: Returns the application type.
+                          examples:
+                          - ctix
+                        id:
+                          type: string
+                          description: Returns the action ID.
+                          examples:
+                          - d4261c1e-f2f3-4487-89f7-8775d78dc43c
+                        object_id:
+                          type: string
+                          description: Returns the object ID.
+                          examples:
+                          - 2ba4f90f-5827-431a-8e38-740c0f3fe647
+                        object_type:
+                          type: string
+                          description: Returns the object type.
+                          examples:
+                          - indicator
+                        rule_id:
+                          type: object
+                          description: Returns the ID of the automation rule run on the object.
+                        rule_name:
+                          type: object
+                          description: Returns the name of the automation rule run on the object.
+                        source_id:
+                          type: object
+                          description: Returns the ID of the source.
+                        status:
+                          type: string
+                          description: Returns the status of the action.
+                          examples:
+                          - UNKNOWN
+                        tool:
+                          type: object
+                          description: Returns the details of the tool.
+                  total:
+                    type: number
+                    description: Returns the total number of actions performed on the specified threat data object.
+                    examples:
+                    - 27
+              example:
+                next: actions/?page=2&page_size=10&object_id=2ba4f90f-5827-431a-8e38-740c0f3fe647&object_type=indicator
+                page_size: 10
+                previous: {}
+                results:
+                - action_name: Update Indicators Allowed (Add)
+                  action_type: automatic
+                  actioned_by:
+                    email: john.doe@example.com
+                    first_name: John
+                    id: f5b3d63c-8bb5-44c5-9699-7e82d3810d6d
+                    last_name: Doe
+                  actioned_on: 1744974108
+                  app_name: CTIX
+                  app_type: ctix
+                  id: d4261c1e-f2f3-4487-89f7-8775d78dc43c
+                  object_id: 2ba4f90f-5827-431a-8e38-740c0f3fe647
+                  object_type: indicator
+                  rule_id: {}
+                  rule_name: {}
+                  source_id: {}
+                  status: UNKNOWN
+                  tool: {}
+                total: 27
+      x-alternate-documents:
+      - title: Get Action Overview
+        operationId: actionOverview
+        url: https://ctixapiv3.cyware.com/threat-data-objects/actions/action-overview
+  /ingestion/actions/{object_type}/{object_id}/stats/:
+    get:
+      operationId: actionStatistics
+      summary: Get Action Statistics
+      tags:
+      - Threat Data Objects
+      description: Retrieves the statistics of the actions performed by third-party tools and Intel Exchange on a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/actions/action-statistics
+      parameters:
+      - name: is_third_action
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Pass true to retrieve third-party action statistics only.
+          default: 'false'
+          examples:
+          - 'True'
+        description: Pass true to retrieve third-party action statistics only.
+      - name: is_ctix_action
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Pass true to retrieve Intel Exchange (CTIX) action statistics only.
+          default: 'false'
+          examples:
+          - 'True'
+        description: Pass true to retrieve Intel Exchange (CTIX) action statistics only.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 916e0c84-61a6-412b-a25c-e65d6bcdc96b
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action_stats:
+                    type: array
+                    description: Returns the number of actions performed by the Intel Exchange (CTIX) and third-party applications.
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: Returns the label or name of the key (3rd Party Actions or CTIX).
+                          examples:
+                          - 3rd Party Actions
+                        key:
+                          type: string
+                          description: Returns the key of the action.
+                          examples:
+                          - third_party
+                        value:
+                          type: number
+                          description: Returns the number of actions.
+                          examples:
+                          - '114'
+                  ctix_actions:
+                    type: array
+                    description: Returns the list of Intel Exchange actions with the action name, action type, and the action time in epoch format.
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: Returns the label of the action.
+                          examples:
+                          - Manual Review
+                        type:
+                          type: string
+                          description: Returns the type of the action.
+                          examples:
+                          - automatic
+                        value:
+                          type: number
+                          description: Returns the value of the action.
+                          examples:
+                          - '1641555728'
+                  third_party_actions:
+                    type: array
+                    description: Returns the list of third-party actions with the action name, third-party tool name, and the action time in epoch format.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the name of the action.
+                          examples:
+                          - Update Context Table
+                        tool:
+                          type: string
+                          description: Returns the tool used for the action.
+                          examples:
+                          - starttemplate {{ marshal (index .tools "29d9638d-ccb1-400b-8d7a-2f163a3eae1d") }} endtemplate
+                        value:
+                          type: number
+                          description: Returns the value of the action.
+                          examples:
+                          - '1641555731'
+              example:
+                action_stats:
+                - label: 3rd Party Actions
+                  key: third_party
+                  value: '114'
+                ctix_actions:
+                - label: Manual Review
+                  type: automatic
+                  value: '1641555728'
+                third_party_actions:
+                - name: Update Context Table
+                  tool: starttemplate {{ marshal (index .tools "29d9638d-ccb1-400b-8d7a-2f163a3eae1d") }} endtemplate
+                  value: '1641555731'
+  /ingestion/threat-data/threat-actor/{object_id}/basic/:
+    post:
+      operationId: addCustomAliases
+      summary: Add Custom Aliases to Threat Actors
+      tags:
+      - Threat Data Objects
+      description: Add custom aliases to threat actors in Intel Exchange.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/add-custom-aliases
+      parameters:
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 903f519f-feb1-49b8-8c80-18ff8de99e8c
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                aliases:
+                  type: object
+                  description: Pass the list of strings that specify the also-known names for the threat actors.
+                  properties:
+                    custom:
+                      type: array
+                      description: Pass a list of custom aliases of the threat actor.
+                      items:
+                        type: string
+                        description: This is an example value.
+                        examples:
+                        - sample alias 1
+            example:
+              aliases:
+                custom:
+                - sample alias 1
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Returns the success message.
+                    examples:
+                    - Custom aliases added successfully.
+              example:
+                message: Custom aliases added successfully.
+  /ingestion/threat-data/kill_chain_phases/{kill_chain_id}/:
+    get:
+      operationId: killChainDetails
+      summary: Get Kill Chain Details
+      tags:
+      - Threat Data Objects
+      description: Retrieves the details of a STIX kill chain phase.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/kill-chain-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: kill_chain_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a kill chain phase to retrieve the details. You can retrieve this ID using the **List Kill Chain Phases API**.
+          examples:
+          - ae78301c-4378-4348-b83e-2e7b4dd8438b
+        description: Pass the ID of a kill chain phase to retrieve the details. You can retrieve this ID using the **List Kill Chain Phases API**.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the kill chain ID.
+                    examples:
+                    - 1f950806-c2a7-4612-bd09-18a69366584f
+                  name:
+                    type: string
+                    description: Returns the name of the kill chain, such as Mandiant, Lockhead, and more.
+                    examples:
+                    - mandiant-attack-lifecycle-model
+                  phase_name:
+                    type: string
+                    description: Returns the name of the phase based on the kill chain.
+                    examples:
+                    - initial-compromise
+              example:
+                id: 1f950806-c2a7-4612-bd09-18a69366584f
+                name: mandiant-attack-lifecycle-model
+                phase_name: initial-compromise
+  /ingestion/threat-data/{object_type}/{object_id}/kill_chain_phases/:
+    get:
+      operationId: listKillChainPhases
+      summary: Get Kill Chain Phases List
+      tags:
+      - Threat Data Objects
+      description: Retrieves kill chain phases associated with a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-kill-chain-phases
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve the kill chain phases.
+          default: '1'
+        description: Pass the page number to retrieve the kill chain phases.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve in each page.
+          default: '10'
+        description: Pass the number of records to retrieve in each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of the threat data object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the ID of the threat data object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL of the next page.
+                    examples:
+                    - threat-data/malware/fbfee712-7661-451b-98ef-5df850cd1894/kill_chain_phases/?page=2&page_size=10
+                  previous:
+                    type: object
+                    description: Returns the URL of the previous page. Returns null if the page number is 1.
+                  total:
+                    type: number
+                    description: Returns the total number of kill chain phases associated with the threat data object.
+                    examples:
+                    - '10'
+                  page_size:
+                    type: number
+                    description: Returns the number of records in a page.
+                    examples:
+                    - '10'
+                  results:
+                    type: array
+                    description: Returns details of the kill chain phase
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of the kill chain phase.
+                          examples:
+                          - 0a07b1c8-c975-4ea8-b346-802405179e2c
+                        name:
+                          type: string
+                          description: Returns the name of the kill chain, such as Mandiant, Lockhead, and more.
+                          examples:
+                          - lockheed-martin-cyber-kill-chain
+                        phase_name:
+                          type: string
+                          description: Returns the name of the phase as per the used kill chain.
+                          examples:
+                          - reconnaissance
+              example:
+                next: threat-data/malware/fbfee712-7661-451b-98ef-5df850cd1894/kill_chain_phases/?page=2&page_size=10
+                previous: {}
+                total: '10'
+                page_size: '10'
+                results:
+                - id: 0a07b1c8-c975-4ea8-b346-802405179e2c
+                  name: lockheed-martin-cyber-kill-chain
+                  phase_name: reconnaissance
+  /ingestion/published-collections/{object_type}/{object_id}/:
+    get:
+      operationId: listPublishedCollectionsOfAThreatObject
+      summary: Get Published Collections of a Threat Object List
+      tags:
+      - Threat Data Objects
+      description: Retrieves the collections to which a threat data object is published.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-published-collections-of-a-threat-object
+      parameters:
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve in each page.
+          default: '10'
+        description: Pass the number of records to retrieve in each page.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of the threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of the threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object IDs, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the threat data object ID. To retrieve the object IDs, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    description: Returns the details of published collections.
+                    properties:
+                      next:
+                        type: object
+                        description: Returns the URL for the next page.
+                      previous:
+                        type: object
+                        description: Returns the URL of the previous page.
+                      total:
+                        type: number
+                        description: Returns the total number of published collections associated with the threat data object.
+                        examples:
+                        - '2'
+                      page_size:
+                        type: number
+                        description: Returns the page size.
+                        examples:
+                        - '10'
+                      results:
+                        type: array
+                        description: Returns the details of the collections.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the unique ID of the published collection record.
+                              examples:
+                              - af242086-e126-44aa-b71c-b290c65e359f
+                            collection:
+                              type: object
+                              description: Returns the collection details
+                              properties:
+                                id:
+                                  type: string
+                                  description: Returns the ID of the collection.
+                                  examples:
+                                  - a1751d0f-5346-47b2-aeea-d6f0531fd290
+                                name:
+                                  type: string
+                                  description: Returns the name of the collection.
+                                  examples:
+                                  - MISP
+                            action_type:
+                              type: string
+                              description: Returns the action that triggered the publishing, such as Rules or Manual.
+                              examples:
+                              - Rules
+                            published:
+                              type: number
+                              description: Returns the epoch timestamp of when the threat data object was published to the collection.
+                              examples:
+                              - 1627992933
+              example:
+                results:
+                  next: {}
+                  previous: {}
+                  total: '2'
+                  page_size: '10'
+                  results:
+                  - id: af242086-e126-44aa-b71c-b290c65e359f
+                    collection:
+                      id: a1751d0f-5346-47b2-aeea-d6f0531fd290
+                      name: MISP
+                    action_type: Rules
+                    published: 1627992933
+  /ingestion/threat-data/{object_type}/{object_id}/source_details/:
+    get:
+      operationId: listSourceDetails
+      summary: Get Source Details List
+      tags:
+      - Threat Data Objects
+      description: Retrieves source information for a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-source-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve sources.
+        description: Pass the page number to retrieve sources.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of sources to be retrieved in each page.
+        description: Pass the number of sources to be retrieved in each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - dd885b9b-a4cd-4e11-bd69-194a8b7f35cb
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL of the next page.
+                  page_size:
+                    type: number
+                    description: Returns the page size.
+                    examples:
+                    - 10
+                  previous:
+                    type: string
+                    description: Returns the URL of the previous page. Returns null if page is 1.
+                  results:
+                    type: array
+                    description: Returns the details of the source.
+                    items:
+                      type: object
+                      properties:
+                        created:
+                          type: number
+                          description: Returns the creation date and time in epoch format of the object in Intel Exchange.
+                          examples:
+                          - 1745306387
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the source.
+                          examples:
+                          - 4735836b-910b-4109-b5b8-0885ff8491df
+                        modified:
+                          type: number
+                          description: Returns the epoch timestamp of when the threat data object was modified in the source.
+                          examples:
+                          - 1745306387
+                        source:
+                          type: object
+                          description: Returns the details of the source, like the name, ID and the source type.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the source ID.
+                              examples:
+                              - 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                            name:
+                              type: string
+                              description: Returns the source name.
+                              examples:
+                              - Import
+                            source_type:
+                              type: string
+                              description: Returns the source type.
+                              examples:
+                              - CUSTOM_STIX_SOURCES
+                        source_confidence:
+                          type: string
+                          description: Returns the confidence type received from the source.
+                          examples:
+                          - HIGH
+                        source_confidence_value:
+                          type: number
+                          description: Returns the confidence score received from the source.
+                          examples:
+                          - 100
+                        tags:
+                          type: array
+                          description: Returns any tags associated with the threat data object by the source.
+                          items: {}
+                  total:
+                    type: number
+                    description: Returns the total number of sources for the threat data object.
+                    examples:
+                    - 1
+              example:
+                next: null
+                page_size: 10
+                previous: null
+                results:
+                - created: 1745306387
+                  id: 4735836b-910b-4109-b5b8-0885ff8491df
+                  modified: 1745306387
+                  source:
+                    id: 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                    name: Import
+                    source_type: CUSTOM_STIX_SOURCES
+                  source_confidence: HIGH
+                  source_confidence_value: 100
+                  tags: []
+                total: 1
+  /ingestion/threat-data/{object_type}/{object_id}/external-references/:
+    get:
+      operationId: listSourceExternalReferences
+      summary: Get Source External References List
+      tags:
+      - Threat Data Objects
+      description: Retrieves a list of the external references that are associated with STIX SDOs.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-source-external-references
+      parameters:
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve in each page.
+          default: '10'
+        description: Pass the number of records to retrieve in each page.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve external references.
+          default: '1'
+        description: Pass the page number to retrieve external references.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 6843bc1c-37ce-4fdc-a289-544abd96f3ca
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL link to the next page.
+                    examples:
+                    - threat-data/vulnerability/b5767475-1d03-477d-a1ff-c1b69318f3c1/external-references/?page=2&page_size=3
+                  previous:
+                    type: object
+                    description: Returns the URL link to the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of records returned by the API.
+                    examples:
+                    - '4'
+                  page_size:
+                    type: number
+                    description: Returns the page size specified in the query parameters.
+                    examples:
+                    - '3'
+                  results:
+                    type: array
+                    description: Returns the source details of the external reference.
+                    items:
+                      type: object
+                      properties:
+                        external_id:
+                          type: string
+                          description: Returns the ID that identifies the reference.
+                          examples:
+                          - CVE-2016-1234
+                        source:
+                          type: string
+                          description: Returns the name of the source as referred by the reference.
+                          examples:
+                          - cve
+                        url:
+                          type: object
+                          description: Returns the URL of the external reference referred to by the object.
+              example:
+                next: threat-data/vulnerability/b5767475-1d03-477d-a1ff-c1b69318f3c1/external-references/?page=2&page_size=3
+                previous: {}
+                total: '4'
+                page_size: '3'
+                results:
+                - external_id: CVE-2016-1234
+                  source: cve
+                  url: {}
+  /ingestion/threat-data/{object_type}/{object_id}/basic/:
+    get:
+      operationId: listThreatDataObjectDetails
+      summary: Get Threat Data Object Details List
+      tags:
+      - Threat Data Objects
+      description: Returns basic correlated details of a threat data object in Intel Exchange.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-threat-data-object-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data objects. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data objects. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of the object to retrieve the details. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - b711cafa-719a-4846-93dd-11741f0c10f5
+        description: Pass the ID of the object to retrieve the details. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  analyst_description:
+                    type: object
+                    description: Returns the description given by an analyst.
+                  analyst_score:
+                    type: object
+                    description: Returns the score given by an analyst.
+                  analyst_tlp:
+                    type: object
+                    description: Returns the TLP value given by an analyst.
+                  asn:
+                    type: object
+                    description: Returns the ASN value.
+                  attribute_field:
+                    type: string
+                    description: Specifies the field name that holds the observable's value.
+                    examples:
+                    - value
+                  attribute_value:
+                    type: string
+                    description: Returns the actual observable or indicator value, such as an IP address, domain name, or file hash.
+                    examples:
+                    - 47.92.78.238
+                  base_type:
+                    type: string
+                    description: Returns if the object was part of any SDO or has been observed.
+                    examples:
+                    - sdo
+                  confidence_score:
+                    type: number
+                    description: Returns the confidence score of the object.
+                    examples:
+                    - 81
+                  confidence_type:
+                    type: string
+                    description: Returns the type of confidence score engine used to calculate the score.
+                    examples:
+                    - CTIX
+                  country:
+                    type: string
+                    description: Returns the country for a valid object.
+                    examples:
+                    - China
+                  created:
+                    type: number
+                    description: Returns the STIX defined creation date in epoch format of the object.
+                    examples:
+                    - 1685352651
+                  ctix_created:
+                    type: number
+                    description: Returns the creation date in epoch format of the object in the CTIX platform .
+                    examples:
+                    - 1685353115
+                  ctix_modified:
+                    type: number
+                    description: Returns the modified date in epoch format of the object in the CTIX platform .
+                    examples:
+                    - 1685353115
+                  ctix_score:
+                    type: number
+                    description: Returns the score of an object in Intel Exchange
+                    examples:
+                    - 81
+                  ctix_tlp:
+                    type: object
+                    description: Returns the TLP of the object in the CTIX platform.
+                  defang_analyst_description:
+                    type: object
+                    description: Returns the defanged description.
+                  description:
+                    type: object
+                    description: Returns the description of the object.
+                  fang_analyst_description:
+                    type: object
+                    description: Returns the fanged description of the object.
+                  first_seen:
+                    type: object
+                    description: Returns the STIX defined date in epoch format on which the object was first observed.
+                  last_seen:
+                    type: object
+                    description: Returns the STIX defined date in epoch format on which the object was last observed.
+                  modified:
+                    type: number
+                    description: Returns the STIX defined date in epoch format on which the object was modified.
+                    examples:
+                    - 1685352662
+                  name:
+                    type: string
+                    description: Returns the name of the object.
+                    examples:
+                    - 47.92.78.238
+                  sources:
+                    type: array
+                    description: Returns the list of sources from where the object has been received.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of the source
+                          examples:
+                          - 99740a47-fb33-4610-90e5-155e1dece960
+                        name:
+                          type: string
+                          description: Returns the name of the source
+                          examples:
+                          - CrowdStrike
+                        source_type:
+                          type: string
+                          description: Returns the type of sources such as API Feed, RSS Feed, and more.
+                          examples:
+                          - API_FEEDS
+                  sub_type:
+                    type: string
+                    description: Returns the valid subtype of the object such as an indicator is a valid subtype is a URL, domain, and more.
+                    examples:
+                    - ipv4-addr
+                  tld:
+                    type: string
+                    description: Returns the Top Level Domain(TLD) value for Domain objects.
+                  tlp:
+                    type: string
+                    description: Returns the TLP of the object.
+                    examples:
+                    - AMBER
+                  type:
+                    type: string
+                    description: Returns the type of object.
+                    examples:
+                    - indicator
+                  valid_from:
+                    type: number
+                    description: Returns the STIX defined as valid in epoch format from the date of an object.
+                    examples:
+                    - 1685352651
+                  valid_until:
+                    type: number
+                    description: Returns the STIX defined as valid in epoch format until the date of an object.
+                    examples:
+                    - 1745240203
+              example:
+                analyst_description: {}
+                analyst_score: {}
+                analyst_tlp: {}
+                asn: {}
+                attribute_field: value
+                attribute_value: 47.92.78.238
+                base_type: sdo
+                confidence_score: 81
+                confidence_type: CTIX
+                country: China
+                created: 1685352651
+                ctix_created: 1685353115
+                ctix_modified: 1685353115
+                ctix_score: 81
+                ctix_tlp: {}
+                defang_analyst_description: {}
+                description: {}
+                fang_analyst_description: {}
+                first_seen: {}
+                last_seen: {}
+                modified: 1685352662
+                name: 47.92.78.238
+                sources:
+                - id: 99740a47-fb33-4610-90e5-155e1dece960
+                  name: CrowdStrike
+                  source_type: API_FEEDS
+                sub_type: ipv4-addr
+                tld: ''
+                tlp: AMBER
+                type: indicator
+                valid_from: 1685352651
+                valid_until: 1745240203
+  /ingestion/threat-data/{object_type}/{object_id}/source-description/:
+    get:
+      operationId: listThreatDataObjectSources
+      summary: Get Threat Data Object Sources List
+      tags:
+      - Threat Data Objects
+      description: Retrieves a list of feed sources associated with a threat data object. Also, retrieves the description, fanged description, and de-fanged description of the sources.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/list-threat-data-object-sources
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the URL for the next page.
+                  previous:
+                    type: object
+                    description: Returns the URL for the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of sources of the threat data object.
+                    examples:
+                    - 2
+                  page_size:
+                    type: number
+                    description: Returns the number of sources in the page.
+                    examples:
+                    - 1
+                  results:
+                    type: array
+                    description: Returns a list of source objects.
+                    items:
+                      type: object
+                      properties:
+                        collection:
+                          type: object
+                          description: Returns the details of the collection, like the name and the ID.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the unique identifier of the collection.
+                              examples:
+                              - decf3ae2-9efd-4c5d-a67c-ea3eba333baa
+                            name:
+                              type: string
+                              description: Returns the name of the collection.
+                              examples:
+                              - Free Text
+                        defang_description:
+                          type: string
+                          description: Returns the defanged version of the description.
+                          examples:
+                          - 'Detected malicious activity from this address: hxxp://malicious-domain[.]com/path/to/resource'
+                        description:
+                          type: string
+                          description: Returns the description as received from the source.
+                          examples:
+                          - 'Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource'
+                        fang_description:
+                          type: string
+                          description: Returns the fanged version of the description.
+                          examples:
+                          - 'Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource'
+                        labels:
+                          type: array
+                          description: Returns any tags associated with the object from the source
+                          items: {}
+                        source:
+                          type: object
+                          description: Returns the source details
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the source ID.
+                              examples:
+                              - 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                            name:
+                              type: string
+                              description: Returns the source name.
+                              examples:
+                              - Import
+                            source_type:
+                              type: string
+                              description: Returns the source type.
+                              examples:
+                              - CUSTOM_STIX_SOURCES
+                        tlp:
+                          type: string
+                          description: Returns the TLP assigned to the object by the source.
+                          examples:
+                          - AMBER
+              example:
+                next: {}
+                previous: {}
+                total: 2
+                page_size: 1
+                results:
+                - collection:
+                    id: decf3ae2-9efd-4c5d-a67c-ea3eba333baa
+                    name: Free Text
+                  defang_description: 'Detected malicious activity from this address: hxxp://malicious-domain[.]com/path/to/resource'
+                  description: 'Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource'
+                  fang_description: 'Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource'
+                  labels: []
+                  source:
+                    id: 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                    name: Import
+                    source_type: CUSTOM_STIX_SOURCES
+                  tlp: AMBER
+  /ingestion/threat-data/source-references/:
+    get:
+      operationId: objectSourceDetailsInListView
+      summary: Get Object Source Details in List View
+      tags:
+      - Threat Data Objects
+      description: List all the instances when the object has been polled into the platform for the given source ID.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/object-source-details-in-list-view
+      parameters:
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*
+      - name: object_type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve source instances.
+        description: Pass the page number to retrieve source instances.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve on each page.
+        description: Pass the number of records to retrieve on each page.
+      - name: layout
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the layout to filter the number of returned fields in response.
+          enum:
+          - tab
+        description: Pass the layout to filter the number of returned fields in response.
+      - name: source_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a source to retrieve the instances of the source. You can retrieve this ID using the **List Source Details API**. Example, *bc8c1d21-3bf1-4b19-bf6b-f31db555c1ec*
+        description: Pass the ID of a source to retrieve the instances of the source. You can retrieve this ID using the **List Source Details API**. Example, *bc8c1d21-3bf1-4b19-bf6b-f31db555c1ec*
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL for the next page.
+                  page_size:
+                    type: number
+                    description: Returns the number of source.
+                    examples:
+                    - 10
+                  previous:
+                    type: object
+                    description: Returns the URL for the previous page.
+                  results:
+                    type: array
+                    description: Returns the object source details
+                    items:
+                      type: object
+                      properties:
+                        acs:
+                          type: string
+                          description: Returns the associated ACS classification object, if any.
+                        collection:
+                          type: object
+                          description: Returns the details of the collection, like the ID and the name.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the collection ID.
+                              examples:
+                              - decf3ae2-9efd-4c5d-a67c-ea3eba333baa
+                            name:
+                              type: string
+                              description: Returns the name of the collection.
+                              examples:
+                              - Free Text
+                        confidence:
+                          type: number
+                          description: Returns the source confidence value assigned to the threat data object.
+                          examples:
+                          - 100
+                        created:
+                          type: number
+                          description: Returns the epoch timestamp of when the object was created in the source.
+                          examples:
+                          - 1745306387
+                        ctix_created:
+                          type: number
+                          description: Returns the epoch timestamp of when the object was created in Intel Exchange.
+                          examples:
+                          - 1745306398
+                        ctix_modified:
+                          type: number
+                          description: Returns the epoch timestamp of when the object was modified in Intel Exchange.
+                          examples:
+                          - 1745306399
+                        custom_attributes:
+                          type: array
+                          description: Returns any custom attributes for the object from the source
+                          items: {}
+                        custom_scores:
+                          type: object
+                          description: Returns any custom scores associated with the object
+                        defang_description:
+                          type: string
+                          description: Returns the defanged source description for the object.
+                        description:
+                          type: string
+                          description: Returns the source description for the object.
+                          examples:
+                          - SAVE result SET v3
+                        external_references:
+                          type: array
+                          description: Returns any external references
+                          items: {}
+                        fang_description:
+                          type: string
+                          description: Returns the fanged source description for the object.
+                        granular_markings:
+                          type: array
+                          description: Returns the fine-grained marking definitions that apply to specific parts (fields) of the object.
+                          items: {}
+                        id:
+                          type: string
+                          description: Returns the ID of the source record.
+                          examples:
+                          - 97251976-10a0-42d4-ba58-41365204225f
+                        marking_definitions:
+                          type: array
+                          description: Returns the marking definitions applied to the entire object.
+                          items: {}
+                        modified:
+                          type: number
+                          description: Returns the epoch timestamp of when the object was modified in the source
+                          examples:
+                          - 1745306387
+                        name:
+                          type: string
+                          description: Returns the name of the object.
+                          examples:
+                          - https://lf24L.4UNR8.io
+                        pattern:
+                          type: string
+                          description: Returns the STIX pattern representing the object.
+                          examples:
+                          - '[url:value = ''https://lf24L.4UNR8.io'']'
+                        pattern_type:
+                          type: string
+                          description: Returns the type of pattern.
+                          examples:
+                          - stix
+                        pattern_version:
+                          type: string
+                          description: Returns the version of the STIX pattern.
+                          examples:
+                          - '2.1'
+                        raw_data:
+                          type: string
+                          description: Returns the raw source data received for the object.
+                        received_id:
+                          type: string
+                          description: Returns the ID of the object received from the source.
+                          examples:
+                          - indicator--af7fba45-cbdf-475f-b604-87a3ad6e60ae
+                        revoked:
+                          type: boolean
+                          description: Returns true if the indicator was revoked.
+                          examples:
+                          - false
+                        sco_object_id:
+                          type: string
+                          description: Returns the unique ID of the corresponding SCO (STIX Cyber Observable Object), if applicable.
+                          examples:
+                          - f74434ef-5897-4521-985b-6610cc446f6d
+                        source:
+                          type: object
+                          description: Returns the source details
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the source ID.
+                              examples:
+                              - 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                            name:
+                              type: string
+                              description: Returns the source name.
+                              examples:
+                              - Import
+                            source_type:
+                              type: string
+                              description: Returns the source type.
+                              examples:
+                              - CUSTOM_STIX_SOURCES
+                        spec_version:
+                          type: string
+                          description: Returns the specific version of TAXII as received from the source in case of a valid object.
+                          examples:
+                          - '2.1'
+                        tlp:
+                          type: string
+                          description: Returns the TLP marking assigned to the object.
+                          examples:
+                          - AMBER
+                        types:
+                          type: object
+                          description: Returns the type of the objects.
+                        unique_hash:
+                          type: string
+                          description: Returns the hash value used for recognizing a record in Intel Exchange.
+                          examples:
+                          - 9725197610a032d47a5841365204225f
+                        valid_from:
+                          type: number
+                          description: Returns the epoch timestamp of when the object is valid from.
+                          examples:
+                          - 1745306387
+                        valid_until:
+                          type: string
+                          description: Returns the epoch timestamp of when the object is valid until.
+                  total:
+                    type: number
+                    description: Returns the total number of sources for the object.
+                    examples:
+                    - 1
+              example:
+                next: null
+                page_size: 10
+                previous: {}
+                results:
+                - acs: null
+                  collection:
+                    id: decf3ae2-9efd-4c5d-a67c-ea3eba333baa
+                    name: Free Text
+                  confidence: 100
+                  created: 1745306387
+                  ctix_created: 1745306398
+                  ctix_modified: 1745306399
+                  custom_attributes: []
+                  custom_scores: {}
+                  defang_description: null
+                  description: SAVE result SET v3
+                  external_references: []
+                  fang_description: null
+                  granular_markings: []
+                  id: 97251976-10a0-42d4-ba58-41365204225f
+                  marking_definitions: []
+                  modified: 1745306387
+                  name: https://lf24L.4UNR8.io
+                  pattern: '[url:value = ''https://lf24L.4UNR8.io'']'
+                  pattern_type: stix
+                  pattern_version: '2.1'
+                  raw_data: null
+                  received_id: indicator--af7fba45-cbdf-475f-b604-87a3ad6e60ae
+                  revoked: false
+                  sco_object_id: f74434ef-5897-4521-985b-6610cc446f6d
+                  source:
+                    id: 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                    name: Import
+                    source_type: CUSTOM_STIX_SOURCES
+                  spec_version: '2.1'
+                  tlp: AMBER
+                  types: {}
+                  unique_hash: 9725197610a032d47a5841365204225f
+                  valid_from: 1745306387
+                  valid_until: null
+                total: 1
+  /ingestion/threat-data/source-reference/{id}/:
+    get:
+      operationId: objectSourceDetails
+      summary: Get Object Source Details
+      tags:
+      - Threat Data Objects
+      description: Retrieves the source object information for the specified threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/object-source-details
+      parameters:
+      - name: object_type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Enter the ID of the source record. You can retrieve this ID using the **List Source Details API**.
+          examples:
+          - 97251976-10a0-42d4-ba58-41365204225f
+        description: Enter the ID of the source record. You can retrieve this ID using the **List Source Details API**.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: object
+                    description: Returns the details about the collection.
+                    properties:
+                      id:
+                        type: string
+                        description: Returns the collection ID.
+                        examples:
+                        - 5db40c19-d50f-4c6a-9eac-eb3c7e71b497
+                      name:
+                        type: string
+                        description: Returns the collection name.
+                        examples:
+                        - orion-static-100-coll-0
+                  confidence:
+                    type: string
+                    description: Returns the confidence score reported from a source.
+                    examples:
+                    - HIGH
+                  created:
+                    type: number
+                    description: Returns the epoch timestamp of when the object was created in the source.
+                    examples:
+                    - '1641982441'
+                  ctix_created:
+                    type: number
+                    description: Returns the epoch timestamp of when the object was created in Intel Exchange.
+                    examples:
+                    - '1641982444'
+                  ctix_modified:
+                    type: number
+                    description: Returns the epoch timestamp of when the object was modified in Intel Exchange.
+                    examples:
+                    - '1641982444'
+                  custom_attributes:
+                    type: array
+                    description: Returns any custom attributes associated with the object from the source
+                    items: {}
+                  description:
+                    type: string
+                    description: Returns the description from the source.
+                    examples:
+                    - None
+                  granular_markings:
+                    type: array
+                    description: Returns the fine-grained marking definitions that apply to specific parts (fields) of the object.
+                    items: {}
+                  id:
+                    type: string
+                    description: Returns the unique ID of the source record.
+                    examples:
+                    - ed19a2b7-b1b1-4c10-adf6-25b2e4790e06
+                  kill_chain_phases:
+                    type: array
+                    description: Returns a list of kill chain phases with the phase ID, kill chain name, and phase name.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the kill chain name.
+                          examples:
+                          - lockheed-martin-cyber-kill-chain
+                        phase_name:
+                          type: string
+                          description: Returns the phase name.
+                          examples:
+                          - command and control
+                  modified:
+                    type: number
+                    description: Returns the epoch timestamp of when the object was modified in the source
+                    examples:
+                    - '1641982441'
+                  pattern:
+                    type: array
+                    description: Returns the pattern as received from the source in case of a valid object.
+                    items:
+                      type: string
+                      description: This is an example value.
+                      examples:
+                      - '[email-addr:value = ''kiara59@mayer.net''] OR ([ipv6-addr:value = ''3cdd:1115:aec:67b7:b23a:b311:330e:9bb6''])'
+                  pattern_type:
+                    type: string
+                    description: Returns the pattern type as received from the source in case of a valid object.
+                    examples:
+                    - stix
+                  pattern_version:
+                    type: array
+                    description: Returns the pattern version fo the object.
+                    items:
+                      type: string
+                      description: Returns the pattern version as received from the source in case of the valid object.
+                      examples:
+                      - '2.1'
+                  received_id:
+                    type: string
+                    description: Returns the ID of the object received from the source.
+                    examples:
+                    - indicator--b2c5372f-8d7b-40a0-a70b-689daa94b99c
+                  sco_object_id:
+                    type: string
+                    description: Returns the ID of the object as stored in the database.
+                    examples:
+                    - 382c30a8-f8cf-44f9-97c7-a4d43786fd5c
+                  source:
+                    type: object
+                    description: Returns details about the source.
+                    properties:
+                      id:
+                        type: string
+                        description: Returns the source ID.
+                        examples:
+                        - c38aeede-606c-4e88-b247-87dbfe8192b1
+                      name:
+                        type: string
+                        description: Returns the name of the source.
+                        examples:
+                        - Orion 2.1 testing bug
+                      source_type:
+                        type: string
+                        description: Returns the source type.
+                        examples:
+                        - CUSTOM_STIX_SOURCES
+                  spec_version:
+                    type: string
+                    description: Returns the specific version of TAXII as received from the source in case of a valid object.
+                    examples:
+                    - '2.1'
+                  tags:
+                    type: array
+                    description: Returns the list of tags received from the source.
+                    items:
+                      type: object
+                      properties:
+                        colour_code:
+                          type: object
+                          description: Returns the hex key of the colour code, which denotes the type of the tag.
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the tag.
+                          examples:
+                          - 277f65a4-d72c-48c3-a454-cfdcf35d0782
+                        name:
+                          type: string
+                          description: Returns the name of the tag.
+                          examples:
+                          - soldier
+                  types:
+                    type: object
+                    description: Returns the list of valid types for the object received from the source.
+                  unique_hash:
+                    type: string
+                    description: Returns the hash value used for recognizing a record in Intel Exchange.
+                    examples:
+                    - 8388ee5a57bacf07ec3d889867b4612a
+                  valid_from:
+                    type: number
+                    description: Returns the date and time from which the received object is valid over the platform.
+                    examples:
+                    - '1608189525'
+                  valid_until:
+                    type: number
+                    description: Returns the date and time till which the received object is valid over the platform.
+                    examples:
+                    - '1610399657'
+              example:
+                collection:
+                  id: 5db40c19-d50f-4c6a-9eac-eb3c7e71b497
+                  name: orion-static-100-coll-0
+                confidence: HIGH
+                created: '1641982441'
+                ctix_created: '1641982444'
+                ctix_modified: '1641982444'
+                custom_attributes: []
+                description: None
+                granular_markings: []
+                id: ed19a2b7-b1b1-4c10-adf6-25b2e4790e06
+                kill_chain_phases:
+                - name: lockheed-martin-cyber-kill-chain
+                  phase_name: command and control
+                modified: '1641982441'
+                pattern:
+                - '[email-addr:value = ''kiara59@mayer.net''] OR ([ipv6-addr:value = ''3cdd:1115:aec:67b7:b23a:b311:330e:9bb6''])'
+                pattern_type: stix
+                pattern_version:
+                - '2.1'
+                received_id: indicator--b2c5372f-8d7b-40a0-a70b-689daa94b99c
+                sco_object_id: 382c30a8-f8cf-44f9-97c7-a4d43786fd5c
+                source:
+                  id: c38aeede-606c-4e88-b247-87dbfe8192b1
+                  name: Orion 2.1 testing bug
+                  source_type: CUSTOM_STIX_SOURCES
+                spec_version: '2.1'
+                tags:
+                - colour_code: {}
+                  id: 277f65a4-d72c-48c3-a454-cfdcf35d0782
+                  name: soldier
+                types: {}
+                unique_hash: 8388ee5a57bacf07ec3d889867b4612a
+                valid_from: '1608189525'
+                valid_until: '1610399657'
+  /ingestion/threat-data/{object_type}/{object_id}/advanced-details/:
+    get:
+      operationId: threatDataObjectAdvancedDetails
+      summary: Get Threat Data Object Additional Details
+      tags:
+      - Threat Data Objects
+      description: Retrieves additional information about a threat data object, such as kill chain phases and published collections.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/threat-data-object-advanced-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 2000
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of an object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - d2610909-58ff-4be5-a07a-48b42a859462
+        description: Pass the unique ID of an object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  published_collections:
+                    type: array
+                    description: Returns a list of published collections with the ID, action type, name, and published time.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the published collection.
+                          examples:
+                          - 245b2206-adae-4056-b2a3-ef9270bdec16
+                        collection:
+                          type: object
+                          description: Returns the details of the collection.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the unique identifier of the collection.
+                              examples:
+                              - 8c9e459f-5164-4f56-9a65-6a3004977cef
+                            name:
+                              type: string
+                              description: Returns the name of the collection.
+                              examples:
+                              - default
+                        action_type:
+                          type: string
+                          description: Returns the type of the action.
+                          examples:
+                          - Rule
+                        published:
+                          type: number
+                          description: Returns the UNIX timestamp of when the object was published.
+                          examples:
+                          - 1685356046
+                  kill_chain_phases:
+                    type: array
+                    description: Returns a list of kill chain phases with the phase ID, kill chain name, and phase name.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of the phase.
+                          examples:
+                          - 9336b88e-a393-443b-81a7-2b9426d7f675
+                        name:
+                          type: string
+                          description: Returns the kill chain name.
+                          examples:
+                          - lockheed-martin-cyber-kill-chain
+                        phase_name:
+                          type: string
+                          description: Returns the phase name.
+                          examples:
+                          - c2
+              example:
+                published_collections:
+                - id: 245b2206-adae-4056-b2a3-ef9270bdec16
+                  collection:
+                    id: 8c9e459f-5164-4f56-9a65-6a3004977cef
+                    name: default
+                  action_type: Rule
+                  published: 1685356046
+                kill_chain_phases:
+                - id: 9336b88e-a393-443b-81a7-2b9426d7f675
+                  name: lockheed-martin-cyber-kill-chain
+                  phase_name: c2
+  /ingestion/threat-data/source-overview/:
+    get:
+      operationId: threatDataObjectDetailsInTableView
+      summary: Get Threat Data Object Details in Table View
+      tags:
+      - Threat Data Objects
+      description: Retrieves the object information for the given filters in a tabular format.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/basic-details/threat-data-object-details-in-table-view
+      parameters:
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*
+      - name: object_type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve the details.
+          default: '1'
+        description: Pass the page number to retrieve the details.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve in each page.
+          default: '10'
+        description: Pass the number of records to retrieve in each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link to the next page. Returns null in case it is the last page.
+                  page_size:
+                    type: number
+                    description: Returns the number of records in a page
+                    examples:
+                    - 10
+                  previous:
+                    type: object
+                    description: Returns the URL for the previous page
+                  results:
+                    type: array
+                    description: Returns the object details.
+                    items:
+                      type: object
+                      properties:
+                        collection:
+                          type: object
+                          description: Returns the details of the collection, like the ID and name.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the collection ID.
+                              examples:
+                              - a6716d75-9a95-4c14-b1e6-d2b9ba3a1d14
+                            name:
+                              type: string
+                              description: Returns the collection name.
+                              examples:
+                              - new-indicators-10-coll-0
+                        created:
+                          type: number
+                          description: Returns the creation timestamp in epoch format of the object as received from the source.
+                          examples:
+                          - 1641562748
+                        custom_attribute_count:
+                          type: number
+                          description: Returns the total number of custom attributes received for the object from the source.
+                          examples:
+                          - '0'
+                        first_seen:
+                          type: number
+                          description: Returns the first seen timestamp in epoch format of the object as received from the source.
+                          examples:
+                          - 1633350549
+                        id:
+                          type: string
+                          description: Returns the unique ID of the record.
+                          examples:
+                          - a7bde8c2-50d6-496e-bd4e-a645d0ca2d66
+                        last_seen:
+                          type: number
+                          description: Returns the date in epoch format on which the object was last seen as shared by the source.
+                          examples:
+                          - 1634978804
+                        modified:
+                          type: number
+                          description: Returns the date in epoch format on which the object was last modified by the source.
+                          examples:
+                          - 1641881164
+                        source:
+                          type: object
+                          description: Returns details of the source
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the source ID.
+                              examples:
+                              - 91106042-dc96-4ecc-8c0e-d1cead882fdc
+                            name:
+                              type: string
+                              description: Returns the source name.
+                              examples:
+                              - new-indicators-10
+                            source_type:
+                              type: string
+                              description: Returns the type of source, such as RSS, API feed, or more.
+                              examples:
+                              - CUSTOM_STIX_SOURCES
+                        source_confidence:
+                          type: string
+                          description: Returns the confidence score received from the source for the threat data object
+                          examples:
+                          - HIGH
+                        tags:
+                          type: array
+                          description: Returns the list of all the labels or tags received from the source.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - exampletag1
+                        times_reported:
+                          type: number
+                          description: Returns the number of times the object has polled from the source.
+                          examples:
+                          - 3
+                        tlp:
+                          type: string
+                          description: Returns the TLP of the object, such as RED, AMBER, GREEN, NONE.
+                          examples:
+                          - AMBER
+                  total:
+                    type: number
+                    description: Returns the number of records in the page.
+                    examples:
+                    - 1
+              example:
+                next: {}
+                page_size: 10
+                previous: {}
+                results:
+                - collection:
+                    id: a6716d75-9a95-4c14-b1e6-d2b9ba3a1d14
+                    name: new-indicators-10-coll-0
+                  created: 1641562748
+                  custom_attribute_count: '0'
+                  first_seen: 1633350549
+                  id: a7bde8c2-50d6-496e-bd4e-a645d0ca2d66
+                  last_seen: 1634978804
+                  modified: 1641881164
+                  source:
+                    id: 91106042-dc96-4ecc-8c0e-d1cead882fdc
+                    name: new-indicators-10
+                    source_type: CUSTOM_STIX_SOURCES
+                  source_confidence: HIGH
+                  tags:
+                  - exampletag1
+                  times_reported: 3
+                  tlp: AMBER
+                total: 1
+  /ingestion/threat-data/{object_type}/{object_id}/refresh-score/:
+    get:
+      operationId: refreshConfidenceScore
+      summary: Refresh Confidence Score (Risk Score)
+      tags:
+      - Threat Data Objects
+      description: Returns the Confidence Score (Risk Score) of an indicator threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/confidence-score/refresh-confidence-score
+      parameters:
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object type (indicator).
+          enum:
+          - indicator
+          examples:
+          - indicator
+        description: Pass the object type (indicator).
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the indicator threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - dbd48dae-3505-4ace-9c0e-e617d9ccc269
+        description: Pass the indicator threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    description: Returns the confidence score (Risk Score) value of the indicator between 0 and 100. Returns -1 if the Risk Score is marked as "NA".
+                    examples:
+                    - '100'
+              example:
+                score: '100'
+  /ingestion/threat-data/{object_type}/{object_id}/key-evidence/:
+    get:
+      operationId: retrieveKeyEvidenceOfConfidenceScore
+      summary: Get Key Evidence of Confidence Score (Risk Score)
+      tags:
+      - Threat Data Objects
+      description: Retrieve the key evidence for the Confidence Score (Risk Score) calculation for an indicator.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/confidence-score/retrieve-key-evidence-of-confidence-score
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object (indicator).
+          enum:
+          - indicator
+          default: indicator
+          examples:
+          - indicator
+        description: Pass the type of threat data object (indicator).
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+          examples:
+          - dbd48dae-3505-4ace-9c0e-e617d9ccc269
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  evidence:
+                    type: object
+                    description: Returns the key evidence parameters for the Risk Score.
+                    properties:
+                      attribute:
+                        type: object
+                        description: Returns the attribute details weighing on the Risk Score.
+                      enrichment:
+                        type: object
+                        description: Returns the enrichment details weighing on the Risk Score.
+                      source:
+                        type: object
+                        description: Returns the source details weighing on the Risk Score.
+                        properties:
+                          calculated_score:
+                            type: number
+                            description: Returns the calculated score from the source.
+                            examples:
+                            - 100
+                          results:
+                            type: array
+                            description: Returns a list of individual scoring results from each source.
+                            items:
+                              type: object
+                              properties:
+                                calculated_score:
+                                  type: number
+                                  description: Returns the score calculated specifically from this individual source.
+                                  examples:
+                                  - 100
+                                score:
+                                  type: number
+                                  description: Returns the raw score given by this source.
+                                  examples:
+                                  - 100
+                                source:
+                                  type: object
+                                  description: Returns the source details.
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: Returns the source ID.
+                                      examples:
+                                      - 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                                    name:
+                                      type: string
+                                      description: Returns the source name.
+                                      examples:
+                                      - Import
+                                source_id:
+                                  type: string
+                                  description: Returns the ID of the source record.
+                                  examples:
+                                  - 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                                weightage:
+                                  type: number
+                                  description: Returns the weightage of this specific source on the overall source weightage calculation.
+                                  examples:
+                                  - 100
+                          weightage:
+                            type: number
+                            description: Returns the source weightage on the final Risk Score.
+                            examples:
+                            - 50
+                  is_premium:
+                    type: boolean
+                    description: Returns a boolean flag indicating if the risk score feature is part of a premium offering.
+                    examples:
+                    - true
+                  risk_score:
+                    type: number
+                    description: Returns the final Risk Score of the threat data object.
+                    examples:
+                    - 100
+                  rule_name:
+                    type: string
+                    description: Returns the name of the rule associated with the object.
+                    examples:
+                    - Unknown Rule
+              example:
+                evidence:
+                  attribute: {}
+                  enrichment: {}
+                  source:
+                    calculated_score: 100
+                    results:
+                    - calculated_score: 100
+                      score: 100
+                      source:
+                        id: 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                        name: Import
+                      source_id: 003d51d0-d3fd-4442-aa60-7e3d5ec8d93d
+                      weightage: 100
+                    weightage: 50
+                is_premium: true
+                risk_score: 100
+                rule_name: Unknown Rule
+  /ingestion/threat-data/{object_type}/{object_id}/custom_attributes/:
+    get:
+      operationId: listCustomAttributesOfThreatDataObject
+      summary: Get Custom Attributes List of Threat Data Object
+      tags:
+      - Threat Data Objects
+      description: Retrieves the custom attributes of a threat data object with respect to all the sources the object has received.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/custom-attributes/list-custom-attributes-of-threat-data-object
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of the object such as indicator, vulnerability, malware, and more.
+          examples:
+          - report
+        description: Pass the type of the object such as indicator, vulnerability, malware, and more.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of the object to retrieve the custom attributes.
+          examples:
+          - ec572fda-8874-4d58-9e30-7fa961b4c878
+        description: Pass the ID of the object to retrieve the custom attributes.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the URL for the next page.
+                  page_size:
+                    type: number
+                    description: Returns the page size.
+                    examples:
+                    - 10
+                  previous:
+                    type: object
+                    description: Returns the URL for the previous page.
+                  results:
+                    type: array
+                    description: Returns the list of custom attributes of threat data objects.
+                    items:
+                      type: object
+                      properties:
+                        collection:
+                          type: object
+                          description: Returns the details of the polling collection from which the threat data object was polled
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the collection ID.
+                              examples:
+                              - fb27dd19-2852-4650-80f9-0e6b3545ac7d
+                            name:
+                              type: string
+                              description: Returns the name of the collection.
+                              examples:
+                              - RSS Feed Collection
+                        custom_attribute_count:
+                          type: number
+                          description: Returns the number of custom attributes associated with the object.
+                          examples:
+                          - 3
+                        id:
+                          type: string
+                          description: Returns the unique ID of the record.
+                          examples:
+                          - e2d97257-b61d-484b-9a23-4f3f4d69634b
+                        source:
+                          type: object
+                          description: Returns the source details.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the source ID.
+                              examples:
+                              - 790b1f0c-21e5-46d7-be66-bb57f4bd4074
+                            name:
+                              type: string
+                              description: Returns the source name.
+                              examples:
+                              - Y combi
+                            source_type:
+                              type: string
+                              description: Returns the source type.
+                              examples:
+                              - RSS_FEED
+                        source_confidence:
+                          type: string
+                          description: Returns the source confidence.
+                          examples:
+                          - HIGH
+                        source_confidence_value:
+                          type: number
+                          description: Returns the source confidence value from 0 to 100.
+                          examples:
+                          - 0
+                        tags:
+                          type: array
+                          description: Returns the tags associated with the object.
+                          items: {}
+                  total:
+                    type: number
+                    description: Returns the total number of sources sharing custom attributes for the threat data object.
+                    examples:
+                    - 1
+              example:
+                next: {}
+                page_size: 10
+                previous: {}
+                results:
+                - collection:
+                    id: fb27dd19-2852-4650-80f9-0e6b3545ac7d
+                    name: RSS Feed Collection
+                  custom_attribute_count: 3
+                  id: e2d97257-b61d-484b-9a23-4f3f4d69634b
+                  source:
+                    id: 790b1f0c-21e5-46d7-be66-bb57f4bd4074
+                    name: Y combi
+                    source_type: RSS_FEED
+                  source_confidence: HIGH
+                  source_confidence_value: 0
+                  tags: []
+                total: 1
+  /integration/apps/update/threatdata/:
+    get:
+      operationId: enrichThreatData
+      summary: Get Enriched Threat Data
+      tags:
+      - Threat Data Objects
+      description: Returns the enriched data of a threat data object using enrichment tools.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/enrichment/enrich-threat-data
+      parameters:
+      - name: app_slug
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the slug of an enrichment tool to retrieve its enriched data. To retrieve the slug of an enrichment tool, use the **GET Enrichment Tools API** endpoint.
+          examples:
+          - comodo
+        description: Pass the slug of an enrichment tool to retrieve its enriched data. To retrieve the slug of an enrichment tool, use the **GET Enrichment Tools API** endpoint.
+      - name: value
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the value of the object. For example, *sco*, *vulnerability*, and more.
+          examples:
+          - sdo
+        description: Pass the value of the object. For example, *sco*, *vulnerability*, and more.
+      - name: action_slug
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the enrichment action name to retrieve specific details. For example, `get_ip` for IPs, `get_domain` for Domain, `get_url` for URL, `get_cve` for Vulnerability.
+          examples:
+          - get_domain
+        description: Pass the enrichment action name to retrieve specific details. For example, `get_ip` for IPs, `get_domain` for Domain, `get_url` for URL, `get_cve` for Vulnerability.
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of an object ID (sco object ID for indicators and vulnerability object ID for vulnerabilities).
+          examples:
+          - 916e0c84-61a6-412b-a25c-e65d6bcdc96b
+        description: Pass the ID of an object ID (sco object ID for indicators and vulnerability object ID for vulnerabilities).
+      - name: object_type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the object type. SDO object type(indicator /or vulnerability).
+          examples:
+          - indicator
+        description: Pass the object type. SDO object type(indicator /or vulnerability).
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  raw_data:
+                    type: object
+                    description: Returns the enriched data returned from an enrichment source.
+                    properties:
+                      asn:
+                        type: string
+                        description: Returns the ASN assigned the IP.
+                        examples:
+                        - '13335'
+                      undetected_urls:
+                        type: array
+                        description: Returns the list of associated non-malicious URLs.
+                        items:
+                          type: array
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - http://www.qwhty39.com/
+                      undetected_downloaded_samples:
+                        type: array
+                        description: Returns the list of file samples downloaded from the IP, not flagged as malicious.
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              description: Returns the scan date.
+                              examples:
+                              - '2019-08-22 17:44:19'
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '0'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '70'
+                            sha256:
+                              type: string
+                              description: Returns the hash of the file.
+                              examples:
+                              - a980b60a8922f510d2da527e74ec9443a57dcc65444dbd6a3ae87dceb28090eb
+                      detected_downloaded_samples:
+                        type: array
+                        description: Returns the list of files downloaded that were flagged as malicious.
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              description: Returns the scan date.
+                              examples:
+                              - '2018-04-16 02:49:06'
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '23'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '62'
+                            sha256:
+                              type: string
+                              description: Returns the hash of the file.
+                              examples:
+                              - 0773b94a2e3239eeda0d02f32d8beea116783b48172c116c9b6b382338f8be13
+                      response_code:
+                        type: string
+                        description: Returns the status of the API request.
+                        examples:
+                        - '1'
+                      as_owner:
+                        type: string
+                        description: Returns the org that owns the ASN.
+                        examples:
+                        - CLOUDFLARENET
+                      detected_referrer_samples:
+                        type: array
+                        description: Returns a list of files that referenced this IP and were flagged as malicious.
+                        items:
+                          type: object
+                          properties:
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '29'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '67'
+                            sha256:
+                              type: string
+                              description: Returns the hash of the file.
+                              examples:
+                              - 5ae867ae674046df7d313206fbe5bf8a13e46985e822638d86615687caed7113
+                      verbose_msg:
+                        type: string
+                        description: Returns the status of the message.
+                        examples:
+                        - IP address in dataset
+                      country:
+                        type: string
+                        description: Returns the country code of the IP address.
+                        examples:
+                        - AU
+                      undetected_referrer_samples:
+                        type: array
+                        description: Returns the list of samples that referenced the IP but were not flagged as malicious.
+                        items:
+                          type: object
+                          properties:
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '0'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '55'
+                            sha256:
+                              type: string
+                              description: Returns the hash of the file.
+                              examples:
+                              - d59a490460e82a5fd1fd593fa2910819ac867a6029daccb6f7dd4ab1241ab084
+                      detected_urls:
+                        type: array
+                        description: Returns the list of URLs associated with the IP that were detected as malicious.
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              description: Returns the malicious URL.
+                              examples:
+                              - https://cuocuopromax.org/
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '1'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '92'
+                            scan_date:
+                              type: string
+                              description: Returns the date of scan.
+                              examples:
+                              - '2022-04-26 02:01:03'
+                      detected_communicating_samples:
+                        type: array
+                        description: Returns a list of malware samples that communicated with this IP address.
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              description: Returns the scan date.
+                              examples:
+                              - '2022-04-13 16:35:05'
+                            positives:
+                              type: string
+                              description: Returns the no of detections.
+                              examples:
+                              - '0'
+                            total:
+                              type: string
+                              description: Indicates the total number of engines that scanned the file, URL, or sample in question.
+                              examples:
+                              - '73'
+                            sha256:
+                              type: string
+                              description: Returns the hash of the file.
+                              examples:
+                              - 71a67c5e3ff1cb1455d7aafb6978ccd29de1c4ca6a4b2c0e8395f2c69ed01438
+                      resolutions:
+                        type: array
+                        description: Returns the DNS resolutions where domains pointed to this IP address.
+                        items:
+                          type: object
+                          properties:
+                            last_resolved:
+                              type: string
+                              description: Returns the date the domain last resolved to this IP.
+                              examples:
+                              - '2019-01-22 12:28:21'
+                            hostname:
+                              type: string
+                              description: Returns the domain name.
+                              examples:
+                              - 08294765.cn
+                      updated:
+                        type: number
+                        description: Returns the UNIX timestamp of the last update to the enrichment data.
+                        examples:
+                        - 1651353555
+                  parsed_data:
+                    type: object
+                    description: Returns details of the enriched data.
+                    properties:
+                      detected_referrer_samples_count:
+                        type: number
+                        description: Returns the total number of malicious referrer samples.
+                        examples:
+                        - 100
+                      detected_downloaded_samples_count:
+                        type: number
+                        description: Returns the total number of flagged downloaded samples.
+                        examples:
+                        - 13
+                      detected_urls_count:
+                        type: number
+                        description: Returns the total number of malicious URLs found.
+                        examples:
+                        - 100
+                      detected_communicating_samples_count:
+                        type: number
+                        description: Returns the number of samples that communicated with the IP.
+                        examples:
+                        - 100
+                  status:
+                    type: number
+                    description: Returns the status of the enrichment request.
+                    examples:
+                    - 1
+                  timestamp:
+                    type: number
+                    description: Returns the timestamp when the original data was recorded or fetched.
+                    examples:
+                    - 1651353355
+                  enriched_on:
+                    type: number
+                    description: Returns the UNIX timestamp when the enrichment process was completed.
+                    examples:
+                    - 1651353555
+                  verdict:
+                    type: string
+                    description: Returns the final categorization of the threat based on analysis.
+                    examples:
+                    - Malicious
+              example:
+                raw_data:
+                  asn: '13335'
+                  undetected_urls:
+                  - - http://www.qwhty39.com/
+                  undetected_downloaded_samples:
+                  - date: '2019-08-22 17:44:19'
+                    positives: '0'
+                    total: '70'
+                    sha256: a980b60a8922f510d2da527e74ec9443a57dcc65444dbd6a3ae87dceb28090eb
+                  detected_downloaded_samples:
+                  - date: '2018-04-16 02:49:06'
+                    positives: '23'
+                    total: '62'
+                    sha256: 0773b94a2e3239eeda0d02f32d8beea116783b48172c116c9b6b382338f8be13
+                  response_code: '1'
+                  as_owner: CLOUDFLARENET
+                  detected_referrer_samples:
+                  - positives: '29'
+                    total: '67'
+                    sha256: 5ae867ae674046df7d313206fbe5bf8a13e46985e822638d86615687caed7113
+                  verbose_msg: IP address in dataset
+                  country: AU
+                  undetected_referrer_samples:
+                  - positives: '0'
+                    total: '55'
+                    sha256: d59a490460e82a5fd1fd593fa2910819ac867a6029daccb6f7dd4ab1241ab084
+                  detected_urls:
+                  - url: https://cuocuopromax.org/
+                    positives: '1'
+                    total: '92'
+                    scan_date: '2022-04-26 02:01:03'
+                  detected_communicating_samples:
+                  - date: '2022-04-13 16:35:05'
+                    positives: '0'
+                    total: '73'
+                    sha256: 71a67c5e3ff1cb1455d7aafb6978ccd29de1c4ca6a4b2c0e8395f2c69ed01438
+                  resolutions:
+                  - last_resolved: '2019-01-22 12:28:21'
+                    hostname: 08294765.cn
+                  updated: 1651353555
+                parsed_data:
+                  detected_referrer_samples_count: 100
+                  detected_downloaded_samples_count: 13
+                  detected_urls_count: 100
+                  detected_communicating_samples_count: 100
+                status: 1
+                timestamp: 1651353355
+                enriched_on: 1651353555
+                verdict: Malicious
+  /ingestion/threat-data/action/{action_type}/:
+    post:
+      operationId: performActionOnThreatDataObject
+      summary: Perform Action on Threat Data Object
+      tags:
+      - Threat Data Objects
+      description: Performs an action on a threat data object. You can perform actions such as deprecate, undeprecate, add analyst TLP, add analyst score, and more
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/quick-action/perform-action-on-threat-data-object
+      parameters:
+      - name: action_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the action to be performed.
+          enum:
+          - deprecate
+          - un_deprecate
+          - reviewed
+          - manual_review
+          - whitelist
+          - un_whitelist
+          - false_positive
+          - un_false_positive
+          - analyst_tlp
+          - analyst_score
+          - add_tag
+          - add_relation
+          - delete
+          - revoke_intel
+          examples:
+          - analyst_tlp
+        description: Pass the action to be performed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                object_id:
+                  type: string
+                  description: Pass the ID of a threat data object to perform an action.
+                  examples:
+                  - 81f699f3-314d-4a6c-a3426b-c5802552c0f7
+                object_type:
+                  type: string
+                  description: Pass the type of threat data object.
+                  examples:
+                  - malware
+                data:
+                  type: object
+                  description: Pass additional data with the action.
+                  properties:
+                    analyst_tlp:
+                      type: string
+                      description: Pass the TLP marked the by analyst.
+                      examples:
+                      - GREEN
+              required:
+              - object_id
+              - object_type
+            example:
+              object_id: 81f699f3-314d-4a6c-a3426b-c5802552c0f7
+              object_type: malware
+              data:
+                analyst_tlp: GREEN
+      responses:
+        '200':
+          description: Action Successfully Executed
+        '400':
+          description: Bad Request (Check if you have passed valid data)
+  /ingestion/threat-data/{object_type}/{object_id}/quick-actions/:
+    get:
+      operationId: quickActionDetails
+      summary: Get Quick Action Details
+      tags:
+      - Threat Data Objects
+      description: Returns the status of the quick actions performed on a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/quick-action/quick-action-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more.
+          examples:
+          - malware
+        description: Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat data object.
+          examples:
+          - 81f699f3-314d-4a6c-a26b-c5802552c0f7
+        description: Pass the ID of a threat data object.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Returns the name of the threat data object.
+                    examples:
+                    - acd519379d6ff071e40b5879579e0c87399a25e48885874ed74d3b2fe47b65d8
+                  type:
+                    type: string
+                    description: Returns the type of threat data object.
+                    examples:
+                    - indicator
+                  sub_type:
+                    type: string
+                    description: Returns the sub-type of the threat data object.
+                    examples:
+                    - file
+                  tags:
+                    type: array
+                    description: Returns the list of tags attached to the threat data object.
+                    items: {}
+                  notes:
+                    type: array
+                    description: Returns the list of notes added to the object.
+                    items: {}
+                  is_reviewed:
+                    type: boolean
+                    description: Returns true if the threat data object is reviewed, else returns false.
+                    examples:
+                    - 'false'
+                  is_under_review:
+                    type: boolean
+                    description: Returns true if the threat data object is under review, else returns false.
+                    examples:
+                    - 'false'
+                  is_whitelisted:
+                    type: boolean
+                    description: Returns true if the threat data object is added to the allowed indicator list, else returns false.
+                    examples:
+                    - 'false'
+                  is_revoked:
+                    type: boolean
+                    description: Returns true if the threat data object is revoked, else returns false.
+                    examples:
+                    - 'false'
+                  is_watchlist:
+                    type: boolean
+                    description: Returns true if the threat data object is marked as a watchlist keyword, else returns false.
+                    examples:
+                    - 'false'
+                  is_false_positive:
+                    type: boolean
+                    description: Returns true if the threat data object is marked false positive, else returns false.
+                    examples:
+                    - 'false'
+                  is_deprecated:
+                    type: boolean
+                    description: Returns true if the threat data object is deprecated, else returns false.
+                    examples:
+                    - 'false'
+                  ctix_created:
+                    type: number
+                    description: Returns the created date and time of the threat data object in epoch format.
+                    examples:
+                    - '1654518909'
+              example:
+                name: acd519379d6ff071e40b5879579e0c87399a25e48885874ed74d3b2fe47b65d8
+                type: indicator
+                sub_type: file
+                tags: []
+                notes: []
+                is_reviewed: 'false'
+                is_under_review: 'false'
+                is_whitelisted: 'false'
+                is_revoked: 'false'
+                is_watchlist: 'false'
+                is_false_positive: 'false'
+                is_deprecated: 'false'
+                ctix_created: '1654518909'
+  /ingestion/threat-data/{object_type}/{object_id}/source_specific_relations/:
+    get:
+      operationId: filterRelationsBySource
+      summary: Filter Relations by Source
+      tags:
+      - Threat Data Objects
+      description: Retrieves source-specific relations of a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/relations/filter-relations-by-source
+      parameters:
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more.
+          examples:
+          - indicator
+        description: Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat data object.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the ID of a threat data object.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Returns an array containing the relation types and their corresponding count/value based on the filter applied.
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: Returns the SDO type.
+                          examples:
+                          - report
+                        value:
+                          type: array
+                          description: Returns an array of integers representing the number of times the specified relation type (report) appears for the given source(s).
+                          items:
+                            type: number
+                            description: Returns the number of corresponding objects to the sources.
+                            examples:
+                            - '1'
+                  x_labels:
+                    type: array
+                    description: Returns the details of a source, such as ID, name, and type.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the source ID.
+                          examples:
+                          - 91dd1ece-27bb-403c-84c3-13f043082532
+                        name:
+                          type: string
+                          description: Returns the source name.
+                          examples:
+                          - Import
+                        source_type:
+                          type: string
+                          description: Returns the source type.
+                          examples:
+                          - CUSTOM_STIX_SOURCES
+              example:
+                data:
+                - label: report
+                  value:
+                  - '1'
+                x_labels:
+                - id: 91dd1ece-27bb-403c-84c3-13f043082532
+                  name: Import
+                  source_type: CUSTOM_STIX_SOURCES
+  /ingestion/threat-data/{object_type}/{object_id}/relations/:
+    get:
+      operationId: listRelationsOfThreatDataObject
+      summary: Get Relations List of Threat Data Object
+      tags:
+      - Threat Data Objects
+      description: Retrieves the list of related objects and the relation details of a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/relations/list-relations-of-threat-data-object
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve relations.
+          default: '1'
+        description: Pass the page number to retrieve relations.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve in each page.
+          default: '10'
+        description: Pass the number of records to retrieve in each page.
+      - name: sources
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the comma-separated IDs of the sources to filter the response. To retrieve the IDs, use the **List Threat Data Object Sources API**.
+        description: Pass the comma-separated IDs of the sources to filter the response. To retrieve the IDs, use the **List Threat Data Object Sources API**.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL of the next page.
+                    examples:
+                    - threat-data/report/03f74e6e-ad8e-48d2-a7a9-4f3d47940db3/relations/?page=2&page_size=1
+                  page_size:
+                    type: number
+                    description: Returns the number of relations in the page.
+                    examples:
+                    - 1
+                  previous:
+                    type: string
+                    description: Returns the URL to the previous page.
+                  results:
+                    type: array
+                    description: Returns the list of related objects and the relation details.
+                    items:
+                      type: object
+                      properties:
+                        created_by_ref:
+                          type: string
+                          description: Returns the list that contains the ID and name of the SDO being referred.
+                        id:
+                          type: string
+                          description: Returns the ID of the relation.
+                          examples:
+                          - 22410c4d-c050-4b6e-b0ab-5e0d26e90881
+                        is_forward:
+                          type: boolean
+                          description: Returns true if this is a forward relation to the specified threat data object.
+                          examples:
+                          - true
+                        is_redacted:
+                          type: boolean
+                          description: Returns true if this is a reverse relation to the specified threat data object.
+                          examples:
+                          - false
+                        relation_end:
+                          type: string
+                          description: Returns the epoch timestamp of when the relation ends.
+                        relation_start:
+                          type: string
+                          description: Returns the epoch timestamp of when the relation starts.
+                        relationship_confidence:
+                          type: string
+                          description: Returns the confidence associated with the relation.
+                        relationship_type:
+                          type: string
+                          description: Returns the STIX defined relationship type between the objects.
+                          examples:
+                          - related-to
+                        sources:
+                          type: array
+                          description: Returns the list of sources from which you received the relationship.
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: Returns the source ID.
+                                examples:
+                                - 790b1f0c-21e5-46d7-be66-bb57f4bd4074
+                              name:
+                                type: string
+                                description: Returns the name of the source.
+                                examples:
+                                - Feed Source
+                              source_type:
+                                type: string
+                                description: Returns the source type.
+                                examples:
+                                - RSS_FEED
+                        target_ref:
+                          type: object
+                          description: Returns the details of the target (related) object
+                          properties:
+                            created:
+                              type: number
+                              description: Returns the epoch timestamp of when the object was created.
+                              examples:
+                              - 1745403589
+                            id:
+                              type: string
+                              description: Returns the unique ID of the object.
+                              examples:
+                              - b45cf121-60fb-43f6-b308-08d2f81cfff9
+                            modified:
+                              type: number
+                              description: Returns the epoch timestamp of when the object was modified.
+                              examples:
+                              - 1745403589
+                            name:
+                              type: string
+                              description: Returns the object name.
+                              examples:
+                              - blocktheme.css
+                            object_type:
+                              type: string
+                              description: Returns the object type.
+                              examples:
+                              - observable
+                            sub_type:
+                              type: string
+                              description: Returns the sub-type of the object.
+                              examples:
+                              - file
+                            tlp:
+                              type: string
+                              description: Returns the TLP associated with the object.
+                              examples:
+                              - CLEAR
+                  total:
+                    type: number
+                    description: Returns the total number of relations of the threat data object.
+                    examples:
+                    - 390
+              example:
+                next: threat-data/report/03f74e6e-ad8e-48d2-a7a9-4f3d47940db3/relations/?page=2&page_size=1
+                page_size: 1
+                previous: null
+                results:
+                - created_by_ref: null
+                  id: 22410c4d-c050-4b6e-b0ab-5e0d26e90881
+                  is_forward: true
+                  is_redacted: false
+                  relation_end: null
+                  relation_start: null
+                  relationship_confidence: null
+                  relationship_type: related-to
+                  sources:
+                  - id: 790b1f0c-21e5-46d7-be66-bb57f4bd4074
+                    name: Feed Source
+                    source_type: RSS_FEED
+                  target_ref:
+                    created: 1745403589
+                    id: b45cf121-60fb-43f6-b308-08d2f81cfff9
+                    modified: 1745403589
+                    name: blocktheme.css
+                    object_type: observable
+                    sub_type: file
+                    tlp: CLEAR
+                total: 390
+  /ingestion/threat-data/{object_type}/{object_id}/relations/card:
+    get:
+      operationId: listRelations
+      summary: Get Relations List
+      tags:
+      - Threat Data Objects
+      description: Retrieves the related statistics for the given object type and object ID.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/relations/list-relations
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object type. Attack pattern, campaign, course of action, grouping, etc., are examples of the object type.
+          examples:
+          - indicator
+        description: Pass the object type. Attack pattern, campaign, course of action, grouping, etc., are examples of the object type.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object ID. Unique UUID4 is an example of the object ID.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the object ID. Unique UUID4 is an example of the object ID.
+      responses:
+        '200':
+          description: Successful response
+  /ingestion/threat-data/{object_type}/{object_id}/relations/card/:
+    get:
+      operationId: relationsOverview
+      summary: Get Relations Overview
+      tags:
+      - Threat Data Objects
+      description: Retrieves the overall statistics for all relations of a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-data-objects/relations/relations-overview
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+          examples:
+          - indicator
+        description: Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**.
+      - name: object_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+          examples:
+          - 09730695-2f63-4a1c-a0fb-a042689588d5
+        description: Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns the relations details of a threat data object.
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Returns the type of related object.
+                          examples:
+                          - indicator
+                        name:
+                          type: string
+                          description: Returns the name of the related object.
+                          examples:
+                          - Indicator
+                        count:
+                          type: number
+                          description: Returns the total number of relations.
+                          examples:
+                          - 350
+              example:
+                results:
+                - type: indicator
+                  name: Indicator
+                  count: 350
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

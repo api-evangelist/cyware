@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Tag Groups API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tag Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Disable Bulk Tag Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/bulk-actions/",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Pass `tags` to include all the tags, irrespective of the status."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disable multiple tag groups in a single request to deactivate them from use."
+        },
+        {
+          "info": {
+            "name": "Update Tag Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/:tag_id/",
+            "params": [
+              {
+                "name": "tag_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a tag group to retrieve the details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update all fields of an existing tag group with new values."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

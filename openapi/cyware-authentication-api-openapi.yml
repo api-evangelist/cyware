@@ -1,0 +1,92 @@
+openapi: 3.2.0
+info:
+  title: Cyware Orchestrate (CO) Open Authentication API
+  version: v1
+  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
+
+
+    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://orchestrateapi.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{co_host}/soarapi
+  description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+  variables:
+    co_host:
+      default: demo.cyware.com
+security:
+- coOpenApiSignature: []
+tags:
+- name: Authentication
+  description: Authentication
+paths:
+  /v1/release_version/:
+    get:
+      operationId: productReleaseVersion
+      summary: Product Release Version
+      tags:
+      - Authentication
+      description: Returns the current version of the Orchestrate application.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/authentication/product-release-version
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  release_version:
+                    type: string
+                    description: Returns the current version of Orchestrate. For example, `3.5.5`
+                    examples:
+                    - 3.0.4
+              example:
+                release_version: 3.0.4
+  /v1/test_connectivity/:
+    get:
+      operationId: testConnectivity
+      summary: Test Connectivity
+      tags:
+      - Authentication
+      description: Returns the status of the test connectivity with the Orchestrate application.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/authentication/test-connectivity
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns the status of the connection.
+                    enum:
+                    - ok
+                    - invalid credentials
+                    examples:
+                    - ok
+              example:
+                status: ok
+components:
+  securitySchemes:
+    coOpenApiSignature:
+      type: apiKey
+      in: query
+      name: access_id
+      description: Orchestrate Open API credentials. Every request carries access_id, expires (epoch, current time + up to 30 seconds) and signature query parameters, where StringToSign = access_id + "\n" + expires and Signature = Base64(HMAC-SHA1(secret_key, StringToSign)). See https://orchestrateapi.cyware.com/authentication
+externalDocs:
+  description: Cyware Orchestrate API Reference
+  url: https://orchestrateapi.cyware.com/

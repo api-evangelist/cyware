@@ -1,0 +1,1220 @@
+{
+  "item": [
+    {
+      "id": "10313ae6-2e63-4556-bfc6-d75ea46b52ff",
+      "name": "Dashboards",
+      "description": {
+        "content": "Dashboards",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6da003d-901a-408e-87eb-e1034f12ed93",
+          "name": "Delete Custom Dashboard",
+          "request": {
+            "name": "Delete Custom Dashboard",
+            "description": {
+              "content": "Deletes a custom dashboard for the given dashboard ID. You can retrieve the ID using the **List Dashboards API**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "dashboard",
+                ":dashboard_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dashboard_id",
+                  "description": "(Required) Pass the ID of a custom dashboard. You can only delete dashboards that you have previously created."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e18b320-b38d-451b-a944-60c2ca914d59",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "dashboard",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) Pass the ID of a custom dashboard. You can only delete dashboards that you have previously created."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee1aee0e-d40f-4215-b471-0f1db892a14f",
+          "name": "Get Dashboard Details",
+          "request": {
+            "name": "Get Dashboard Details",
+            "description": {
+              "content": "Returns data about the specific dashboard ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "dashboard",
+                ":dashboard_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dashboard_id",
+                  "description": "(Required) Pass the ID of the dashboard. You can retrieve this ID using the **List Dashboards** API. For example: *7749e131-2161-4b19-b77d-e92aa7e945a9*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bed7914-d5ab-4f93-96bb-2f956ab54e84",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "dashboard",
+                    ":dashboard_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dashboard_id",
+                      "description": "(Required) Pass the ID of the dashboard. You can retrieve this ID using the **List Dashboards** API. For example: *7749e131-2161-4b19-b77d-e92aa7e945a9*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_by\": {\n    \"email\": \"john.doe@example.com\",\n    \"first_name\": \"John\",\n    \"id\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n    \"last_name\": \"Doe\"\n  },\n  \"dashboard_id\": \"30038717-ce67-48b8-839f-dd84aeb7cc45\",\n  \"description\": \"Use this dashboard to visualize Intel Exchange automation rules metrics such as performance, processing by IoCs or domain objects, rule actions, and sources.\",\n  \"editable\": false,\n  \"is_default\": false,\n  \"layout\": [\n    {\n      \"columns\": [\n        {\n          \"available_charts\": [\n            \"heatmap\"\n          ],\n          \"axis\": {\n            \"xaxis\": \"Rules\",\n            \"yaxis\": \"Count\"\n          },\n          \"filters\": {},\n          \"name\": \"Rule Performance by Domain Objects\",\n          \"slug\": \"rulewise_coverage_on_sdos\",\n          \"table\": {\n            \"type\": \"stacked\"\n          },\n          \"table_columns\": [\n            {\n              \"key\": \"x_labels\",\n              \"label\": \"Rule Name\",\n              \"type\": \"string\"\n            }\n          ],\n          \"widget_type\": \"heatmap\"\n        }\n      ],\n      \"row\": 2\n    }\n  ],\n  \"layout_type\": 0,\n  \"name\": \"Rules Dashboard\",\n  \"overview\": [\n    {\n      \"columns\": [\n        {\n          \"available_charts\": [\n            \"hero\"\n          ],\n          \"filters\": {},\n          \"icon\": \"cyicon-whitelisted\",\n          \"name\": \"Allowed Indicators\",\n          \"redirections\": [\n            {\n              \"component\": \"threatdata\",\n              \"filters\": {\n                \"is_whitelisted\": true,\n                \"object\": \"indicator\"\n              }\n            }\n          ],\n          \"slug\": \"allowed_sdos\",\n          \"widget_type\": \"hero\"\n        }\n      ],\n      \"row\": 6\n    }\n  ],\n  \"rotation_timer\": 30,\n  \"shared_type\": \"system\",\n  \"shared_users\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d75604d3-4225-4f48-911b-22bf9eeda965",
+          "name": "Export Dashboard",
+          "request": {
+            "name": "Export Dashboard",
+            "description": {
+              "content": "Exports a dashboard in the Intel Exchange application. On successful exporting, you will receive an email with the subject line **Cyware Dashboard Report Mail**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "dashboard_export",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dashboards\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_date\": \"One month from current epoch timestamp\",\n  \"end_date\": \"Current epoch timestamp\",\n  \"template_config\": {\n    \"type\": \"<string>\",\n    \"width\": \"1064\",\n    \"format\": \"a3\",\n    \"widget_count\": \"10\",\n    \"height\": \"1372\",\n    \"extraHeight\": \"150\",\n    \"pdf_required\": \"150\"\n  },\n  \"external_recipients\": {},\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81acb924-9b62-4f1b-b59c-ed14020c9492",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "dashboard_export",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dashboards\": [\n    \"c28f0aec-3640-45df-a3ab-37ed35745d8a\"\n  ],\n  \"start_date\": \"1634601600\",\n  \"end_date\": \"1637279999\",\n  \"template_config\": {\n    \"type\": \"png\",\n    \"width\": 1064,\n    \"format\": \"a3\",\n    \"widget_count\": 1,\n    \"height\": 611,\n    \"extraHeight\": 150,\n    \"pdf_required\": false\n  },\n  \"external_recipients\": {\n    \"to\": [],\n    \"cc\": [],\n    \"bcc\": []\n  },\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"70258fac-5905-4232-8b2d-4243dc8bb224\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\"\n      }\n    ],\n    \"cc\": [],\n    \"bcc\": []\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"Your Dashboard will be mailed to you as soon as it is ready.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2405f679-bbb5-4f0b-8d3b-9d8c391ed613",
+          "name": "Get Dashboards List",
+          "request": {
+            "name": "Get Dashboards List",
+            "description": {
+              "content": "Returns all system dashboards as well as dashboards you created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "dashboard",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00ef273a-8b57-4e6e-b43b-c4437431c0da",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "dashboard",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"created_by\": {\n        \"email\": \"system.default@cyware.com\",\n        \"first_name\": \"John\",\n        \"id\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n        \"last_name\": \"Doe\"\n      },\n      \"dashboard_id\": \"d2295055-47a2-4a31-8e73-f79d3f873e23\",\n      \"description\": \"Use this dashboard to visualize standard threat analyst metrics such as IoC count, domain objects, TLP distribution, recurring tags, and feed sources.\",\n      \"editable\": false,\n      \"is_default\": true,\n      \"layout_type\": 1,\n      \"name\": \"Analyst Dashboard\",\n      \"no_export\": false,\n      \"rotation_timer\": 30,\n      \"shared_type\": \"system\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0498229a-280e-4385-959d-57365da49de2",
+          "name": "Get Top Level Domain (TLD)",
+          "request": {
+            "name": "Get Top Level Domain (TLD)",
+            "description": {
+              "content": "Returns all top-level domains in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "utilities",
+                "tld",
+                "data",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "2",
+                  "description": "Pass the page number to retrieve details from."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of TLDs to be retrieved on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "219d244e-0c9f-45a7-9d7a-393e0c50df82",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "utilities",
+                    "tld",
+                    "data",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"analytics/utilities/tld/data/?page=2&page_size=10\",\n  \"previous\": {},\n  \"total\": 312,\n  \"results\": [\n    {\n      \"label\": \".ac\",\n      \"value\": \".ac\"\n    }\n  ],\n  \"page_size\": \"2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c8cbc5a-df8e-4e8c-a5a5-911119fca06d",
+          "name": "Delete Widget",
+          "request": {
+            "name": "Delete Widget",
+            "description": {
+              "content": "Deletes a custom widget from the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "widget",
+                ":widget_slug",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "widget_slug",
+                  "description": "(Required) Pass the slug of a widget. You can retrieve the slug using the **List Widgets API**. For example: *01JE8E8WA4VPW9DQB96GW2F1XS*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae42b297-f3cc-4df5-8465-fcea9b7de25e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "widget",
+                    ":widget_slug",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "widget_slug",
+                      "description": "(Required) Pass the slug of a widget. You can retrieve the slug using the **List Widgets API**. For example: *01JE8E8WA4VPW9DQB96GW2F1XS*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"Action Successfully Executed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "226e4e5d-f781-41b9-89e1-d69ad7a8ba94",
+          "name": "Get Widget Configurations",
+          "request": {
+            "name": "Get Widget Configurations",
+            "description": {
+              "content": "Returns the configuration details of a widget.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "widget",
+                ":widget_slug",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "widget_slug",
+                  "description": "(Required) Pass the slug of a widget."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a7f4fab-e32f-4bba-8f66-0159e11f80b1",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "widget",
+                    ":widget_slug",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "widget_slug",
+                      "description": "(Required) Pass the slug of a widget."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Allowed Indicators by Type\",\n  \"description\": \"All Incoming IOC vs allowed indicators\",\n  \"widget_type\": \"variablepie\",\n  \"slug\": \"ioc_vs_allowed\",\n  \"available_charts\": [\n    \"\"\n  ],\n  \"configuration\": {\n    \"axis\": {\n      \"xaxis\": \"IOC Type\",\n      \"yaxis\": \"Count\"\n    },\n    \"redirections\": [\n      {\n        \"component\": \"threatdata\",\n        \"filters\": {\n          \"type\": \"indicator\",\n          \"is_whitelisted\": \"true\"\n        },\n        \"xaxis\": [\n          {\n            \"key\": \"ioc_type\"\n          }\n        ]\n      }\n    ],\n    \"filters\": [\n      {\n        \"name\": \"Source\",\n        \"key\": \"source\",\n        \"type\": \"select\",\n        \"multiple\": \"true\",\n        \"component\": \"sources\",\n        \"field\": \"sources\",\n        \"nested\": {\n          \"path\": \"sources\",\n          \"field\": \"sources.source_id\"\n        }\n      }\n    ],\n    \"table_columns\": [\n      {\n        \"type\": \"string\",\n        \"key\": \"label\",\n        \"label\": \"IOC Type\"\n      }\n    ],\n    \"indicator_type\": \"true\",\n    \"highchart\": \"true\"\n  },\n  \"widget_location\": \"dashboard\",\n  \"created_by\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bcbfa1a-bbbe-48df-831e-43a9a33185e8",
+          "name": "Get Widgets List",
+          "request": {
+            "name": "Get Widgets List",
+            "description": {
+              "content": "Returns the list of widgets in the widget library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "widget",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "widget_location",
+                  "value": "dashboard",
+                  "description": "Pass the types of widgets to retrieve in comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "2",
+                  "description": "Pass the page number to retrieve widgets from."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of widgets to retrieve in each page of the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the user ID of the creator of the widgets to filter widgets. If you are passing this parameter, ensure you also pass the `widget_location` value as custom-dashboard-widget or custom-hero-card. For example: *a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad*"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06eaedef-2432-4d14-92df-a00c6d61ed62",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "widget",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "widget_location",
+                      "value": "dashboard"
+                    },
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"analytics/widget/?page=2&page_size=1\",\n  \"previous\": {},\n  \"total\": 52,\n  \"page_size\": 1,\n  \"results\": [\n    {\n      \"name\": \"Allowed Indicators by Type\",\n      \"description\": \"This widget displays all incoming IOCs vs allowed indicators\",\n      \"widget_type\": \"variablepie\",\n      \"slug\": \"ioc_vs_allowed\",\n      \"available_charts\": [\n        \"bar\"\n      ],\n      \"configuration\": {\n        \"axis\": {\n          \"xaxis\": \"IOC Type\",\n          \"yaxis\": \"Count\"\n        },\n        \"redirections\": [\n          {\n            \"component\": \"threatdata\",\n            \"filters\": {\n              \"type\": \"indicator\",\n              \"is_whitelisted\": true\n            },\n            \"xaxis\": [\n              {\n                \"key\": \"ioc_type\"\n              }\n            ]\n          }\n        ],\n        \"filters\": [\n          {\n            \"name\": \"Source\",\n            \"key\": \"source\",\n            \"type\": \"select\",\n            \"multiple\": true,\n            \"component\": \"sources\",\n            \"field\": \"sources\",\n            \"nested\": {\n              \"path\": \"sources\",\n              \"field\": \"sources.source_id\"\n            }\n          }\n        ],\n        \"table_columns\": [\n          {\n            \"type\": \"string\",\n            \"key\": \"label\",\n            \"label\": \"IOC Type\"\n          }\n        ],\n        \"indicator_type\": true,\n        \"highchart\": true\n      },\n      \"widget_location\": \"dashboard\",\n      \"created_by\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "734eff6e-0960-4529-b6cb-489c86e884d1",
+          "name": "Get Widget Data",
+          "request": {
+            "name": "Get Widget Data",
+            "description": {
+              "content": "Returns the data returned by a widget based on the widget configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "analytics",
+                "widget",
+                ":widget_slug",
+                "data",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "widget_slug",
+                  "description": "(Required) Pass the slug of a widget. You can retrieve the slug using the **List Widgets** API. For example: *ioc_vs_allowed*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ac75f37-be0d-4690-8847-914d5275f6ec",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "analytics",
+                    "widget",
+                    ":widget_slug",
+                    "data",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "widget_slug",
+                      "description": "(Required) Pass the slug of a widget. You can retrieve the slug using the **List Widgets** API. For example: *ioc_vs_allowed*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"label\": \"indicator\",\n    \"value\": 34207\n  },\n  \"1\": {\n    \"label\": \"vulnerability\",\n    \"value\": 32866\n  },\n  \"2\": {\n    \"label\": \"observable\",\n    \"value\": 704\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "298b07ac-aeae-452c-9de5-f5749ed0218f",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Dashboards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

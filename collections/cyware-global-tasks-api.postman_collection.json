@@ -1,0 +1,1091 @@
+{
+  "item": [
+    {
+      "id": "eba76a74-b7b4-4127-af49-5ae0943ee691",
+      "name": "Global Tasks",
+      "description": {
+        "content": "Global Tasks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a20299b-336b-419a-8a0c-41b2eb34f697",
+          "name": "Create Task in Multiple Objects",
+          "request": {
+            "name": "Create Task in Multiple Objects",
+            "description": {
+              "content": "Creates a task in multiple threat data objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                "bulk-action",
+                "add_task",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": {\n    \"priority\": \"medium\",\n    \"status\": \"not_started\",\n    \"text\": \"<string>\",\n    \"assignee\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50376ac7-ea01-4cdc-93a8-d9eeb0710cae",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    "bulk-action",
+                    "add_task",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"indicator\",\n  \"object_ids\": [\n    \"e536dc79-9d34-4944-855a-64f832568b8c\"\n  ],\n  \"data\": {\n    \"priority\": \"medium\",\n    \"status\": \"in_progress\",\n    \"text\": \"task description\",\n    \"assignee\": \"58a66a94-fe9b-4928-ba44-d38fda6f06f3\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"Action Successfully Executed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3112036a-90a3-4212-a85e-a8de59b14e51",
+          "name": "Create Task",
+          "request": {
+            "name": "Create Task",
+            "description": {
+              "content": "Creates a task for a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"assignee\": \"<string>\",\n  \"priority\": \"medium\",\n  \"status\": \"not_started\",\n  \"type\": \"<string>\",\n  \"object_id\": \"<string>\",\n  \"deadline\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c59f8bc-296e-4e08-96c9-68938d559ab8",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Verify this indicator!\",\n  \"priority\": \"high\",\n  \"status\": \"not_started\",\n  \"type\": \"indicator\",\n  \"object_id\": \"92686150-58e5-4f15-be64-f3e123efd825\",\n  \"deadline\": \"1633393469\",\n  \"assignee\": \"58a66a94-fe9b-4928-ba44-d38fda6f06f3\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a\",\n  \"created\": \"1630394661\",\n  \"modified\": \"1630394661\",\n  \"created_by\": \"(unknown)\",\n  \"assignee\": \"5555f14c-6130-4e58-a2da-33e1a85b5a64\",\n  \"text\": \"Verify this indicator!\",\n  \"priority\": \"high\",\n  \"status\": \"\",\n  \"deadline\": \"1633393469\",\n  \"closure_comment\": {},\n  \"completed_on\": {},\n  \"type\": \"indicator\",\n  \"object_id\": \"92686150-58e5-4f15-be64-f3e123efd825\",\n  \"is_removed\": \"0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49137d6c-f07a-4ab2-9f4e-4d959c24860b",
+          "name": "Get Tasks List",
+          "request": {
+            "name": "Get Tasks List",
+            "description": {
+              "content": "Returns a list of global tasks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Pass the priority to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Pass the status to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user to filter tasks by the assigned user."
+                },
+                {
+                  "disabled": false,
+                  "key": "deadline_gte",
+                  "value": "<string>",
+                  "description": "Pass the start date of the task deadline in epoch format to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "deadline_lte",
+                  "value": "<string>",
+                  "description": "Pass the end date of the task deadline in epoch format to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user to filter tasks by the user who created the task."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of a threat data object."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "653f2480-4223-4018-be1c-4bde0faf5fbe",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deadline_gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deadline_lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7dc4ff8e-3682-42f9-b3b5-515d27604753",
+          "name": "Delete Task",
+          "request": {
+            "name": "Delete Task",
+            "description": {
+              "content": "Deletes a task from the Intel Exchange platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                ":task_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) Pass the unique identifier of a task to delete."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f5a4565-adc5-40ad-9ab8-73cd2cf48ec2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    ":task_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) Pass the unique identifier of a task to delete."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc23e235-d59c-423d-8c86-f51bb8a66fc4",
+          "name": "Get Task Details",
+          "request": {
+            "name": "Get Task Details",
+            "description": {
+              "content": "Returns the details of a task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                ":task_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) Pass the unique ID of a task to retrieve the details."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fde12ab-9550-4cbc-9e0b-4389500e6e81",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    ":task_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) Pass the unique ID of a task to retrieve the details."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52dd4c0e-7048-4f6d-bc35-72d947bf2cdf",
+          "name": "Update Task",
+          "request": {
+            "name": "Update Task",
+            "description": {
+              "content": "Updates the details of a task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                ":task_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) Pass the unique identifier of a task to update the details."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignee\": \"<string>\",\n  \"created\": \"<number>\",\n  \"modified\": \"<number>\",\n  \"created_by\": \"<string>\",\n  \"text\": \"<string>\",\n  \"priority\": \"medium\",\n  \"status\": \"not_started\",\n  \"deadline\": \"<number>\",\n  \"closure_comment\": \"<object>\",\n  \"completed_on\": \"<object>\",\n  \"type\": \"<string>\",\n  \"object_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "373bff9d-3e76-415d-b8c0-03440fd65f57",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    ":task_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) Pass the unique identifier of a task to update the details."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"created\": \"1630394661\",\n  \"modified\": \"1630394661\",\n  \"created_by\": \"0eea7e23-9670-4c5f-9742-2666ddf0be74\",\n  \"assignee\": \"0eea7e23-9670-4c5f-9742-2666ddf0be74\",\n  \"text\": \"Verify this indicator!\",\n  \"priority\": \"high\",\n  \"status\": \"not_started\",\n  \"deadline\": \"1633393469\",\n  \"closure_comment\": {},\n  \"completed_on\": {},\n  \"type\": \"indicator\",\n  \"object_id\": \"92686150-58e5-4f15-be64-f3e123efd825\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a\",\n  \"created\": \"1630394661\",\n  \"modified\": \"1630394817\",\n  \"created_by\": \"(unknown)\",\n  \"assignee\": \"5555f14c-6130-4e58-a2da-33e1a85b5a64\",\n  \"text\": \"Verify this indicator!\",\n  \"priority\": \"high\",\n  \"status\": \"not_started\",\n  \"deadline\": \"1633393469\",\n  \"closure_comment\": {},\n  \"completed_on\": {},\n  \"type\": \"indicator\",\n  \"object_id\": \"92686150-58e5-4f15-be64-f3e123efd825\",\n  \"is_removed\": \"0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fc24f03-c378-48cb-8aac-50827e085e14",
+          "name": "Get Task Overview in Threat Data Object",
+          "request": {
+            "name": "Get Task Overview in Threat Data Object",
+            "description": {
+              "content": "Returns an overview of the tasks created for a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tasks",
+                "stats",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the ID of an object to retrieve an overview of the associated tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass an object type associated with the tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Pass the priority of the tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Pass the status of the tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user who created the tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<string>",
+                  "description": "Pass the ID of the assigned user of the tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "deadline_gte",
+                  "value": "<string>",
+                  "description": "Pass the start date of the task deadline in epoch format to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "deadline_lte",
+                  "value": "<string>",
+                  "description": "Pass the end date of the task deadline in epoch format to filter tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the search text to search for a task type."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b0dd507-cd2f-45ea-b8cc-22a805d0afcc",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tasks",
+                    "stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deadline_gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deadline_lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "abf74a33-5b81-4beb-ada7-dc512019daf7",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Global Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

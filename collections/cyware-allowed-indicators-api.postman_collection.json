@@ -1,0 +1,2202 @@
+{
+  "item": [
+    {
+      "id": "618365e6-08aa-46eb-a634-1f58422d091a",
+      "name": "Allowed Indicators",
+      "description": {
+        "content": "Allowed Indicators",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75f1c4ea-1a14-4f3e-99b5-46a7f2db6bac",
+          "name": "Add Indicators to Allowed List",
+          "request": {
+            "name": "Add Indicators to Allowed List",
+            "description": {
+              "content": "Adds a list of indicators of a common IOC type to the allowed indicators list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd5f5c1b-36a9-4589-ad82-fcdd5cb589c5",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ipv4-addr\",\n  \"values\": [\n    \"91.108.17.134\"\n  ],\n  \"reason\": \"adding IP ioc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"invalid\": [],\n    \"new_created\": [\n      \"91.108.17.134\"\n    ],\n    \"already_exists\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "164d5b75-044e-4312-a3d5-ba120eb98349",
+          "name": "Get Allowed Indicators List",
+          "request": {
+            "name": "Get Allowed Indicators List",
+            "description": {
+              "content": "Returns a list of allowed indicators from the Intel Exchange platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve indicators."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass an allowed indicator type to filter the result. To retrieve the supported list of allowed indicator types, see the **GET List Supported Allowed Indicator Types API**."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user to filter records by the creator."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_by_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user to filter records by the modifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the created from time in epoch format to filter records based on the created time."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the created time in epoch format to filter records based on the created time."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_from",
+                  "value": "<string>",
+                  "description": "Pass the last active time in epoch format to filter records based on the last activity time."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_to",
+                  "value": "<string>",
+                  "description": "Pass the last active to time in epoch format to filter records based on the last activity time."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Pass `-created` to sort the result in descending order based on the created time. Pass `created` to sort the result in ascending order."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02d799d2-e9a3-4708-beba-1b6fd881f1e6",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_active_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_active_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"created\": \"1712294333\",\n      \"created_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"4c8841ea-28f7-4a68-8a7b-46bba21c30ba\",\n        \"last_name\": \"\"\n      },\n      \"id\": \"df896cee-ef03-4f9f-bb27-4f7cf60c0954\",\n      \"include_emails\": \"false\",\n      \"include_subdomains\": \"false\",\n      \"include_urls\": \"false\",\n      \"modified\": \"1712294333\",\n      \"modified_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"4c8841ea-28f7-4a68-8a7b-46bba21c30ba\",\n        \"last_name\": \"\"\n      },\n      \"type\": \"ipv4-addr\",\n      \"value\": \"91.108.17.134\"\n    }\n  ],\n  \"total\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1d15fdc-2ec2-45fa-8cf4-120bfaeae528",
+          "name": "Get Allowed Indicator Details",
+          "request": {
+            "name": "Get Allowed Indicator Details",
+            "description": {
+              "content": "Returns the details of an allowed indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                ":indicator_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "indicator_id",
+                  "description": "(Required) Pass the ID of an allowed indicator."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8528234-6e57-4ae8-b012-23f7980c03dc",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    ":indicator_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "indicator_id",
+                      "description": "(Required) Pass the ID of an allowed indicator."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ipv4-addr\",\n  \"value\": \"91.108.17.134\",\n  \"id\": \"df896cee-ef03-4f9f-bb27-4f7cf60c0954\",\n  \"modified_by\": \"4c8841ea-28f7-4a68-8a7b-46bba21c30ba\",\n  \"modified\": \"1712294333\",\n  \"include_subdomains\": \"false\",\n  \"include_urls\": \"false\",\n  \"include_emails\": \"false\",\n  \"created_by\": \"4c8841ea-28f7-4a68-8a7b-46bba21c30ba\",\n  \"created\": \"1712294333\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d396e46-d784-4750-8db1-d348dae8423c",
+          "name": "Delete Allowed Indicator",
+          "request": {
+            "name": "Delete Allowed Indicator",
+            "description": {
+              "content": "Deletes a particular allowed indicator entry from the dashboard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                ":indicator_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "indicator_id",
+                  "description": "(Required) Pass the ID of an allowed indicator to delete."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f556d842-111f-4b09-8513-99554831cdaf",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    ":indicator_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "indicator_id",
+                      "description": "(Required) Pass the ID of an allowed indicator to delete."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Deletion Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b9cdb21-8147-40e4-876b-146564a913b7",
+          "name": "Update Allowed Indicator",
+          "request": {
+            "name": "Update Allowed Indicator",
+            "description": {
+              "content": "Updates the specified allowed indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                ":indicator_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "indicator_id",
+                  "description": "(Required) Pass the ID of the allowed list indicator."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"include_emails\": \"<boolean>\",\n  \"include_subdomains\": \"<boolean>\",\n  \"include_urls\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee75677c-aca1-4177-9413-b23850cecae7",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    ":indicator_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "indicator_id",
+                      "description": "(Required) Pass the ID of the allowed list indicator."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include_emails\": \"false\",\n  \"include_subdomains\": \"false\",\n  \"include_urls\": \"false\",\n  \"type\": \"ipv4-addr\",\n  \"value\": \"1.2.3.45\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ipv4-addr\",\n  \"value\": \"1.2.3.45\",\n  \"id\": \"8af39afb-6503-4f57-a347-4b42475abd59\",\n  \"modified_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"modified\": \"1641491689\",\n  \"include_subdomains\": \"false\",\n  \"include_urls\": \"false\",\n  \"include_emails\": \"false\",\n  \"created_by\": \"754c15c6-e922-4bde-95b2-e80d9d1cf87c\",\n  \"created\": \"1641464479\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d35b378-6b76-4f6f-8283-71f4b0d51355",
+          "name": "Bulk Action",
+          "request": {
+            "name": "Bulk Action",
+            "description": {
+              "content": "Perform bulk actions such as follow, unfollow, and delete on multiple allowed indicators in one API request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "bulk-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4607802-ee42-447c-a868-024c76a4553b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "bulk-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"delete\",\n  \"ids\": [\n    \"15e4bac8-1ee4-4207-99e2-a8e14e16552d\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Action applied succesfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17ffd3b1-4d98-4a85-8bb9-7909f280157d",
+          "name": "Create Reason",
+          "request": {
+            "name": "Create Reason",
+            "description": {
+              "content": "Creates a new reason for an allowed indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "reasons",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "indicator_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of the indicator."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d92f755-eee0-43b6-be12-dbe8ba7b22ec",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "reasons",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "indicator_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"test reason -whitelist\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"83f2efb5-ca0d-4400-bad2-baf4b7361532\",\n  \"created\": \"1641492061\",\n  \"modified\": \"1641492061\",\n  \"created_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"modified_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"reason\": \"test reason -whitelist\",\n  \"is_active\": \"true\",\n  \"whitelist\": \"8af39afb-6503-4f57-a347-4b42475abd59\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa532be2-8510-4d62-a674-323eee1274aa",
+          "name": "Get Reasons List",
+          "request": {
+            "name": "Get Reasons List",
+            "description": {
+              "content": "Returns a paginated response with all the saved reasons for an allowed indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "reasons",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "indicator_id",
+                  "value": "<string>",
+                  "description": "Pass the unique key of the allowed list object."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "779026e3-1a44-4568-8058-a13d815756f6",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "reasons",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "indicator_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"page_size\": \"10\",\n  \"total\": \"1\",\n  \"results\": [\n    {\n      \"id\": \"83f2efb5-ca0d-4400-bad2-baf4b7361532\",\n      \"created\": \"1641492061\",\n      \"modified\": \"1641492061\",\n      \"created_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n      \"modified_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n      \"reason\": \"test reason -whitelist\",\n      \"is_active\": \"true\",\n      \"whitelist\": \"8af39afb-6503-4f57-a347-4b42475abd59\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd4bc615-193a-450e-b3d6-94dd73c76c08",
+          "name": "Delete Reason",
+          "request": {
+            "name": "Delete Reason",
+            "description": {
+              "content": "Deletes a particular reason for an allowed indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "reasons",
+                ":reason_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reason_id",
+                  "description": "(Required) Pass the ID of the reason to delete."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3586c258-75dd-4b95-a8a5-8ea215d90b83",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "reasons",
+                    ":reason_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reason_id",
+                      "description": "(Required) Pass the ID of the reason to delete."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Deleted Successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae44ae88-69eb-4b96-957e-f5c753efa06f",
+          "name": "Update Reason",
+          "request": {
+            "name": "Update Reason",
+            "description": {
+              "content": "Updates a particular reason to add an indicator to the allowed list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "reasons",
+                ":reason_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reason_id",
+                  "description": "(Required) Pass the unique ID of the reason object."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<number>\",\n  \"modified\": \"<number>\",\n  \"created_by\": \"<string>\",\n  \"modified_by\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"whitelist\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f205e33-2972-4f06-98e2-d67f002f2126",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "reasons",
+                    ":reason_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reason_id",
+                      "description": "(Required) Pass the unique ID of the reason object."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"83f2efb5-ca0d-4400-bad2-baf4b7361532\",\n  \"created\": \"1641492061\",\n  \"modified\": \"1641492061\",\n  \"created_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"modified_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"reason\": \"test reason -whitelist-updated\",\n  \"is_active\": \"true\",\n  \"whitelist\": \"8af39afb-6503-4f57-a347-4b42475abd59\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"83f2efb5-ca0d-4400-bad2-baf4b7361532\",\n  \"created\": \"1641492061\",\n  \"modified\": \"1641492217\",\n  \"created_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"modified_by\": \"6063f29f-0224-4891-8761-34ef988fa080\",\n  \"reason\": \"test reason -whitelist-updated\",\n  \"is_active\": \"true\",\n  \"whitelist\": \"8af39afb-6503-4f57-a347-4b42475abd59\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e992dd0-2fa1-4441-91bc-ce81fd7ac4dc",
+          "name": "Get Supported Allowed Indicator Types List",
+          "request": {
+            "name": "Get Supported Allowed Indicator Types List",
+            "description": {
+              "content": "Returns the supported types of IOCs that can be added to the allowed indicators list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "getoptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the query text to search indicator types."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38ee3d43-e0e3-4620-998d-94273b795ef7",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "getoptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"value\": \"ipv4-addr\",\n      \"label\": \"Ipv4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41e8133e-f822-495f-947f-2df87ea2bd96",
+          "name": "Parse IOC",
+          "request": {
+            "name": "Parse IOC",
+            "description": {
+              "content": "Parse the IOCs provided by the user. Further, validate and categorize the IOCs as valid or invalid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "parse-ioc",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"values\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fc36feb-4a35-44ac-a814-42aa7e1e0836",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "parse-ioc",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ipv4-addr\",\n  \"values\": \"23.32.23.121 12.23.3.3\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid_ioc\": [\n    \"23.32.23.121\"\n  ],\n  \"invalid_ioc\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea578929-6d5f-4d46-b099-9da4ade300f9",
+          "name": "Add Third-Party Allowed Indicator to Ignored List",
+          "request": {
+            "name": "Add Third-Party Allowed Indicator to Ignored List",
+            "description": {
+              "content": "Add an indicator from the third-party allowed indicator repository to the third-party ignored indicator list in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "third_party_indicators",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59b45040-97d8-45b4-9ffd-b01b55a00a0c",
+              "name": "Indicator added to Third-Party Ignored Indicators List successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "third_party_indicators",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"id\": \"e1e7e5de-e902-4e01-93a6-090e19a28818\",\n    \"name\": \"Majestic_Million\"\n  },\n  \"type\": \"domain-name\",\n  \"value\": \"google.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b31e861-c199-4b5f-bde1-cf01539b5335",
+          "name": "Get Third-Party Ignored Indicators List",
+          "request": {
+            "name": "Get Third-Party Ignored Indicators List",
+            "description": {
+              "content": "Returns the third-party indicators added to the ignored list in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "third_party_indicators",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ignored",
+                  "value": "<string>",
+                  "description": "(Required) Pass true to list third-party ignored indicators in Intel Exchange."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the domain to search in the third-party ignored indicator list."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass the type of indicator to filter records."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of a user who added the indicators in the third-party allowed indicator list."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the created time in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the created time in epoch format."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bf45cdd-5471-466e-83f0-e2aadb4786df",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "third_party_indicators",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignored",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_refreshed\": \"1690761710\",\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"created\": \"2023-06-05T13:43:29.205251Z\",\n      \"created_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"John\",\n        \"id\": \"ff4843c4-1b36-4703-92e9-6b5d4b300f59\",\n        \"last_name\": \"\"\n      },\n      \"id\": \"ab2c26d0-ccc7-44df-b5bc-f68b96f4c3c0\",\n      \"is_removed\": \"0\",\n      \"modified\": \"2023-06-05T13:43:29.205251Z\",\n      \"modified_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"John\",\n        \"id\": \"ff4843c4-1b36-4703-92e9-6b5d4b300f59\",\n        \"last_name\": \"\"\n      },\n      \"source_name\": \"Majestic_Million\",\n      \"type\": \"domain-name\",\n      \"value\": \"7kanal.com\"\n    }\n  ],\n  \"total\": \"2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3934bb5-431e-451f-9a8e-aab80f44bb19",
+          "name": "Remove Indicator from Third-Party Ignored List",
+          "request": {
+            "name": "Remove Indicator from Third-Party Ignored List",
+            "description": {
+              "content": "Removes an indicator from the third-party ignored list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "third_party_indicators",
+                "bulk-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ignored",
+                  "value": "<string>",
+                  "description": "(Required) Pass true to remove an indicator from the third-party ignored indicator list."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7850c92-c477-4f9b-8d70-bb9eec856415",
+              "name": "Indicator removed from Third-Party Ignored Indicators List successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "third_party_indicators",
+                    "bulk-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignored",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"a7b0cdf1-86e8-406a-b12e-aaac7c7ce15b\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cd15a97-8205-4cf0-b4e9-db793d837b16",
+          "name": "Verify Allowed Indicators",
+          "request": {
+            "name": "Verify Allowed Indicators",
+            "description": {
+              "content": "Verify if an indicator is added to the allowed indicators list in the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "allowed_indicators",
+                "verify",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23958bc6-83ec-4c32-9baa-4bb7036338f7",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "allowed_indicators",
+                    "verify",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"https://sample-url.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_whitelisted\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ca92e61-7b18-4d08-b76a-4274075b5131",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Allowed Indicators API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

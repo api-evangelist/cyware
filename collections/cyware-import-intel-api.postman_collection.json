@@ -1,0 +1,225 @@
+{
+  "item": [
+    {
+      "id": "2231314e-9c70-4da1-a6bc-42e56add8bb6",
+      "name": "Import Intel",
+      "description": {
+        "content": "Import Intel",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b986cb36-4a2f-4934-907b-fae2da21189e",
+          "name": "Import Intel",
+          "request": {
+            "name": "Import Intel",
+            "description": {
+              "content": "Imports threat data to Intel Exchange.\n\nThe formats supported for import are as follows:\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\",\"155px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"72d731c7-ebb1-49cd-8c66-b61b425b73af\",\"title\":\"Format\"},{\"id\":\"be6d9056-f3f6-4e7e-9dec-81a55a8c377f\",\"title\":\"Value\"},{\"id\":\"5146e66f-e608-4d4c-b37f-fea0cf7e7f2a\",\"title\":\"Allowed File Type\"},{\"id\":\"c4796b75-42df-4055-ac0c-bdf2566f0608\",\"title\":\"Default Collection\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">MISP</p></table-cell>\n    <table-cell><p class=\"slate-p \">misp</p></table-cell>\n    <table-cell><p class=\"slate-p \">.json</p></table-cell>\n    <table-cell><p class=\"slate-p \">misp</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">Open IOC</p></table-cell>\n    <table-cell><p class=\"slate-p \">openioc</p></table-cell>\n    <table-cell><p class=\"slate-p \">.xml</p></table-cell>\n    <table-cell><p class=\"slate-p \">openioc</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">STIX 1.x</p></table-cell>\n    <table-cell><p class=\"slate-p \">stix1</p></table-cell>\n    <table-cell><p class=\"slate-p \">.xml</p></table-cell>\n    <table-cell><p class=\"slate-p \">.xml</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">STIX 2.1</p></table-cell>\n    <table-cell><p class=\"slate-p \">stix2</p></table-cell>\n    <table-cell><p class=\"slate-p \">.json</p></table-cell>\n    <table-cell><p class=\"slate-p \">Stix2</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">STIX 2.0</p></table-cell>\n    <table-cell><p class=\"slate-p \">stix20</p></table-cell>\n    <table-cell><p class=\"slate-p \">.json</p></table-cell>\n    <table-cell><p class=\"slate-p \">Stix2</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">STIX 1.x URL</p></table-cell>\n    <table-cell><p class=\"slate-p \">stix1url</p></table-cell>\n    <table-cell><p class=\"slate-p \">URL</p></table-cell>\n    <table-cell><p class=\"slate-p \">url</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">CSV (Recorded Future)</p></table-cell>\n    <table-cell><p class=\"slate-p \">csv-recorded-future</p></table-cell>\n    <table-cell><p class=\"slate-p \">.csv</p></table-cell>\n    <table-cell><p class=\"slate-p \">csv</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">CSV (Cyware)</p></table-cell>\n    <table-cell><p class=\"slate-p \">cy-csv</p></table-cell>\n    <table-cell><p class=\"slate-p \">.csv</p></table-cell>\n    <table-cell><p class=\"slate-p \">csv</p></table-cell>\n  </table-row>\n</Table>\n\nOptionally, you can specify a collection to which the file is imported. If no collection is specified, the data is imported to the default collection. To retrieve import collections, use the **Get Source Collections** endpoint.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>For STIX 1.x URL, the body must include the URL value. For more information, see the example request.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "import",
+                ":format",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "2.1",
+                  "description": "If the format (path variable) value is stix1 or stix2, enter the STIX version."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) Pass the format for the import. Refer to preceding table for more information."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "Select the file to be imported."
+                },
+                {
+                  "key": "collection_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Enter the ID of the collection to which the file is imported. To retrieve the `collection_id`, use the **Get Source Collections** endpoint. Data is imported to both the default collection as well as this specified collection."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e4e84ff-d36f-4a89-9d30-40f64b6b4fce",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "import",
+                    ":format",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "2.1"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Pass the format for the import. Refer to preceding table for more information."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Select the file to be imported.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "Enter the ID of the collection to which the file is imported. To retrieve the `collection_id`, use the **Get Source Collections** endpoint. Data is imported to both the default collection as well as this specified collection.",
+                        "type": "text/plain"
+                      },
+                      "key": "collection_id",
+                      "value": "603dd2cf-2c3e-4a6b-8200-505d3586df1f",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"You will be notified once file got uploaded.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1a66509-41e3-432f-b8bc-94f5f13863ec",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Import Intel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

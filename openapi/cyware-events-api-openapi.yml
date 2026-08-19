@@ -1,0 +1,903 @@
+openapi: 3.2.0
+info:
+  title: Cyware Orchestrate (CO) Open Events API
+  version: v1
+  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
+
+
+    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://orchestrateapi.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{co_host}/soarapi
+  description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+  variables:
+    co_host:
+      default: demo.cyware.com
+security:
+- coOpenApiSignature: []
+tags:
+- name: Events
+  description: Events
+paths:
+  /v1/webhooks/data-labels/:
+    post:
+      operationId: configureEvent
+      summary: Configure Trigger
+      tags:
+      - Events
+      description: Configure a trigger by passing the app identifier, action identifier, and labels through the payload.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/configure-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  type: array
+                  description: Pass the list of label names to add to the event.
+                  items:
+                    type: string
+                    description: Pass the label for the event. To view the list labels, sign into Orchestrate and go to Triggers > Labels.
+                    examples:
+                    - label 34
+                app_identifier:
+                  type: string
+                  description: Pass the source app of the event.
+                  examples:
+                  - CTIX
+                action_identifier:
+                  type: string
+                  description: Pass the event type. For example, phishing.
+                  examples:
+                  - ctix_submission
+              required:
+              - labels
+              - app_identifier
+              - action_identifier
+            example:
+              labels:
+              - label 34
+              app_identifier: CTIX
+              action_identifier: ctix_submission
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_identifier:
+                    type: string
+                    description: Returns the source app configured for the trigger.
+                    examples:
+                    - CTIX
+                  action_identifier:
+                    type: string
+                    description: Returns the event type configured for the event.
+                    examples:
+                    - ctix_submission
+                  labels:
+                    type: array
+                    description: Returns the list of label names associated with the event.
+                    items:
+                      type: string
+                      description: Returns the label name.
+                      examples:
+                      - V2.10
+                  labels_data:
+                    type: array
+                    description: Returns the details of the labels associated with the event
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: Returns the title of the label.
+                          examples:
+                          - V2.10
+                        unique_id:
+                          type: string
+                          description: Returns the unique ID of the label.
+                          examples:
+                          - 56f49626-ae27-4692-94d2-d373f49c7c7e
+                        color:
+                          type: string
+                          description: Returns the hex color code of the label.
+                          examples:
+                          - '#1060E7'
+                  unique_id:
+                    type: string
+                    description: Returns the unique ID that is generated dynamically for the event.
+                    examples:
+                    - 719033ad-5199-48b3-ba39-8d1da8b26272
+                  created:
+                    type: string
+                    description: Returns the date and time of when the event was configured.
+                    examples:
+                    - '2022-01-20T16:18:34.341673Z'
+                  modified:
+                    type: string
+                    description: Returns the modified date and time of the event.
+                    examples:
+                    - '2022-01-20T16:18:34.341673Z'
+                  created_by:
+                    type: string
+                    description: Returns the unique ID of the user who created the event.
+                    examples:
+                    - 0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab
+                  modified_by:
+                    type: object
+                    description: Returns the unique ID of the user who modified the event.
+                  created_by_data:
+                    type: object
+                    description: Returns the details of the user who created the event.
+                    properties:
+                      unique_id:
+                        type: string
+                        description: Returns the unique ID of the user who created the event.
+                        examples:
+                        - 094b1d3e-b7b3-4542-afd0-7612de3a320f
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the event.
+                        examples:
+                        - John
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the event.
+                        examples:
+                        - Doe
+                      full_name:
+                        type: string
+                        description: Returns the full name of the user who created the event.
+                        examples:
+                        - John Doe
+                  modified_by_data:
+                    type: object
+                    description: Returns the details of the user who modified the event.
+                  is_active:
+                    type: boolean
+                    description: Returns if the event is active or not.
+                    examples:
+                    - 'true'
+              example:
+                app_identifier: CTIX
+                action_identifier: ctix_submission
+                labels:
+                - V2.10
+                labels_data:
+                - title: V2.10
+                  unique_id: 56f49626-ae27-4692-94d2-d373f49c7c7e
+                  color: '#1060E7'
+                unique_id: 719033ad-5199-48b3-ba39-8d1da8b26272
+                created: '2022-01-20T16:18:34.341673Z'
+                modified: '2022-01-20T16:18:34.341673Z'
+                created_by: 0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab
+                modified_by: {}
+                created_by_data:
+                  unique_id: 094b1d3e-b7b3-4542-afd0-7612de3a320f
+                  first_name: John
+                  last_name: Doe
+                  full_name: John Doe
+                modified_by_data: {}
+                is_active: 'true'
+  /v2/events/:
+    post:
+      operationId: createEventV2
+      summary: Create Event (v2)
+      tags:
+      - Events
+      description: "Create an event by passing the app identifier, action identifier, and data through the payload. This endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>This API is available in Orchestrate v3.5.9 onwards.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/create-event-v2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass the title of the event.
+                  examples:
+                  - SourceEvent20/01/2022 01:30:14
+                app_identifier:
+                  type: string
+                  description: Pass a source app for the event.
+                  examples:
+                  - Test App Identifier
+                action_identifier:
+                  type: string
+                  description: Pass the event type.
+                  examples:
+                  - Test Action Identifier
+                extra_data:
+                  type: object
+                  description: Pass any extra data as key-value pairs with the event.
+                  properties:
+                    data:
+                      type: number
+                      description: Pass any extra data to be passed with the event.
+                      examples:
+                      - '123'
+                data:
+                  type: object
+                  description: Pass data as key-value pairs to include with the event.
+                  properties:
+                    data:
+                      type: number
+                      description: Pass data to include with the event.
+                      examples:
+                      - '1234'
+              required:
+              - title
+              - app_identifier
+              - action_identifier
+            example:
+              title: SourceEvent20/01/2022 01:30:14
+              app_identifier: Test App Identifier
+              action_identifier: Test Action Identifier
+              extra_data:
+                data: '123'
+              data:
+                data: '1234'
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: Returns the title of the event.
+                    examples:
+                    - intel_enrichment
+                  readable_id:
+                    type: string
+                    description: Returns the readable ID of the trigger event.
+                    examples:
+                    - TEfbb104ed-6
+                  unique_id:
+                    type: string
+                    description: Returns the unique ID generated dynamically for the event.
+                    examples:
+                    - fbb104ed-6704-4127-8898-f2f6aefe9fc1
+                  created:
+                    type: string
+                    description: Returns the date and time when the event was created.
+                    examples:
+                    - '2024-12-11T06:50:59.946589Z'
+                  source:
+                    type: string
+                    description: Returns the source through which the event is triggered.
+                    examples:
+                    - Openapi
+                  app_identifier:
+                    type: string
+                    description: Returns the source app associated with the event.
+                    examples:
+                    - CTIX
+                  action_identifier:
+                    type: string
+                    description: Returns the event type associated with the event.
+                    examples:
+                    - CTIX_submission
+              example:
+                title: intel_enrichment
+                readable_id: TEfbb104ed-6
+                unique_id: fbb104ed-6704-4127-8898-f2f6aefe9fc1
+                created: '2024-12-11T06:50:59.946589Z'
+                source: Openapi
+                app_identifier: CTIX
+                action_identifier: CTIX_submission
+  /v1/events/:
+    post:
+      operationId: createEvent
+      summary: Create Event
+      tags:
+      - Events
+      description: Create an event by passing the app identifier, action identifier, and data through the payload.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/create-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass the title of the event.
+                  examples:
+                  - SourceEvent20/01/2022 01:30:14
+                app_identifier:
+                  type: string
+                  description: Pass the source app for the event.
+                  examples:
+                  - Test App Identifier
+                action_identifier:
+                  type: string
+                  description: Pass the event type for the event.
+                  examples:
+                  - Test Action Identifier
+                extra_data:
+                  type: object
+                  description: Pass any extra data to be passed with the event.
+                  properties:
+                    data:
+                      type: number
+                      description: Pass the data to be passed with the event.
+                      examples:
+                      - '123'
+                data:
+                  type: object
+                  description: Pass the data in key-value pairs to be passed with the event.
+                  properties:
+                    data:
+                      type: number
+                      description: Pass the data to be passed with the event.
+                      examples:
+                      - '1234'
+              required:
+              - title
+              - app_identifier
+              - action_identifier
+            example:
+              title: SourceEvent20/01/2022 01:30:14
+              app_identifier: Test App Identifier
+              action_identifier: Test Action Identifier
+              extra_data:
+                data: '123'
+              data:
+                data: '1234'
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_identifier:
+                    type: string
+                    description: Returns the source app associated with the event.
+                    examples:
+                    - CTIX
+                  action_identifier:
+                    type: string
+                    description: Returns the event type associated with the event.
+                    examples:
+                    - CTIX_submission
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: number
+                        description: Returns the data passed to the event.
+                        examples:
+                        - '1234'
+                  extra_data:
+                    type: object
+                    description: Returns the extra data passed to the event.
+                    properties:
+                      data:
+                        type: number
+                        description: Returns the values passed as data to the events.
+                        examples:
+                        - '123'
+                  unique_id:
+                    type: string
+                    description: Returns the unique ID generated dynamically for the event.
+                    examples:
+                    - 2c7a4166-2fa1-4619-a5fe-41bb3de2e969
+                  created:
+                    type: string
+                    description: Returns the date and time when the event was created.
+                    examples:
+                    - '2022-01-20T10:06:26.171520Z'
+                  modified:
+                    type: string
+                    description: Returns the date and time when the event was last modified.
+                    examples:
+                    - '2022-01-20T10:06:26.171520Z'
+                  title:
+                    type: string
+                    description: Returns the title of the event.
+                    examples:
+                    - SourceEvent20/01/2022 01:30:14
+                  labels:
+                    type: array
+                    description: Returns the list of labels associated with the event.
+                    items: {}
+                  labels_data:
+                    type: array
+                    description: Returns the details of the label associated with the event.
+                    items: {}
+                  created_by:
+                    type: string
+                    description: Returns the unique ID of the user who created the tag.
+                    examples:
+                    - 0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab
+                  created_by_data:
+                    type: object
+                    description: Returns the details of the user who created the event.
+                    properties:
+                      unique_id:
+                        type: string
+                        description: Returns the unique ID of the user who created the event.
+                        examples:
+                        - 094b1d3e-b7b3-4542-afd0-7612de3a320f
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the event.
+                        examples:
+                        - John
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the event.
+                        examples:
+                        - Doe
+                      full_name:
+                        type: string
+                        description: Returns the full name of the user who created the event.
+                        examples:
+                        - John Doe
+                  processed:
+                    type: boolean
+                    description: Returns if the event is processed or not.
+                    examples:
+                    - 'false'
+                  execution_error:
+                    type: boolean
+                    description: Indicates if the event execution error occurred or not.
+                    examples:
+                    - 'false'
+                  source:
+                    type: string
+                    description: Returns the source through which the event was triggered.
+                    examples:
+                    - Openapi
+                  readable_id:
+                    type: string
+                    description: Returns the readable ID of the trigger event.
+                    examples:
+                    - TE8b96aae1-4
+                  splitted_columns:
+                    type: array
+                    description: Returns the list of fields that consist of large data. You can use the **Download Event Data** endpoint to download the large data files.
+                    items: {}
+              example:
+                app_identifier: CTIX
+                action_identifier: CTIX_submission
+                data:
+                  data: '1234'
+                extra_data:
+                  data: '123'
+                unique_id: 2c7a4166-2fa1-4619-a5fe-41bb3de2e969
+                created: '2022-01-20T10:06:26.171520Z'
+                modified: '2022-01-20T10:06:26.171520Z'
+                title: SourceEvent20/01/2022 01:30:14
+                labels: []
+                labels_data: []
+                created_by: 0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab
+                created_by_data:
+                  unique_id: 094b1d3e-b7b3-4542-afd0-7612de3a320f
+                  first_name: John
+                  last_name: Doe
+                  full_name: John Doe
+                processed: 'false'
+                execution_error: 'false'
+                source: Openapi
+                readable_id: TE8b96aae1-4
+                splitted_columns: []
+    get:
+      operationId: listSourceEvents
+      summary: Get Events
+      tags:
+      - Events
+      description: Returns the list of triggered events.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/list-source-events
+      parameters:
+      - name: title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the keyword to search for in the titles of triggered events.
+        description: Pass the keyword to search for in the titles of triggered events.
+      - name: app_identifier
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the source app to filter events based on the apps.
+        description: Pass the source app to filter events based on the apps.
+      - name: action_identifier
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the event type to filter events based on the type of the event.
+        description: Pass the event type to filter events based on the type of the event.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the keyword to search in title (event title), `app_identifier` (source app), `action_identifer` (event type) and `unique_id` (event ID).
+        description: Pass the keyword to search in title (event title), `app_identifier` (source app), `action_identifer` (event type) and `unique_id` (event ID).
+      - name: unique_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the unique ID of the event.
+        description: Pass the unique ID of the event.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve the source event list.
+          default: '1'
+          examples:
+          - '1'
+        description: Pass the page number to retrieve the source event list.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of items to retrieve per page.
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of items to retrieve per page.
+      - name: labels
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the label name to filter the results.
+        description: Pass the label name to filter the results.
+      - name: create__lte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Pass the custom date in Unix timestamp format. The list of source events modified earlier than the entered time will be returned. Example: *1655231399*.'
+        description: 'Pass the custom date in Unix timestamp format. The list of source events modified earlier than the entered time will be returned. Example: *1655231399*.'
+      - name: created__gte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Pass the custom date in Unix timestamp format. The list of source events modified after the entered time will be returned. Example: *1655145000*.'
+        description: 'Pass the custom date in Unix timestamp format. The list of source events modified after the entered time will be returned. Example: *1655145000*.'
+      - name: created
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the values for the time duration to view source events.
+          enum:
+          - last_week
+          - last_month
+          - last_year
+          examples:
+          - last_week
+        description: Pass the values for the time duration to view source events.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  link:
+                    type: object
+                    description: Returns the URL for the next and previous page.
+                    properties:
+                      next:
+                        type: string
+                        description: Returns the API endpoint to the next page.
+                        examples:
+                        - openapi/v1/events/?page=1&page_size=1&Expires={{expires}}&AccessID={{open_api_access_id}}&Signature={{signature}}
+                  count:
+                    type: number
+                    description: Returns the total count of the triggered events.
+                    examples:
+                    - '1'
+                  results:
+                    type: array
+                    description: Returns the list of the triggered events. Each object displays the details of one source event.
+                    items:
+                      type: object
+                      properties:
+                        readable_id:
+                          type: string
+                          description: Returns the readable ID to identify an event.
+                          examples:
+                          - TE3970854f-a
+                        created:
+                          type: string
+                          description: Returns the date and time when the triggered event was created.
+                          examples:
+                          - '2023-02-03T01:33:11.571459Z'
+                        unique_id:
+                          type: string
+                          description: Returns the unique ID of the triggered event.
+                          examples:
+                          - 3970854f-a9f5-4ed6-b214-7486a5de11a6
+                        title:
+                          type: string
+                          description: Returns the title of the event.
+                          examples:
+                          - SourceEvent03/02/2023 01:30:18
+                        labels:
+                          type: array
+                          description: Returns the label names associated with the events.
+                          items: {}
+                        labels_data:
+                          type: array
+                          description: Returns the details of the labels associated with the events.
+                          items: {}
+                        app_identifier:
+                          type: string
+                          description: Returns the source app of the event.
+                          examples:
+                          - App Identifier
+                        action_identifier:
+                          type: string
+                          description: Returns the event type configured for the event.
+                          examples:
+                          - Action Identifier
+                        processed:
+                          type: boolean
+                          description: Returns if the event is processed or not.
+                          examples:
+                          - 'false'
+                        execution_error:
+                          type: boolean
+                          description: Indicates if the event execution error occurred or not.
+                          examples:
+                          - 'false'
+                        source:
+                          type: string
+                          description: Returns the event source through which the event is triggered.
+                          examples:
+                          - Platform
+              example:
+                link:
+                  next: openapi/v1/events/?page=1&page_size=1&Expires={{expires}}&AccessID={{open_api_access_id}}&Signature={{signature}}
+                count: '1'
+                results:
+                - readable_id: TE3970854f-a
+                  created: '2023-02-03T01:33:11.571459Z'
+                  unique_id: 3970854f-a9f5-4ed6-b214-7486a5de11a6
+                  title: SourceEvent03/02/2023 01:30:18
+                  labels: []
+                  labels_data: []
+                  app_identifier: App Identifier
+                  action_identifier: Action Identifier
+                  processed: 'false'
+                  execution_error: 'false'
+                  source: Platform
+  /v1/events/export/{unique_id}/:
+    get:
+      operationId: eventDataDownlaod
+      summary: Download Event Data
+      tags:
+      - Events
+      description: Download large files from event data.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/event-data-downlaod
+      parameters:
+      - name: field
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the column name for which file will be generated. You can retrieve the column name in the `splitted_columns` field of the **Get Source Event Details** endpoint.
+        description: Pass the column name for which file will be generated. You can retrieve the column name in the `splitted_columns` field of the **Get Source Event Details** endpoint.
+      - name: unique_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of the event to download. You can retrieve the unique ID of the event using the **Get Source Events** endpoint.
+        description: Pass the unique ID of the event to download. You can retrieve the unique ID of the event using the **Get Source Events** endpoint.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_url:
+                    type: string
+                    description: Returns the URL of the file to download.
+                    examples:
+                    - https://server.com/csolbucket/qa/playbookresult/event-data-f593a083.json?response-content-disposition=attachment
+              example:
+                file_url: https://server.com/csolbucket/qa/playbookresult/event-data-f593a083.json?response-content-disposition=attachment
+  /v1/events/{event_unique_id}/:
+    get:
+      operationId: sourceEventDetails
+      summary: Get Event Details
+      tags:
+      - Events
+      description: Returns the details of a specific triggered event.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/events/source-event-details
+      parameters:
+      - name: event_unique_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the event ID to retrieve the details. You can retrieve the unique ID of an event using the **Get Source Event** endpoint.
+        description: Pass the event ID to retrieve the details. You can retrieve the unique ID of an event using the **Get Source Event** endpoint.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  readable_id:
+                    type: string
+                    description: Returns the human readable ID of the event.
+                    examples:
+                    - TE3970854f-a
+                  created:
+                    type: string
+                    description: Returns the date and time when the event was triggered.
+                    examples:
+                    - '2023-02-03T01:33:11.571459Z'
+                  unique_id:
+                    type: string
+                    description: Returns the unique ID of the event.
+                    examples:
+                    - 3970854f-a9f5-4ed6-b214-7486a5de11a6
+                  title:
+                    type: string
+                    description: Returns the title of the playbook.
+                    examples:
+                    - SourceEvent03/02/2023 01:30:18
+                  labels:
+                    type: array
+                    description: Returns the label names associated with trigger events.
+                    items: {}
+                  labels_data:
+                    type: array
+                    description: Returns the details of the labels associated with trigger events.
+                    items: {}
+                  app_identifier:
+                    type: string
+                    description: Returns the source app associated with the event.
+                    examples:
+                    - App Identifier
+                  action_identifier:
+                    type: string
+                    description: Returns event type associated with the event. For example, phishing.
+                    examples:
+                    - Action Identifier
+                  created_by:
+                    type: string
+                    description: Returns the unique ID of the user who created the event.
+                    examples:
+                    - 58ea8ed9-96c9-48a2-88e9-4ae7f4a738ca
+                  created_by_data:
+                    type: object
+                    description: Returns the details of the user who created the event.
+                    properties:
+                      unique_id:
+                        type: string
+                        description: Returns the unique ID of the user who created the event.
+                        examples:
+                        - bf62bdbe-c280-4882-b947-c750b31062fb
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the event.
+                        examples:
+                        - John
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the event.
+                        examples:
+                        - Doe
+                      full_name:
+                        type: string
+                        description: Returns the full name of the user who created the event.
+                        examples:
+                        - John Doe
+                  data:
+                    type: object
+                    description: Returns the data passed with the event.
+                    properties:
+                      x:
+                        type: string
+                        description: Returns the data passed with the event.
+                        examples:
+                        - value
+                  extra_data:
+                    type: object
+                    description: Returns the extra data passed with the event.
+                  processed:
+                    type: boolean
+                    description: Returns if the event is processed or not.
+                    examples:
+                    - 'false'
+                  execution_error:
+                    type: boolean
+                    description: Indicates if the event execution error occurred or not.
+                    examples:
+                    - 'false'
+                  source:
+                    type: string
+                    description: Returns the event source through which the event was triggered.
+                    examples:
+                    - Platform
+                  splitted_columns:
+                    type: array
+                    description: Returns the list of fields that consist of large data. You can use the **Download Event Data** endpoint to download the large data files.
+                    items: {}
+              example:
+                readable_id: TE3970854f-a
+                created: '2023-02-03T01:33:11.571459Z'
+                unique_id: 3970854f-a9f5-4ed6-b214-7486a5de11a6
+                title: SourceEvent03/02/2023 01:30:18
+                labels: []
+                labels_data: []
+                app_identifier: App Identifier
+                action_identifier: Action Identifier
+                created_by: 58ea8ed9-96c9-48a2-88e9-4ae7f4a738ca
+                created_by_data:
+                  unique_id: bf62bdbe-c280-4882-b947-c750b31062fb
+                  first_name: John
+                  last_name: Doe
+                  full_name: John Doe
+                data:
+                  x: value
+                extra_data: {}
+                processed: 'false'
+                execution_error: 'false'
+                source: Platform
+                splitted_columns: []
+components:
+  securitySchemes:
+    coOpenApiSignature:
+      type: apiKey
+      in: query
+      name: access_id
+      description: Orchestrate Open API credentials. Every request carries access_id, expires (epoch, current time + up to 30 seconds) and signature query parameters, where StringToSign = access_id + "\n" + expires and Signature = Base64(HMAC-SHA1(secret_key, StringToSign)). See https://orchestrateapi.cyware.com/authentication
+externalDocs:
+  description: Cyware Orchestrate API Reference
+  url: https://orchestrateapi.cyware.com/

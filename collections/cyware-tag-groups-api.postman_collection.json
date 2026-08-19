@@ -1,0 +1,327 @@
+{
+  "item": [
+    {
+      "id": "04d4137c-e034-4894-88c1-2a7974ddb588",
+      "name": "Tag Groups",
+      "description": {
+        "content": "Tag Groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb50fd7f-61da-4bed-b9c4-804c31b41729",
+          "name": "Disable Bulk Tag Group",
+          "request": {
+            "name": "Disable Bulk Tag Group",
+            "description": {
+              "content": "Disable multiple tag groups in a single request to deactivate them from use.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tags",
+                "bulk-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "component",
+                  "value": "<string>",
+                  "description": "Pass `tags` to include all the tags, irrespective of the status."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b0f13c5-5814-4e5b-8cce-fb98452e32b0",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tags",
+                    "bulk-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "component",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"1bcbd3e4-0e45-48a0-b87f-775051c7b363\"\n  ],\n  \"action\": \"disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"details\": \"Action Successfully Executed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "538f159d-86f7-4e91-8190-d60795ad662d",
+          "name": "Update Tag Group",
+          "request": {
+            "name": "Update Tag Group",
+            "description": {
+              "content": "Update all fields of an existing tag group with new values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tags",
+                ":tag_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_id",
+                  "description": "(Required) Pass the ID of a tag group to retrieve the details."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"tag_type\": \"group\",\n  \"associated_tags\": [\n    {\n      \"colour_code\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"tag_type\": \"<string>\",\n      \"theme\": \"<string>\"\n    },\n    {\n      \"colour_code\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"tag_type\": \"<string>\",\n      \"theme\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"is_active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25f40a52-57ba-4953-8450-ea635399e611",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tags",
+                    ":tag_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_id",
+                      "description": "(Required) Pass the ID of a tag group to retrieve the details."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"AS Group\",\n  \"description\": \"Ransomware AS Check\",\n  \"tag_type\": {\n    \"id\": \"group\",\n    \"name\": \"Group\"\n  },\n  \"associated_tags\": [\n    {\n      \"colour_code\": \"#45505E\",\n      \"icon\": null,\n      \"id\": \"96031982-fe29-462b-9ab6-5e278a62e281\",\n      \"name\": \"AS57333\",\n      \"tag_type\": \"source\",\n      \"theme\": \"neutral\"\n    }\n  ],\n  \"is_active\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8b523365-34c3-49d6-890a-e8015b927d45\",\n  \"name\": \"AS Group\",\n  \"colour_code\": \"#DCDEE4\",\n  \"created\": 1760440627,\n  \"created_by\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n  \"modified_by\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n  \"modified\": 1760511178,\n  \"tag_type\": {\n    \"id\": \"group\",\n    \"name\": \"Group\"\n  },\n  \"is_active\": true,\n  \"groups\": [],\n  \"description\": \"Ransomware AS Check\",\n  \"theme\": \"white\",\n  \"icon\": \"cyicon-tags-solid\",\n  \"associated_tags_count\": 1,\n  \"associated_tags\": [\n    {\n      \"id\": \"96031982-fe29-462b-9ab6-5e278a62e281\",\n      \"name\": \"ASN/AS57333\",\n      \"tag_type\": \"source\",\n      \"colour_code\": \"#45505E\",\n      \"theme\": \"neutral\",\n      \"icon\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8de68950-04d2-4959-ac59-3040feb98441",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Tag Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

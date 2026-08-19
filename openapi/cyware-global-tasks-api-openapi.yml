@@ -1,0 +1,1071 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Global Tasks API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Global Tasks
+  description: Global Tasks
+paths:
+  /ingestion/tasks/bulk-action/add_task/:
+    post:
+      operationId: createTaskInMultipleObjects
+      summary: Create Task in Multiple Objects
+      tags:
+      - Global Tasks
+      description: Creates a task in multiple threat data objects.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/create-task-in-multiple-objects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                object_type:
+                  type: string
+                  description: Pass the type of the threat data object such as indicator, malware, vulnerability, and more.
+                  examples:
+                  - indicator
+                object_ids:
+                  type: array
+                  description: Pass a list of threat data object IDs to associate with the task.
+                  items:
+                    type: string
+                    description: This is an example object ID.
+                    examples:
+                    - e536dc79-9d34-4944-855a-64f832568b8c
+                data:
+                  type: object
+                  description: Pass the data associated with the task.
+                  properties:
+                    priority:
+                      type: string
+                      description: Pass the priority of the task.
+                      enum:
+                      - high
+                      - medium
+                      - low
+                      default: medium
+                      examples:
+                      - medium
+                    status:
+                      type: string
+                      description: Pass the status of the task.
+                      enum:
+                      - not_started
+                      - in_progress
+                      - completed
+                      default: not_started
+                      examples:
+                      - in_progress
+                    text:
+                      type: string
+                      description: Pass the description of the task to be performed.
+                      examples:
+                      - task description
+                    assignee:
+                      type: string
+                      description: Pass the ID of a user to assign the task.
+                      examples:
+                      - 58a66a94-fe9b-4928-ba44-d38fda6f06f3
+              required:
+              - object_type
+              - object_ids
+              - data
+            example:
+              object_type: indicator
+              object_ids:
+              - e536dc79-9d34-4944-855a-64f832568b8c
+              data:
+                priority: medium
+                status: in_progress
+                text: task description
+                assignee: 58a66a94-fe9b-4928-ba44-d38fda6f06f3
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: Returns a success or failure message.
+                    examples:
+                    - Action Successfully Executed
+              example:
+                result: Action Successfully Executed
+      x-alternate-documents:
+      - title: Create Task in Multiple Objects
+        operationId: threatDataObjectsTasksCreateTaskInMultipleObjects
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/create-task-in-multiple-objects
+  /ingestion/tasks/:
+    post:
+      operationId: createTask
+      summary: Create Task
+      tags:
+      - Global Tasks
+      description: Creates a task for a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/create-task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Pass the description of the task to be performed.
+                  examples:
+                  - Verify this indicator!
+                priority:
+                  type: string
+                  description: Pass the priority of the task.
+                  enum:
+                  - high
+                  - medium
+                  - low
+                  default: medium
+                  examples:
+                  - high
+                status:
+                  type: string
+                  description: Pass the status of the task.
+                  enum:
+                  - not_started
+                  - in_progress
+                  - completed
+                  default: not_started
+                  examples:
+                  - not_started
+                type:
+                  type: string
+                  description: 'Pass the type of the threat data object. For example: *indicator*, *malware*, *vulnerability*, *campaign*, and more.'
+                  examples:
+                  - indicator
+                object_id:
+                  type: string
+                  description: Pass the ID of the threat data object to associate the task.
+                  examples:
+                  - 92686150-58e5-4f15-be64-f3e123efd825
+                deadline:
+                  type: number
+                  description: Pass the deadline of the task.
+                  examples:
+                  - '1633393469'
+                assignee:
+                  type: string
+                  description: Pass the ID of a user to assign the task.
+                  examples:
+                  - 58a66a94-fe9b-4928-ba44-d38fda6f06f3
+              required:
+              - text
+              - assignee
+            example:
+              text: Verify this indicator!
+              priority: high
+              status: not_started
+              type: indicator
+              object_id: 92686150-58e5-4f15-be64-f3e123efd825
+              deadline: '1633393469'
+              assignee: 58a66a94-fe9b-4928-ba44-d38fda6f06f3
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the task.
+                    examples:
+                    - 0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a
+                  created:
+                    type: number
+                    description: Returns the date of creation of the task.
+                    examples:
+                    - '1630394661'
+                  modified:
+                    type: number
+                    description: Returns the date the task was modified.
+                    examples:
+                    - '1630394661'
+                  created_by:
+                    type: string
+                    description: Returns the user who created the task.
+                    examples:
+                    - (unknown)
+                  assignee:
+                    type: string
+                    description: Returns the assignee of the task.
+                    examples:
+                    - 5555f14c-6130-4e58-a2da-33e1a85b5a64
+                  text:
+                    type: string
+                    description: Returns the text or description of the task.
+                    examples:
+                    - Verify this indicator!
+                  priority:
+                    type: string
+                    description: Returns the priority of the task.
+                    examples:
+                    - high
+                  status:
+                    type: string
+                    description: Returns the status of the task.
+                    enum:
+                    - not started
+                    - progress
+                    - completed
+                  deadline:
+                    type: number
+                    description: Returns the deadline of the task.
+                    examples:
+                    - '1633393469'
+                  closure_comment:
+                    type: object
+                    description: Returns any comments that are added while marking the task as complete.
+                  completed_on:
+                    type: object
+                    description: Returns the date of completion of the task.
+                  type:
+                    type: string
+                    description: Returns the type of threat data object that is associated with the task.
+                    examples:
+                    - indicator
+                  object_id:
+                    type: string
+                    description: Returns the object id associated with the task.
+                    examples:
+                    - 92686150-58e5-4f15-be64-f3e123efd825
+                  is_removed:
+                    type: number
+                    description: Returns 1 if the task is marked as removed; otherwise, 0.
+                    examples:
+                    - '0'
+              example:
+                id: 0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a
+                created: '1630394661'
+                modified: '1630394661'
+                created_by: (unknown)
+                assignee: 5555f14c-6130-4e58-a2da-33e1a85b5a64
+                text: Verify this indicator!
+                priority: high
+                status: ''
+                deadline: '1633393469'
+                closure_comment: {}
+                completed_on: {}
+                type: indicator
+                object_id: 92686150-58e5-4f15-be64-f3e123efd825
+                is_removed: '0'
+      x-alternate-documents:
+      - title: Create Task in Threat Data Object
+        operationId: createTaskInThreatDataObject
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/create-task-in-threat-data-object
+    get:
+      operationId: listTasks
+      summary: Get Tasks List
+      tags:
+      - Global Tasks
+      description: Returns a list of global tasks.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/list-tasks
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve tasks.
+          default: '1'
+          examples:
+          - '1'
+        description: Pass the page number to retrieve tasks.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: priority
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the priority to filter tasks.
+          examples:
+          - medium
+        description: Pass the priority to filter tasks.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the status to filter tasks.
+          examples:
+          - not_started
+        description: Pass the status to filter tasks.
+      - name: assignee
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of a user to filter tasks by the assigned user.
+          examples:
+          - ed213e1e-fa2b-476e-8778-4d4c61722494
+        description: Pass the ID of a user to filter tasks by the assigned user.
+      - name: deadline_gte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the start date of the task deadline in epoch format to filter tasks.
+          examples:
+          - '1623393469'
+        description: Pass the start date of the task deadline in epoch format to filter tasks.
+      - name: deadline_lte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the end date of the task deadline in epoch format to filter tasks.
+          examples:
+          - '1623393469'
+        description: Pass the end date of the task deadline in epoch format to filter tasks.
+      - name: created_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of a user to filter tasks by the user who created the task.
+          examples:
+          - 0eea7e23-9670-4c5f-9742-2666ddf0be74
+        description: Pass the ID of a user to filter tasks by the user who created the task.
+      - name: object_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of a threat data object.
+          examples:
+          - 617784ab-7680-4a34-ad66-9221128847c0
+        description: Pass the ID of a threat data object.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    description: Returns a response object containing task details.
+                    properties:
+                      next:
+                        type: string
+                        description: Returns the pagination link to the next page.
+                        examples:
+                        - http://localhost:9090/ingestion/tasks/?object_id=00018ede-2695-4fa1-b253-56374f18bca8&page=2&page_size=2
+                      previous:
+                        type: object
+                        description: Returns the pagination link to the previous page.
+                      results:
+                        type: array
+                        description: Returns the list of tasks.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the ID of the task.
+                              examples:
+                              - 97252ad5-f82c-49af-ae23-9542f8b3a7ff
+                            created_by:
+                              type: object
+                              description: Returns the details of the user who created the task.
+                              properties:
+                                id:
+                                  type: string
+                                  description: Returns the ID of the user who created the report.
+                                  examples:
+                                  - ca9ab3e8-a588-4f00-a1a6-e9a7af50da19
+                                first_name:
+                                  type: string
+                                  description: Returns the first name of the user who created the report.
+                                  examples:
+                                  - System
+                                last_name:
+                                  type: string
+                                  description: Returns the last name of the user who created the report
+                                  examples:
+                                  - user
+                                email:
+                                  type: string
+                                  description: Returns the email address of the user who created the report.
+                                  examples:
+                                  - system@user.com
+                            assignee:
+                              type: object
+                              description: Returns the details of the assigned user of the task.
+                            created:
+                              type: string
+                              description: Returns the date of creation of the task.
+                              examples:
+                              - '2021-06-11T06:34:28.139837Z'
+                            modified:
+                              type: string
+                              description: Returns the date the task was modified.
+                              examples:
+                              - '2021-06-11T06:34:28.139837Z'
+                            text:
+                              type: string
+                              description: Returns the text or description of the task.
+                              examples:
+                              - My New Tasks for a malware
+                            priority:
+                              type: string
+                              description: Returns the priority of the task.
+                              examples:
+                              - high
+                            status:
+                              type: string
+                              description: Returns the status of the task. Status can be in Progress, not started, or completed.
+                              examples:
+                              - not_started
+                            deadline:
+                              type: object
+                              description: Returns the deadline of the task.
+                            closure_comment:
+                              type: object
+                              description: Returns any comments that are added while marking the task as complete.
+                            type:
+                              type: string
+                              description: Returns the type of threat data object that is associated with the task.
+                              examples:
+                              - malware
+                            object_id:
+                              type: string
+                              description: Returns the threat data object ID associated with the task.
+                              examples:
+                              - 00018ede-2695-4fa1-b253-56374f18bca8
+                            is_removed:
+                              type: number
+                              description: Returns 1 if the task is marked as removed; otherwise, 0.
+                              examples:
+                              - 0
+              example:
+                results:
+                  next: http://localhost:9090/ingestion/tasks/?object_id=00018ede-2695-4fa1-b253-56374f18bca8&page=2&page_size=2
+                  previous: {}
+                  results:
+                  - id: 97252ad5-f82c-49af-ae23-9542f8b3a7ff
+                    created_by:
+                      id: ca9ab3e8-a588-4f00-a1a6-e9a7af50da19
+                      first_name: System
+                      last_name: user
+                      email: system@user.com
+                    assignee: {}
+                    created: '2021-06-11T06:34:28.139837Z'
+                    modified: '2021-06-11T06:34:28.139837Z'
+                    text: My New Tasks for a malware
+                    priority: high
+                    status: not_started
+                    deadline: {}
+                    closure_comment: {}
+                    type: malware
+                    object_id: 00018ede-2695-4fa1-b253-56374f18bca8
+                    is_removed: 0
+      x-alternate-documents:
+      - title: Get Tasks List in Threat Data Object
+        operationId: listTasksInThreatDataObject
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/list-tasks-in-threat-data-object
+  /ingestion/tasks/{task_id}/:
+    delete:
+      operationId: deleteTask
+      summary: Delete Task
+      tags:
+      - Global Tasks
+      description: Deletes a task from the Intel Exchange platform.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/delete-task
+      parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique identifier of a task to delete.
+          examples:
+          - 0eea7e23-9670-4c5f-9742-2666ddf0be74
+        description: Pass the unique identifier of a task to delete.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: Returns a success or failure message.
+                    examples:
+                    - success
+              example:
+                result: success
+      x-alternate-documents:
+      - title: Delete Task
+        operationId: threatDataObjectsTasksDeleteTask
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/delete-task
+    get:
+      operationId: taskDetails1
+      summary: Get Task Details
+      tags:
+      - Global Tasks
+      description: Returns the details of a task.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/task-details-1
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a task to retrieve the details.
+          examples:
+          - 9521e4ca-783d-4047-b092-7ae09a6ded36
+        description: Pass the unique ID of a task to retrieve the details.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the task.
+                    examples:
+                    - 9521e4ca-783d-4047-b092-7ae09a6ded36
+                  created_by:
+                    type: object
+                    description: Returns the details of the user who created the task.
+                    properties:
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the report.
+                        examples:
+                        - ca9ab3e8-a588-4f00-a1a6-e9a7af50da19
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the report.
+                        examples:
+                        - System
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the report.
+                        examples:
+                        - user
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the report.
+                        examples:
+                        - system@user.com
+                  assignee:
+                    type: object
+                    description: Returns the details of the assigned user of the task.
+                  created:
+                    type: string
+                    description: Returns the date of creation of the task.
+                    examples:
+                    - '2021-06-11T06:38:44.476099Z'
+                  modified:
+                    type: string
+                    description: Returns the date the task was modified.
+                    examples:
+                    - '2021-06-11T06:38:44.476099Z'
+                  text:
+                    type: string
+                    description: Returns the text or description of the task.
+                    examples:
+                    - for a malware
+                  priority:
+                    type: string
+                    description: Returns the priority of the task.
+                    examples:
+                    - high
+                  status:
+                    type: string
+                    description: Returns the status of the task. Status can be in Progress, not started, or completed.
+                    examples:
+                    - not_started
+                  deadline:
+                    type: string
+                    description: Returns the deadline of the task.
+                    examples:
+                    - '2021-06-11T06:37:49.352067Z'
+                  closure_comment:
+                    type: object
+                    description: Returns any comments that are added while marking the task as complete.
+                  type:
+                    type: string
+                    description: Returns the type of threat data object that is associated with the task.
+                    examples:
+                    - malware
+                  object_id:
+                    type: string
+                    description: Returns the threat data object ID associated with the task.
+                    examples:
+                    - 00018ede-2695-4fa1-b253-56374f18bca8
+                  is_removed:
+                    type: number
+                    description: Returns 1 if the task is marked as removed; otherwise, 0.
+                    examples:
+                    - 0
+              example:
+                id: 9521e4ca-783d-4047-b092-7ae09a6ded36
+                created_by:
+                  id: ca9ab3e8-a588-4f00-a1a6-e9a7af50da19
+                  first_name: System
+                  last_name: user
+                  email: system@user.com
+                assignee: {}
+                created: '2021-06-11T06:38:44.476099Z'
+                modified: '2021-06-11T06:38:44.476099Z'
+                text: for a malware
+                priority: high
+                status: not_started
+                deadline: '2021-06-11T06:37:49.352067Z'
+                closure_comment: {}
+                type: malware
+                object_id: 00018ede-2695-4fa1-b253-56374f18bca8
+                is_removed: 0
+      x-alternate-documents:
+      - title: Get Task Details
+        operationId: taskDetails
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/task-details
+    put:
+      operationId: updateTask
+      summary: Update Task
+      tags:
+      - Global Tasks
+      description: Updates the details of a task.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/update-task
+      parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique identifier of a task to update the details.
+          examples:
+          - c838ad2b-af11-4a32-9e45-088f2e7d55c6
+        description: Pass the unique identifier of a task to update the details.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created:
+                  type: number
+                  description: Pass the epoch time of the last created date.
+                  examples:
+                  - '1630394661'
+                modified:
+                  type: number
+                  description: Pass the epoch time of the last modified date.
+                  examples:
+                  - '1630394661'
+                created_by:
+                  type: string
+                  description: Pass the details of the user who created the report.
+                  examples:
+                  - 0eea7e23-9670-4c5f-9742-2666ddf0be74
+                assignee:
+                  type: string
+                  description: Pass the ID of a user to assign the task.
+                  examples:
+                  - 0eea7e23-9670-4c5f-9742-2666ddf0be74
+                text:
+                  type: string
+                  description: Pass the description of the task to be performed.
+                  examples:
+                  - Verify this indicator!
+                priority:
+                  type: string
+                  description: Pass the priority of the task.
+                  enum:
+                  - high
+                  - medium
+                  - low
+                  default: medium
+                  examples:
+                  - high
+                status:
+                  type: string
+                  description: Pass the status of the task.
+                  enum:
+                  - not_started
+                  - in_progress
+                  - completed
+                  default: not_started
+                  examples:
+                  - not_started
+                deadline:
+                  type: number
+                  description: Pass the deadline information.
+                  examples:
+                  - '1633393469'
+                closure_comment:
+                  type: object
+                  description: Pass the comment to close the task.
+                completed_on:
+                  type: object
+                  description: Pass the date of completion of the task.
+                type:
+                  type: string
+                  description: 'Pass the type of the threat data object. For example: *indicator*, *malware*, *vulnerability*, *campaign*, and more.'
+                  examples:
+                  - indicator
+                object_id:
+                  type: string
+                  description: Pass the ID of the threat data object to associate the task.
+                  examples:
+                  - 92686150-58e5-4f15-be64-f3e123efd825
+              required:
+              - assignee
+            example:
+              created: '1630394661'
+              modified: '1630394661'
+              created_by: 0eea7e23-9670-4c5f-9742-2666ddf0be74
+              assignee: 0eea7e23-9670-4c5f-9742-2666ddf0be74
+              text: Verify this indicator!
+              priority: high
+              status: not_started
+              deadline: '1633393469'
+              closure_comment: {}
+              completed_on: {}
+              type: indicator
+              object_id: 92686150-58e5-4f15-be64-f3e123efd825
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the task.
+                    examples:
+                    - 0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a
+                  created:
+                    type: number
+                    description: Returns the date of creation of the task.
+                    examples:
+                    - '1630394661'
+                  modified:
+                    type: number
+                    description: Returns the date the task was modified.
+                    examples:
+                    - '1630394817'
+                  created_by:
+                    type: string
+                    description: Returns the user who created the task.
+                    examples:
+                    - (unknown)
+                  assignee:
+                    type: string
+                    description: Returns the assignee of the task.
+                    examples:
+                    - 5555f14c-6130-4e58-a2da-33e1a85b5a64
+                  text:
+                    type: string
+                    description: Returns the text or description of the task.
+                    examples:
+                    - Verify this indicator!
+                  priority:
+                    type: string
+                    description: Returns the priority of the task.
+                    examples:
+                    - high
+                  status:
+                    type: string
+                    description: Returns the status of the task.
+                    enum:
+                    - not_started
+                    - in_progress
+                    - completed
+                    examples:
+                    - not_started
+                  deadline:
+                    type: number
+                    description: Returns the deadline of the task.
+                    examples:
+                    - '1633393469'
+                  closure_comment:
+                    type: object
+                    description: Returns any comments that are added while marking the task as complete.
+                  completed_on:
+                    type: object
+                    description: Returns the date of completion of the task.
+                  type:
+                    type: string
+                    description: Returns the type of threat data object that is associated with the task.
+                    examples:
+                    - indicator
+                  object_id:
+                    type: string
+                    description: Returns the ID of the threat data object to associate the task.
+                    examples:
+                    - 92686150-58e5-4f15-be64-f3e123efd825
+                  is_removed:
+                    type: number
+                    description: Returns 1 if the task is marked as removed; otherwise, 0.
+                    examples:
+                    - '0'
+              example:
+                id: 0434c6f6-fa28-4d5f-9e0d-d3f4c1ffcb5a
+                created: '1630394661'
+                modified: '1630394817'
+                created_by: (unknown)
+                assignee: 5555f14c-6130-4e58-a2da-33e1a85b5a64
+                text: Verify this indicator!
+                priority: high
+                status: not_started
+                deadline: '1633393469'
+                closure_comment: {}
+                completed_on: {}
+                type: indicator
+                object_id: 92686150-58e5-4f15-be64-f3e123efd825
+                is_removed: '0'
+      x-alternate-documents:
+      - title: Update Task
+        operationId: threatDataObjectsTasksUpdateTask
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/update-task
+  /ingestion/tasks/stats/:
+    get:
+      operationId: taskOverviewInThreatDataObject1
+      summary: Get Task Overview in Threat Data Object
+      tags:
+      - Global Tasks
+      description: Returns an overview of the tasks created for a threat data object.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/global-tasks/task-overview-in-threat-data-object-1
+      parameters:
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of an object to retrieve an overview of the associated tasks.
+          examples:
+          - <id>
+        description: Pass the ID of an object to retrieve an overview of the associated tasks.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass an object type associated with the tasks.
+          examples:
+          - indicator
+        description: Pass an object type associated with the tasks.
+      - name: priority
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the priority of the tasks.
+          enum:
+          - high
+          - medium
+          - low
+          examples:
+          - medium
+        description: Pass the priority of the tasks.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the status of the tasks.
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          examples:
+          - in_progress
+        description: Pass the status of the tasks.
+      - name: created_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of a user who created the tasks.
+          examples:
+          - 0eea7e23-9670-4c5f-9742-2666ddf0be74
+        description: Pass the ID of a user who created the tasks.
+      - name: assignee
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of the assigned user of the tasks.
+          examples:
+          - ed213e1e-fa2b-476e-8778-4d4c61722494
+        description: Pass the ID of the assigned user of the tasks.
+      - name: deadline_gte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the start date of the task deadline in epoch format to filter tasks.
+          examples:
+          - '1623393469'
+        description: Pass the start date of the task deadline in epoch format to filter tasks.
+      - name: deadline_lte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the end date of the task deadline in epoch format to filter tasks.
+          examples:
+          - '1633393469'
+        description: Pass the end date of the task deadline in epoch format to filter tasks.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the search text to search for a task type.
+          examples:
+          - indicator
+        description: Pass the search text to search for a task type.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns the statistics of tasks that are `not_started`, `in_progress`, `completed`, assigned to the user, and high priority but in `not_started` state.
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          description: Returns the key associated with the task state name.
+                          examples:
+                          - not_started
+                        name:
+                          type: string
+                          description: Returns the state of the task.
+                          examples:
+                          - Not Started
+                        count:
+                          type: number
+                          description: Returns the number of tasks associated with a state.
+                          examples:
+                          - 3
+              example:
+                results:
+                - key: not_started
+                  name: Not Started
+                  count: 3
+      x-alternate-documents:
+      - title: Get Task Overview in Threat Data Object
+        operationId: taskOverviewInThreatDataObject
+        url: https://ctixapiv3.cyware.com/threat-data-objects/tasks/task-overview-in-threat-data-object
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

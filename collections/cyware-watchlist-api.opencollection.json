@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Watchlist API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watchlist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Watchlist Keywords List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/watchlist/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve watchlist keywords."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of keywords to retrieve on each page."
+              },
+              {
+                "name": "last_active_on_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active from time in epoch format."
+              },
+              {
+                "name": "last_active_on_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active to time in epoch format."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve active keywords only. By default, both active and inactive keywords are retrieved."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created from time in epoch format."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created to time in epoch format."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a creator to filter keywords."
+              }
+            ]
+          },
+          "docs": "Returns a list of keywords from the watchlist."
+        },
+        {
+          "info": {
+            "name": "Add Keyword to Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/watchlist/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a keyword to the watchlist."
+        },
+        {
+          "info": {
+            "name": "Update Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/watchlist/:watchlist_id/",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the watchlist keyword to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a keyword in the watchlist."
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/watchlist/:watchlist_id/",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the watchlist keyword to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a keyword from the watchlist."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist Feeds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/watchlist/:watchlist_id/feeds/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve feeds."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of feeds to retrieve on each page."
+              },
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the watchlist for which we are receiving feeds."
+              }
+            ]
+          },
+          "docs": "Returns the occurrence details of a watchlist keyword."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

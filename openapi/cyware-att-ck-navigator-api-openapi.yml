@@ -1,0 +1,1419 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open ATT&CK Navigator API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: ATT&CK Navigator
+  description: ATT&CK Navigator
+paths:
+  /ingestion/attack-navigator/attack-layer/{layer_id}/:
+    get:
+      operationId: attAndCkLayerDetails
+      summary: Get ATT&CK Layer Details
+      tags:
+      - ATT&CK Navigator
+      description: Returns the details of a custom ATT&CK layer.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/att-and-ck-layer/att-and-ck-layer-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: layer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique identifier of attack layer.
+          examples:
+          - de4261a1-5c27-4dae-b1a7-e00b9389f188
+        description: Pass the unique identifier of attack layer.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created_by:
+                    type: object
+                    description: Returns the details of the creator of the custom layer.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the report.
+                        examples:
+                        - localsystem@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the report.
+                        examples:
+                        - local
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the report.
+                        examples:
+                        - 04e46a4a-6618-42b5-a6da-ee280d103e1e
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the report.
+                        examples:
+                        - system
+                  description:
+                    type: string
+                    description: Returns the description of the ATT&CK layer.
+                    examples:
+                    - attack layer
+                  domain:
+                    type: string
+                    description: Returns the ATT&CK domain of a layer.
+                    examples:
+                    - enterprise
+                  editable:
+                    type: boolean
+                    description: Returns true if the ATT&CK layer is editable by you, else returns false.
+                    examples:
+                    - 'true'
+                  id:
+                    type: string
+                    description: Returns the unique ID of the ATT&CK layer.
+                    examples:
+                    - de4261a1-5c27-4dae-b1a7-e00b9389f188
+                  layout:
+                    type: object
+                    description: Returns the layout configuration of the layer.
+                  pinned:
+                    type: boolean
+                    description: Returns true if the ATT&CK layer is pinned, else returns false.
+                    examples:
+                    - 'true'
+                  shared_type:
+                    type: string
+                    description: Returns the type of sharing permissions.
+                    examples:
+                    - private
+                  shared_users:
+                    type: array
+                    description: Returns the list of email addresses that are listed under shared users.
+                    items: {}
+                  title:
+                    type: string
+                    description: Returns the title of the ATT&CK layer.
+                    examples:
+                    - attack layer
+              example:
+                created_by:
+                  email: localsystem@cyware.com
+                  first_name: local
+                  id: 04e46a4a-6618-42b5-a6da-ee280d103e1e
+                  last_name: system
+                description: attack layer
+                domain: enterprise
+                editable: 'true'
+                id: de4261a1-5c27-4dae-b1a7-e00b9389f188
+                layout: {}
+                pinned: 'true'
+                shared_type: private
+                shared_users: []
+                title: attack layer
+  /ingestion/attack-navigator/attack-layer/:
+    get:
+      operationId: listAttAndCkLayers
+      summary: Get ATT&CK Layers List
+      tags:
+      - ATT&CK Navigator
+      description: Returns a list of custom ATT&CK layers.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/att-and-ck-layer/list-att-and-ck-layers
+      parameters:
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ATT&CK domain.
+          enum:
+          - enterprise
+          - mobile
+          default: enterprise
+          examples:
+          - mobile
+        description: Pass the ATT&CK domain.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a query text to search layers based on the title.
+          examples:
+          - mitre
+        description: Pass a query text to search layers based on the title.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link to the next page. Returns null in case it is the last page.
+                  page_size:
+                    type: number
+                    description: Returns the number of records displayed per page.
+                    examples:
+                    - '10'
+                  previous:
+                    type: object
+                    description: Returns the link to the previous page. Returns null in case it is the first page.
+                  results:
+                    type: array
+                    description: Returns the list of custom ATT&CK layers.
+                    items:
+                      type: object
+                      properties:
+                        created_by:
+                          type: object
+                          description: Returns the user information.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address of the user who created the report.
+                              examples:
+                              - localsystem@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who created the report.
+                              examples:
+                              - local
+                            id:
+                              type: string
+                              description: Returns the ID of the user who created the report.
+                              examples:
+                              - 04e46a4a-6618-42b5-a6da-ee280d103e1e
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who created the report.
+                              examples:
+                              - system
+                        description:
+                          type: string
+                          description: Returns the description of the ATT&CK layer.
+                          examples:
+                          - attack layer
+                        domain:
+                          type: string
+                          description: Returns the ATT&CK domain of a layer.
+                          examples:
+                          - enterprise
+                        editable:
+                          type: boolean
+                          description: Returns true if the ATT&CK layer is editable by you, else returns false.
+                          examples:
+                          - 'true'
+                        id:
+                          type: string
+                          description: Returns the unique ID of the ATT&CK layer.
+                          examples:
+                          - de4261a1-5c27-4dae-b1a7-e00b9389f188
+                        layout:
+                          type: object
+                          description: Returns the layout configuration of the layer.
+                        pinned:
+                          type: boolean
+                          description: Returns true if the ATT&CK layer is pinned, else returns false.
+                          examples:
+                          - 'true'
+                        shared_type:
+                          type: string
+                          description: Returns the type of sharing permissions.
+                          examples:
+                          - private
+                        shared_users:
+                          type: array
+                          description: Returns the list of email addresses that are listed under shared users.
+                          items: {}
+                        title:
+                          type: string
+                          description: Returns the title of the ATT&CK layer.
+                          examples:
+                          - attack layer
+                  total:
+                    type: number
+                    description: Returns the total number of records the API returns.
+                    examples:
+                    - '1'
+              example:
+                next: {}
+                page_size: '10'
+                previous: {}
+                results:
+                - created_by:
+                    email: localsystem@cyware.com
+                    first_name: local
+                    id: 04e46a4a-6618-42b5-a6da-ee280d103e1e
+                    last_name: system
+                  description: attack layer
+                  domain: enterprise
+                  editable: 'true'
+                  id: de4261a1-5c27-4dae-b1a7-e00b9389f188
+                  layout: {}
+                  pinned: 'true'
+                  shared_type: private
+                  shared_users: []
+                  title: attack layer
+                total: '1'
+  /ingestion/attack-navigator/{filter}/:
+    get:
+      operationId: filters
+      summary: Get Filters
+      tags:
+      - ATT&CK Navigator
+      description: Returns the filter options of various filters available for ATT&CK Navigator.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/filters
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: filter
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass a filter to retrieve the values.
+          enum:
+          - apt
+          - software
+          - mitigation
+          - defense-bypassed
+          - platform
+          - data-source
+          examples:
+          - apt
+        description: Pass a filter to retrieve the values.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the link to the next page. Returns null in case it is the last page.
+                    examples:
+                    - attack-navigator/software/?page=2&page_size=10
+                  previous:
+                    type: object
+                    description: Returns the link to the previous page. Returns null in case it is the first page.
+                  total:
+                    type: number
+                    description: Returns the total number of records the API returns.
+                    examples:
+                    - 545
+                  page_size:
+                    type: number
+                    description: Returns the number of records displayed per page.
+                    examples:
+                    - 10
+                  results:
+                    type: array
+                    description: Returns the details of the filter object.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the filter.
+                          examples:
+                          - 7b22e8a0-eed6-425b-b508-ecb0cc060696
+                        name:
+                          type: string
+                          description: Returns the name of filter.
+                          examples:
+                          - Empire
+              example:
+                next: attack-navigator/software/?page=2&page_size=10
+                previous: {}
+                total: 545
+                page_size: 10
+                results:
+                - id: 7b22e8a0-eed6-425b-b508-ecb0cc060696
+                  name: Empire
+  /ingestion/attack-navigator/tactic-technique-ioc-heat/:
+    get:
+      operationId: iocHeatMap
+      summary: Get IOC Heat Map
+      tags:
+      - ATT&CK Navigator
+      description: Returns relation statistics for the IOC heat map.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/ioc-heat-map
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  0cfb937f-61ef-49d2-a236-aa0b40eb643e:ac4814d2-c855-4e06-985e-53a22690fcb8:
+                    type: object
+                    description: Returns a mapping of unique object identifiers to their corresponding heat map data, including counts of associated indicators, malware, threat actors, and incidents.
+                    properties:
+                      indicator_count:
+                        type: number
+                        description: Returns the number of associated indicators for the specified mapping.
+                        examples:
+                        - '1'
+                      malware_count:
+                        type: number
+                        description: Returns the number of associated malware entities for the mapping.
+                        examples:
+                        - '1'
+                      threat_actor_count:
+                        type: number
+                        description: Returns the number of associated threat actors linked to the rule or mapping.
+                        examples:
+                        - '0'
+                      incident_count:
+                        type: number
+                        description: Returns the number of associated incidents related to the given entity pair.
+                        examples:
+                        - '0'
+              example:
+                0cfb937f-61ef-49d2-a236-aa0b40eb643e:ac4814d2-c855-4e06-985e-53a22690fcb8:
+                  indicator_count: '1'
+                  malware_count: '1'
+                  threat_actor_count: '0'
+                  incident_count: '0'
+  /ingestion/attack-navigator/tactics/:
+    get:
+      operationId: tactics
+      summary: Get Tactics
+      tags:
+      - ATT&CK Navigator
+      description: Returns a list of ATT&CK tactics.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/tactics
+      parameters:
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ATT&CK domain.
+          enum:
+          - enterprise
+          - mobile
+          default: enterprise
+          examples:
+          - mobile
+        description: Pass the ATT&CK domain.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a query text to search tactics based on the name.
+          examples:
+          - remote
+        description: Pass a query text to search tactics based on the name.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '0':
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Returns the name of the ATT&CK tactic.
+                        examples:
+                        - Initial Access
+                      slug:
+                        type: string
+                        description: Returns the slug of the ATT&CK tactic.
+                        examples:
+                        - initial-access
+                      domain:
+                        type: string
+                        description: Returns the domain based on the request parameters.
+                        examples:
+                        - mitre-enterprise
+                      url:
+                        type: string
+                        description: Returns the URL associated with the ATT&CK tactic.
+                        examples:
+                        - https://attack.mitre.org/tactics/TA0001
+                      id:
+                        type: string
+                        description: Returns the unique ID of the tactic.
+                        examples:
+                        - 04611a47-dce4-4258-93cd-467adb3218fe
+                  '1':
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        examples:
+                        - Impact
+                      slug:
+                        type: string
+                        examples:
+                        - impact
+                      domain:
+                        type: string
+                        examples:
+                        - mitre-enterprise
+                      url:
+                        type: string
+                        examples:
+                        - https://attack.mitre.org/tactics/TA0040
+                      id:
+                        type: string
+                        examples:
+                        - a9d26108-4a19-49cd-9fb8-25d2a561f21d
+                  '2':
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        examples:
+                        - Reconnaissance
+                      slug:
+                        type: string
+                        examples:
+                        - reconnaissance
+                      domain:
+                        type: string
+                        examples:
+                        - mitre-enterprise
+                      url:
+                        type: string
+                        examples:
+                        - https://attack.mitre.org/tactics/TA0043
+                      id:
+                        type: string
+                        examples:
+                        - 844f5561-ca18-4c00-9a89-95d14ec26de8
+              example:
+                '0':
+                  name: Initial Access
+                  slug: initial-access
+                  domain: mitre-enterprise
+                  url: https://attack.mitre.org/tactics/TA0001
+                  id: 04611a47-dce4-4258-93cd-467adb3218fe
+                '1':
+                  name: Impact
+                  slug: impact
+                  domain: mitre-enterprise
+                  url: https://attack.mitre.org/tactics/TA0040
+                  id: a9d26108-4a19-49cd-9fb8-25d2a561f21d
+                '2':
+                  name: Reconnaissance
+                  slug: reconnaissance
+                  domain: mitre-enterprise
+                  url: https://attack.mitre.org/tactics/TA0043
+                  id: 844f5561-ca18-4c00-9a89-95d14ec26de8
+  /ingestion/attack-navigator/techniques/:
+    get:
+      operationId: listAttAndCkTechniques
+      summary: Get ATT&CK Techniques List
+      tags:
+      - ATT&CK Navigator
+      description: Returns a list of ATT&CK techniques.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/list-att-and-ck-techniques
+      parameters:
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ATT&CK domain.
+          enum:
+          - enterprise
+          - mobile
+          default: enterprise
+          examples:
+          - enterprise
+        description: Pass the ATT&CK domain.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a query text to search techniques based on the title.
+          examples:
+          - mitre
+        description: Pass a query text to search techniques based on the title.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the technique type to filter.
+          enum:
+          - mitre
+          - custom
+          examples:
+          - custom
+        description: Pass the technique type to filter.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns the list of ATT&CK techniques.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the name of the ATT&CK technique.
+                          examples:
+                          - Sample Technique 1
+                        id:
+                          type: string
+                          description: Returns the ID of the ATT&CK technique.
+                          examples:
+                          - cb37e7ca-00fd-4916-a408-a9cad1f1ba05
+                        type:
+                          type: string
+                          description: Returns the type of ATT&CK technique.
+                          examples:
+                          - custom
+                        tactics:
+                          type: array
+                          description: Returns the list of ATT&CK tactic IDs associated with the techniques.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - 1f8dd4c5-0a04-4253-a84b-a93ada73425b
+                        apt_count:
+                          type: number
+                          description: Returns the value of apt count.
+                          examples:
+                          - '1'
+              example:
+                results:
+                - name: Sample Technique 1
+                  id: cb37e7ca-00fd-4916-a408-a9cad1f1ba05
+                  type: custom
+                  tactics:
+                  - 1f8dd4c5-0a04-4253-a84b-a93ada73425b
+                  apt_count: '1'
+  /ingestion/attack-navigator/sub-techniques/:
+    get:
+      operationId: listSubTechniques
+      summary: Get Sub-techniques List
+      tags:
+      - ATT&CK Navigator
+      description: Returns details of all the sub-techniques.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/list-sub-techniques
+      parameters:
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ATT&CK domain.
+          enum:
+          - mobile
+          - enterprise
+          default: enterprise
+          examples:
+          - enterprise
+        description: Pass the ATT&CK domain.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  458e6e6f-00a3-4474-9273-530833952266:
+                    type: array
+                    description: Returns a mapping of parent technique IDs to their associated list of sub-techniques, where each sub-technique includes its unique `id` and `name`.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the name of a sub-technique.
+                          examples:
+                          - Setuid and Setgid
+                        id:
+                          type: string
+                          description: Returns the unique ID of a sub-technique.
+                          examples:
+                          - 2a4f6845-f4e2-4c55-bd14-62b44601bb58
+              example:
+                458e6e6f-00a3-4474-9273-530833952266:
+                - name: Setuid and Setgid
+                  id: 2a4f6845-f4e2-4c55-bd14-62b44601bb58
+  /ingestion/attack-navigator/techniques/{id}/reference/:
+    get:
+      operationId: references
+      summary: Get References
+      tags:
+      - ATT&CK Navigator
+      description: Returns the references of an attack technique.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/references
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a technique.
+          examples:
+          - cb37e7ca-00fd-4916-a408-a9cad1f1ba05
+        description: Pass the unique ID of a technique.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link to the next page. Returns null in case it is the last page.
+                  previous:
+                    type: object
+                    description: Returns the link to the previous page. Returns null in case it is the first page.
+                  total:
+                    type: number
+                    description: Returns the total number of records the API returns.
+                    examples:
+                    - 6
+                  page_size:
+                    type: number
+                    description: Returns the number of records displayed per page.
+                    examples:
+                    - 10
+                  results:
+                    type: array
+                    description: Returns the list of references of an attack technique.
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          description: Returns the URL linked to the attack technique.
+                          examples:
+                          - https://attack.mitre.org/techniques/T1098/002
+                        external_id:
+                          type: string
+                          description: Returns the external ID of the attack technique.
+                          examples:
+                          - T1098.002
+                        source_name:
+                          type: string
+                          description: Returns the source name of the attack technique.
+                          examples:
+                          - mitre-attack
+              example:
+                next: {}
+                previous: {}
+                total: 6
+                page_size: 10
+                results:
+                - url: https://attack.mitre.org/techniques/T1098/002
+                  external_id: T1098.002
+                  source_name: mitre-attack
+  /ingestion/attack-navigator/techniques/{id}/relation/:
+    get:
+      operationId: relationList
+      summary: Get Relation List
+      tags:
+      - ATT&CK Navigator
+      description: Returns a list of threat data objects related to a technique.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/relation-list
+      parameters:
+      - name: tactic_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of the associated tactic.
+          examples:
+          - <tactic_id>
+        description: Pass the ID of the associated tactic.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the type of threat data object for which you want to retrieve the relations.
+          examples:
+          - indicator
+        description: Pass the type of threat data object for which you want to retrieve the relations.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a technique.
+          examples:
+          - 7b295320-87e5-4c5b-9bf1-700c49ecbd18
+        description: Pass the unique ID of a technique.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link to the next page. Returns null in case it is the last page.
+                  previous:
+                    type: object
+                    description: Returns the link to the previous page. Returns null in case it is the first page.
+                  total:
+                    type: number
+                    description: Returns the total number of records the API returns.
+                    examples:
+                    - '1'
+                  page_size:
+                    type: number
+                    description: Returns the number of records displayed per page.
+                    examples:
+                    - '10'
+                  results:
+                    type: array
+                    description: Returns a list of related threat data objects.
+                    items:
+                      type: object
+                      properties:
+                        object_id:
+                          type: string
+                          description: Returns the unique identifier of the object.
+                          examples:
+                          - a3ec75a2-7ba2-4d78-baea-e9ea3168dbdf
+                        object_type:
+                          type: string
+                          description: Returns the type of the object.
+                          examples:
+                          - indicator
+              example:
+                next: {}
+                previous: {}
+                total: '1'
+                page_size: '10'
+                results:
+                - object_id: a3ec75a2-7ba2-4d78-baea-e9ea3168dbdf
+                  object_type: indicator
+  /ingestion/attack-navigator/sub-techniques/{id}/:
+    get:
+      operationId: subTechniqueDetails
+      summary: Get Sub-technique Details
+      tags:
+      - ATT&CK Navigator
+      description: Returns the details of a sub-technique.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/sub-technique-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a sub-technique.
+          examples:
+          - 1cc4c302-efca-49f3-a59c-c529d70ee78d
+        description: Pass the unique ID of a sub-technique.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    description: Returns the description of the attack pattern.
+                    examples:
+                    - An attacker might use setuid or setgid bits to run programs with higher privileges. This lets their malware act like it’s being run by another user, helping it do things it normally couldn’t—like bypassing restrictions or accessing sensitive data.
+                  modified:
+                    type: number
+                    description: Returns the last modified time of the sub-technique in epoch format.
+                    examples:
+                    - '1643003227'
+                  mitigation:
+                    type: array
+                    description: Returns the list of IDs of the associated mitigations.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated mitigations.
+                          examples:
+                          - 2db9cd8e-1564-4ea1-8f1c-a7454ff4ed58
+                        name:
+                          type: string
+                          description: Returns the name of the associated mitigations.
+                          examples:
+                          - Operating System Configuration
+                        description:
+                          type: string
+                          description: Returns the description of the associated mitigations.
+                          examples:
+                          - Make configuration changes related to the operating system or a common feature of the operating system that result in system hardening against techniques.
+                  detection:
+                    type: string
+                    description: Returns the detected pattern.
+                    examples:
+                    - Monitor the file system for files that have the setuid or setgid bits set. Monitor for execution of utilities, like chmod, and their command-line arguments to look for setuid or setguid bits being set.
+                  technique_id:
+                    type: string
+                    description: Returns the unique ID of the associated technique.
+                    examples:
+                    - 2a4f6845-f4e2-4c55-bd14-62b44601bb58
+                  tactics:
+                    type: array
+                    description: Returns a list of tactic IDs associated with the sub-technique.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the name of the tactic.
+                          examples:
+                          - Defense Evasion
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the tactic.
+                          examples:
+                          - b1949554-4733-4130-aa3e-1a4d74ec50fe
+                  platforms:
+                    type: array
+                    description: Returns the list of IDs of the associated platforms.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated platforms.
+                          examples:
+                          - 760f87e5-11e3-40d6-be72-ad9e0c1e4473
+                        name:
+                          type: string
+                          description: Returns the name of the associated platforms.
+                          examples:
+                          - Linux
+                  softwares:
+                    type: array
+                    description: Returns the list of IDs of the associated software.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated software.
+                          examples:
+                          - 94f3f42e-a063-416a-a5f4-34249fac5aa2
+                        name:
+                          type: string
+                          description: Returns the name of the associated software.
+                          examples:
+                          - Keydnap
+                  data_source:
+                    type: array
+                    description: Returns the list of associated data sources.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated data source.
+                          examples:
+                          - a462338b-2c05-46de-92c4-1cd4138f62f4
+                        name:
+                          type: string
+                          description: Returns the name of the associated data source.
+                          examples:
+                          - 'Command: Command Execution'
+                  defense_bypassed:
+                    type: array
+                    description: Returns the list of defences bypassed.
+                    items: {}
+                  details_page_link:
+                    type: string
+                    description: Returns a direct URL linking to the MITRE ATT&CK official page for the corresponding technique.
+                    examples:
+                    - https://attack.mitre.org/techniques/T1548/001
+              example:
+                description: An attacker might use setuid or setgid bits to run programs with higher privileges. This lets their malware act like it’s being run by another user, helping it do things it normally couldn’t—like bypassing restrictions or accessing sensitive data.
+                modified: '1643003227'
+                mitigation:
+                - id: 2db9cd8e-1564-4ea1-8f1c-a7454ff4ed58
+                  name: Operating System Configuration
+                  description: Make configuration changes related to the operating system or a common feature of the operating system that result in system hardening against techniques.
+                detection: Monitor the file system for files that have the setuid or setgid bits set. Monitor for execution of utilities, like chmod, and their command-line arguments to look for setuid or setguid bits being set.
+                technique_id: 2a4f6845-f4e2-4c55-bd14-62b44601bb58
+                tactics:
+                - name: Defense Evasion
+                  id: b1949554-4733-4130-aa3e-1a4d74ec50fe
+                platforms:
+                - id: 760f87e5-11e3-40d6-be72-ad9e0c1e4473
+                  name: Linux
+                softwares:
+                - id: 94f3f42e-a063-416a-a5f4-34249fac5aa2
+                  name: Keydnap
+                data_source:
+                - id: a462338b-2c05-46de-92c4-1cd4138f62f4
+                  name: 'Command: Command Execution'
+                defense_bypassed: []
+                details_page_link: https://attack.mitre.org/techniques/T1548/001
+  /ingestion/attack-navigator/techniques/{id}/:
+    get:
+      operationId: techniqueDetails
+      summary: Get Technique Details
+      tags:
+      - ATT&CK Navigator
+      description: Returns the details of a technique.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/att-and-ck-navigator/techniques/technique-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a technique.
+          examples:
+          - cb37e7ca-00fd-4916-a408-a9cad1f1ba05
+        description: Pass the unique ID of a technique.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    description: Returns the description of the technique.
+                    examples:
+                    - '
+
+                      Adversaries may deliver payloads to remote systems by adding content to shared storage locations, such as network drives or internal code repositories. Content stored on network drives or in other shared locations may be tainted by adding malicious programs, scripts, or exploit code to otherwise valid files. Once a user opens the shared tainted content, the malicious portion can be executed to run the adversary''s code on a remote system. Adversaries may use tainted shared content to move laterally.
+
+
+                      A directory share pivot is a variation on this technique that uses several other techniques to propagate malware when users access a shared network directory. It uses [Shortcut Modification](https://attack.mitre.org/techniques/T1547/009) of directory .LNK files that use [Masquerading](https://attack.mitre.org/techniques/T1036) to look like the real directories, which are hidden through [Hidden Files and Directories](https://attack.mitre.org/techniques/T1564/001). The malicious .LNK-based directories have an embedded command that executes the hidden malware file in the directory and then opens the real intended directory so that the user''s expected action still occurs. When used with frequently used network directories, the technique may result in frequent reinfections and broad access to systems and potentially to new and higher privileged accounts. (Citation: Retwin Directory Share Pivot)
+
+
+                      Adversaries may also compromise shared network directories through binary infections by appending or prepending its code to the healthy binary on the shared network directory. The malware may modify the original entry point (OEP) of the healthy binary to ensure that it is executed before the legitimate code. The infection could continue to spread via the newly infected file when it is executed by a remote system. These infections may target both binary and non-binary formats that end with extensions including, but not limited to, .EXE, .DLL, .SCR, .BAT, and/or .VBS.'
+                  modified:
+                    type: number
+                    description: Returns the last modified time of the technique in epoch format.
+                    examples:
+                    - 1643003123
+                  mitigation:
+                    type: array
+                    description: Returns the list of IDs of the associated mitigations.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated mitigations.
+                          examples:
+                          - bccd4ae3-c804-4022-bc20-835faa63a3f3
+                        name:
+                          type: string
+                          description: Returns the name of the associated mitigations.
+                          examples:
+                          - Taint Shared Content Mitigation
+                        description:
+                          type: string
+                          description: Returns the descriptions of the associated mitigations.
+                          examples:
+                          - 'Protect shared folders by minimizing users who have write access. Use utilities that detect or mitigate common features used in exploitation, such as the Microsoft Enhanced Mitigation Experience Toolkit (EMET).
+
+
+                            Reduce potential lateral movement risk by using web-based document management and collaboration services that do not use network file and directory sharing.
+
+
+                            Identify potentially malicious software that may be used to taint content or may result from it and audit and/or block the unknown programs by using whitelisting (Citation: Beechey 2010) tools, like AppLocker, (Citation: Windows Commands JPCERT) (Citation: NSA MS AppLocker) or Software Restriction Policies (Citation: Corio 2008) where appropriate. (Citation: TechNet Applocker vs SRP)'
+                  detection:
+                    type: string
+                    description: Returns the detected pattern.
+                    examples:
+                    - 'Processes that write or overwrite many files to a network shared directory may be suspicious. Monitor processes that are executed from removable media for malicious or abnormal activity such as network connections due to Command and Control and possible network Discovery techniques.
+
+
+                      Frequently scan shared network directories for malicious files, hidden files, .LNK files, and other file types that may not typical exist in directories used to share specific types of content.'
+                  technique_id:
+                    type: string
+                    description: Returns the unique ID of the technique.
+                    examples:
+                    - a394e341-d1f4-4f13-8094-ae101dd50740
+                  tactics:
+                    type: array
+                    description: Returns the list of IDs associated with attack tactics.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Returns the name of the attack tactics.
+                          examples:
+                          - Lateral Movement
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the attack tactics.
+                          examples:
+                          - d0c6dcdd-3bdd-497b-86f1-f1ee848408c3
+                  platforms:
+                    type: array
+                    description: Returns the list of IDs of the associated platforms.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated platforms.
+                          examples:
+                          - 760f87e5-11e3-40d6-be72-ad9e0c1e4473
+                        name:
+                          type: string
+                          description: Returns the name of the associated platforms.
+                          examples:
+                          - Linux
+                  softwares:
+                    type: array
+                    description: Returns the list of IDs of the associated software.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated software.
+                          examples:
+                          - f35c4233-1896-480e-a149-55cef35a5253
+                        name:
+                          type: string
+                          description: Returns the name of associated software.
+                          examples:
+                          - Miner-C
+                  data_source:
+                    type: array
+                    description: Returns the list of associated data sources.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the unique identifier of the associated data source.
+                          examples:
+                          - 301d9128-d905-47ea-9db5-f025d599cbf9
+                        name:
+                          type: string
+                          description: Returns the name of the associated data source.
+                          examples:
+                          - 'Process: Process Creation'
+                  defense_bypassed:
+                    type: array
+                    description: Returns the list of defences bypassed.
+                    items: {}
+                  details_page_link:
+                    type: string
+                    description: Returns a direct URL linking to the MITRE ATT&CK official page for the corresponding technique.
+                    examples:
+                    - https://attack.mitre.org/techniques/T1080
+                  task:
+                    type: object
+                    description: Returns the list of associated tasks.
+              example:
+                description: '
+
+                  Adversaries may deliver payloads to remote systems by adding content to shared storage locations, such as network drives or internal code repositories. Content stored on network drives or in other shared locations may be tainted by adding malicious programs, scripts, or exploit code to otherwise valid files. Once a user opens the shared tainted content, the malicious portion can be executed to run the adversary''s code on a remote system. Adversaries may use tainted shared content to move laterally.
+
+
+                  A directory share pivot is a variation on this technique that uses several other techniques to propagate malware when users access a shared network directory. It uses [Shortcut Modification](https://attack.mitre.org/techniques/T1547/009) of directory .LNK files that use [Masquerading](https://attack.mitre.org/techniques/T1036) to look like the real directories, which are hidden through [Hidden Files and Directories](https://attack.mitre.org/techniques/T1564/001). The malicious .LNK-based directories have an embedded command that executes the hidden malware file in the directory and then opens the real intended directory so that the user''s expected action still occurs. When used with frequently used network directories, the technique may result in frequent reinfections and broad access to systems and potentially to new and higher privileged accounts. (Citation: Retwin Directory Share Pivot)
+
+
+                  Adversaries may also compromise shared network directories through binary infections by appending or prepending its code to the healthy binary on the shared network directory. The malware may modify the original entry point (OEP) of the healthy binary to ensure that it is executed before the legitimate code. The infection could continue to spread via the newly infected file when it is executed by a remote system. These infections may target both binary and non-binary formats that end with extensions including, but not limited to, .EXE, .DLL, .SCR, .BAT, and/or .VBS.'
+                modified: 1643003123
+                mitigation:
+                - id: bccd4ae3-c804-4022-bc20-835faa63a3f3
+                  name: Taint Shared Content Mitigation
+                  description: 'Protect shared folders by minimizing users who have write access. Use utilities that detect or mitigate common features used in exploitation, such as the Microsoft Enhanced Mitigation Experience Toolkit (EMET).
+
+
+                    Reduce potential lateral movement risk by using web-based document management and collaboration services that do not use network file and directory sharing.
+
+
+                    Identify potentially malicious software that may be used to taint content or may result from it and audit and/or block the unknown programs by using whitelisting (Citation: Beechey 2010) tools, like AppLocker, (Citation: Windows Commands JPCERT) (Citation: NSA MS AppLocker) or Software Restriction Policies (Citation: Corio 2008) where appropriate. (Citation: TechNet Applocker vs SRP)'
+                detection: 'Processes that write or overwrite many files to a network shared directory may be suspicious. Monitor processes that are executed from removable media for malicious or abnormal activity such as network connections due to Command and Control and possible network Discovery techniques.
+
+
+                  Frequently scan shared network directories for malicious files, hidden files, .LNK files, and other file types that may not typical exist in directories used to share specific types of content.'
+                technique_id: a394e341-d1f4-4f13-8094-ae101dd50740
+                tactics:
+                - name: Lateral Movement
+                  id: d0c6dcdd-3bdd-497b-86f1-f1ee848408c3
+                platforms:
+                - id: 760f87e5-11e3-40d6-be72-ad9e0c1e4473
+                  name: Linux
+                softwares:
+                - id: f35c4233-1896-480e-a149-55cef35a5253
+                  name: Miner-C
+                data_source:
+                - id: 301d9128-d905-47ea-9db5-f025d599cbf9
+                  name: 'Process: Process Creation'
+                defense_bypassed: []
+                details_page_link: https://attack.mitre.org/techniques/T1080
+                task: {}
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

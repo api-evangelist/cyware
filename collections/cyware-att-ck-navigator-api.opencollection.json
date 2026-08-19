@@ -1,0 +1,397 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open ATT&CK Navigator API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ATT&CK Navigator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ATT&CK Layer Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/attack-layer/:layer_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "layer_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique identifier of attack layer."
+              }
+            ]
+          },
+          "docs": "Returns the details of a custom ATT&CK layer."
+        },
+        {
+          "info": {
+            "name": "Get ATT&CK Layers List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/attack-layer/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ATT&CK domain."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a query text to search layers based on the title."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom ATT&CK layers."
+        },
+        {
+          "info": {
+            "name": "Get Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/:filter/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "path",
+                "description": "Pass a filter to retrieve the values."
+              }
+            ]
+          },
+          "docs": "Returns the filter options of various filters available for ATT&CK Navigator."
+        },
+        {
+          "info": {
+            "name": "Get IOC Heat Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/tactic-technique-ioc-heat/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns relation statistics for the IOC heat map."
+        },
+        {
+          "info": {
+            "name": "Get Tactics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/tactics/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ATT&CK domain."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a query text to search tactics based on the name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of ATT&CK tactics."
+        },
+        {
+          "info": {
+            "name": "Get ATT&CK Techniques List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/techniques/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ATT&CK domain."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a query text to search techniques based on the title."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the technique type to filter."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of ATT&CK techniques."
+        },
+        {
+          "info": {
+            "name": "Get Sub-techniques List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/sub-techniques/",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ATT&CK domain."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns details of all the sub-techniques."
+        },
+        {
+          "info": {
+            "name": "Get References",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/techniques/:id/reference/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a technique."
+              }
+            ]
+          },
+          "docs": "Returns the references of an attack technique."
+        },
+        {
+          "info": {
+            "name": "Get Relation List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/techniques/:id/relation/",
+            "params": [
+              {
+                "name": "tactic_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the associated tactic."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of threat data object for which you want to retrieve the relations."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a technique."
+              }
+            ]
+          },
+          "docs": "Returns a list of threat data objects related to a technique."
+        },
+        {
+          "info": {
+            "name": "Get Sub-technique Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/sub-techniques/:id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a sub-technique."
+              }
+            ]
+          },
+          "docs": "Returns the details of a sub-technique."
+        },
+        {
+          "info": {
+            "name": "Get Technique Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/attack-navigator/techniques/:id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a technique."
+              }
+            ]
+          },
+          "docs": "Returns the details of a technique."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

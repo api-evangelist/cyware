@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Authentication API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Product Release Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/release_version/"
+          },
+          "docs": "Returns the current version of the Orchestrate application."
+        },
+        {
+          "info": {
+            "name": "Test Connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/test_connectivity/"
+          },
+          "docs": "Returns the status of the test connectivity with the Orchestrate application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1146 @@
+{
+  "item": [
+    {
+      "id": "dd047dec-44d5-4d4c-aca7-5dfe3e067f4b",
+      "name": "Threat Bulletin",
+      "description": {
+        "content": "Threat Bulletin",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "511e44e1-b013-4656-b78d-a8a6a6458e2f",
+          "name": "Create Threat Bulletin",
+          "request": {
+            "name": "Create Threat Bulletin",
+            "description": {
+              "content": "Creates a threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"tlp\": \"<string>\",\n  \"server_collections\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"colour_code\": \"<object>\",\n      \"created\": \"<number>\",\n      \"modified_by\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modified\": \"<number>\",\n      \"id\": \"<string>\",\n      \"created_by\": \"<string>\"\n    },\n    {\n      \"colour_code\": \"<object>\",\n      \"created\": \"<number>\",\n      \"modified_by\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modified\": \"<number>\",\n      \"id\": \"<string>\",\n      \"created_by\": \"<string>\"\n    }\n  ],\n  \"attachments\": [\n    {\n      \"data\": \"<string>\",\n      \"mime_type\": \"<string>\",\n      \"size\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"data\": \"<string>\",\n      \"mime_type\": \"<string>\",\n      \"size\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d72b9da3-2ef8-4f5d-8a20-7287690f0aae",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"yoyo\",\n  \"description\": \"<table class='' style='width: 91%; margin-left: calc(9%);'><tbody> <tr><td style='width: 50.0000%;'>Object Type</td><td style='width: 50.0000%;' class=''>Value</td></tr><tr :data-new='1.2.1.1'><td style='width: 50.0000%;'>Ipv4</td><td style='width: 50.0000%;'>1.2.1.1</td></tr><tr :data-new='3.3.2.1'><td style='width: 50.0000%;'>Ipv4</td><td style='width: 50.0000%;'>3.3.2.1</td></tr><tr :data-new='33.22.1.11'><td style='width: 50.0000%;' class=''>ipv4</td><td style='width: 50.0000%;'>33.22.1.11</td></tr><tr :data-new='google.com'><td style='width: 50.0000%;'>Domain</td><td style='width: 50.0000%;'>google.com</td></tr><tr :data-new='Graphite'><td style='width: 50.0000%;'>Malware</td><td style='width: 50.0000%;'>Graphite</td></tr></tbody></table><table class='' style='width: 91%; margin-left: calc(9%);'><tbody><tr><td style='width: 50.0000%;'>Object Type</td><td style='width: 50.0000%;' class=''>Value</td></tr><tr :data-cql='b24f49e0-a411-4a0a-9b57-6e2628fe299f'><td style='width: 50.0000%;'>Domain</td><td style='width: 50.0000%;'>testing3.com</td></tr><tr :data-cql='05e7ca93-4135-491a-8c52-02ff16137b55'><td style='width: 50.0000%;'>Ipv4</td><td style='width: 50.0000%;'>94.140.112.178</td></tr><tr :data-cql='663cafd3-e74a-4ed1-89d2-a151c0343b2c'><td style='width: 50.0000%;'>ipv4</td><td style='width: 50.0000%;'>12.22.33.44</td></tr><tr :data-cql='e926e6bb-7125-4037-90e5-1a820f1a8523'><td style='width: 50.0000%;>Domain</td><td style='width: 50.0000%;'>google.com</td></tr><tr :data-cql='60db773b-387c-4cbb-b23a-6e7e73924d21'><td style='width: 50.0000%;'>Identity</td><td style='width: 50.0000%;'>Media</td></tr></tbody></table>'\",\n  \"status\": \"CREATED\",\n  \"tlp\": \"RED\",\n  \"server_collections\": [\n    {\n      \"id\": \"collection_id\",\n      \"name\": \"collection1\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"colour_code\": {},\n      \"created\": 1627778138.196819,\n      \"modified_by\": \"system@default.tld\",\n      \"name\": \"espionage\",\n      \"modified\": 1627778138.197279,\n      \"id\": \"2a1218ae-8560-4c5b-a4d0-edadd25f9710\",\n      \"created_by\": \"system@default.tld\"\n    }\n  ],\n  \"attachments\": [\n    {\n      \"data\": \"PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K\",\n      \"mime_type\": \"text/xml\",\n      \"size\": \"1062\",\n      \"name\": \"0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4d01804f-86b8-48d7-9afd-a1bbb65e7bc3\",\n  \"created\": \"2022-02-12T18:05:16.830634Z\",\n  \"modified\": \"2022-02-12T18:05:16.830634Z\",\n  \"object_id\": {},\n  \"created_by\": \"38f5828c-74b6-43b5-91f3-4f653ddf85c6\",\n  \"modified_by\": \"38f5828c-74b6-43b5-91f3-4f653ddf85c6\",\n  \"name\": \"my_bulletin1\",\n  \"status\": \"DRAFT\",\n  \"tags\": \"[{\\\"colour_code\\\": null, \\\"created\\\": 1627778138.196819, \\\"modified_by\\\": \\\"system@default.tld\\\", \\\"name\\\": \\\"espionage\\\", \\\"modified\\\": 1627778138.197279, \\\"id\\\": \\\"2a1218ae-8560-4c5b-a4d0-edadd25f9710\\\", \\\"created_by\\\": \\\"system@default.tld\\\"}, {\\\"colour_code\\\": null, \\\"created\\\": 1626170193.96807, \\\"modified_by\\\": \\\"system@default.tld\\\", \\\"name\\\": \\\"APT29\\\", \\\"modified\\\": 1626170193.968943, \\\"id\\\": \\\"8f60e945-a5bc-4d76-ae5f-d83bea1d7b6d\\\", \\\"created_by\\\": \\\"system@default.tld\\\"}, {\\\"colour_code\\\": null, \\\"created\\\": 1628756542.839106, \\\"modified_by\\\": \\\"system@default.tld\\\", \\\"name\\\": \\\"wellmail\\\", \\\"modified\\\": 1628756542.839431, \\\"id\\\": \\\"9283f065-f057-4ed5-8bcc-f2aa162514c3\\\", \\\"created_by\\\": \\\"system@default.tld\\\"}, {\\\"colour_code\\\": null, \\\"created\\\": 1628756542.83903, \\\"modified_by\\\": \\\"system@default.tld\\\", \\\"name\\\": \\\"wellmess\\\", \\\"modified\\\": 1628756542.839391, \\\"id\\\": \\\"9a58306f-81df-4f36-8e3a-fb425c7b3b4e\\\", \\\"created_by\\\": \\\"system@default.tld\\\"}]\",\n  \"score\": {},\n  \"tlp\": {},\n  \"server_collections\": \"[]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4099b169-6b92-4262-8e85-8c3d786220b6",
+          "name": "Get Threat Bulletin List",
+          "request": {
+            "name": "Get Threat Bulletin List",
+            "description": {
+              "content": "Returns a list of threat bulletins with details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a query text to search for threat bulletin names."
+                },
+                {
+                  "disabled": false,
+                  "key": "received",
+                  "value": "false",
+                  "description": "Pass a true to retrieve received threat bulletins only."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "false",
+                  "description": "Pass a true to retrieve active threat bulletins only."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve threat bulletins."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of threat bulletins to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c6d8ae0-a8ff-42b8-8c41-54d17f9b9205",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "received",
+                      "value": "false"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"client_collections\": {},\n      \"confidence\": \"MEDIUM\",\n      \"created\": \"1685944400\",\n      \"created_by\": {\n        \"email\": \"john@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"4218968c-acf3-4789-a92f-7231d0858590\",\n        \"last_name\": \"\"\n      },\n      \"id\": \"a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8\",\n      \"metadata\": \"{\\\"is_added_object\\\":true,\\\"height\\\":640,\\\"width\\\":1064}\",\n      \"modified\": \"1686547577\",\n      \"modified_by\": {\n        \"email\": \"john@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"db2139ce-29d1-4db3-9848-2a75a686aacf\",\n        \"last_name\": \"\"\n      },\n      \"published\": \"false\",\n      \"published_on\": {},\n      \"received\": \"false\",\n      \"report_id\": {},\n      \"server_collections\": {},\n      \"status\": \"DRAFT\",\n      \"tags\": {},\n      \"title\": \"RedHat\",\n      \"tlp\": \"AMBER\"\n    }\n  ],\n  \"total\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13c066c9-9095-4c27-911a-64b79d1bac93",
+          "name": "Download Threat Bulletin Attachment",
+          "request": {
+            "name": "Download Threat Bulletin Attachment",
+            "description": {
+              "content": "Downloads an attachment from a threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ":threat_bulletin_id",
+                "attachments",
+                ":attachment_id",
+                "download",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "Pass the download token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threat_bulletin_id",
+                  "description": "(Required) Pass the ID of a threat bulletin."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attachment_id",
+                  "description": "(Required) Pass the ID of an attachment."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bc4fcbe-c2e9-43a3-b1ed-97d36fc1bc4d",
+              "name": "Returns the attachment from a threat bulletin in downloadable format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ":threat_bulletin_id",
+                    "attachments",
+                    ":attachment_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threat_bulletin_id",
+                      "description": "(Required) Pass the ID of a threat bulletin."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attachment_id",
+                      "description": "(Required) Pass the ID of an attachment."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe8f3e44-8a52-4854-9a5e-406d93ecc1c2",
+          "name": "Get Threat Bulletin Attachments List",
+          "request": {
+            "name": "Get Threat Bulletin Attachments List",
+            "description": {
+              "content": "Returns all attachments of one threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ":threat_bulletin_id",
+                "attachments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threat_bulletin_id",
+                  "description": "(Required) Pass the ID of a threat bulletin."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f95d399d-98e0-4d79-83da-c4ad17fa091e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ":threat_bulletin_id",
+                    "attachments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threat_bulletin_id",
+                      "description": "(Required) Pass the ID of a threat bulletin."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"page_size\": \"10\",\n  \"total\": \"2\",\n  \"results\": [\n    {\n      \"id\": \"599aae95-0e77-4bfe-bcdf-efb9a7633e8e\",\n      \"data\": \"PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K\",\n      \"name\": \"0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml\",\n      \"size\": \"1062\",\n      \"mime_type\": \"text/xml\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f3d49e6-ed1a-4de0-9909-08e834463497",
+          "name": "Send Email",
+          "request": {
+            "name": "Send Email",
+            "description": {
+              "content": "Sends the threat bulletin to internal and external recipients through email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                "send-email",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"id\": \"<string>\",\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cc\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"bcc\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "624aba72-de59-4848-b0db-3ece635c8459",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    "send-email",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"subject2\",\n  \"id\": \"03d972c5-468a-44bf-ba7d-65001a4ad9a5\",\n  \"external_recipients\": {\n    \"to\": [\n      \"abc@gmail.com\"\n    ],\n    \"cc\": [\n      \"abc1@gmail.com\"\n    ],\n    \"bcc\": [\n      \"abc2@gmail.com\"\n    ]\n  },\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"48c1b826-c8c6-48a6-a1b2-f52faef1035d\",\n        \"first_name\": \"LDAP\",\n        \"last_name\": \"User\",\n        \"email\": \"sushant.choudhary+2@cyware.com\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"74b34e52-a0e3-4277-915c-65096f8ceeba\",\n        \"first_name\": \"hrithik.puppala\",\n        \"last_name\": \"hrithik.puppala\",\n        \"email\": \"hrithik.puppala@cyware.com\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"f2e42899-f13d-47b0-bf52-57b444f3c881\",\n        \"first_name\": \"Test\",\n        \"last_name\": \"User\",\n        \"email\": \"sushant.choudhary+1@cyware.com\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Task enqueued for pdf generation and mail\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1684e83c-88f5-4a53-b143-ae84bac3c363",
+          "name": "Get Threat Bulletin Details",
+          "request": {
+            "name": "Get Threat Bulletin Details",
+            "description": {
+              "content": "Returns the details of a threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ":threat_bulletin_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threat_bulletin_id",
+                  "description": "(Required) Pass the ID of a threat bulletin."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcb757f4-f624-44d0-b500-aa8c2d67d128",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ":threat_bulletin_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threat_bulletin_id",
+                      "description": "(Required) Pass the ID of a threat bulletin."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attachments\": [],\n  \"client_collections\": {},\n  \"confidence\": \"MEDIUM\",\n  \"created\": \"1685944400\",\n  \"created_by\": {\n    \"email\": \"john@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"4218968c-acf3-4789-a92f-7231d0858590\",\n    \"last_name\": \"\"\n  },\n  \"description\": \"<h2>List of Objects</h2><table cy:data-table=\\\"c8ea7c80-af59-43f9-b890-364f527b8529\\\" style=\\\"width: 100%; padding: 16px 0px; border-spacing: 0px;\\\"><thead><tr><th cy:data-th=\\\"name\\\" style=\\\"padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);\\\">Value</th><th cy:data-th=\\\"type\\\" style=\\\"padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);\\\">Type</th><th cy:data-th=\\\"sources\\\" style=\\\"padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);\\\">Source</th></tr></thead><tbody><tr cy:data-tr=\\\"undefined\\\" cy:data-id=\\\"63fd8eb4-7ad9-4e27-8818-da4767efcaaa\\\" cy:data-ref=\\\"c8ea7c80-af59-43f9-b890-364f527b8529\\\"><td cy:data-td=\\\"name\\\" cy:data-id=\\\"63fd8eb4-7ad9-4e27-8818-da4767efcaaa\\\" cy:data-ref=\\\"c8ea7c80-af59-43f9-b890-364f527b8529\\\" style=\\\"padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);\\\">77.91.68.62</td><td cy:data-td=\\\"type\\\" style=\\\"padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);\\\">indicator</td><td cy:data-td=\\\"sources\\\" style=\\\"padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);\\\">CrowdStrike</td></tr></tbody></table>\",\n  \"id\": \"a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8\",\n  \"metadata\": \"{\\\"is_added_object\\\":true,\\\"height\\\":640,\\\"width\\\":1064}\",\n  \"modified\": \"1686547577\",\n  \"modified_by\": {\n    \"email\": \"john@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"db2139ce-29d1-4db3-9848-2a75a686aacf\",\n    \"last_name\": \"\"\n  },\n  \"published\": \"false\",\n  \"published_on\": {},\n  \"received\": \"false\",\n  \"report_id\": {},\n  \"server_collections\": {},\n  \"status\": \"DRAFT\",\n  \"tags\": {},\n  \"title\": \"RedHat\",\n  \"tlp\": \"AMBER\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40d74025-5740-45e3-b618-768e7b715889",
+          "name": "Update Threat Bulletin",
+          "request": {
+            "name": "Update Threat Bulletin",
+            "description": {
+              "content": "Updates the threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ":threat_bulletin_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threat_bulletin_id",
+                  "description": "(Required) Pass the threat bulletin ID."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba373a22-80c0-4943-bdb3-09c8e7b22337",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ":threat_bulletin_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threat_bulletin_id",
+                      "description": "(Required) Pass the threat bulletin ID."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"my_bulletin\",\n  \"description\": \"my_bulletin\",\n  \"tags\": [],\n  \"server_collections\": [],\n  \"status\": \"DRAFT\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c96e8a8a-d9d6-4c2f-8def-9d08d628b157\",\n  \"title\": \"my_bulletin\",\n  \"created\": \"1708925624\",\n  \"modified\": \"1708926876\",\n  \"report_id\": \"13ad990c-2125-4546-89b3-fce8db538eeb\",\n  \"created_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"modified_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"status\": \"DRAFT\",\n  \"tags\": [],\n  \"description\": \"my_bulletin\",\n  \"tlp\": {},\n  \"server_collections\": {},\n  \"client_collections\": {},\n  \"received\": \"false\",\n  \"published_on\": {},\n  \"attachments\": [],\n  \"metadata\": \"{\\\"is_added_object\\\":false,\\\"height\\\":640,\\\"width\\\":1064}\",\n  \"published\": \"false\",\n  \"confidence\": \"MEDIUM\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89b1f46a-bd7e-4b52-85e0-798663242475",
+          "name": "Get Token to Download Attachment",
+          "request": {
+            "name": "Get Token to Download Attachment",
+            "description": {
+              "content": "Returns the token to download the attachments of a threat bulletin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "threat-bulletin",
+                ":threat_bulletin_id",
+                "attachments",
+                "link",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threat_bulletin_id",
+                  "description": "(Required) Pass the ID of a threat bulletin."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef983841-5b57-4a76-bace-8c3ef61579e6",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "threat-bulletin",
+                    ":threat_bulletin_id",
+                    "attachments",
+                    "link",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threat_bulletin_id",
+                      "description": "(Required) Pass the ID of a threat bulletin."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"/threat-bulletin/6ecd8c8a-c869-426e-8d78-b4bf26314bb2/attachments/download/?token=2cba13b5-4e7c-40e9-8f1b-3daf69f27510&all_files=True\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "57b37606-68b4-4299-a8f0-44226408a3ae",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Bulletin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

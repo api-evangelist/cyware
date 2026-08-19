@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Mailbox API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Mailbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Intel from Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/:email_id/stix/",
+            "params": [
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates intel from Threat Mailbox emails in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Attachments List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/:email_id/attachments/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              }
+            ]
+          },
+          "docs": "Returns a list of attachments of an email message."
+        },
+        {
+          "info": {
+            "name": "Download Single Threat Mail Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/:email_id/attachments/:file_id/",
+            "params": [
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an attachment."
+              }
+            ]
+          },
+          "docs": "Use this API to download one attachment of an email message."
+        },
+        {
+          "info": {
+            "name": "Get Email Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/:id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              }
+            ]
+          },
+          "docs": "Returns the details of an email."
+        },
+        {
+          "info": {
+            "name": "Get IOCs Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/:email_id/iocs-count/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              }
+            ]
+          },
+          "docs": "Returns the number of IOCs in the email body and email attachments."
+        },
+        {
+          "info": {
+            "name": "Get IOCs Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/:email_id/iocs/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type (value will be `email_accounts_attachment` or `email_accounts`)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              }
+            ]
+          },
+          "docs": "Returns a list of IOCs and attachments in an email."
+        },
+        {
+          "info": {
+            "name": "Get Emails List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/",
+            "params": [
+              {
+                "name": "email_config",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the email feed source to retrieve emails from a specific source. By default, emails from all email sources are retrieved. To retrieve the email source ID, use the **GET Email Source List API** under **Administration** > **Integration management** > **Email Feed Sources**."
+              },
+              {
+                "name": "is_read",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve read emails only. By default, both read and unread emails are retrieved."
+              },
+              {
+                "name": "is_starred",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve starred emails only. By default, both starred and non-starred emails are retrieved."
+              },
+              {
+                "name": "is_regulatory_email",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve regulatory emails only. By default, both regulatory and non-regulatory emails are retrieved."
+              },
+              {
+                "name": "is_delete",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve trashed emails only. By default, trashed emails are not returned."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search in the subject and body of emails."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of emails to retrieve on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve emails."
+              },
+              {
+                "name": "has_attachments",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve emails with attachments."
+              },
+              {
+                "name": "is_reviewed",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve reviewed emails only. By default, both reviewed and unreviewed emails are retrieved."
+              }
+            ]
+          },
+          "docs": "Returns a list of email messages received from email feed sources."
+        },
+        {
+          "info": {
+            "name": "Get Search URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/deep-search/",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Pass a URL to search in threat mailbox feeds."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Search URLs in email messages."
+        },
+        {
+          "info": {
+            "name": "Update Email Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/email/inbox/:email_id/",
+            "params": [
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to update the details of an email message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

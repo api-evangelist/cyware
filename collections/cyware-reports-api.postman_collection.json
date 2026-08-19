@@ -1,0 +1,1261 @@
+{
+  "item": [
+    {
+      "id": "c1dbca69-bab2-49ce-b34e-3d227dac2fe7",
+      "name": "Reports",
+      "description": {
+        "content": "Reports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8517ec2a-e5bb-4951-8392-23637c026d79",
+          "name": "Create Report",
+          "request": {
+            "name": "Create Report",
+            "description": {
+              "content": "Create a basic (standard) report in Intel Exchange.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to create advanced reports.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to be created."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"shared_type\": \"<string>\",\n  \"saved_search\": {\n    \"meta_data\": \"<string>\",\n    \"query\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"schedule\": {\n    \"repeat_type\": \"<string>\",\n    \"start_datetime\": \"<number>\",\n    \"duration_value\": \"<number>\",\n    \"repeat_value\": \"<number>\"\n  },\n  \"file_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"columns\": [\n    {\n      \"key\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"basic_report_type\": \"<string>\",\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"user_id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"user_id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ]\n  },\n  \"query_key\": \"`ctix_created`\",\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bef30d2b-cc9f-478b-8e49-2691aa61dfe3",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Intel Exchange report\",\n  \"type\": \"basic\",\n  \"basic_report_type\": \"custom\",\n  \"shared_type\": \"global\",\n  \"saved_search\": {\n    \"meta_data\": \"{\\\\\\\"object_type\\\\\\\":[\\\\\\\"indicator\\\\\\\"],\\\\\\\"query\\\\\\\":[{\\\\\\\"length\\\\\\\":28,\\\\\\\"dataKey\\\\\\\":{\\\\\\\"id\\\\\\\":\\\\\\\"type\\\\\\\",\\\\\\\"type\\\\\\\":\\\\\\\"select\\\\\\\",\\\\\\\"addAll\\\\\\\":true,\\\\\\\"reset\\\\\\\":true,\\\\\\\"multiple\\\\\\\":true,\\\\\\\"value\\\\\\\":\\\\\\\"id\\\\\\\",\\\\\\\"label\\\\\\\":\\\\\\\"Object Type\\\\\\\",\\\\\\\"values\\\\\\\":[{\\\\\\\"id\\\\\\\":\\\\\\\"indicator\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Indicator\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"malware\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Malware\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"threat-actor\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Threat Actor\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"vulnerability\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Vulnerability\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"attack-pattern\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Attack Pattern\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"campaign\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Campaign\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"course-of-action\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Course of Action\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"identity\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Identity\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"infrastructure\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Infrastructure\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"intrusion-set\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Intrusion Set\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"location\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Location\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"malware-analysis\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Malware Analysis\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"observed-data\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Observed Data\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"opinion\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Opinion\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"tool\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Tool\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"report\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Report\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"custom-object\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Custom Object\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"observable\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Observable\\\\\\\"},{\\\\\\\"id\\\\\\\":\\\\\\\"incident\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Incident\\\\\\\"}]},\\\\\\\"key\\\\\\\":\\\\\\\"'Object Type'\\\\\\\",\\\\\\\"keyType\\\\\\\":\\\\\\\"select\\\\\\\",\\\\\\\"dataOperator\\\\\\\":{\\\\\\\"id\\\\\\\":\\\\\\\"=\\\\\\\",\\\\\\\"label\\\\\\\":\\\\\\\"=\\\\\\\"},\\\\\\\"operator\\\\\\\":\\\\\\\"=\\\\\\\",\\\\\\\"dataValue\\\\\\\":{\\\\\\\"id\\\\\\\":\\\\\\\"indicator\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"Indicator\\\\\\\"},\\\\\\\"value\\\\\\\":\\\\\\\"\\\\\\\\\\\\\\\"Indicator\\\\\\\\\\\\\\\"\\\\\\\"}]}\",\n    \"name\": \"Malware\",\n    \"query\": \"type = \\\"malware\\\"\"\n  },\n  \"schedule\": {\n    \"repeat_type\": \"daily\",\n    \"start_datetime\": \"1638124200\",\n    \"duration_value\": \"2\",\n    \"repeat_value\": \"2\"\n  },\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"columns\": [\n    {\n      \"key\": \"valid_until\",\n      \"label\": \"Valid Until\"\n    }\n  ],\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"user_id\": \"3504aa4a-1e56-40c6-89d7-fc3c6adc2b03\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    ],\n    \"cc\": [],\n    \"bcc\": []\n  },\n  \"query_key\": \"\",\n  \"external_recipients\": {\n    \"to\": [\n      \"bca@cyware.com\"\n    ],\n    \"cc\": [],\n    \"bcc\": []\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"basic_report_type\": \"custom\",\n  \"columns\": [\n    {\n      \"key\": \"valid_until\",\n      \"label\": \"Valid Until\"\n    }\n  ],\n  \"created\": \"1692188813\",\n  \"created_by\": {\n    \"email\": \"john.doe@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8b13\",\n    \"last_name\": \"\"\n  },\n  \"date_last_run\": {},\n  \"external_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": [\n      \"bca@cyware.com\"\n    ]\n  },\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"id\": \"334c3ff3-bfcc-402c-ad6a-e13cb830a602\",\n  \"internal_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": [\n      {\n        \"user\": {}\n      }\n    ]\n  },\n  \"modified\": \"1692188813\",\n  \"modified_by\": {\n    \"email\": \"john.doe@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8b13\",\n    \"last_name\": \"doe\"\n  },\n  \"name\": \"Vulnerability Report\",\n  \"query_key\": \"ctix_created\",\n  \"saved_search\": {\n    \"created_by\": {\n      \"email\": \"john.doe@cyware.com\",\n      \"first_name\": \"john\",\n      \"id\": \"76fbe1c3-5fd0-4674-9666-69921edafb94\",\n      \"last_name\": \"doe\"\n    },\n    \"description\": {},\n    \"editable\": \"false\",\n    \"id\": \"57d957a8-c468-4a94-8c23-b74aa3540fb0\",\n    \"is_threat_data_search\": \"true\",\n    \"meta_data\": \"{\\\"object_type\\\":[\\\"vulnerability\\\"],\\\"query\\\":[{\\\"length\\\":32,\\\"dataKey\\\":{\\\"id\\\":\\\"type\\\",\\\"type\\\":\\\"select\\\",\\\"addAll\\\":true,\\\"reset\\\":true,\\\"multiple\\\":true,\\\"value\\\":\\\"id\\\",\\\"label\\\":\\\"Object Type\\\",\\\"values\\\":[{\\\"id\\\":\\\"indicator\\\",\\\"name\\\":\\\"Indicator\\\"},{\\\"id\\\":\\\"malware\\\",\\\"name\\\":\\\"Malware\\\"},{\\\"id\\\":\\\"threat-actor\\\",\\\"name\\\":\\\"Threat Actor\\\"},{\\\"id\\\":\\\"vulnerability\\\",\\\"name\\\":\\\"Vulnerability\\\"},{\\\"id\\\":\\\"attack-pattern\\\",\\\"name\\\":\\\"Attack Pattern\\\"},{\\\"id\\\":\\\"campaign\\\",\\\"name\\\":\\\"Campaign\\\"},{\\\"id\\\":\\\"course-of-action\\\",\\\"name\\\":\\\"Course of Action\\\"},{\\\"id\\\":\\\"identity\\\",\\\"name\\\":\\\"Identity\\\"},{\\\"id\\\":\\\"infrastructure\\\",\\\"name\\\":\\\"Infrastructure\\\"},{\\\"id\\\":\\\"intrusion-set\\\",\\\"name\\\":\\\"Intrusion Set\\\"},{\\\"id\\\":\\\"location\\\",\\\"name\\\":\\\"Location\\\"},{\\\"id\\\":\\\"malware-analysis\\\",\\\"name\\\":\\\"Malware Analysis\\\"},{\\\"id\\\":\\\"observed-data\\\",\\\"name\\\":\\\"Observed Data\\\"},{\\\"id\\\":\\\"opinion\\\",\\\"name\\\":\\\"Opinion\\\"},{\\\"id\\\":\\\"tool\\\",\\\"name\\\":\\\"Tool\\\"},{\\\"id\\\":\\\"report\\\",\\\"name\\\":\\\"Report\\\"},{\\\"id\\\":\\\"custom-object\\\",\\\"name\\\":\\\"Custom Object\\\"},{\\\"id\\\":\\\"observable\\\",\\\"name\\\":\\\"Observable\\\"},{\\\"id\\\":\\\"incident\\\",\\\"name\\\":\\\"Incident\\\"}]},\\\"key\\\":\\\"'Object Type'\\\",\\\"keyType\\\":\\\"select\\\",\\\"dataOperator\\\":{\\\"id\\\":\\\"=\\\",\\\"label\\\":\\\"=\\\"},\\\"operator\\\":\\\"=\\\",\\\"dataValue\\\":{\\\"id\\\":\\\"vulnerability\\\",\\\"name\\\":\\\"Vulnerability\\\"},\\\"value\\\":\\\"\\\\\\\"Vulnerability\\\\\\\"\\\"}]}\",\n    \"name\": \"Vulnerability\",\n    \"order\": \"1\",\n    \"pinned\": \"false\",\n    \"query\": \"type = \\\"vulnerability\\\"\",\n    \"shared_type\": \"global\",\n    \"shared_users\": [],\n    \"type\": \"cql\"\n  },\n  \"schedule\": {\n    \"duration_value\": \"2\",\n    \"ends_on\": {\n      \"attempts_left\": \"10\",\n      \"type\": \"occurrences\",\n      \"value\": \"10\"\n    },\n    \"id\": \"37bbeaac-a8d2-4571-a259-ee710342213e\",\n    \"repeat_on\": {},\n    \"repeat_type\": \"daily\",\n    \"start_datetime\": \"1638124200\"\n  },\n  \"shared_type\": \"global\",\n  \"type\": \"basic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b6055cb-bce6-4e88-9d4a-d100ff6ffd88",
+          "name": "Get Reports List",
+          "request": {
+            "name": "Get Reports List",
+            "description": {
+              "content": "Returns a list of reports from the Intel Exchange application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Pass the type of report to filter reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Pass the page number to retrieve reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of reports to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "repeat_type",
+                  "value": "<string>",
+                  "description": "Pass the frequency of the report run schedule."
+                },
+                {
+                  "disabled": false,
+                  "key": "shared_type",
+                  "value": "<string>",
+                  "description": "Pass the visibility of the reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "Pass the ID of the user who created the reports. You can retrieve the ID using the **Get Users** endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_by",
+                  "value": "<string>",
+                  "description": "Pass the ID of the user who modified the reports. You can retrieve the ID using the **Get Users** endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the created from time of the reports in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the created to time of the reports in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_from",
+                  "value": "<string>",
+                  "description": "Pass the modified from time of the reports in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_to",
+                  "value": "<string>",
+                  "description": "Pass the modified to time of the reports in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_last_run_from",
+                  "value": "<string>",
+                  "description": "Pass the last run from time of the reports in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_last_run_to",
+                  "value": "<string>",
+                  "description": "Pass the last run to time of the reports in epoch format."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb915d4d-bc0c-42c9-8278-0549c60e5ead",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "repeat_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shared_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_last_run_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_last_run_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"reports/?page=2&page_size=2&type=basic\",\n  \"page_size\": 2,\n  \"previous\": {},\n  \"results\": [\n    {\n      \"basic_report_type\": \"saved\",\n      \"columns\": [\n        {\n          \"key\": \"name\",\n          \"label\": \"Value\"\n        }\n      ],\n      \"created\": 1690977181,\n      \"created_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8bxx\",\n        \"last_name\": \"doe\"\n      },\n      \"date_last_run\": 1690977526,\n      \"external_recipients\": {\n        \"bcc\": [],\n        \"cc\": [],\n        \"to\": []\n      },\n      \"file_types\": [\n        \"csv\"\n      ],\n      \"id\": \"243558ea-b0e5-4290-a1dc-688d830f6e81\",\n      \"internal_recipients\": {\n        \"bcc\": [],\n        \"cc\": [],\n        \"to\": [\n          {\n            \"user\": {}\n          }\n        ]\n      },\n      \"modified\": 1690977526,\n      \"modified_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8b13\",\n        \"last_name\": \"doe\"\n      },\n      \"name\": \"Malware report\",\n      \"query_key\": {},\n      \"saved_search\": {\n        \"created_by\": {\n          \"email\": \"john.doe@cyware.com\",\n          \"first_name\": \"john\",\n          \"id\": \"76fbe1c3-5fd0-4674-9666-69921edafb94\",\n          \"last_name\": \"doe\"\n        },\n        \"description\": {},\n        \"editable\": false,\n        \"id\": \"a8a01156-d63a-42ed-810f-041b5b8bc4e3\",\n        \"is_threat_data_search\": true,\n        \"meta_data\": \"{\\\"object_type\\\":[\\\"malware\\\"],\\\"query\\\":[{\\\"length\\\":26,\\\"dataKey\\\":{\\\"id\\\":\\\"type\\\",\\\"type\\\":\\\"select\\\",\\\"addAll\\\":true,\\\"reset\\\":true,\\\"multiple\\\":true,\\\"value\\\":\\\"id\\\",\\\"label\\\":\\\"Object Type\\\",\\\"values\\\":[{\\\"id\\\":\\\"indicator\\\",\\\"name\\\":\\\"Indicator\\\"},{\\\"id\\\":\\\"malware\\\",\\\"name\\\":\\\"Malware\\\"},{\\\"id\\\":\\\"threat-actor\\\",\\\"name\\\":\\\"Threat Actor\\\"},{\\\"id\\\":\\\"vulnerability\\\",\\\"name\\\":\\\"Vulnerability\\\"},{\\\"id\\\":\\\"attack-pattern\\\",\\\"name\\\":\\\"Attack Pattern\\\"},{\\\"id\\\":\\\"campaign\\\",\\\"name\\\":\\\"Campaign\\\"},{\\\"id\\\":\\\"course-of-action\\\",\\\"name\\\":\\\"Course of Action\\\"},{\\\"id\\\":\\\"identity\\\",\\\"name\\\":\\\"Identity\\\"},{\\\"id\\\":\\\"infrastructure\\\",\\\"name\\\":\\\"Infrastructure\\\"},{\\\"id\\\":\\\"intrusion-set\\\",\\\"name\\\":\\\"Intrusion Set\\\"},{\\\"id\\\":\\\"location\\\",\\\"name\\\":\\\"Location\\\"},{\\\"id\\\":\\\"malware-analysis\\\",\\\"name\\\":\\\"Malware Analysis\\\"},{\\\"id\\\":\\\"observed-data\\\",\\\"name\\\":\\\"Observed Data\\\"},{\\\"id\\\":\\\"opinion\\\",\\\"name\\\":\\\"Opinion\\\"},{\\\"id\\\":\\\"tool\\\",\\\"name\\\":\\\"Tool\\\"},{\\\"id\\\":\\\"report\\\",\\\"name\\\":\\\"Report\\\"},{\\\"id\\\":\\\"custom-object\\\",\\\"name\\\":\\\"Custom Object\\\"},{\\\"id\\\":\\\"observable\\\",\\\"name\\\":\\\"Observable\\\"},{\\\"id\\\":\\\"incident\\\",\\\"name\\\":\\\"Incident\\\"}]},\\\"key\\\":\\\"'Object Type'\\\",\\\"keyType\\\":\\\"select\\\",\\\"dataOperator\\\":{\\\"id\\\":\\\"=\\\",\\\"label\\\":\\\"=\\\"},\\\"operator\\\":\\\"=\\\",\\\"dataValue\\\":{\\\"id\\\":\\\"malware\\\",\\\"name\\\":\\\"Malware\\\"},\\\"value\\\":\\\"\\\\\\\"Malware\\\\\\\"\\\"}]}\",\n        \"name\": \"Malware\",\n        \"order\": 3,\n        \"pinned\": false,\n        \"query\": \"type = \\\"malware\\\"\",\n        \"shared_type\": \"global\",\n        \"shared_users\": [],\n        \"type\": \"cql\"\n      },\n      \"schedule\": {\n        \"duration_value\": 7,\n        \"ends_on\": {\n          \"attempts_left\": 10,\n          \"type\": \"occurrences\",\n          \"value\": 10\n        },\n        \"id\": \"36d479a0-6d8e-4722-bb98-c0ea6ec1808f\",\n        \"repeat_on\": {},\n        \"repeat_type\": \"once\",\n        \"start_datetime\": 1690977183\n      },\n      \"shared_type\": \"private\",\n      \"type\": \"basic\"\n    }\n  ],\n  \"total\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd9de8a8-dc29-4a2b-935c-94a86259bf79",
+          "name": "Delete Report",
+          "request": {
+            "name": "Delete Report",
+            "description": {
+              "content": "Delete a report from the Intel Exchange application. You can only delete reports that are created by you. Retrieve the `report_id` using **List Reports** or **Report Details** APIs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ":report_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to be deleted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the ID of the report to delete. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa316e26-82c2-4436-b074-3be97ba82365",
+              "name": "This request doesn't return any response body. 204 status indicates that the report is deleted from Intel Exchange",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ":report_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the ID of the report to delete. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"raw\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b7aa36d-dd93-486f-8b9c-e3a4b187c3ec",
+          "name": "Get Report Details",
+          "request": {
+            "name": "Get Report Details",
+            "description": {
+              "content": "Returns the details of a report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ":report_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to be retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the ID of a report.\nFor example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd828c3c-acbf-448b-923e-fefe986fe64f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ":report_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the ID of a report.\nFor example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"basic_report_type\": \"custom\",\n  \"columns\": [\n    {\n      \"key\": \"name\",\n      \"label\": \"Value\"\n    }\n  ],\n  \"created\": 1689156499,\n  \"created_by\": {\n    \"email\": \"divya.jadhav@cyware.com\",\n    \"first_name\": \"divya\",\n    \"id\": \"8fba2055-e44a-4521-a68e-3d3b8b4bafd0\",\n    \"last_name\": \"j\"\n  },\n  \"date_last_run\": 1690107360,\n  \"external_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": []\n  },\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"id\": \"0870234e-9224-4a30-a6aa-03d3e1869b68\",\n  \"internal_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": [\n      {\n        \"user\": {\n          \"email\": \"divya.jadhav@cyware.com\",\n          \"first_name\": \"divya\",\n          \"id\": \"8fba2055-e44a-4521-a68e-3d3b8b4bafd0\",\n          \"last_name\": \"j\"\n        }\n      }\n    ]\n  },\n  \"modified\": 1690809887,\n  \"modified_by\": {\n    \"email\": \"divya.jadhav@cyware.com\",\n    \"first_name\": \"divya\",\n    \"id\": \"8fba2055-e44a-4521-a68e-3d3b8b4bafd0\",\n    \"last_name\": \"j\"\n  },\n  \"name\": \"global - donot edit- daily\",\n  \"saved_search\": {\n    \"created_by\": {\n      \"email\": \"divya.jadhav@cyware.com\",\n      \"first_name\": \"divya\",\n      \"id\": \"8fba2055-e44a-4521-a68e-3d3b8b4bafd0\",\n      \"last_name\": \"j\"\n    },\n    \"description\": {},\n    \"editable\": false,\n    \"id\": \"ce7dcaeb-3cff-4c0a-96cf-09610aa11c55\",\n    \"is_threat_data_search\": false,\n    \"meta_data\": \"{\\\"panelFilters\\\":{\\\"type\\\":{\\\"value\\\":[{\\\"id\\\":\\\"indicator\\\",\\\"name\\\":\\\"Indicator\\\"}]},\\\"ioc_type\\\":{\\\"value\\\":[{\\\"name\\\":\\\"Ipv4 addr\\\",\\\"id\\\":\\\"ipv4-addr\\\"}]}},\\\"object_type\\\":{\\\"id\\\":\\\"indicator\\\",\\\"name\\\":\\\"Indicator\\\"}}\",\n    \"name\": \"6d440e55-eba3-4f5f-99e3-fec281b31cda\",\n    \"order\": -1,\n    \"pinned\": false,\n    \"query\": \"type = \\\"indicator\\\" AND ioc_type = \\\"ipv4-addr\\\"\",\n    \"shared_type\": \"private\",\n    \"shared_users\": [],\n    \"type\": \"basic\"\n  },\n  \"schedule\": {\n    \"duration_value\": 1,\n    \"ends_on\": {\n      \"type\": \"end_date\",\n      \"value\": 1689618600\n    },\n    \"id\": \"7e484745-b116-4c8d-998d-a01efdc14d18\",\n    \"repeat_on\": {},\n    \"repeat_type\": \"daily\",\n    \"start_datetime\": 1689156516\n  },\n  \"shared_type\": \"global\",\n  \"type\": \"basic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aab2c846-a684-4d5d-9231-5b1364c634fa",
+          "name": "Update Report",
+          "request": {
+            "name": "Update Report",
+            "description": {
+              "content": "Updates specific fields of a report.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to update advanced reports.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ":report_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to be created."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule\": {\n    \"repeat_type\": \"<string>\",\n    \"start_datetime\": \"<number>\",\n    \"repeat_value\": \"<number>\",\n    \"duration_value\": \"<number>\"\n  },\n  \"name\": \"<string>\",\n  \"query_key\": \"ctix_created\",\n  \"columns\": [\n    {\n      \"key\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"user_id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"user_id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ]\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"type\": \"<string>\",\n  \"file_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shared_type\": \"<string>\",\n  \"saved_search\": {\n    \"query\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"meta_data\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87efa212-ec03-4b12-8dc3-c7bfa7dd7474",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ":report_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule\": {\n    \"repeat_type\": \"monthly\",\n    \"start_datetime\": \"1638124200\",\n    \"repeat_value\": \"2\",\n    \"duration_value\": \"2\"\n  },\n  \"name\": \"test_edited\",\n  \"query_key\": \"ctix_created\",\n  \"columns\": [\n    {\n      \"key\": \"valid_until\",\n      \"label\": \"Valid Until\"\n    }\n  ],\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"user_id\": \"3504aa4a-1e56-40c6-89d7-fc3c6adc2b03\",\n        \"first_name\": \"Aakriti\",\n        \"last_name\": \"Arya\",\n        \"email\": \"aakriti@cyware.com\"\n      }\n    ],\n    \"cc\": [],\n    \"bcc\": []\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"bca@cyware.com\"\n    ],\n    \"cc\": [],\n    \"bcc\": []\n  },\n  \"type\": \"basic\",\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"shared_type\": \"global\",\n  \"saved_search\": {\n    \"name\": \"test_edited\",\n    \"type\": \"cql\",\n    \"query\": \"type = \\\"malware\\\"\",\n    \"meta_data\": \"{\\\"panelFilters\\\":{\\\"type\\\":{\\\"value\\\":[\\\"indicator\\\",\\\"malware\\\"]}},\\\"object_type\\\":[\\\"indicator\\\",\\\"malware\\\"]}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"basic_report_type\": \"custom\",\n  \"columns\": [\n    {\n      \"key\": \"valid_until\",\n      \"label\": \"Valid Until\"\n    }\n  ],\n  \"created\": \"1692188813\",\n  \"created_by\": {\n    \"email\": \"john.doe@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8b13\",\n    \"last_name\": \"\"\n  },\n  \"date_last_run\": {},\n  \"external_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": [\n      \"bca@cyware.com\"\n    ]\n  },\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"id\": \"334c3ff3-bfcc-402c-ad6a-e13cb830a602\",\n  \"internal_recipients\": {\n    \"bcc\": [],\n    \"cc\": [],\n    \"to\": [\n      {\n        \"user\": {}\n      }\n    ]\n  },\n  \"modified\": \"1692188813\",\n  \"modified_by\": {\n    \"email\": \"john.doe@cyware.com\",\n    \"first_name\": \"john\",\n    \"id\": \"0d4408bd-9f94-47ec-98eb-6f32ecfd8b13\",\n    \"last_name\": \"doe\"\n  },\n  \"name\": \"Vulnerability Report\",\n  \"query_key\": \"ctix_created\",\n  \"saved_search\": {\n    \"created_by\": {\n      \"email\": \"john.doe@cyware.com\",\n      \"first_name\": \"john\",\n      \"id\": \"76fbe1c3-5fd0-4674-9666-69921edafb94\",\n      \"last_name\": \"doe\"\n    },\n    \"description\": {},\n    \"editable\": \"false\",\n    \"id\": \"57d957a8-c468-4a94-8c23-b74aa3540fb0\",\n    \"is_threat_data_search\": \"true\",\n    \"meta_data\": \"{\\\"object_type\\\":[\\\"vulnerability\\\"],\\\"query\\\":[{\\\"length\\\":32,\\\"dataKey\\\":{\\\"id\\\":\\\"type\\\",\\\"type\\\":\\\"select\\\",\\\"addAll\\\":true,\\\"reset\\\":true,\\\"multiple\\\":true,\\\"value\\\":\\\"id\\\",\\\"label\\\":\\\"Object Type\\\",\\\"values\\\":[{\\\"id\\\":\\\"indicator\\\",\\\"name\\\":\\\"Indicator\\\"},{\\\"id\\\":\\\"malware\\\",\\\"name\\\":\\\"Malware\\\"},{\\\"id\\\":\\\"threat-actor\\\",\\\"name\\\":\\\"Threat Actor\\\"},{\\\"id\\\":\\\"vulnerability\\\",\\\"name\\\":\\\"Vulnerability\\\"},{\\\"id\\\":\\\"attack-pattern\\\",\\\"name\\\":\\\"Attack Pattern\\\"},{\\\"id\\\":\\\"campaign\\\",\\\"name\\\":\\\"Campaign\\\"},{\\\"id\\\":\\\"course-of-action\\\",\\\"name\\\":\\\"Course of Action\\\"},{\\\"id\\\":\\\"identity\\\",\\\"name\\\":\\\"Identity\\\"},{\\\"id\\\":\\\"infrastructure\\\",\\\"name\\\":\\\"Infrastructure\\\"},{\\\"id\\\":\\\"intrusion-set\\\",\\\"name\\\":\\\"Intrusion Set\\\"},{\\\"id\\\":\\\"location\\\",\\\"name\\\":\\\"Location\\\"},{\\\"id\\\":\\\"malware-analysis\\\",\\\"name\\\":\\\"Malware Analysis\\\"},{\\\"id\\\":\\\"observed-data\\\",\\\"name\\\":\\\"Observed Data\\\"},{\\\"id\\\":\\\"opinion\\\",\\\"name\\\":\\\"Opinion\\\"},{\\\"id\\\":\\\"tool\\\",\\\"name\\\":\\\"Tool\\\"},{\\\"id\\\":\\\"report\\\",\\\"name\\\":\\\"Report\\\"},{\\\"id\\\":\\\"custom-object\\\",\\\"name\\\":\\\"Custom Object\\\"},{\\\"id\\\":\\\"observable\\\",\\\"name\\\":\\\"Observable\\\"},{\\\"id\\\":\\\"incident\\\",\\\"name\\\":\\\"Incident\\\"}]},\\\"key\\\":\\\"'Object Type'\\\",\\\"keyType\\\":\\\"select\\\",\\\"dataOperator\\\":{\\\"id\\\":\\\"=\\\",\\\"label\\\":\\\"=\\\"},\\\"operator\\\":\\\"=\\\",\\\"dataValue\\\":{\\\"id\\\":\\\"vulnerability\\\",\\\"name\\\":\\\"Vulnerability\\\"},\\\"value\\\":\\\"\\\\\\\"Vulnerability\\\\\\\"\\\"}]}\",\n    \"name\": \"Vulnerability\",\n    \"order\": \"1\",\n    \"pinned\": \"false\",\n    \"query\": \"type = \\\"vulnerability\\\"\",\n    \"shared_type\": \"global\",\n    \"shared_users\": [],\n    \"type\": \"cql\"\n  },\n  \"schedule\": {\n    \"duration_value\": \"2\",\n    \"ends_on\": {\n      \"attempts_left\": \"10\",\n      \"type\": \"occurrences\",\n      \"value\": \"10\"\n    },\n    \"id\": \"37bbeaac-a8d2-4571-a259-ee710342213e\",\n    \"repeat_on\": {},\n    \"repeat_type\": \"daily\",\n    \"start_datetime\": \"1638124200\"\n  },\n  \"shared_type\": \"global\",\n  \"type\": \"basic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94ec42bc-370a-4ea4-a1d5-31f6240b5508",
+          "name": "Get Download File",
+          "request": {
+            "name": "Get Download File",
+            "description": {
+              "content": "Downloads a file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "external_download",
+                ":file_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Pass the unique token to authorize the request."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) Pass the external file ID to download. Example, *3cd05d6d-3ed4-49ae-8866-4d8f87542fa1*"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9168e66e-6874-4da5-98bd-a3a8f782a0b4",
+              "name": "Returns the content of the file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "external_download",
+                    ":file_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) Pass the external file ID to download. Example, *3cd05d6d-3ed4-49ae-8866-4d8f87542fa1*"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "html"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f29e516-b1a4-4efc-970d-714c0b30ab2f",
+          "name": "Get Report Run Logs List",
+          "request": {
+            "name": "Get Report Run Logs List",
+            "description": {
+              "content": "Returns the run logs of a report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ":report_id",
+                "run",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to retrieve run logs."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a89fbf10-9c02-413f-a019-f902fd234331",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ":report_id",
+                    "run",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": \"3\",\n  \"page_size\": \"10\",\n  \"results\": [\n    {\n      \"files\": [\n        {\n          \"type\": \"xls\",\n          \"id\": \"fa3b65eb-d385-45b3-bbdd-6e63572cdfe0\",\n          \"url\": \"file/fa3b65eb-d385-45b3-bbdd-6e63572cdfe0/\",\n          \"name\": \"DONOT Edit - hourly report\"\n        }\n      ],\n      \"id\": \"06ebeae3-09c2-4fa0-80c1-afcc51a13064\",\n      \"last_run\": \"1650532503\",\n      \"download_link\": {},\n      \"run_type\": \"scheduled\",\n      \"file_types\": [\n        \"xls\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "303f5d96-0d5f-4308-b74b-7794be65c637",
+          "name": "Run Report",
+          "request": {
+            "name": "Run Report",
+            "description": {
+              "content": "Runs a report and sends the file to the recipients.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "reports",
+                ":report_id",
+                "run",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of report to run."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"id\": \"<string>\"\n      }\n    ]\n  },\n  \"query_key\": \"<string>\",\n  \"starttime\": \"<number>\",\n  \"endtime\": \"<number>\",\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"file_types\": \"csv\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d37af65-7920-4ef3-96c9-9d05dd2ad27e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "reports",
+                    ":report_id",
+                    "run",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"file_types\": [\n    \"csv\"\n  ],\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john.doe@orgname.com\",\n        \"id\": \"af4d8750-b8a4-4197-9a61-6b416b48f752\"\n      }\n    ]\n  },\n  \"query_key\": \"ctix_created\",\n  \"starttime\": 1752834255,\n  \"endtime\": 1753439055,\n  \"external_recipients\": {\n    \"to\": [\n      \"jane.smith@orgname.com\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"Your Report will be mailed to you as soon as it is ready.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d53af07e-3bf1-4f6f-8234-10974551f39f",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

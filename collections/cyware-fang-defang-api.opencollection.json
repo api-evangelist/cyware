@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Fang/Defang API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fang/Defang",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fang/Defang Indicators",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/analyst-tools/fang-defang-text/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert fanged data into defanged format and vice versa.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>If <code class=\"slate-code\">categorize = true</code> is passed in the request parameters, then the response includes the IOC types and the fanged or defanged data as key-value pairs.</p>\n</Callout>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

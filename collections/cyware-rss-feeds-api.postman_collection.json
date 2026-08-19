@@ -1,0 +1,632 @@
+{
+  "item": [
+    {
+      "id": "6cf9a215-a88d-4f5b-800c-061a57b05224",
+      "name": "RSS Feeds",
+      "description": {
+        "content": "RSS Feeds",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca0e8fdc-4084-4220-9f3a-d6a0ae2339b8",
+          "name": "Create Intel from RSS Feed",
+          "request": {
+            "name": "Create Intel from RSS Feed",
+            "description": {
+              "content": "Creates intel from the IOCs of an RSS article.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                ":article_id",
+                "stix",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "article_id",
+                  "description": "(Required) Pass the ID of an RSS article"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_type\": \"<string>\",\n  \"source_feed_id\": \"<string>\",\n  \"content\": {\n    \"emails\": {\n      \"all\": \"<boolean>\"\n    },\n    \"domains\": {\n      \"all\": \"<boolean>\",\n      \"negation\": \"<boolean>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ips\": {\n      \"all\": \"<boolean>\",\n      \"negation\": \"<boolean>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"metadata\": {\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"confidence\": \"<number>\",\n    \"tlp\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c1e3af8-ef12-40cb-87e9-f3eb59db945a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    ":article_id",
+                    "stix",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "article_id",
+                      "description": "(Required) Pass the ID of an RSS article"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_type\": \"rss_feed\",\n  \"source_feed_id\": \"bb042a32-6eb5-4cec-8886-c3921a9860c0\",\n  \"content\": {\n    \"emails\": {\n      \"all\": \"true\"\n    },\n    \"domains\": {\n      \"all\": \"false\",\n      \"negation\": \"true\",\n      \"values\": [\n        \"abc.com\"\n      ]\n    },\n    \"ips\": {\n      \"all\": \"false\",\n      \"negation\": \"false\",\n      \"values\": [\n        \"1.1.1.1\"\n      ]\n    }\n  },\n  \"metadata\": {\n    \"title\": \"Nugget post: WKHTMLTOPDF not loading JavaScript\",\n    \"description\": \"WKHTMLTOPDF is an extremely popular tool to convert existing html pages (or strings) to a PDF. This comes in handy for CyberSift\",\n    \"confidence\": \"80\",\n    \"tlp\": \"AMBER\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"you will be notified once stix get created.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f86a624-924e-4421-82f2-a47eb009c4b5",
+          "name": "Get IOCs Listing",
+          "request": {
+            "name": "Get IOCs Listing",
+            "description": {
+              "content": "Returns the IOCs of an RSS article.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                ":article_id",
+                "iocs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the entity type as `rss_feed`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "article_id",
+                  "description": "(Required) Pass the ID of an RSS article."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e62cff93-d9cf-4149-be68-7df3f75e3e62",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    ":article_id",
+                    "iocs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "article_id",
+                      "description": "(Required) Pass the ID of an RSS article."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"urls\": [\n      {\n        \"value\": \"https://breeew.com\",\n        \"is_whitelisted\": false\n      }\n    ],\n    \"registry_key_path\": [],\n    \"ips\": [\n      {\n        \"value\": \"2.64.228.228\",\n        \"is_whitelisted\": false\n      }\n    ],\n    \"ipv6\": [],\n    \"emails\": [],\n    \"domains\": [],\n    \"file_paths\": [],\n    \"sha512\": [],\n    \"sha256\": [],\n    \"sha1\": [],\n    \"md5\": [],\n    \"sha224\": [],\n    \"sha384\": [],\n    \"ssdeeps\": [],\n    \"cve_ids\": []\n  },\n  \"ioc_parsed\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a5bd55b-f957-40d1-b57e-176c8027c691",
+          "name": "Get RSS Feed Articles List",
+          "request": {
+            "name": "Get RSS Feed Articles List",
+            "description": {
+              "content": "Returns a list of articles from RSS feed sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "rss",
+                "articles",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of a source to filter articles based on the source."
+                },
+                {
+                  "disabled": false,
+                  "key": "bookmarked",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve bookmarked articles."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_read",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve read articles."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_reviewed",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve articles that are marked as reviewed."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "486b2b90-a94e-4e75-b4ad-a38617b353c3",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "rss",
+                    "articles",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmarked",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_read",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_reviewed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"feed-sources/rss/articles/?page=2&page_size=1\",\n  \"previous\": {},\n  \"page_size\": \"1\",\n  \"total\": \"14928\",\n  \"results\": [\n    {\n      \"id\": \"8f7b9abd-b41e-4241-9d52-3fb3e356af94\",\n      \"bookmarked\": \"false\",\n      \"title\": \"From laid off to starting a SaaS and $8K MRR with my productized service\",\n      \"summary\": \"<p>Article URL: <a href=\\\"https://breeew.com\\\">https://breeew.com</a></p>\\n<p>Comments URL: <a href=\\\"https://news.ycombinator.com/item?id=38188509\\\">https://news.ycombinator.com/item?id=38188509</a></p>\\n<p>Points: 1</p>\\n<p># Comments: 1</p>\",\n      \"published\": \"Wed, 08 Nov 2023 10:08:54 +0000\",\n      \"url\": \"https://breeew.com\",\n      \"media_thumbnail\": {},\n      \"source\": {\n        \"id\": \"391b6798-0b72-479c-b602-b47f46f5273f\",\n        \"name\": \"RSS\",\n        \"default_metadata\": {\n          \"tlp\": \"WHITE\",\n          \"score\": \"100\",\n          \"is_apply_all\": \"true\",\n          \"selected\": \"false\",\n          \"tags\": []\n        },\n        \"taxii_option\": \"2.1\"\n      },\n      \"date_created\": \"1699438134\",\n      \"is_read\": \"false\",\n      \"is_reviewed\": {\n        \"value\": \"true\",\n        \"comment\": \"reviewed\",\n        \"created_by\": {\n          \"first_name\": \"john\",\n          \"last_name\": \"doe\",\n          \"id\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n          \"email\": \"john.doe@cyware.com\"\n        },\n        \"created_date\": \"1699440004\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b40420f-d2cd-42b7-8327-118fda55ee4f",
+          "name": "Update RSS Feed Article",
+          "request": {
+            "name": "Update RSS Feed Article",
+            "description": {
+              "content": "Updates an RSS feed article.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "rss",
+                "articles",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"is_reviewed\": {\n    \"value\": \"<boolean>\",\n    \"comment\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d34beaf-ef35-4df3-b0bd-7fdee51c65b7",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "rss",
+                    "articles",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_reviewed\": {\n    \"value\": \"true\",\n    \"comment\": \"sample\"\n  },\n  \"id\": \"2b528e26-e402-436f-be45-fa4e7e7ada46\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb042a32-6eb5-4cec-8886-c3921a9860c0\",\n  \"stix_created\": \"false\",\n  \"title\": \"Clop ransomware suspects busted in Ukraine, money and motors seized\",\n  \"summary\": \"Victims in South Korea and the USA, suspects busted in Ukraine.\",\n  \"published\": \"Wed, 16 Jun 2021 18:44:28 +0000\",\n  \"url\": \"https://nakedsecurity.sophos.com/2021/06/16/clop-ransomware-suspects-busted-in-ukraine-money-and-motors-seized/\",\n  \"media_thumbnail\": \"https://nakedsecurity.sophos.com/wp-content/uploads/sites/2/2021/06/tes-1200.jpg\",\n  \"source\": {\n    \"id\": \"d5556850-895c-419c-a343-b2314b1a2814\",\n    \"name\": \"Cyware RSS\"\n  },\n  \"date_created\": \"1623869068\",\n  \"bookmarked\": \"false\",\n  \"is_read\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "07df21b4-8ba8-4a7a-9908-141191257444",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open RSS Feeds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

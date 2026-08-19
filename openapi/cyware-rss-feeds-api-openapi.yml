@@ -1,0 +1,774 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open RSS Feeds API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: RSS Feeds
+  description: RSS Feeds
+paths:
+  /conversion/feed-sources/{article_id}/stix/:
+    put:
+      operationId: createIntelFromRssFeed
+      summary: Create Intel from RSS Feed
+      tags:
+      - RSS Feeds
+      description: Creates intel from the IOCs of an RSS article.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/rss-feeds/create-intel-from-rss-feed
+      parameters:
+      - name: article_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of an RSS article
+          examples:
+          - 2b528e26-e402-436f-be45-fa4e7e7ada46
+        description: Pass the ID of an RSS article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source_type:
+                  type: string
+                  description: Pass the source type, such as the RSS feed.
+                  examples:
+                  - rss_feed
+                source_feed_id:
+                  type: string
+                  description: Pass the ID of the RSS article.
+                  examples:
+                  - bb042a32-6eb5-4cec-8886-c3921a9860c0
+                content:
+                  type: object
+                  description: Pass the IOCs selected from the article.
+                  properties:
+                    emails:
+                      type: object
+                      description: Pass the emails selected from the article.
+                      properties:
+                        all:
+                          type: boolean
+                          description: Returns a boolean flag indicating whether all email addresses extracted from the RSS feed should be included as IOCs.
+                          examples:
+                          - 'true'
+                    domains:
+                      type: object
+                      description: Pass the domains selected from the article.
+                      properties:
+                        all:
+                          type: boolean
+                          description: Indicates whether all domains from the RSS feed should be included as IOCs.
+                          examples:
+                          - 'false'
+                        negation:
+                          type: boolean
+                          description: Returns a boolean that determines whether the listed domain values should be excluded or included.
+                          examples:
+                          - 'true'
+                        values:
+                          type: array
+                          description: Pass the list of values of the domains.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - abc.com
+                    ips:
+                      type: object
+                      description: Pass the IPs selected from the article.
+                      properties:
+                        all:
+                          type: boolean
+                          description: Indicates whether all IP addresses parsed from the RSS feed should be added to the intel.
+                          examples:
+                          - 'false'
+                        negation:
+                          type: boolean
+                          description: Determines whether the IP addresses listed in values should be excluded  or included.
+                          examples:
+                          - 'false'
+                        values:
+                          type: array
+                          description: Pass the list of values of the IPs
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - 1.1.1.1
+                metadata:
+                  type: object
+                  description: Pass the additional details
+                  properties:
+                    title:
+                      type: string
+                      description: Pass the title of the report.
+                      examples:
+                      - 'Nugget post: WKHTMLTOPDF not loading JavaScript'
+                    description:
+                      type: string
+                      description: Pass the description of the report.
+                      examples:
+                      - WKHTMLTOPDF is an extremely popular tool to convert existing html pages (or strings) to a PDF. This comes in handy for CyberSift
+                    confidence:
+                      type: number
+                      description: Pass the confidence score.
+                      examples:
+                      - '80'
+                    tlp:
+                      type: string
+                      description: Pass the TLP value for the report.
+                      examples:
+                      - AMBER
+              required:
+              - source_type
+              - source_feed_id
+            example:
+              source_type: rss_feed
+              source_feed_id: bb042a32-6eb5-4cec-8886-c3921a9860c0
+              content:
+                emails:
+                  all: 'true'
+                domains:
+                  all: 'false'
+                  negation: 'true'
+                  values:
+                  - abc.com
+                ips:
+                  all: 'false'
+                  negation: 'false'
+                  values:
+                  - 1.1.1.1
+              metadata:
+                title: 'Nugget post: WKHTMLTOPDF not loading JavaScript'
+                description: WKHTMLTOPDF is an extremely popular tool to convert existing html pages (or strings) to a PDF. This comes in handy for CyberSift
+                confidence: '80'
+                tlp: AMBER
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: string
+                    description: Returns the success message.
+                    examples:
+                    - you will be notified once stix get created.
+              example:
+                details: you will be notified once stix get created.
+  /conversion/feed-sources/{article_id}/iocs/:
+    get:
+      operationId: iocsListing1
+      summary: Get IOCs Listing
+      tags:
+      - RSS Feeds
+      description: Returns the IOCs of an RSS article.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/rss-feeds/iocs-listing-1
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the entity type as `rss_feed`.
+          examples:
+          - rss_feed
+        description: Pass the entity type as `rss_feed`.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: article_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of an RSS article.
+          examples:
+          - 2b528e26-e402-436f-be45-fa4e7e7ada46
+        description: Pass the ID of an RSS article.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    description: Returns the list of IOCs.
+                    properties:
+                      urls:
+                        type: array
+                        description: Returns the list of URLs.
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                              description: Returns the value of URL.
+                              examples:
+                              - https://breeew.com
+                            is_whitelisted:
+                              type: boolean
+                              description: Returns true, if the URL is whitelisted.
+                              examples:
+                              - false
+                      registry_key_path:
+                        type: array
+                        description: Returns a list of Windows registry key paths identified as IOCs during threat analysis or content parsing.
+                        items: {}
+                      ips:
+                        type: array
+                        description: Returns the list of IPs.
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                              description: Returns the value of the IP.
+                              examples:
+                              - 2.64.228.228
+                            is_whitelisted:
+                              type: boolean
+                              description: Returns true, if the IP is whitelisted.
+                              examples:
+                              - false
+                      ipv6:
+                        type: array
+                        description: Returns the list of IPv6
+                        items: {}
+                      emails:
+                        type: array
+                        description: Returns the list of emails
+                        items: {}
+                      domains:
+                        type: array
+                        description: Returns the list of domains
+                        items: {}
+                      file_paths:
+                        type: array
+                        description: Returns the list of file paths
+                        items: {}
+                      sha512:
+                        type: array
+                        description: Returns the list of SHA512
+                        items: {}
+                      sha256:
+                        type: array
+                        description: Returns the list of SHA512
+                        items: {}
+                      sha1:
+                        type: array
+                        description: Returns the list of SHA1
+                        items: {}
+                      md5:
+                        type: array
+                        description: Returns the list of MD5
+                        items: {}
+                      sha224:
+                        type: array
+                        description: Returns the list of SHA224
+                        items: {}
+                      sha384:
+                        type: array
+                        description: Returns the list of SHA384
+                        items: {}
+                      ssdeeps:
+                        type: array
+                        description: Returns the list of SSDEEPS
+                        items: {}
+                      cve_ids:
+                        type: array
+                        description: Returns the list of CVE IDs
+                        items: {}
+                  ioc_parsed:
+                    type: boolean
+                    description: Returns `true` if the IOCs are parsed from the article, else returns `false`.
+                    examples:
+                    - true
+              example:
+                results:
+                  urls:
+                  - value: https://breeew.com
+                    is_whitelisted: false
+                  registry_key_path: []
+                  ips:
+                  - value: 2.64.228.228
+                    is_whitelisted: false
+                  ipv6: []
+                  emails: []
+                  domains: []
+                  file_paths: []
+                  sha512: []
+                  sha256: []
+                  sha1: []
+                  md5: []
+                  sha224: []
+                  sha384: []
+                  ssdeeps: []
+                  cve_ids: []
+                ioc_parsed: true
+  /conversion/feed-sources/rss/articles/:
+    get:
+      operationId: listRssFeedArticles
+      summary: Get RSS Feed Articles List
+      tags:
+      - RSS Feeds
+      description: Returns a list of articles from RSS feed sources.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/rss-feeds/list-rss-feed-articles
+      parameters:
+      - name: feed_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of a source to filter articles based on the source.
+          examples:
+          - 37290cca-338b-4242-879e-da1867c3a055
+        description: Pass the ID of a source to filter articles based on the source.
+      - name: bookmarked
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass true to retrieve bookmarked articles.
+          examples:
+          - 'true'
+        description: Pass true to retrieve bookmarked articles.
+      - name: is_read
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass true to retrieve read articles.
+          examples:
+          - 'false'
+        description: Pass true to retrieve read articles.
+      - name: is_reviewed
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass true to retrieve articles that are marked as reviewed.
+          examples:
+          - 'true'
+        description: Pass true to retrieve articles that are marked as reviewed.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the link for the next page.
+                    examples:
+                    - feed-sources/rss/articles/?page=2&page_size=1
+                  previous:
+                    type: object
+                    description: Returns the link for the previous page.
+                  page_size:
+                    type: number
+                    description: Returns the number of elements present on a page.
+                    examples:
+                    - '1'
+                  total:
+                    type: number
+                    description: Returns the total number of RSS feed sources.
+                    examples:
+                    - '14928'
+                  results:
+                    type: array
+                    description: Returns the list of all RSS feed articles.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of the article.
+                          examples:
+                          - 8f7b9abd-b41e-4241-9d52-3fb3e356af94
+                        bookmarked:
+                          type: boolean
+                          description: Returns true if the feed has been bookmarked, else returns false.
+                          examples:
+                          - 'false'
+                        title:
+                          type: string
+                          description: Returns the title of the article.
+                          examples:
+                          - From laid off to starting a SaaS and $8K MRR with my productized service
+                        summary:
+                          type: string
+                          description: Returns the summary of the article.
+                          examples:
+                          - '<p>Article URL: <a href="https://breeew.com">https://breeew.com</a></p>
+
+                            <p>Comments URL: <a href="https://news.ycombinator.com/item?id=38188509">https://news.ycombinator.com/item?id=38188509</a></p>
+
+                            <p>Points: 1</p>
+
+                            <p># Comments: 1</p>'
+                        published:
+                          type: string
+                          description: Returns the date and time of publishing of the article.
+                          examples:
+                          - Wed, 08 Nov 2023 10:08:54 +0000
+                        url:
+                          type: string
+                          description: Returns the URL of the article.
+                          examples:
+                          - https://breeew.com
+                        media_thumbnail:
+                          type: object
+                          description: Returns the URL of the media thumbnail.
+                        source:
+                          type: object
+                          description: Return details such as ID and name of the source RSS feed.
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the unique identifier of the source RSS feed.
+                              examples:
+                              - 391b6798-0b72-479c-b602-b47f46f5273f
+                            name:
+                              type: string
+                              description: Returns the name of the source RSS feed.
+                              examples:
+                              - RSS
+                            default_metadata:
+                              type: object
+                              description: Returns additional fields.
+                              properties:
+                                tlp:
+                                  type: string
+                                  description: Returns the TLP associated.
+                                  default: WHITE
+                                  examples:
+                                  - WHITE
+                                score:
+                                  type: number
+                                  description: Returns the confidence score for the source.
+                                  default: '100'
+                                  examples:
+                                  - '100'
+                                is_apply_all:
+                                  type: boolean
+                                  description: Returns a boolean indicating whether to apply metadata to all objects/IOCS created. If not, use default values for metadata.
+                                  default: 'true'
+                                  examples:
+                                  - 'true'
+                                selected:
+                                  type: boolean
+                                  description: Returns a boolean value indicating whether the `default_metadata` is to be applied to the report. If not, use default values for the metadata.
+                                  default: 'true'
+                                  examples:
+                                  - 'false'
+                                tags:
+                                  type: array
+                                  description: Contains a list of tags selected by the user. Contains id, name and some tag-related values
+                                  items: {}
+                            taxii_option:
+                              type: string
+                              description: Specifies the version of the TAXII protocol used for ingesting or interacting with the feed source.
+                              examples:
+                              - '2.1'
+                        date_created:
+                          type: number
+                          description: Returns the date of creation of this article in epoch format.
+                          examples:
+                          - '1699438134'
+                        is_read:
+                          type: boolean
+                          description: Returns true if the article is read, else returns false.
+                          examples:
+                          - 'false'
+                        is_reviewed:
+                          type: object
+                          description: Returns the review details.
+                          properties:
+                            value:
+                              type: boolean
+                              description: Returns true to mark an RSS feed article as reviewed.
+                              examples:
+                              - 'true'
+                            comment:
+                              type: string
+                              description: Returns the review comment.
+                              examples:
+                              - reviewed
+                            created_by:
+                              type: object
+                              description: Returns the details of the user who created the note.
+                              properties:
+                                first_name:
+                                  type: string
+                                  description: Returns the first name of the user who created the note.
+                                  examples:
+                                  - john
+                                last_name:
+                                  type: string
+                                  description: Returns the last name of the user who created the note.
+                                  examples:
+                                  - doe
+                                id:
+                                  type: string
+                                  description: Returns the ID of the user who created the note.
+                                  examples:
+                                  - a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                                email:
+                                  type: string
+                                  description: Returns the email address of the user who created the note.
+                                  examples:
+                                  - john.doe@cyware.com
+                            created_date:
+                              type: number
+                              description: Returns the timestamp when the note was created.
+                              examples:
+                              - '1699440004'
+              example:
+                next: feed-sources/rss/articles/?page=2&page_size=1
+                previous: {}
+                page_size: '1'
+                total: '14928'
+                results:
+                - id: 8f7b9abd-b41e-4241-9d52-3fb3e356af94
+                  bookmarked: 'false'
+                  title: From laid off to starting a SaaS and $8K MRR with my productized service
+                  summary: '<p>Article URL: <a href="https://breeew.com">https://breeew.com</a></p>
+
+                    <p>Comments URL: <a href="https://news.ycombinator.com/item?id=38188509">https://news.ycombinator.com/item?id=38188509</a></p>
+
+                    <p>Points: 1</p>
+
+                    <p># Comments: 1</p>'
+                  published: Wed, 08 Nov 2023 10:08:54 +0000
+                  url: https://breeew.com
+                  media_thumbnail: {}
+                  source:
+                    id: 391b6798-0b72-479c-b602-b47f46f5273f
+                    name: RSS
+                    default_metadata:
+                      tlp: WHITE
+                      score: '100'
+                      is_apply_all: 'true'
+                      selected: 'false'
+                      tags: []
+                    taxii_option: '2.1'
+                  date_created: '1699438134'
+                  is_read: 'false'
+                  is_reviewed:
+                    value: 'true'
+                    comment: reviewed
+                    created_by:
+                      first_name: john
+                      last_name: doe
+                      id: a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                      email: john.doe@cyware.com
+                    created_date: '1699440004'
+    put:
+      operationId: updateRssFeedArticle
+      summary: Update RSS Feed Article
+      tags:
+      - RSS Feeds
+      description: Updates an RSS feed article.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/rss-feeds/update-rss-feed-article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_reviewed:
+                  type: object
+                  description: Pass the review details.
+                  properties:
+                    value:
+                      type: boolean
+                      description: Pass true to mark an RSS feed article as reviewed.
+                      examples:
+                      - 'true'
+                    comment:
+                      type: string
+                      description: Pass the review comment.
+                      examples:
+                      - sample
+                  required:
+                  - value
+                id:
+                  type: string
+                  description: Pass the ID of the article.
+                  examples:
+                  - 2b528e26-e402-436f-be45-fa4e7e7ada46
+              required:
+              - id
+            example:
+              is_reviewed:
+                value: 'true'
+                comment: sample
+              id: 2b528e26-e402-436f-be45-fa4e7e7ada46
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the RSS article.
+                    examples:
+                    - bb042a32-6eb5-4cec-8886-c3921a9860c0
+                  stix_created:
+                    type: boolean
+                    description: Indicates whether a STIX object has been generated from the RSS feed article.
+                    examples:
+                    - 'false'
+                  title:
+                    type: string
+                    description: Returns the title of the article.
+                    examples:
+                    - Clop ransomware suspects busted in Ukraine, money and motors seized
+                  summary:
+                    type: string
+                    description: Returns the summary of the article.
+                    examples:
+                    - Victims in South Korea and the USA, suspects busted in Ukraine.
+                  published:
+                    type: string
+                    description: Returns the date and time of publishing the article.
+                    examples:
+                    - Wed, 16 Jun 2021 18:44:28 +0000
+                  url:
+                    type: string
+                    description: Returns the URL of the article.
+                    examples:
+                    - https://nakedsecurity.sophos.com/2021/06/16/clop-ransomware-suspects-busted-in-ukraine-money-and-motors-seized/
+                  media_thumbnail:
+                    type: string
+                    description: Returns the URL of the media thumbnail.
+                    examples:
+                    - https://nakedsecurity.sophos.com/wp-content/uploads/sites/2/2021/06/tes-1200.jpg
+                  source:
+                    type: object
+                    description: Return details such as ID, name, and default metadata of the source RSS feed.
+                    properties:
+                      id:
+                        type: string
+                        description: Returns the unique identifier of the source RSS feed.
+                        examples:
+                        - d5556850-895c-419c-a343-b2314b1a2814
+                      name:
+                        type: string
+                        description: Returns the name of the source RSS feed.
+                        examples:
+                        - Cyware RSS
+                  date_created:
+                    type: number
+                    description: Returns the date of creation of the account in epoch format.
+                    examples:
+                    - '1623869068'
+                  bookmarked:
+                    type: boolean
+                    description: Returns true to bookmark this feed, else returns false.
+                    examples:
+                    - 'false'
+                  is_read:
+                    type: boolean
+                    description: Returns true if the article is read, else returns false.
+                    examples:
+                    - 'false'
+              example:
+                id: bb042a32-6eb5-4cec-8886-c3921a9860c0
+                stix_created: 'false'
+                title: Clop ransomware suspects busted in Ukraine, money and motors seized
+                summary: Victims in South Korea and the USA, suspects busted in Ukraine.
+                published: Wed, 16 Jun 2021 18:44:28 +0000
+                url: https://nakedsecurity.sophos.com/2021/06/16/clop-ransomware-suspects-busted-in-ukraine-money-and-motors-seized/
+                media_thumbnail: https://nakedsecurity.sophos.com/wp-content/uploads/sites/2/2021/06/tes-1200.jpg
+                source:
+                  id: d5556850-895c-419c-a343-b2314b1a2814
+                  name: Cyware RSS
+                date_created: '1623869068'
+                bookmarked: 'false'
+                is_read: 'false'
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

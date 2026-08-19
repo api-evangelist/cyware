@@ -1,0 +1,1466 @@
+{
+  "item": [
+    {
+      "id": "876a6cc5-9a4a-4615-a1da-89d14e90cc03",
+      "name": "Quick Add Intel",
+      "description": {
+        "content": "Quick Add Intel",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29d0d335-e15e-456c-a29a-729489934f48",
+          "name": "Create Parse IOCs Task",
+          "request": {
+            "name": "Create Parse IOCs Task",
+            "description": {
+              "content": "Creates an IOC parsing task to extract STIX objects from free text data or a web page.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Currently, this API endpoint does not support parsing IOCs from files such as PDF, CSV, XLS, and others.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "free-text",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<string>\",\n  \"url\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10a7c050-0481-4a93-97de-604b7612dbbf",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "free-text",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"1.2.3.11, 1.1.2.1, domain.com\",\n  \"url\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"4310c8e6-c26e-4526-a3b2-7445c6798511\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67e64d7a-a697-4a79-93b6-9c61b30dbd9e",
+          "name": "Get Country Codes List",
+          "request": {
+            "name": "Get Country Codes List",
+            "description": {
+              "content": "Returns a list of country codes based on the [STIX 2.1 enumeration](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These country codes can be used to specify locations in the **Quick Add Intel** endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "vocabs",
+                "country_enum",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4bc79de-3997-42b4-866c-64957200f01a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "vocabs",
+                    "country_enum",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"value\": \"AC\",\n    \"label\": \"AC\"\n  },\n  \"1\": {\n    \"value\": \"AN\",\n    \"label\": \"AN\"\n  },\n  \"2\": {\n    \"value\": \"ZM\",\n    \"label\": \"Zambia\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2fdfb39-dcc4-41e5-92bb-c0ecdd4b88db",
+          "name": "Get Quick Add Intel History List",
+          "request": {
+            "name": "Get Quick Add Intel History List",
+            "description": {
+              "content": "Returns a list of intel added using quick add intel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "intel-history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a query text to search for an intel based on the title."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Pass a comma-separated list of fields to sort the history."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the time in epoch format to apply the created after (inclusive) filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the time in epoch format to apply the created before (inclusive) filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "published_from",
+                  "value": "<string>",
+                  "description": "Pass the time in epoch format to apply the published after (inclusive) filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "published_to",
+                  "value": "<string>",
+                  "description": "Pass the time in epoch format to apply the published before (inclusive) filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the user ID to apply the created by filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Pass a status to apply the status filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the records."
+                },
+                {
+                  "disabled": false,
+                  "key": "component",
+                  "value": "<string>",
+                  "description": "(Required) Pass `quick-add-intel` to retrieve the quick add intel history."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8609b73a-ff7f-4b8a-9494-7669ed3a1c18",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "intel-history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "published_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "published_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "component",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"intel-history/?page=2&page_size=1\",\n  \"page_size\": 1,\n  \"previous\": {},\n  \"results\": [\n    {\n      \"client_collections\": {},\n      \"component\": \"quick-add-intel\",\n      \"created\": 1706707031.759591,\n      \"created_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n        \"last_name\": \"doe\"\n      },\n      \"error_message\": \"\",\n      \"feed_id\": {},\n      \"id\": \"9fae8850-5956-4479-834c-8cd4d51c28aa\",\n      \"metadata\": {},\n      \"modified\": 1706707049.743087,\n      \"modified_by\": {\n        \"email\": \"john.doe@cyware.com\",\n        \"first_name\": \"john\",\n        \"id\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n        \"last_name\": \"doe\"\n      },\n      \"published_on\": {},\n      \"report_id\": \"e121fe2f-4ecf-42ab-ac87-8e7c0ba8d24d\",\n      \"server_collections\": {},\n      \"status\": \"CREATED\",\n      \"title\": \"ips\",\n      \"tlp\": \"NONE\"\n    }\n  ],\n  \"total\": 168553\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efa13500-db68-49c3-97c7-3607b574558b",
+          "name": "Get Regions List",
+          "request": {
+            "name": "Get Regions List",
+            "description": {
+              "content": "Returns the list of [STIX 2.1 region open vocabulary](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These regions can be used to specify locations in the **Quick Add Intel** endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "vocabs",
+                "region_ov",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45ff5d1a-f976-4dfc-aff2-71fff15f3c3f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "vocabs",
+                    "region_ov",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"value\": \"africa\",\n    \"label\": \"africa\"\n  },\n  \"1\": {\n    \"value\": \"eastern-africa\",\n    \"label\": \"eastern-africa\"\n  },\n  \"2\": {\n    \"value\": \"middle-africa\",\n    \"label\": \"middle-africa\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "270dfe5d-7482-4424-8ec0-a8296c14e391",
+          "name": "Quick Add Intel",
+          "request": {
+            "name": "Quick Add Intel",
+            "description": {
+              "content": "Creates intel by providing minimal details of indicators, SDOs, relations, custom objects, and indicators parsed from free text.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Default Source</strong>: Import</p>\n  <p><strong class=\"slate-bold\">Default Collection</strong>: Free Text</p>\n</Callout>\n\n**Note**: At least one of the `indicators`, `sdos`, `observables`, or `custom_objects` is required to create an intel.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"The Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">indicators</code> object in Quick Add Intel accepts the IOC type as the key and a comma-separated list of IOC values as the value. You can pass a maximum of 5000 characters as the IOC value per IOC type.</p>\n<p>For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ipv4-addr</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6-addr</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domain</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">url</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">email</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p></AccordionItem>\n<AccordionItem title=\"The Parse Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">parse_indicators</code> object in Quick Add Intel accepts the IOC type as the key and a list of parsed IOC values as the value. For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">parse_indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ips</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domains</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">urls</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">emails</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p>\n<p>CVE IDs</p>\n<p><code class=\"slate-code\">cve_ids</code></p>\n<p>Windows Registry Key</p>\n<p><code class=\"slate-code\">registry_key_path</code></p>\n<p>File Paths</p>\n<p><code class=\"slate-code\">file_paths</code></p>\n<p>Autonomous System</p>\n<p><code class=\"slate-code\">as</code></p>\n<p>X.509 certificates</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p></AccordionItem>\n<AccordionItem title=\"The Custom Objects Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">custom_objects</code> object in Quick Add Intel accepts the ID of a custom object as the key and a list of custom attribute objects as the value.</p>\n<p>The custom attribute object accepts the name of the primary attribute of a custom object as the key and the attribute value as the value.</p>\n<p>To retrieve the custom object IDs and the respective primary attribute, use the <em class=\"slate-italic\">GET Custom Object Details</em> API in <strong class=\"slate-bold\">Administration</strong> > <strong class=\"slate-bold\">Custom Entities Management</strong> > <strong class=\"slate-bold\">Custom Objects</strong>.</p></AccordionItem>\n<AccordionItem title=\"The SDOs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">sdos</code> object in Quick Add Intel accepts the STIX Domain Object (SDO) type as the key and a comma-separated list of SDO values as the value. You can pass a maximum of 5000 characters as the SDO value per SDO type.</p>\n<p>For the allowed list of SDO types and the respective key to pass in the <code class=\"slate-code\">sdos</code> object, refer to the following table:</p>\n<p>SDO Type</p>\n<p>SDO Key</p>\n<p>Vulnerability</p>\n<p><code class=\"slate-code\">vulnerability</code></p>\n<p>Malware</p>\n<p><code class=\"slate-code\">malware</code></p>\n<p>Campaign</p>\n<p><code class=\"slate-code\">campaign</code></p>\n<p>Threat Actor</p>\n<p><code class=\"slate-code\">threat-actor</code></p>\n<p>Intrusion Set</p>\n<p><code class=\"slate-code\">intrusion-set</code></p>\n<p>Attack Pattern</p>\n<p><code class=\"slate-code\">attack-pattern</code></p>\n<p>Incident</p>\n<p><code class=\"slate-code\">incident</code></p>\n<p>Course of Action</p>\n<p><code class=\"slate-code\">course-of-action</code></p>\n<p>Identity</p>\n<p><code class=\"slate-code\">identity</code></p>\n<p>Tool</p>\n<p><code class=\"slate-code\">tool</code></p>\n<p>Infrastructure</p>\n<p><code class=\"slate-code\">infrastructure</code></p>\n<p>Location</p>\n<p><code class=\"slate-code\">location</code></p>\n<p>Malware Analysis</p>\n<p><code class=\"slate-code\">malware-analysis</code></p></AccordionItem>\n<AccordionItem title=\"The Observables Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">observables</code> object in Quick Add Intel accepts the STIX Cyber Observable Object (SCO) type as the key and a comma-separated list of SCO values as the value. You can pass a maximum of 5000 characters as the SCO value per SCO type.</p>\n<p>For the allowed list of SCO types and the respective key to pass in the <code class=\"slate-code\">observables</code> object, refer to the following table:</p>\n<p>SCO Type</p>\n<p>SCO Key</p>\n<p>Artifact</p>\n<p><code class=\"slate-code\">artifact</code></p>\n<p>Directory</p>\n<p><code class=\"slate-code\">directory</code></p>\n<p>Email Message</p>\n<p><code class=\"slate-code\">email-message</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p>\n<p>Mutex</p>\n<p><code class=\"slate-code\">mutex</code></p>\n<p>​Network Traffic</p>\n<p><code class=\"slate-code\">network-traffic</code></p>\n<p>Process</p>\n<p><code class=\"slate-code\">process</code></p>\n<p>Software</p>\n<p><code class=\"slate-code\">software</code></p>\n<p>User Account</p>\n<p><code class=\"slate-code\">user-account</code></p>\n<p>X.509 Certificate</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>File</p>\n<p><code class=\"slate-code\">file</code></p></AccordionItem>\n</Accordion>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "create-stix",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parsed_indicators\": \"<object>\",\n  \"metadata\": {\n    \"tlp\": \"<string>\",\n    \"is_apply_all\": \"false\",\n    \"custom_scores\": {\n      \"x_ctix_customscore_2\": \"<number>\"\n    },\n    \"confidence\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"import\": \"<object>\",\n  \"indicators\": {\n    \"ipv4-addr\": \"<string>\"\n  },\n  \"title\": \"<string>\",\n  \"sdos\": {\n    \"vulnerability\": \"<string>\"\n  },\n  \"observables\": \"<object>\",\n  \"relations\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"ioc_type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"ioc_type\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"custom_objects\": {\n    \"7e081615-a44b-4d52-bd8d-48b9bbbd37a8\": [\n      {\n        \"action\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\"\n      }\n    ]\n  },\n  \"create_intel_feed\": \"False\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5fa77ed-abc2-42f5-927c-06d591064b79",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "create-stix",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parsed_indicators\": {},\n  \"metadata\": {\n    \"tlp\": \"\",\n    \"is_apply_all\": \"true\",\n    \"custom_scores\": {\n      \"x_ctix_customscore_2\": \"2\"\n    },\n    \"confidence\": \"91\",\n    \"labels\": [],\n    \"description\": \"Sample source vulnerability description\"\n  },\n  \"import\": {},\n  \"indicators\": {\n    \"ipv4-addr\": \"112.121.123.222\"\n  },\n  \"title\": \"Vulnerability Report\",\n  \"sdos\": {\n    \"vulnerability\": \"CVE-2021-21913\"\n  },\n  \"observables\": {},\n  \"relations\": [\n    {\n      \"name\": \"1.1.1.100\",\n      \"type\": \"indicator\",\n      \"ioc_type\": \"ipv4-addr\",\n      \"id\": \"30bafaad-b70d-4881-97f2-7915df322332\"\n    }\n  ],\n  \"custom_objects\": {\n    \"7e081615-a44b-4d52-bd8d-48b9bbbd37a8\": [\n      {\n        \"action\": \"sample action\"\n      }\n    ]\n  },\n  \"create_intel_feed\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"You will be notified once the STIX is created\",\n  \"task_id\": \"139e97e9-51fa-4717-bcfa-1cd226a8a76d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8701d92-d086-48a3-8f83-2e998307e156",
+          "name": "Get Parse IOCs Task Status",
+          "request": {
+            "name": "Get Parse IOCs Task Status",
+            "description": {
+              "content": "Returns the status of a parse IOCs task.\n\n### Parsing Task Status Codes\n\nThe following table provides an overview of the different statuses for a parsing task\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"121px\",\"143px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"8f70bc14-bb07-48b1-bd12-f249c90f8a7a\",\"title\":\"Numeric Status\"},{\"id\":\"d40d086a-e785-40d2-8529-69e9f3c6027d\",\"title\":\"Status Value\"},{\"id\":\"b3c11ff0-e7e2-496f-949c-12ea98e41749\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">0</p></table-cell>\n    <table-cell><p class=\"slate-p \">enqueued</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is in the queue for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">1</p></table-cell>\n    <table-cell><p class=\"slate-p \">running</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is being processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">2</p></table-cell>\n    <table-cell><p class=\"slate-p \">failed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Failed to process parsing due to invalid input.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">3</p></table-cell>\n    <table-cell><p class=\"slate-p \">done</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task has been completed. Use the <strong class=\"slate-bold\">Get Parsed IOCs</strong> endpoint to retrieve the parsed IOCs.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">5</p></table-cell>\n    <table-cell><p class=\"slate-p \">delayed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing is delayed due to too many tasks in the queue. Try again after some time.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">6</p></table-cell>\n    <table-cell><p class=\"slate-p \">cancelled</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing has been manually cancelled by the user.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">7</p></table-cell>\n    <table-cell><p class=\"slate-p \">aborted</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing was aborted due to some unexpected error. Create a new parsing task.</p></table-cell>\n  </table-row>\n</Table>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "tasks",
+                ":task_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "(Required) Pass `status` to retrieve the status of a task."
+                },
+                {
+                  "disabled": false,
+                  "key": "num_status",
+                  "value": "<boolean>",
+                  "description": "Pass `true` to retrieve the numeric status of the task."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) Pass the ID of a parse IOCs task."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "029cc6fc-15c9-4e02-a11b-d29951ae2745",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "tasks",
+                    ":task_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "num_status",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) Pass the ID of a parse IOCs task."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"done\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5dd4f71a-0c6a-4d06-89c1-6562c99b4675",
+          "name": "Get Parsed IOCs List",
+          "request": {
+            "name": "Get Parsed IOCs List",
+            "description": {
+              "content": "Returns a list of parsed IOCs as STIX objects after successfully processing the **Create Parse IOCs Task** endpoint. Also indicates whether each IOC exists in the platform’s Allowed Indicators list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "tasks",
+                ":task_id",
+                "parse-iocs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) Pass the ID of a parse IOCs task."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09c728f0-a994-4628-b543-6712264726c2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "tasks",
+                    ":task_id",
+                    "parse-iocs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) Pass the ID of a parse IOCs task."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"registry_key_path\": [],\n  \"urls\": [],\n  \"ips\": [\n    {\n      \"value\": \"1.1.2.1\",\n      \"is_whitelisted\": false\n    }\n  ],\n  \"ipv6\": [],\n  \"emails\": [],\n  \"domains\": [\n    {\n      \"value\": \"domain.com\",\n      \"is_whitelisted\": true\n    }\n  ],\n  \"file_paths\": [],\n  \"sha512\": [],\n  \"sha256\": [],\n  \"sha1\": [],\n  \"md5\": [],\n  \"sha224\": [],\n  \"sha384\": [],\n  \"ssdeeps\": [],\n  \"cve_ids\": [],\n  \"description\": \"1.2.3.11, 1.1.2.1, domain.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38f4e156-be93-4e0d-ad26-9645e1f45ae1",
+          "name": "Get Quick Add Intel Relation Objects",
+          "request": {
+            "name": "Get Quick Add Intel Relation Objects",
+            "description": {
+              "content": "Retrieve the details of the threat objects (indicators, SDOs, SCOs, relations, and custom objects) that are ingested and added as relationship objects of the report that is created as part of the quick add intel submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "report",
+                ":report_id",
+                "relations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of objects to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the keyword to search based on the object name."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_id",
+                  "description": "(Required) Pass the unique ID of a report object to retrieve the related objects. You can retrieve the report ID using the **List Quick Add Intel History** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6f5bd22-a452-474c-aa4b-7f138bbd0581",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "report",
+                    ":report_id",
+                    "relations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_id",
+                      "description": "(Required) Pass the unique ID of a report object to retrieve the related objects. You can retrieve the report ID using the **List Quick Add Intel History** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"is_redacted\": \"false\",\n      \"relationship_type\": \"related-to\",\n      \"sources\": [\n        {\n          \"id\": \"e5cc6128-494f-40ff-bec7-f3c347664839\",\n          \"name\": \"Import\",\n          \"source_type\": \"CUSTOM_STIX_SOURCES\"\n        }\n      ],\n      \"target_ref\": {\n        \"created\": \"1716973369\",\n        \"id\": \"6e573ee8-e53d-46ea-bc1e-9ca135fda709\",\n        \"modified\": \"1716973369\",\n        \"name\": \"sampledomain.com\",\n        \"object_type\": \"indicator\",\n        \"sub_type\": \"domain-name\",\n        \"tlp\": \"NONE\"\n      }\n    }\n  ],\n  \"total\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a12500f-41cb-4a27-a1b4-e170c847a308",
+          "name": "Get Quick Add Intel Statistics",
+          "request": {
+            "name": "Get Quick Add Intel Statistics",
+            "description": {
+              "content": "Returns the statistics of the Quick Add Intel history.\n\n### Intel Processing Statuses\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"cf4b84a4-8824-4fb2-88a3-743338792450\",\"title\":\"Status\"},{\"id\":\"e1e57983-1f94-4270-bde4-ace3385a5640\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DRAFT</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been created but has not yet been submitted for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PENDING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is awaiting processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARSED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PUBLISHED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PROCESSING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is currently being analyzed and processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">CREATED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been added to the system but has not yet moved to further stages.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DELETED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been removed from the system.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">FAILED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The processing attempt was unsuccessful.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARTIALLY SUCCESSFUL</p></table-cell>\n    <table-cell><p class=\"slate-p \">Some elements of the intel were processed successfully, but others encountered issues.</p></table-cell>\n  </table-row>\n</Table>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "intel-history-stat",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "component",
+                  "value": "<string>",
+                  "description": "(Required) Pass `quick-add-intel` to retrieve the statistics of the Quick Add Intel history."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84a975ff-8d32-4ba3-9fa3-bf7760060e8d",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "intel-history-stat",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "component",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"label\": \"Draft\",\n    \"key\": \"DRAFT\",\n    \"value\": 6\n  },\n  \"1\": {\n    \"label\": \"Parsed\",\n    \"key\": \"PARSED\",\n    \"value\": 30\n  },\n  \"2\": {\n    \"label\": \"Published\",\n    \"key\": \"PUBLISHED\",\n    \"value\": 50\n  },\n  \"3\": {\n    \"label\": \"Processing\",\n    \"key\": \"PROCESSING\",\n    \"value\": 2\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1c131e5-b2eb-459c-809b-91a556a397a7",
+          "name": "Get Quick Add Intel Status",
+          "request": {
+            "name": "Get Quick Add Intel Status",
+            "description": {
+              "content": "Retrieve the intel creation status of a quick add intel submission. This API requires the unique ID of the background task created by the system to create intel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "quick-intel",
+                "receive-report",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "task_id",
+                  "value": "<string>",
+                  "description": "Pass the quick add intel task ID to retrieve the intel creation status. You can retrieve the ID using the **Quick Add Intel API**."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00434674-e17d-4dcb-aadc-e06ed2774788",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "quick-intel",
+                    "receive-report",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "task_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"d42fb454-62c7-4b5f-9330-40036bd2da1f\",\n  \"report_status\": \"CREATED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4ca5a45c-61b3-4bee-bee8-af436e99dd8e",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Quick Add Intel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

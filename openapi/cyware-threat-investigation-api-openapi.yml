@@ -1,0 +1,2359 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Threat Investigation API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Threat Investigation
+  description: Threat Investigation
+paths:
+  /ingestion/canvas/{canvas_id}/:
+    get:
+      operationId: canvasBasicDetails
+      summary: Get Canvas Basic Details
+      tags:
+      - Threat Investigation
+      description: Return the details of a canvas.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/canvas/canvas-basic-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: canvas_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a canvas
+          examples:
+          - 16bd0f9d-8ee5-4559-a632-8ffe4e687776
+        description: Pass the unique ID of a canvas
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the canvas.
+                    examples:
+                    - fc84c3cf-570d-48e0-91f0-d23cde141612
+                  name:
+                    type: string
+                    description: Returns the name of the canvas.
+                    examples:
+                    - canvas
+                  shared_type:
+                    type: string
+                    description: Returns the sharing type of the canvas, such as `shared`, `private`, or `received`.
+                    examples:
+                    - specific_users
+                  shared_users:
+                    type: array
+                    description: Returns the users' list with whom the canvas is shared.
+                    items:
+                      type: string
+                      description: This is an example value.
+                      examples:
+                      - '123456789'
+                  created_by:
+                    type: object
+                    description: Returns the details of the creator of the canvas.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the canvas.
+                        examples:
+                        - John@gmail.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the canvas.
+                        examples:
+                        - John
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the canvas.
+                        examples:
+                        - 3a4d629c-3061-412b-9049-86d33704e608
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the canvas.
+                        examples:
+                        - John
+              example:
+                id: fc84c3cf-570d-48e0-91f0-d23cde141612
+                name: canvas
+                shared_type: specific_users
+                shared_users:
+                - '123456789'
+                created_by:
+                  email: John@gmail.com
+                  first_name: John
+                  id: 3a4d629c-3061-412b-9049-86d33704e608
+                  last_name: John
+  /ingestion/canvas/nodes/{canvas_id}/:
+    get:
+      operationId: canvasNodesDetails
+      summary: Get Canvas Nodes Details
+      tags:
+      - Threat Investigation
+      description: Returns the node details of a threat investigation canvas.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/canvas/canvas-nodes-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve results.
+          default: '1'
+          examples:
+          - '1'
+        description: Pass the page number to retrieve results.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+          examples:
+          - '20'
+        description: Pass the number of records to retrieve on each page.
+      - name: canvas_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a threat investigation canvas.
+          examples:
+          - 16bd0f9d-8ee5-4559-a632-8ffe4e687776
+        description: Pass the unique ID of a threat investigation canvas.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the pagination link to navigate to the next page.
+                  previous:
+                    type: object
+                    description: Returns the pagination link to navigate to the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of records the API returns.
+                    examples:
+                    - '1'
+                  page_size:
+                    type: number
+                    description: Returns the number of elements present on a page.
+                    examples:
+                    - '10'
+                  results:
+                    type: array
+                    description: Returns the node details.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of the threat data element.
+                          examples:
+                          - indicator--3c1ed30a-659b-4a82-9d35-9328943aae23
+                        prop:
+                          type: object
+                          description: Returns some additional information about the threat data element on the canvas.
+                          properties:
+                            tlp_data:
+                              type: string
+                              description: Returns the TLP of the data
+                              examples:
+                              - AMBER
+                            first_seen:
+                              type: number
+                              description: Returns when the object was first observed.
+                              examples:
+                              - '1626179839'
+                            source_collections:
+                              type: array
+                              description: Returns the collections from which the indicator originated.
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    description: Returns the name of the source collections.
+                                    examples:
+                                    - Bruteforce Web
+                                  id:
+                                    type: string
+                                    description: Returns the unique identifier of the source collections.
+                                    examples:
+                                    - a9d46234-5948-4f88-8984-7d9701fd2c88
+                            last_seen:
+                              type: number
+                              description: Returns the last time the indicator was observed.
+                              examples:
+                              - '1626179839'
+                            sources:
+                              type: array
+                              description: Returns the details of the source.
+                              items:
+                                type: object
+                                properties:
+                                  created:
+                                    type: number
+                                    description: Returns the UNIX timestamp of the source creation.
+                                    examples:
+                                    - '1626179839'
+                                  name:
+                                    type: string
+                                    description: Returns the name of the source.
+                                    examples:
+                                    - Volon
+                                  source_type:
+                                    type: string
+                                    description: Returns the type of the source.
+                                    examples:
+                                    - API FEEDS
+                                  id:
+                                    type: string
+                                    description: Returns the unique identifier of the source.
+                                    examples:
+                                    - e302863d-845d-4272-b0a9-13eebe5e0b40
+                                  category:
+                                    type: string
+                                    description: Returns the source category.
+                                    examples:
+                                    - System Feeds
+                            stix_object_id:
+                              type: string
+                              description: Returns the unique identifier of the STIX object.
+                              examples:
+                              - indicator--3c1ed30a-659b-4a82-9d35-9328943aae23
+                            subscribers:
+                              type: array
+                              description: List of subscribers to this object.
+                              items: {}
+                            deprecated:
+                              type: boolean
+                              description: Returns a boolean indicating whether the indicator is deprecated.
+                              examples:
+                              - 'false'
+                            intel_grading:
+                              type: string
+                              description: Returns the assessed accuracy and credibility of the intelligence.
+                              examples:
+                              - POSSIBLY TRUE | 3
+                            indicator_type:
+                              type: string
+                              description: Returns the type of indicator.
+                              examples:
+                              - ipv4-addr
+                            type:
+                              type: string
+                              description: Specifies the STIX type of the indicator object.
+                              examples:
+                              - ipv4-addr
+                            labels:
+                              type: array
+                              description: Returns an array of labels associated with the indicator.
+                              items: {}
+                            source_grading:
+                              type: string
+                              description: Returns the grading of the source reliability.
+                              examples:
+                              - FAIRLY RELIABLE | C
+                            score:
+                              type: number
+                              description: Returns a numeric score.
+                              examples:
+                              - '72.81'
+                            name2:
+                              type: string
+                              description: Returns a secondary name or value for the node, usually the actual observable.
+                              examples:
+                              - 54.198.171.238
+                            subscriber_collections:
+                              type: array
+                              description: Returns a list of collections subscribed to the indicator.
+                              items: {}
+                            parent_type:
+                              type: string
+                              description: Returns the parent object type in the system.
+                              examples:
+                              - indicator
+                            followed:
+                              type: boolean
+                              description: Returns boolean indicating whether the user is following this indicator.
+                              examples:
+                              - 'false'
+                            identifier:
+                              type: string
+                              description: Returns the source identifier.
+                              examples:
+                              - ctix
+                            label:
+                              type: string
+                              description: Returns a human-readable tag or classification for the node.
+                              examples:
+                              - IP
+                        type:
+                          type: string
+                          description: Returns one of the following values
+                          enum:
+                          - node
+                          - link
+                          examples:
+                          - node
+                        t:
+                          type: string
+                          description: Returns the value of the threat data object or the relationship type.
+                          examples:
+                          - 54.198.171.238
+                        hi:
+                          type: boolean
+                          description: Returns `true` if the threat data element is hidden in the Threat investigation canvas, else returns `false`.
+                          examples:
+                          - 'false'
+                        u:
+                          type: string
+                          description: Returns an endpoint to the image of a node.
+                          examples:
+                          - /ctix/images/graph/ipv4-addr.svg
+                        x:
+                          type: number
+                          description: Returns the horizontal (X-axis) coordinate that determines the node’s position in a graphical threat investigation view.
+                          examples:
+                          - '511'
+                        y:
+                          type: number
+                          description: Returns the vertical (Y-axis) coordinate that determines the node’s position in a graphical threat investigation view.
+                          examples:
+                          - '94'
+                        added_node:
+                          type: boolean
+                          description: Indicates whether this node was newly created in the current session or action.
+                          examples:
+                          - 'false'
+              example:
+                next: {}
+                previous: {}
+                total: '1'
+                page_size: '10'
+                results:
+                - id: indicator--3c1ed30a-659b-4a82-9d35-9328943aae23
+                  prop:
+                    tlp_data: AMBER
+                    first_seen: '1626179839'
+                    source_collections:
+                    - name: Bruteforce Web
+                      id: a9d46234-5948-4f88-8984-7d9701fd2c88
+                    last_seen: '1626179839'
+                    sources:
+                    - created: '1626179839'
+                      name: Volon
+                      source_type: API FEEDS
+                      id: e302863d-845d-4272-b0a9-13eebe5e0b40
+                      category: System Feeds
+                    stix_object_id: indicator--3c1ed30a-659b-4a82-9d35-9328943aae23
+                    subscribers: []
+                    deprecated: 'false'
+                    intel_grading: POSSIBLY TRUE | 3
+                    indicator_type: ipv4-addr
+                    type: ipv4-addr
+                    labels: []
+                    source_grading: FAIRLY RELIABLE | C
+                    score: '72.81'
+                    name2: 54.198.171.238
+                    subscriber_collections: []
+                    parent_type: indicator
+                    followed: 'false'
+                    identifier: ctix
+                    label: IP
+                  type: node
+                  t: 54.198.171.238
+                  hi: 'false'
+                  u: /ctix/images/graph/ipv4-addr.svg
+                  x: '511'
+                  y: '94'
+                  added_node: 'false'
+  /ingestion/canvas/:
+    get:
+      operationId: listCanvases
+      summary: Get Canvases List
+      tags:
+      - Threat Investigation
+      description: Returns a list of canvases.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/canvas/list-canvases
+      parameters:
+      - name: created_by_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of the creator.
+          examples:
+          - '1234'
+        description: Pass the ID of the creator.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the query text to search for threat investigations by the title.
+          examples:
+          - canvas
+        description: Pass the query text to search for threat investigations by the title.
+      - name: shared_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the sharing type to filter.
+          enum:
+          - private
+          - shared
+          - received
+          examples:
+          - private
+        description: Pass the sharing type to filter.
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the created time in epoch format to filter results.
+          examples:
+          - '1633067201'
+        description: Pass the created time in epoch format to filter results.
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the created time in epoch format to filter results.
+          examples:
+          - '1633067253'
+        description: Pass the created time in epoch format to filter results.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the pagination link to the next page.
+                  previous:
+                    type: object
+                    description: Returns the pagination link to the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of canvases created.
+                    examples:
+                    - 4
+                  page_size:
+                    type: number
+                    description: Returns the number of results per page.
+                    examples:
+                    - 10
+                  results:
+                    type: array
+                    description: Returns the details of the canvas.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the ID of a canvas.
+                          examples:
+                          - fc84c3cf-570d-48e0-91f0-d23cde141612
+                        name:
+                          type: string
+                          description: Returns the name of a canvas.
+                          examples:
+                          - canvas
+                        created:
+                          type: number
+                          description: Returns the date and time when the canvas is created.
+                          examples:
+                          - 1633081533
+                        modified:
+                          type: number
+                          description: Returns the date and time when the canvas is last modified.
+                          examples:
+                          - 1633081533
+                        created_by:
+                          type: string
+                          description: Returns the details of the user who created the canvas.
+                          examples:
+                          - (unknown)
+                        shared_type:
+                          type: string
+                          description: Returns the sharing type of the canvas, such as `shared`, `private`, or `received`.
+                          examples:
+                          - shared
+              example:
+                next: {}
+                previous: {}
+                total: 4
+                page_size: 10
+                results:
+                - id: fc84c3cf-570d-48e0-91f0-d23cde141612
+                  name: canvas
+                  created: 1633081533
+                  modified: 1633081533
+                  created_by: (unknown)
+                  shared_type: shared
+  /ingestion/investigation/ctix-enrichment/:
+    post:
+      operationId: analyzeRelations
+      summary: Analyze Relations
+      tags:
+      - Threat Investigation
+      description: Returns relationship details of threat data objects within Intel Exchange.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/enrichment/analyze-relations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  description: Pass a list of threat object IDs.
+                  items:
+                    type: string
+                    description: This is an example ID.
+                    examples:
+                    - ff8fcc0f-4efb-4492-9145-230317fea9c4
+              required:
+              - ids
+            example:
+              ids:
+              - ff8fcc0f-4efb-4492-9145-230317fea9c4
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the pagination link to the next page.
+                  page_size:
+                    type: number
+                    description: Returns the number of results retrieved per page.
+                    examples:
+                    - '10'
+                  previous:
+                    type: object
+                    description: Returns the pagination link to the previous page.
+                  results:
+                    type: array
+                    description: Returns the relationship details of threat data object
+                    items:
+                      type: object
+                      properties:
+                        hi:
+                          type: boolean
+                          description: Returns `true` if the threat data object is hidden in the threat investigation canvas, else returns `false`.
+                          examples:
+                          - 'false'
+                        id:
+                          type: string
+                          description: Returns the ID of the threat data object or the relationship type.
+                          examples:
+                          - ff8fcc0f-4efb-4492-9145-230317fea9c4
+                        prop:
+                          type: object
+                          description: Returns additional information about the threat data object or the relationship type.
+                          properties:
+                            analyst_score:
+                              type: object
+                              description: Returns the analyst-assigned score.
+                            analyst_tlp:
+                              type: object
+                              description: Returns the analyst-assigned score.
+                            confidence_score:
+                              type: number
+                              description: Returns the confidence score of the object.
+                              examples:
+                              - '40'
+                            confidence_type:
+                              type: string
+                              description: Returns the confidence type of the object.
+                              examples:
+                              - ctix
+                            country:
+                              type: object
+                              description: Returns the geographic information about the object source.
+                            created:
+                              type: number
+                              description: Returns the Unix timestamp when the indicator was created.
+                              examples:
+                              - '1634636796'
+                            first_seen:
+                              type: object
+                              description: Returns when the object was first observed.
+                            id:
+                              type: string
+                              description: Returns the unique identifier for the threat object.
+                              examples:
+                              - ff8fcc0f-4efb-4492-9145-230317fea9c4
+                            identifier:
+                              type: string
+                              description: Returns the internal system identifier for the threat object.
+                              examples:
+                              - ctix
+                            indicator_type:
+                              type: string
+                              description: Returns the type of the object.
+                              examples:
+                              - url
+                            is_actioned:
+                              type: boolean
+                              description: Boolean indicating if the threat has been actioned.
+                              examples:
+                              - 'false'
+                            is_deprecated:
+                              type: boolean
+                              description: Boolean indicating whether the object is outdated.
+                              examples:
+                              - 'false'
+                            is_false_positive:
+                              type: boolean
+                              description: Boolean indicating if this was marked as a false positive.
+                              examples:
+                              - 'false'
+                            is_reviewed:
+                              type: boolean
+                              description: Boolean indicating whether this threat has been reviewed by an analyst.
+                              examples:
+                              - 'false'
+                            is_revoked:
+                              type: boolean
+                              description: Boolean indicating whether this threat has been reviewed by an analyst.
+                              examples:
+                              - 'false'
+                            is_whitelisted:
+                              type: boolean
+                              description: Boolean indicating the indicator is allowed/safe.
+                              examples:
+                              - 'false'
+                            label:
+                              type: string
+                              description: Returns the label for the object type.
+                              examples:
+                              - Url
+                            last_seen:
+                              type: object
+                              description: Returns the last time the indicator was observed
+                            modified:
+                              type: number
+                              description: Returns the Unix timestamp for the last modification of the object.
+                              examples:
+                              - '1634636796'
+                            name:
+                              type: string
+                              description: Returns the name of the object.
+                              examples:
+                              - http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                            'null':
+                              type: array
+                              items: {}
+                            parent_type:
+                              type: string
+                              examples:
+                              - indicator
+                            primary_attribute:
+                              type: object
+                            published_collections:
+                              type: array
+                              description: Returns the Unix timestamp for the last modification of the indicator.
+                              items: {}
+                            severity:
+                              type: object
+                              description: Returns the threat severity information.
+                            source_collections:
+                              type: array
+                              description: Returns the collections from which the indicator originated.
+                              items: {}
+                            source_confidence:
+                              type: string
+                              description: Returns the confidence level of the source.
+                              examples:
+                              - NONE
+                            sources:
+                              type: array
+                              description: Returns the details of the source
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    description: Returns the unique identifier of the source.
+                                    examples:
+                                    - b7aefa5d-511e-4487-8363-a9844bd7ecc7
+                                  name:
+                                    type: string
+                                    description: Returns the name of the source.
+                                    examples:
+                                    - CrowdStrike
+                                  source_type:
+                                    type: string
+                                    description: Returns the type of the source.
+                                    examples:
+                                    - API_FEEDS
+                            sub_type:
+                              type: string
+                              examples:
+                              - value
+                            subscriber_collections:
+                              type: array
+                              description: Returns the collections that have subscribed to this threat.
+                              items: {}
+                            subscribers:
+                              type: array
+                              description: List of subscribers to this object.
+                              items: {}
+                            tags:
+                              type: array
+                              description: Returns the list of associated tags.
+                              items:
+                                type: string
+                                examples:
+                                - infrastructure:-pony3.microsoftups.com-[pony]
+                            tlp:
+                              type: string
+                              description: Returns the associated TLP.
+                              examples:
+                              - AMBER
+                            type:
+                              type: string
+                              description: Returns the type of the object.
+                              examples:
+                              - indicator
+                            valid_from:
+                              type: number
+                              description: Returns the Unix timestamp for when the indicator becomes valid.
+                              examples:
+                              - '1634636783'
+                            valid_until:
+                              type: object
+                              description: Returns the Unix timestamp for when the indicator expires.
+                        t:
+                          type: string
+                          description: Returns the value of the threat data object or the relationship type.
+                          examples:
+                          - http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                        type:
+                          type: string
+                          description: Returns one of the following
+                          enum:
+                          - node
+                          - link
+                          examples:
+                          - node
+                        u:
+                          type: string
+                          description: Returns an endpoint to the image of a node in the canvas.
+                          examples:
+                          - /ctix/images/graph/url.svg
+                  total:
+                    type: number
+                    description: Returns the total number of items on a page.
+                    examples:
+                    - '3'
+              example:
+                next: {}
+                page_size: '10'
+                previous: {}
+                results:
+                - hi: 'false'
+                  id: ff8fcc0f-4efb-4492-9145-230317fea9c4
+                  prop:
+                    analyst_score: {}
+                    analyst_tlp: {}
+                    confidence_score: '40'
+                    confidence_type: ctix
+                    country: {}
+                    created: '1634636796'
+                    first_seen: {}
+                    id: ff8fcc0f-4efb-4492-9145-230317fea9c4
+                    identifier: ctix
+                    indicator_type: url
+                    is_actioned: 'false'
+                    is_deprecated: 'false'
+                    is_false_positive: 'false'
+                    is_reviewed: 'false'
+                    is_revoked: 'false'
+                    is_whitelisted: 'false'
+                    label: Url
+                    last_seen: {}
+                    modified: '1634636796'
+                    name: http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                    'null': []
+                    parent_type: indicator
+                    primary_attribute: {}
+                    published_collections: []
+                    severity: {}
+                    source_collections: []
+                    source_confidence: NONE
+                    sources:
+                    - id: b7aefa5d-511e-4487-8363-a9844bd7ecc7
+                      name: CrowdStrike
+                      source_type: API_FEEDS
+                    sub_type: value
+                    subscriber_collections: []
+                    subscribers: []
+                    tags:
+                    - infrastructure:-pony3.microsoftups.com-[pony]
+                    tlp: AMBER
+                    type: indicator
+                    valid_from: '1634636783'
+                    valid_until: {}
+                  t: http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                  type: node
+                  u: /ctix/images/graph/url.svg
+                total: '3'
+  /integration/investigation/enrichment/:
+    post:
+      operationId: enrichNodes
+      summary: Enrich Nodes
+      tags:
+      - Threat Investigation
+      description: Enrich threat data objects for threat investigation using third-party enrichment tools configured in Intel Exchange.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/enrichment/enrich-nodes
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve enrichment results.
+          default: '1'
+          examples:
+          - '1'
+        description: Pass the page number to retrieve enrichment results.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of results to retrieve per page.
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of results to retrieve per page.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                object_id:
+                  type: string
+                  description: Pass the ID of the threat data object.
+                  examples:
+                  - 01cde415-bed4-40c0-aed4-dd4a52ea6450
+                object_type:
+                  type: string
+                  description: Pass the type of the threat data object such as `indicator`, `vulnerability`, and more.
+                  examples:
+                  - indicator
+                type:
+                  type: string
+                  description: Pass the type or the sub type of the threat data object such as `url`, `domain`, `ipv4-addr`, and more.
+                  examples:
+                  - ipv4-addr
+                app_slug:
+                  type: string
+                  description: 'Pass the slug of an enrichment tool to use for enrichment. To retrieve the list of enrichment tools, use the **GET
+
+                    Enrichment Tools API**.'
+                  examples:
+                  - alien_vault
+                action_slug:
+                  type: string
+                  description: Pass the slug value of the action. For example, `get_ip`.
+                  examples:
+                  - get_ip
+                value:
+                  type: string
+                  description: Pass the value of the threat data object.
+                  examples:
+                  - 311.76.208.163
+                identifier:
+                  type: string
+                  description: Pass `ctix` to indicate that the threat data object already exists in the Intel Exchange database. If you pass anything else, it indicates a custom object.
+                  examples:
+                  - ctix
+                raw_data:
+                  type: object
+                  description: If the node is already enriched, then pass the raw data to prevent it from getting re-enriched.
+                  properties:
+                    general:
+                      type: object
+                      description: Pass the general enrichment data of the object.
+                      properties:
+                        whois:
+                          type: string
+                          description: Pass the information link related to the object.
+                          examples:
+                          - http://whois.domaintools.com/1.2.3.4
+                        reputation:
+                          type: number
+                          description: Pass the reputation score.
+                          examples:
+                          - 0
+                        indicator:
+                          type: string
+                          description: Pass the indicator value to be enriched.
+                          examples:
+                          - 185.161.208.194
+                        type:
+                          type: string
+                          description: Pass the type of the object.
+                          examples:
+                          - IPv4
+                        type_title:
+                          type: string
+                          description: Pass the UI label for object type.
+                          examples:
+                          - IPv4
+                        base_indicator:
+                          type: object
+                          description: Pass the details of the base indicator
+                          properties:
+                            id:
+                              type: number
+                              description: Pass the unique identifier of the base indicator.
+                              examples:
+                              - 7629
+                            indicator:
+                              type: string
+                              description: Pass the value of the base indicator.
+                              examples:
+                              - 1.2.3.4
+                            type:
+                              type: string
+                              description: Pass the type of the base indicator.
+                              examples:
+                              - IPv4
+                            title:
+                              type: string
+                              description: Pass the UI label of the base indicator.
+                            description:
+                              type: string
+                              description: Pass the description of the base indicator.
+                            content:
+                              type: string
+                              description: Pass the content of the base indicator.
+                            access_type:
+                              type: string
+                              description: Pass the access setting type of the base indicator.
+                              examples:
+                              - public
+                            access_reason:
+                              type: string
+                              description: Pass the access setting reason of the base indicator.
+                        pulse_info:
+                          type: object
+                          description: Pass the details of threat intelligence pulses, the indicator is part of
+                          properties:
+                            count:
+                              type: number
+                              description: Pass the number of related pulses.
+                              examples:
+                              - 27
+                            pulses:
+                              type: array
+                              description: Pass the list of pulse objects.
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    description: Pass the unique identifier of the pulse object.
+                                    examples:
+                                    - 5ebca7e4e49c4c7ffae8eeeb
+                                  name:
+                                    type: string
+                                    description: Pass the name of the pulse object.
+                                    examples:
+                                    - Unknown linked malware delivery using public data sets
+                                  description:
+                                    type: string
+                                    description: Pass the description of the pulse object.
+                                    examples:
+                                    - Gmail, g account take overs using google education developer access enrolled on unauthorised mdm. 1000k apis set in google console plus data sets being pulled big data & big query push ai data again unauthorised to google data pool, kiosk set up, browser shows “mendal experiments”  ?? Working across all device platforms, on the fly automated bot control.  Weather station & sensor data somehow being used as external beacons or something weird with an android customised car gps config file and a car autopairing config file which appears to be able to scan for unsecure (which means all now!!) other car bluetooth signals and creating p2p netw with the help of gaming consoles mainly xbox
+                                  modified:
+                                    type: string
+                                    description: Pass the modified timestamps of pulse object.
+                                    examples:
+                                    - '2021-08-05T12:08:15.032000'
+                                  created:
+                                    type: string
+                                    description: Pass the creation timestamps of pulse object.
+                                    examples:
+                                    - '2020-05-14T02:07:32.487000'
+                                  tags:
+                                    type: array
+                                    description: Pass the tags associated
+                                    items: {}
+                                  references:
+                                    type: array
+                                    description: Pass the additional references
+                                    items:
+                                      type: string
+                                      description: This is an example value.
+                                      examples:
+                                      - 2c65c70350c67e4ec31d23379f76d92acdca2c8b1d80f5465fc685510929e05d
+                                  public:
+                                    type: number
+                                    description: Pass the visibility flag, whether the pulse is public.
+                                    examples:
+                                    - 1
+                                  adversary:
+                                    type: string
+                                    description: Pass the name or label of adversary group.
+                                  targeted_countries:
+                                    type: array
+                                    description: List of countries targeted by this threat.
+                                    items: {}
+                                  malware_families:
+                                    type: array
+                                    description: List of involved malware families.
+                                    items: {}
+                                  attack_ids:
+                                    type: array
+                                    description: List of mapped attack techniques.
+                                    items: {}
+                                  industries:
+                                    type: array
+                                    description: Industries affected by the threat.
+                                    items: {}
+                                  TLP:
+                                    type: string
+                                    description: Pass the TLP of the object.
+                                    examples:
+                                    - green
+                                  cloned_from:
+                                    type: object
+                                    description: Pass the pulse source ID from which it was cloned.
+                                  export_count:
+                                    type: number
+                                    description: Pass the number of times exported.
+                                    examples:
+                                    - 54
+                                  upvotes_count:
+                                    type: number
+                                    description: Pass the number of upvotes received.
+                                    examples:
+                                    - 0
+                                  downvotes_count:
+                                    type: number
+                                    description: Pass the number of downvotes received.
+                                    examples:
+                                    - 0
+                                  votes_count:
+                                    type: number
+                                    description: Pass the total number of votes.
+                                    examples:
+                                    - 0
+                                  locked:
+                                    type: boolean
+                                    description: Boolean flag for pulse lock status.
+                                    examples:
+                                    - false
+                                  pulse_source:
+                                    type: string
+                                    description: Pass the source of the pulse
+                                    examples:
+                                    - web
+                                  validator_count:
+                                    type: number
+                                    description: Pass the number of validators who have reviewed the pulse.
+                                    examples:
+                                    - 0
+                                  comment_count:
+                                    type: number
+                                    description: Pass the number of comments on the pulse.
+                                    examples:
+                                    - 66
+                                  follower_count:
+                                    type: number
+                                    description: Pass the number of users following this pulse.
+                                    examples:
+                                    - 0
+                                  vote:
+                                    type: number
+                                    description: Pass the vote status of the current user
+                                    examples:
+                                    - 0
+                                  author:
+                                    type: object
+                                    description: Pass the author details
+                                    properties:
+                                      username:
+                                        type: string
+                                        description: Pass the user name of the author.
+                                        examples:
+                                        - dorkingbeauty1
+                                      id:
+                                        type: string
+                                        description: Pass the unique identifier of the author.
+                                        examples:
+                                        - '80137'
+                                      avatar_url:
+                                        type: string
+                                        description: Pass the path to author's avatar image.
+                                        examples:
+                                        - /otxapi/users/avatar_image/media/avatars/user_80137/resized/80/avatar_54d0ee2979.png
+                                      is_subscribed:
+                                        type: boolean
+                                        description: Whether the user is subscribed to updates.
+                                        examples:
+                                        - false
+                                      is_following:
+                                        type: boolean
+                                        description: Whether the user is following the pulse.
+                                        examples:
+                                        - false
+                                  indicator_type_counts:
+                                    type: object
+                                    description: Pass breakdown counts by type
+                                    properties:
+                                      domain:
+                                        type: number
+                                        description: Pass counts for domain.
+                                        examples:
+                                        - 2353
+                                      hostname:
+                                        type: number
+                                        description: Pass counts for hostname.
+                                        examples:
+                                        - 2900
+                                      URL:
+                                        type: number
+                                        description: Pass counts for URL.
+                                        examples:
+                                        - 7751
+                                      FileHash-SHA256:
+                                        type: number
+                                        description: Pass counts for file hash SHA-256.
+                                        examples:
+                                        - 2205
+                                      email:
+                                        type: number
+                                        description: Pass counts for email.
+                                        examples:
+                                        - 34
+                                      FileHash-MD5:
+                                        type: number
+                                        description: Pass counts for file hash MD5.
+                                        examples:
+                                        - 2103
+                                      FileHash-SHA1:
+                                        type: number
+                                        description: Pass counts for file hash SHA-1
+                                        examples:
+                                        - 1027
+                                      FilePath:
+                                        type: number
+                                        description: Pass counts for file path.
+                                        examples:
+                                        - 16
+                                      URI:
+                                        type: number
+                                        description: Pass counts for URI.
+                                        examples:
+                                        - 15
+                                      Mutex:
+                                        type: number
+                                        description: Pass counts for Mutex.
+                                        examples:
+                                        - 1
+                                      CIDR:
+                                        type: number
+                                        description: Pass counts for CIDR.
+                                        examples:
+                                        - 3
+                                      CVE:
+                                        type: number
+                                        description: Pass counts for CVE.
+                                        examples:
+                                        - 2
+                                      SSLCertFingerprint:
+                                        type: number
+                                        description: Pass counts for SSLCertFingerprint.
+                                        examples:
+                                        - 2
+                                  indicator_count:
+                                    type: number
+                                    description: Pass the total indicator count.
+                                    examples:
+                                    - 18412
+                                  is_author:
+                                    type: boolean
+                                    description: Pass a boolean if the current user authored this pulse.
+                                    examples:
+                                    - false
+                                  is_subscribing:
+                                    type: object
+                                    description: Pass the subscription status.
+                                  subscriber_count:
+                                    type: number
+                                    description: Pass number of pulse subscribers.
+                                    examples:
+                                    - 207
+                                  modified_text:
+                                    type: string
+                                    description: Pass the modification time.
+                                    examples:
+                                    - '4 days ago '
+                                  is_modified:
+                                    type: boolean
+                                    description: Pass a boolean if modified recently.
+                                    examples:
+                                    - true
+                                  groups:
+                                    type: array
+                                    description: Pass the list of groups associated
+                                    items: {}
+                                  in_group:
+                                    type: boolean
+                                    description: Pass a boolean if current user is in a group with this pulse
+                                    examples:
+                                    - false
+                                  threat_hunter_scannable:
+                                    type: boolean
+                                    description: Pass a boolean if the hunter tool can scan.
+                                    examples:
+                                    - true
+                                  threat_hunter_has_agents:
+                                    type: number
+                                    description: Pass the count of threat hunter agents.
+                                    examples:
+                                    - 1
+                                  related_indicator_type:
+                                    type: string
+                                    description: Pass the related indicator type.
+                                    examples:
+                                    - IPv4
+                                  related_indicator_is_active:
+                                    type: number
+                                    description: Pass a boolean if the related indicator is active.
+                                    examples:
+                                    - 0
+                            references:
+                              type: array
+                              description: Pass the global references related to the general section.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - https://feodotracker.abuse.ch/
+                            related:
+                              type: object
+                              description: 'Pass the object with source-wise relation breakdown:'
+                              properties:
+                                alienvault:
+                                  type: object
+                                  description: Returns the structured threat intelligence from the AlienVault platform.
+                                  properties:
+                                    adversary:
+                                      type: array
+                                      description: Returns the known threat actors or groups attributed to the indicator.
+                                      items: {}
+                                    malware_families:
+                                      type: array
+                                      description: Returns the malware families associated with the indicator as per AlienVault data.
+                                      items: {}
+                                    industries:
+                                      type: array
+                                      description: Returns the industry verticals likely targeted or affected by the threat.
+                                      items: {}
+                                other:
+                                  type: object
+                                  description: Returns the additional contextual intelligence from non-AlienVault sources.
+                                  properties:
+                                    adversary:
+                                      type: array
+                                      description: Returns the threat actors or groups associated with other sources.
+                                      items:
+                                        type: string
+                                        description: This is an example value.
+                                        examples:
+                                        - APT 10
+                                    malware_families:
+                                      type: array
+                                      description: Returns the related malware families identified by external sources.
+                                      items:
+                                        type: string
+                                        description: This is an example value.
+                                        examples:
+                                        - Dridex
+                                    industries:
+                                      type: array
+                                      description: Returns the affected industry sectors based on non-AlienVault data.
+                                      items:
+                                        type: string
+                                        description: This is an example value.
+                                        examples:
+                                        - Technology
+                        false_positive:
+                          type: array
+                          description: Pass the list of false-positive flags.
+                          items: {}
+                        validation:
+                          type: array
+                          description: Pass the validation objects.
+                          items:
+                            type: object
+                            properties:
+                              source:
+                                type: string
+                                description: Pass the validation source label.
+                                examples:
+                                - whitelist
+                              message:
+                                type: string
+                                description: Pass the description of the validation decision.
+                                examples:
+                                - contained in whitelisted prefix
+                              name:
+                                type: string
+                                description: Pass the validation name.
+                                examples:
+                                - Whitelisted IP
+                        city_data:
+                          type: boolean
+                          description: Pass a boolean whether city-level info is available.
+                          examples:
+                          - true
+                        city:
+                          type: object
+                          description: Returns the city where the IP is geolocated.
+                        region:
+                          type: object
+                          description: Returns the state or province information.
+                        continent_code:
+                          type: string
+                          description: Returns the 2-letter ISO code representing the continent.
+                          examples:
+                          - OC
+                        country_code3:
+                          type: string
+                          description: Returns the 3-letter ISO country code.
+                          examples:
+                          - AUS
+                        country_code2:
+                          type: string
+                          description: Returns the 2-letter ISO country code.
+                          examples:
+                          - AU
+                        subdivision:
+                          type: object
+                          description: Returns the administrative subdivision, such as a state or district.
+                        latitude:
+                          type: number
+                          description: Returns the Geographical latitude of the IP address.
+                          examples:
+                          - -33.494
+                        postal_code:
+                          type: object
+                          description: Returns the ZIP or postal code.
+                        longitude:
+                          type: number
+                          description: Returns the Geographical longitude of the IP address.
+                          examples:
+                          - 143.2104
+                        accuracy_radius:
+                          type: number
+                          description: Returns the estimated accuracy of the geolocation in kilometres.
+                          examples:
+                          - 1000
+                        country_code:
+                          type: string
+                          description: Another representation of the country code, often the same as `country_code2`.
+                          examples:
+                          - AU
+                        country_name:
+                          type: string
+                          description: Returns the full country name where the IP is registered
+                          examples:
+                          - Australia
+                        dma_code:
+                          type: number
+                          description: Returns the designated Market Area code used for U.S. media regions
+                          examples:
+                          - 0
+                        charset:
+                          type: number
+                          description: Returns the character encoding standard.
+                          examples:
+                          - 0
+                        area_code:
+                          type: number
+                          description: Returns the telephone area code associated with the IP.
+                          examples:
+                          - 0
+                        flag_url:
+                          type: string
+                          description: Returns the path to the flag image of the associated country.
+                          examples:
+                          - /assets/images/flags/au.png
+                        flag_title:
+                          type: string
+                          description: Returns the country name or label shown as the title for the flag icon.
+                          examples:
+                          - Australia
+                        sections:
+                          type: array
+                          description: Pass the list of sections included in enrichment.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - general
+              required:
+              - object_id
+              - object_type
+              - type
+              - app_slug
+              - action_slug
+              - value
+              - identifier
+              - raw_data
+            example:
+              object_id: 01cde415-bed4-40c0-aed4-dd4a52ea6450
+              object_type: indicator
+              type: ipv4-addr
+              app_slug: alien_vault
+              action_slug: get_ip
+              value: 311.76.208.163
+              identifier: ctix
+              raw_data:
+                general:
+                  whois: http://whois.domaintools.com/1.2.3.4
+                  reputation: 0
+                  indicator: 185.161.208.194
+                  type: IPv4
+                  type_title: IPv4
+                  base_indicator:
+                    id: 7629
+                    indicator: 1.2.3.4
+                    type: IPv4
+                    title: ''
+                    description: ''
+                    content: ''
+                    access_type: public
+                    access_reason: ''
+                  pulse_info:
+                    count: 27
+                    pulses:
+                    - id: 5ebca7e4e49c4c7ffae8eeeb
+                      name: Unknown linked malware delivery using public data sets
+                      description: Gmail, g account take overs using google education developer access enrolled on unauthorised mdm. 1000k apis set in google console plus data sets being pulled big data & big query push ai data again unauthorised to google data pool, kiosk set up, browser shows “mendal experiments”  ?? Working across all device platforms, on the fly automated bot control.  Weather station & sensor data somehow being used as external beacons or something weird with an android customised car gps config file and a car autopairing config file which appears to be able to scan for unsecure (which means all now!!) other car bluetooth signals and creating p2p netw with the help of gaming consoles mainly xbox
+                      modified: '2021-08-05T12:08:15.032000'
+                      created: '2020-05-14T02:07:32.487000'
+                      tags: []
+                      references:
+                      - 2c65c70350c67e4ec31d23379f76d92acdca2c8b1d80f5465fc685510929e05d
+                      public: 1
+                      adversary: ''
+                      targeted_countries: []
+                      malware_families: []
+                      attack_ids: []
+                      industries: []
+                      TLP: green
+                      cloned_from: {}
+                      export_count: 54
+                      upvotes_count: 0
+                      downvotes_count: 0
+                      votes_count: 0
+                      locked: false
+                      pulse_source: web
+                      validator_count: 0
+                      comment_count: 66
+                      follower_count: 0
+                      vote: 0
+                      author:
+                        username: dorkingbeauty1
+                        id: '80137'
+                        avatar_url: /otxapi/users/avatar_image/media/avatars/user_80137/resized/80/avatar_54d0ee2979.png
+                        is_subscribed: false
+                        is_following: false
+                      indicator_type_counts:
+                        domain: 2353
+                        hostname: 2900
+                        URL: 7751
+                        FileHash-SHA256: 2205
+                        email: 34
+                        FileHash-MD5: 2103
+                        FileHash-SHA1: 1027
+                        FilePath: 16
+                        URI: 15
+                        Mutex: 1
+                        CIDR: 3
+                        CVE: 2
+                        SSLCertFingerprint: 2
+                      indicator_count: 18412
+                      is_author: false
+                      is_subscribing: {}
+                      subscriber_count: 207
+                      modified_text: '4 days ago '
+                      is_modified: true
+                      groups: []
+                      in_group: false
+                      threat_hunter_scannable: true
+                      threat_hunter_has_agents: 1
+                      related_indicator_type: IPv4
+                      related_indicator_is_active: 0
+                    references:
+                    - https://feodotracker.abuse.ch/
+                    related:
+                      alienvault:
+                        adversary: []
+                        malware_families: []
+                        industries: []
+                      other:
+                        adversary:
+                        - APT 10
+                        malware_families:
+                        - Dridex
+                        industries:
+                        - Technology
+                  false_positive: []
+                  validation:
+                  - source: whitelist
+                    message: contained in whitelisted prefix
+                    name: Whitelisted IP
+                  city_data: true
+                  city: {}
+                  region: {}
+                  continent_code: OC
+                  country_code3: AUS
+                  country_code2: AU
+                  subdivision: {}
+                  latitude: -33.494
+                  postal_code: {}
+                  longitude: 143.2104
+                  accuracy_radius: 1000
+                  country_code: AU
+                  country_name: Australia
+                  dma_code: 0
+                  charset: 0
+                  area_code: 0
+                  flag_url: /assets/images/flags/au.png
+                  flag_title: Australia
+                  sections:
+                  - general
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the pagination link to the next page.
+                    examples:
+                    - investigation/enrichment/?page=2&page_size=10
+                  previous:
+                    type: object
+                    description: Returns the pagination link to the previous page.
+                  page_size:
+                    type: number
+                    description: Returns the number of results per page.
+                    examples:
+                    - 10
+                  total:
+                    type: number
+                    description: Returns the total number of items on a page.
+                    examples:
+                    - 24
+                  results:
+                    type: array
+                    description: Returns the details of the enriched threat data objects.
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Returns the type.
+                          examples:
+                          - node
+                        id:
+                          type: string
+                          description: Returns the ID of the threat data object or the relationship type.
+                          examples:
+                          - Technology
+                        u:
+                          type: string
+                          description: Returns an endpoint to the image of the node.
+                          examples:
+                          - /ctix/images/graph/identity.svg
+                        t:
+                          type: string
+                          description: Returns the value of the threat data object or the relationship type.
+                          examples:
+                          - Technology
+                        hi:
+                          type: boolean
+                          description: Returns `true` if the threat data object is hidden in the threat investigations canvas, else returns `false`.
+                          examples:
+                          - false
+                        prop:
+                          type: object
+                          description: Returns any additional information about the threat data object or the relationship type.
+                          properties:
+                            parent_type:
+                              type: string
+                              description: Returns the original object type to which the enrichment is related.
+                              examples:
+                              - indicator
+                            enriched:
+                              type: boolean
+                              description: Indicates whether the node contains enrichment data retrieved from an external threat intelligence source.
+                              examples:
+                              - true
+                            tool_name:
+                              type: string
+                              description: Returns the name of the tool.
+                              examples:
+                              - alien_vault
+                            identifier:
+                              type: string
+                              description: Returns the internal system identifier for the threat object.
+                              examples:
+                              - enriched
+                            type:
+                              type: string
+                              description: Returns the type of the object.
+                              examples:
+                              - identity
+                            label:
+                              type: string
+                              description: Returns the label for the object type.
+                              examples:
+                              - Identity
+              example:
+                next: investigation/enrichment/?page=2&page_size=10
+                previous: {}
+                page_size: 10
+                total: 24
+                results:
+                - type: node
+                  id: Technology
+                  u: /ctix/images/graph/identity.svg
+                  t: Technology
+                  hi: false
+                  prop:
+                    parent_type: indicator
+                    enriched: true
+                    tool_name: alien_vault
+                    identifier: enriched
+                    type: identity
+                    label: Identity
+  /conversion/investigation/create-intel/:
+    post:
+      operationId: createDraft
+      summary: Create Draft
+      tags:
+      - Threat Investigation
+      description: Creates intel in the draft state from the details retrieved from the threat investigation.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/publishing/create-draft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass a title for the intel.
+                  examples:
+                  - visualizer test 1.1
+                create_stix:
+                  type: boolean
+                  description: Pass True to create intel in draft state.
+                  examples:
+                  - 'true'
+                items:
+                  type: array
+                  description: Pass the details of the report object.
+                  items:
+                    type: object
+                    properties:
+                      t:
+                        type: string
+                        description: Pass the value of the threat data object or the relationship type.
+                        examples:
+                        - 125.56.67.79
+                      prop:
+                        type: object
+                        description: Pass any additional information about the threat data object or the relationship type.
+                        properties:
+                          identifier:
+                            type: string
+                            description: Pass the internal system identifier for the threat object.
+                            examples:
+                            - added
+                          label:
+                            type: string
+                            description: Pass the label for the object type.
+                            examples:
+                            - IP
+                          type:
+                            type: string
+                            description: Pass the type of the object.
+                            examples:
+                            - url
+                          parent_type:
+                            type: string
+                            description: Indicates the category or origin class of the data object being added.
+                            examples:
+                            - indicator
+                      id:
+                        type: string
+                        description: Pass the ID of the threat data object or the relationship type.
+                        examples:
+                        - node--54c79961-6d09-4c95-b152-6645dcc757cc
+                      type:
+                        type: string
+                        description: Pass one of the following values
+                        enum:
+                        - node
+                        - link
+                        examples:
+                        - node
+                      added_node:
+                        type: boolean
+                        description: Pass a boolean flag that marks whether this node is newly introduced in this create-intel operation.
+                        examples:
+                        - 'true'
+                    required:
+                    - t
+                    - prop
+                    - id
+                    - type
+              required:
+              - title
+              - create_stix
+            example:
+              title: visualizer test 1.1
+              create_stix: 'true'
+              items:
+              - t: 125.56.67.79
+                prop:
+                  identifier: added
+                  label: IP
+                  type: url
+                  parent_type: indicator
+                id: node--54c79961-6d09-4c95-b152-6645dcc757cc
+                type: node
+                added_node: 'true'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: string
+                    description: A background task has been initiated to create the intel.
+                    examples:
+                    - You will be notified once the STIX is created
+              example:
+                details: You will be notified once the STIX is created
+      x-alternate-documents:
+      - title: Create Intel
+        operationId: createIntel
+        url: https://ctixapiv3.cyware.com/threat-investigation/publishing/create-intel
+  /ingestion/investigation/edges/:
+    post:
+      operationId: listExistingRelationships
+      summary: List Existing Relationships
+      tags:
+      - Threat Investigation
+      description: Returns the relationship types that exist between two threat data objects.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/relationship/list-existing-relationships
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  description: Pass a list of threat data object IDs.
+                  items:
+                    type: string
+                    description: This is an example value.
+                    examples:
+                    - 24859c8e-5482-4d07-a47c-f263d4c1e490
+              required:
+              - ids
+            example:
+              ids:
+              - 24859c8e-5482-4d07-a47c-f263d4c1e490
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the pagination link to the next page.
+                  previous:
+                    type: object
+                    description: Returns the pagination link to the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of items on a page.
+                    examples:
+                    - '1'
+                  results:
+                    type: array
+                    description: Returns the relationship details between threat data objects.
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Returns the relationship type of the object.
+                          examples:
+                          - link
+                        id:
+                          type: string
+                          description: Returns the ID of the relation ship type that exists between two threat data objects.
+                          examples:
+                          - 24859c8e-5482-4d07-a47c-f263d4c1e490647d880d-d100-47a0-bcbf-d01f85d75d4d
+                        a2:
+                          type: boolean
+                          description: A boolean flag indicating the direction or orientation of the relationship.
+                          examples:
+                          - 'true'
+                        id1:
+                          type: string
+                          description: Returns the ID of the source threat data object.
+                          examples:
+                          - 24859c8e-5482-4d07-a47c-f263d4c1e490
+                        id2:
+                          type: string
+                          description: Returns the ID of the target threat data object.
+                          examples:
+                          - 647d880d-d100-47a0-bcbf-d01f85d75d4d
+                        t:
+                          type: object
+                          description: Returns the STIX relationship type.
+                        hi:
+                          type: boolean
+                          description: Returns `true` if the threat data object is hidden from the threat investigations canvas, else returns `false`.
+                          examples:
+                          - 'false'
+                        prop:
+                          type: object
+                          description: Returns the details of the relationships.
+                          properties:
+                            relation:
+                              type: object
+                              description: Returns the relationship between two threat data objects.
+                              properties:
+                                type:
+                                  type: object
+                                  description: Specifies the semantic nature of the relationship
+                                label1:
+                                  type: string
+                                  description: Returns the type of the source entity in the relationship.
+                                  examples:
+                                  - domain-name
+                                label2:
+                                  type: string
+                                  description: Returns the type of the target entity in the relationship.
+                                  examples:
+                                  - indicator
+                        dt:
+                          type: array
+                          description: Returns a list of timestamps indicating when the relationship was established or last updated.
+                          items:
+                            type: number
+                            description: This is an example value.
+                            examples:
+                            - '1634536777'
+                  page_size:
+                    type: number
+                    description: Returns the number of results per page.
+                    examples:
+                    - '10'
+              example:
+                next: {}
+                previous: {}
+                total: '1'
+                results:
+                - type: link
+                  id: 24859c8e-5482-4d07-a47c-f263d4c1e490647d880d-d100-47a0-bcbf-d01f85d75d4d
+                  a2: 'true'
+                  id1: 24859c8e-5482-4d07-a47c-f263d4c1e490
+                  id2: 647d880d-d100-47a0-bcbf-d01f85d75d4d
+                  t: {}
+                  hi: 'false'
+                  prop:
+                    relation:
+                      type: {}
+                      label1: domain-name
+                      label2: indicator
+                  dt:
+                  - '1634536777'
+                page_size: '10'
+  /ingestion/investigation/relationship/:
+    get:
+      operationId: listPossibleRelationships
+      summary: Get Possible Relationships List
+      tags:
+      - Threat Investigation
+      description: Returns the list of possible STIX 2.1 relationship types that can exist between two STIX Domain Objects.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/relationship/list-possible-relationships
+      parameters:
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the source object type.
+          examples:
+          - indicator
+        description: Pass the source object type.
+      - name: target
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the target object type.
+          examples:
+          - attack-pattern
+        description: Pass the target object type.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: "[\n  \"indicates\",\n  \"related-to\"\n]"
+  /ingestion/investigation/threat-data/{id}/:
+    get:
+      operationId: threatDataObjectDetails
+      summary: Get Threat Data Object Details
+      tags:
+      - Threat Investigation
+      description: Returns the details of a threat data object that is accessible from the Threat Investigation canvas.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-investigation/threat-data/threat-data-object-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the Object ID of the threat data object
+        description: Pass the Object ID of the threat data object
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hi:
+                    type: boolean
+                    description: Returns `true` if the threat data object is hidden in the threat investigations module, else returns `false`.
+                    examples:
+                    - 'false'
+                  id:
+                    type: string
+                    description: Returns the ID of the threat data object.
+                    examples:
+                    - ff8fcc0f-4efb-4492-9145-230317fea9c4
+                  prop:
+                    type: object
+                    description: Returns additional details of the threat data object.
+                    properties:
+                      analyst_score:
+                        type: object
+                        description: Returns the analyst-assigned score.
+                      analyst_tlp:
+                        type: object
+                        description: Returns the TLP marking assigned by an analyst.
+                      confidence_score:
+                        type: number
+                        description: Returns the confidence score of the object.
+                        examples:
+                        - '40'
+                      confidence_type:
+                        type: string
+                        description: Returns the confidence type of the object.
+                        examples:
+                        - ctix
+                      country:
+                        type: object
+                        description: Returns the geographic information about the indicator source.
+                      created:
+                        type: number
+                        description: Returns the Unix timestamp when the object was created.
+                        examples:
+                        - '1634636796'
+                      first_seen:
+                        type: object
+                        description: Returns when the object was first observed.
+                      id:
+                        type: string
+                        description: Returns the unique identifier of the threat object.
+                        examples:
+                        - ff8fcc0f-4efb-4492-9145-230317fea9c4
+                      identifier:
+                        type: string
+                        description: Returns the internal system identifier of the threat object.
+                        examples:
+                        - ctix
+                      indicator_type:
+                        type: string
+                        description: Returns the type of the object.
+                        examples:
+                        - url
+                      is_actioned:
+                        type: boolean
+                        description: Boolean indicating if the threat has been actioned.
+                        examples:
+                        - 'false'
+                      is_deprecated:
+                        type: boolean
+                        description: Boolean indicating whether the object is outdated.
+                        examples:
+                        - 'false'
+                      is_false_positive:
+                        type: boolean
+                        description: Boolean indicating if this was marked as a false positive.
+                        examples:
+                        - 'false'
+                      is_reviewed:
+                        type: boolean
+                        description: Boolean indicating whether this threat has been reviewed by an analyst.
+                        examples:
+                        - 'false'
+                      is_revoked:
+                        type: boolean
+                        description: Whether the object has been revoked by the source.
+                        examples:
+                        - 'false'
+                      is_whitelisted:
+                        type: boolean
+                        description: Boolean indicating the object is allowed/safe.
+                        examples:
+                        - 'false'
+                      label:
+                        type: string
+                        description: Returns the label for the object type.
+                        examples:
+                        - Url
+                      last_seen:
+                        type: object
+                        description: Returns the last time the object was observed.
+                      modified:
+                        type: number
+                        description: Returns the Unix timestamp for the last modification of the object.
+                        examples:
+                        - '1634636796'
+                      name:
+                        type: string
+                        description: Returns the name of the object.
+                        examples:
+                        - http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                      'null':
+                        type: array
+                        description: Returns a placeholder for undefined or empty values within the object; typically used to maintain consistent structure even when no data is present.
+                        items: {}
+                      parent_type:
+                        type: string
+                        description: Specifies the broader classification or category to which the object belongs.
+                        examples:
+                        - indicator
+                      primary_attribute:
+                        type: object
+                        description: Returns the main defining attribute of the threat object; typically used for identification or correlation purposes.
+                      published_collections:
+                        type: array
+                        description: Returns the collections where this indicator is officially published.
+                        items: {}
+                      severity:
+                        type: object
+                        description: Returns the threat severity information.
+                      source_collections:
+                        type: array
+                        description: Returns the collections from which the indicator originated.
+                        items: {}
+                      source_confidence:
+                        type: string
+                        description: Returns the collections from which the indicator originated.
+                        examples:
+                        - NONE
+                      sources:
+                        type: array
+                        description: List of source objects that reported the object.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Returns the unique identifier of the source.
+                              examples:
+                              - b7aefa5d-511e-4487-8363-a9844bd7ecc7
+                            name:
+                              type: string
+                              description: Returns the name of the source.
+                              examples:
+                              - CrowdStrike
+                            source_type:
+                              type: string
+                              description: Returns the type of the source.
+                              examples:
+                              - API_FEEDS
+                      sub_type:
+                        type: string
+                        description: Returns the sub type of the object.
+                        examples:
+                        - value
+                      subscriber_collections:
+                        type: array
+                        description: Returns the collections that have subscribed to this threat.
+                        items: {}
+                      subscribers:
+                        type: array
+                        description: List of subscribers to this object.
+                        items: {}
+                      tags:
+                        type: array
+                        description: Returns the list of associated tags.
+                        items:
+                          type: string
+                          description: This is an example value.
+                          examples:
+                          - infrastructure:-pony3.microsoftups.com-[pony]
+                      tlp:
+                        type: string
+                        description: Returns the associated TLP.
+                        examples:
+                        - AMBER
+                      type:
+                        type: string
+                        description: Returns the type of the object.
+                        examples:
+                        - indicator
+                      valid_from:
+                        type: number
+                        description: Returns the Unix timestamp for when the indicator becomes valid.
+                        examples:
+                        - '1634636783'
+                      valid_until:
+                        type: object
+                        description: Returns the Unix timestamp for when the indicator expires.
+                  t:
+                    type: string
+                    description: Returns the value of the threat data object.
+                    examples:
+                    - http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                  type:
+                    type: string
+                    description: Returns the object type.
+                    enum:
+                    - node
+                    - link
+                    examples:
+                    - node
+                  u:
+                    type: string
+                    description: Returns an endpoint to the image of a node in the canvas.
+                    examples:
+                    - /ctix/images/graph/url.svg
+              example:
+                hi: 'false'
+                id: ff8fcc0f-4efb-4492-9145-230317fea9c4
+                prop:
+                  analyst_score: {}
+                  analyst_tlp: {}
+                  confidence_score: '40'
+                  confidence_type: ctix
+                  country: {}
+                  created: '1634636796'
+                  first_seen: {}
+                  id: ff8fcc0f-4efb-4492-9145-230317fea9c4
+                  identifier: ctix
+                  indicator_type: url
+                  is_actioned: 'false'
+                  is_deprecated: 'false'
+                  is_false_positive: 'false'
+                  is_reviewed: 'false'
+                  is_revoked: 'false'
+                  is_whitelisted: 'false'
+                  label: Url
+                  last_seen: {}
+                  modified: '1634636796'
+                  name: http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                  'null': []
+                  parent_type: indicator
+                  primary_attribute: {}
+                  published_collections: []
+                  severity: {}
+                  source_collections: []
+                  source_confidence: NONE
+                  sources:
+                  - id: b7aefa5d-511e-4487-8363-a9844bd7ecc7
+                    name: CrowdStrike
+                    source_type: API_FEEDS
+                  sub_type: value
+                  subscriber_collections: []
+                  subscribers: []
+                  tags:
+                  - infrastructure:-pony3.microsoftups.com-[pony]
+                  tlp: AMBER
+                  type: indicator
+                  valid_from: '1634636783'
+                  valid_until: {}
+                t: http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D
+                type: node
+                u: /ctix/images/graph/url.svg
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

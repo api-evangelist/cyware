@@ -1,0 +1,1115 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Create Intel via Open API API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Create Intel via Open API
+  description: Create Intel via Open API
+paths:
+  /conversion/quick-intel/open-api/:
+    post:
+      operationId: createIntelViaOpenApi
+      summary: Create Intel via Open API
+      tags:
+      - Create Intel via Open API
+      description: 'Create intel with additional details such as the source and collection. You can also include details for each object, such as description, notes, custom attributes, and more.
+
+
+        <Accordion attributes=''{"style":{"width":"100%"}}''>
+
+        <AccordionItem title="The All SDOs Object" iconUrl=""><p>The <code class="slate-code">all_sdos</code> object accepts <code class="slate-code">all_iocs</code> and the SDO type as the key, and a list of objects for the respective IOC and SDO type.</p>
+
+        <p>For a list of the supported SDO types, refer to the following table.</p>
+
+        <p>Title</p>
+
+        <p>SDO Key</p>
+
+        <p>Vulnerability</p>
+
+        <p><code class="slate-code">vulnerabilities</code></p>
+
+        <p>Malware</p>
+
+        <p><code class="slate-code">malwares</code></p>
+
+        <p>Campaign</p>
+
+        <p><code class="slate-code">campaigns</code></p>
+
+        <p>Threat Actor</p>
+
+        <p><code class="slate-code">threat_actor</code></p>
+
+        <p>Intrusion Set</p>
+
+        <p><code class="slate-code">intrusion_sets</code></p>
+
+        <p>Attack Pattern</p>
+
+        <p><code class="slate-code">attack_patterns</code></p>
+
+        <p>Incident</p>
+
+        <p><code class="slate-code">incidents</code></p>
+
+        <p>Course of Action</p>
+
+        <p><code class="slate-code">course_of_actions</code></p>
+
+        <p>Identity</p>
+
+        <p><code class="slate-code">identities</code></p>
+
+        <p>Tool</p>
+
+        <p><code class="slate-code">tools</code></p>
+
+        <p>Infrastructure</p>
+
+        <p><code class="slate-code">infrastructures</code></p>
+
+        <p>Location</p>
+
+        <p><code class="slate-code">locations</code></p>
+
+        <p>Malware Analysis</p>
+
+        <p><code class="slate-code">malware_analysis</code></p>
+
+        <p>Custom Objects</p>
+
+        <p><code class="slate-code">custom_objects</code></p>
+
+        <p>File</p>
+
+        <p><code class="slate-code">files</code></p>
+
+        <p>Grouping</p>
+
+        <p><code class="slate-code">groupings</code></p>
+
+        <p>Indicator</p>
+
+        <p><code class="slate-code">indicators</code></p>
+
+        <p>Marking Definition</p>
+
+        <p><code class="slate-code">marking_definitions</code></p>
+
+        <p>Note</p>
+
+        <p><code class="slate-code">notes</code></p>
+
+        <p>Observed Data</p>
+
+        <p><code class="slate-code">observed_datas</code></p>
+
+        <p>Opinion</p>
+
+        <p><code class="slate-code">opinions</code></p>
+
+        <p>Relatioship</p>
+
+        <p><code class="slate-code">relationships</code></p>
+
+        <p>Observables</p>
+
+        <p><code class="slate-code">cyber_observables</code></p>
+
+        <p>Software</p>
+
+        <p><code class="slate-code">softwares</code></p></AccordionItem>
+
+        <AccordionItem title="The All IOCs Object" iconUrl=""><p>The <code class="slate-code">all_iocs</code> object accepts the IOC type as the key and a list of objects for the respective IOC type.</p>
+
+        <p>For a list of the supported IOC types, refer to the following table.</p>
+
+        <p>IOC Type</p>
+
+        <p>IOC Key</p>
+
+        <p>IPv4</p>
+
+        <p><code class="slate-code">ipv4</code></p>
+
+        <p>IPv6</p>
+
+        <p><code class="slate-code">ipv6</code></p>
+
+        <p>Domain</p>
+
+        <p><code class="slate-code">domain</code></p>
+
+        <p>URL</p>
+
+        <p><code class="slate-code">url</code></p>
+
+        <p>Email Address</p>
+
+        <p><code class="slate-code">email_address</code></p>
+
+        <p>MD5</p>
+
+        <p><code class="slate-code">md5</code></p>
+
+        <p>SHA1</p>
+
+        <p><code class="slate-code">sha1</code></p>
+
+        <p>SHA224</p>
+
+        <p><code class="slate-code">sha224</code></p>
+
+        <p>SHA256</p>
+
+        <p><code class="slate-code">sha256</code></p>
+
+        <p>SHA384</p>
+
+        <p><code class="slate-code">sha384</code></p>
+
+        <p>SHA512</p>
+
+        <p><code class="slate-code">sha512</code></p>
+
+        <p>SSDEEP</p>
+
+        <p><code class="slate-code">ssdeep</code></p>
+
+        <p></p></AccordionItem>
+
+        </Accordion>'
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/create-intel-via-open-api/create-intel-via-open-api
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                  description: "Pass the name of the source to map the intel. \nIf the passed source name does not exist in the platform, then a new source is automatically created in the Miscellaneous source category."
+                  default: Miscellaneous
+                  examples:
+                  - Open API Source
+                collection:
+                  type: string
+                  description: 'Pass the name of the source collection to associate with the source.
+
+                    If the passed collection name does not exist in the platform, then a new collection is automatically created.'
+                  default: Free Text
+                  examples:
+                  - API Import
+                metadata:
+                  type: object
+                  description: Pass additional information to associate with the intel.
+                  properties:
+                    confidence:
+                      type: number
+                      description: Pass the Source Confidence Score associated with all the intel. This score is applied to all the threat data objects in the payload.
+                      default: 'null'
+                      examples:
+                      - '80'
+                    tlp:
+                      type: string
+                      description: Pass the TLP to associate with the intel. This TLP is applied to all the threat data objects in the payload.
+                      enum:
+                      - GREEN
+                      - ' AMBER'
+                      - RED
+                      - WHITE
+                      - NONE
+                      examples:
+                      - RED
+                    labels:
+                      type: array
+                      description: Pass a list of tags to associate with the intel.
+                      items:
+                        type: string
+                        description: Pass the tag name to associate with the intel.
+                        examples:
+                        - open_api_objects
+                title:
+                  type: string
+                  description: Pass the title of the intel within 100 characters.
+                  examples:
+                  - new intel
+                all_sdos:
+                  type: object
+                  description: Pass the SDO and IOC objects to add to the intel. For more information, see *The All SDOs Object* table.
+                  properties:
+                    all_iocs:
+                      type: object
+                      description: Pass details of threat data objects you want to create as intel in Intel Exchange.
+                      properties:
+                        ipv4:
+                          type: array
+                          description: Pass IPv4 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of an IPv4.
+                                examples:
+                                - 1.2.34.21
+                              description:
+                                type: string
+                                description: Pass the description of the IOC or SDO within 5000 characters.
+                                examples:
+                                - sample description
+                              is_false_positive:
+                                type: boolean
+                                description: Pass true to mark the IOC or SDO as False-Positive.
+                                default: 'false'
+                                examples:
+                                - 'true'
+                              notes:
+                                type: array
+                                description: Pass a list of note strings to add to the IOC or SDO.
+                                items:
+                                  type: string
+                                  description: This is an example note.
+                                  examples:
+                                  - This is a sample Note attached to this indicator!
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute values in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        ipv6:
+                          type: array
+                          description: Pass IPv6 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of an IPv6.
+                                examples:
+                                - 7b6f:e96a:991b:e1f8:6e50:9bf6:3c7:2922
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute values in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        domain:
+                          type: array
+                          description: Pass the domain object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the domain.
+                                examples:
+                                - abc.com
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute values in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        url:
+                          type: array
+                          description: Pass the URL object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the URL.
+                                examples:
+                                - http://www.abc.com
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute values in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        email_address:
+                          type: array
+                          description: Pass the Email address object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the email address.
+                                examples:
+                                - john.doe@cyware.com
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute values in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        md5:
+                          type: array
+                          description: Pass the MD5 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the MD5.
+                                examples:
+                                - 00616b4b72c8a1da89ed3840fa7313e1
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        sha1:
+                          type: array
+                          description: Pass the SHA1 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the SHA1.
+                                examples:
+                                - 434c2da14ed0326cd2536a51a50341c8877cabe9
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        sha224:
+                          type: array
+                          description: Pass the SHA224 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the SHA224.
+                                examples:
+                                - 90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        sha256:
+                          type: array
+                          description: Pass the SHA256 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of SHA256.
+                                examples:
+                                - 003b3e35daeb64f1608b31e98db56044c0294703dfc39ce31e25b2ac66933699
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute names and the attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        sha384:
+                          type: array
+                          description: Pass the SHA384 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of SHA384.
+                                examples:
+                                - f2360531b6d70f20650e28f79c3e327c107842379a5ece06b0485aa21bf10ef0a0f307e50752550daab99f5bb6afb7ea
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute name and the attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        sha512:
+                          type: array
+                          description: Pass the SHA512 object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of SHA512.
+                                examples:
+                                - 0ef857c3298a01de7e7cf21d60b38709adf28ae711d1e72be1f43a91b18ed1c4956fd75294db5b40bf241f50507abdccdd133364cfef6f6e5c9b908279816223
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute name and attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                        ssdeep:
+                          type: array
+                          description: Pass the SSDEEP object details.
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                description: Pass the value of the SSDEEP.
+                                examples:
+                                - 3:BWcSn:EcSn
+                              custom_attributes:
+                                type: object
+                                description: Pass the custom attribute name and attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                                properties:
+                                  x_custom_attribute1:
+                                    type: string
+                                    description: This is an example value.
+                                    examples:
+                                    - sample value 1
+                            required:
+                            - value
+                    vulnerabilities:
+                      type: array
+                      description: Pass the vulnerability object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the vulnerability.
+                            examples:
+                            - vul1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    malwares:
+                      type: array
+                      description: Pass the malware object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the malware.
+                            examples:
+                            - malware1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-value pairs. The custom attribute name must start with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    campaigns:
+                      type: array
+                      description: Pass the campaign object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the campaign.
+                            examples:
+                            - campaign1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    threat_actors:
+                      type: array
+                      description: Pass the threat actor object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the threat actor.
+                            examples:
+                            - threatactor1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    intrusion_sets:
+                      type: array
+                      description: Pass the intrusion set's object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the intrusion set.
+                            examples:
+                            - intrusionset1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    attack_patterns:
+                      type: array
+                      description: Pass the attack pattern's object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the attack pattern.
+                            examples:
+                            - attackpattern1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    course_of_actions:
+                      type: array
+                      description: Pass the course of action's object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the course of action.
+                            examples:
+                            - coa1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    identities:
+                      type: array
+                      description: Pass the identities object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the identity.
+                            examples:
+                            - iden1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    tools:
+                      type: array
+                      description: Pass the tool's object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the tool.
+                            examples:
+                            - tool1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example tool.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+                    locations:
+                      type: array
+                      description: Pass the location's object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the location.
+                            examples:
+                            - loc1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                          type:
+                            type: string
+                            description: Returns the format used to define the location.
+                            examples:
+                            - latitude-longitude
+                          latitude:
+                            type: number
+                            description: Returns the geographic latitude of the location.
+                            examples:
+                            - '21.12'
+                          longitude:
+                            type: number
+                            description: Returns the geographic longitude of the location.
+                            examples:
+                            - '12.12'
+                        required:
+                        - value
+                    malware_analysis:
+                      type: array
+                      description: Pass the malware object details.
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: Pass the value of the malware.
+                            examples:
+                            - ma1
+                          custom_attributes:
+                            type: object
+                            description: Pass the custom attribute name and attribute value in key-pairs. The custom attribute name starts with `x_`. For example, `x_identity`.
+                            properties:
+                              x_custom_attribute1:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - sample value 1
+                        required:
+                        - value
+              required:
+              - title
+            example:
+              source: Open API Source
+              collection: API Import
+              metadata:
+                confidence: '80'
+                tlp: RED
+                labels:
+                - open_api_objects
+              title: new intel
+              all_sdos:
+                all_iocs:
+                  ipv4:
+                  - value: 1.2.34.21
+                    description: sample description
+                    is_false_positive: 'true'
+                    notes:
+                    - This is a sample Note attached to this indicator!
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  ipv6:
+                  - value: 7b6f:e96a:991b:e1f8:6e50:9bf6:3c7:2922
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  domain:
+                  - value: abc.com
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  url:
+                  - value: http://www.abc.com
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  email_address:
+                  - value: john.doe@cyware.com
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  md5:
+                  - value: 00616b4b72c8a1da89ed3840fa7313e1
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  sha1:
+                  - value: 434c2da14ed0326cd2536a51a50341c8877cabe9
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  sha224:
+                  - value: 90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  sha256:
+                  - value: 003b3e35daeb64f1608b31e98db56044c0294703dfc39ce31e25b2ac66933699
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  sha384:
+                  - value: f2360531b6d70f20650e28f79c3e327c107842379a5ece06b0485aa21bf10ef0a0f307e50752550daab99f5bb6afb7ea
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  sha512:
+                  - value: 0ef857c3298a01de7e7cf21d60b38709adf28ae711d1e72be1f43a91b18ed1c4956fd75294db5b40bf241f50507abdccdd133364cfef6f6e5c9b908279816223
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                  ssdeep:
+                  - value: 3:BWcSn:EcSn
+                    custom_attributes:
+                      x_custom_attribute1: sample value 1
+                vulnerabilities:
+                - value: vul1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                malwares:
+                - value: malware1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                campaigns:
+                - value: campaign1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                threat_actors:
+                - value: threatactor1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                intrusion_sets:
+                - value: intrusionset1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                attack_patterns:
+                - value: attackpattern1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                course_of_actions:
+                - value: coa1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                identities:
+                - value: iden1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                tools:
+                - value: tool1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                locations:
+                - value: loc1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+                  type: latitude-longitude
+                  latitude: '21.12'
+                  longitude: '12.12'
+                malware_analysis:
+                - value: ma1
+                  custom_attributes:
+                    x_custom_attribute1: sample value 1
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: string
+                    description: 'Returns the following success message: *Intel creation is in progress*.'
+                    examples:
+                    - Intel creation is in progress.
+                  task_id:
+                    type: string
+                    description: Returns the unique identifier of the task.
+                    examples:
+                    - 99771bd8-2fda-4433-9cc9-1fa82befeaec
+              example:
+                details: Intel creation is in progress.
+                task_id: 99771bd8-2fda-4433-9cc9-1fa82befeaec
+  /ingestion/ingestion-api/ingest_bundle/:
+    post:
+      operationId: withSourceAndCollectionId
+      summary: With Source and Collection ID
+      tags:
+      - Create Intel via Open API
+      description: "Use this API to ingest a STIX bundle into Intel Exchange by specifying the source and collection ID. A STIX bundle can include any combination of STIX Domain Objects (SDOs). For more information on supported objects, see the [STIX documentation](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html).\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>If you pass an invalid or missing <code class=\"slate-code\">source_id</code> or <code class=\"slate-code\">collection_id</code>, the bundle is ingested with the source set to <strong class=\"slate-bold\">Import</strong> and the collection set to <strong class=\"slate-bold\">STIX2</strong>.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/create-intel-via-open-api/ingest-bundle/with-source-and-collection-id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source_id:
+                  type: string
+                  description: Pass the unique identifier for the source of the bundle being ingested.
+                  examples:
+                  - d2ab6414-416d-4dba-a23c-fde56a75a17a
+                source_type:
+                  type: string
+                  description: Pass the type of the source. For example, `CUSTOM_STIX_SOURCES`.
+                  examples:
+                  - CUSTOM_STIX_SOURCES
+                collection_id:
+                  type: string
+                  description: Pass the unique identifier for the collection that should receive the bundle.
+                  examples:
+                  - 7e8fbe54-abf1-4f5b-82b0-21eb7d9e7fdc
+                bundle:
+                  type: object
+                  description: Pass the STIX bundle that includes one or more STIX objects.
+                  properties:
+                    type:
+                      type: string
+                      description: Pass the type of the bundle.
+                      examples:
+                      - bundle
+                    id:
+                      type: string
+                      description: Pass a unique identifier for the bundle.
+                      examples:
+                      - bundle--73128ede-df7b-42cb-b073-a04b59acf898
+                    objects:
+                      type: array
+                      description: Pass an array of STIX objects contained in the bundle.
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Pass the object type. For example, `indicator`, `malware`, `threat_actor`.
+                            examples:
+                            - indicator
+                          spec_version:
+                            type: string
+                            description: Pass the STIX specification version used for the object.
+                            examples:
+                            - '2.1'
+                          id:
+                            type: string
+                            description: Pass a unique identifier for the specific STIX object.
+                            examples:
+                            - indicator--88359550-45b9-41d3-9bbd-69bfbb994593
+                          created:
+                            type: string
+                            description: Pass the timestamp when the object was created.
+                            examples:
+                            - '2024-09-30T10:42:06.935776Z'
+                          modified:
+                            type: string
+                            description: Pass the timestamp when the object was modified.
+                            examples:
+                            - '2024-09-30T10:42:06.935776Z'
+                          name:
+                            type: string
+                            description: Pass a human-readable name or description of the object.
+                            examples:
+                            - 205.165.206.118
+                          pattern:
+                            type: string
+                            description: 'Pass the detection pattern that defines the indicator''s characteristics. For example, `[url:value = ''http: //affected-domains.com/test'']`.'
+                            examples:
+                            - '[ipv4-addr:value = ''205.165.206.118'']'
+                          pattern_type:
+                            type: string
+                            description: Pass the type of pattern used. For example, `stix`.
+                            examples:
+                            - stix
+                          pattern_version:
+                            type: string
+                            description: Pass the version of the pattern specification. For example, `2.1`.
+                            examples:
+                            - '2.1'
+                          valid_from:
+                            type: string
+                            description: Pass the timestamp from which the indicator is considered valid.
+                            examples:
+                            - '2024-09-30T10:42:06.935776Z'
+                        required:
+                        - type
+                        - spec_version
+                        - id
+                        - created
+                        - modified
+                        - pattern
+                        - pattern_type
+                        - valid_from
+                  required:
+                  - type
+                  - id
+                  - objects
+              required:
+              - source_id
+              - source_type
+              - collection_id
+              - bundle
+            example:
+              source_id: d2ab6414-416d-4dba-a23c-fde56a75a17a
+              source_type: CUSTOM_STIX_SOURCES
+              collection_id: 7e8fbe54-abf1-4f5b-82b0-21eb7d9e7fdc
+              bundle:
+                type: bundle
+                id: bundle--73128ede-df7b-42cb-b073-a04b59acf898
+                objects:
+                - type: indicator
+                  spec_version: '2.1'
+                  id: indicator--88359550-45b9-41d3-9bbd-69bfbb994593
+                  created: '2024-09-30T10:42:06.935776Z'
+                  modified: '2024-09-30T10:42:06.935776Z'
+                  name: 205.165.206.118
+                  pattern: '[ipv4-addr:value = ''205.165.206.118'']'
+                  pattern_type: stix
+                  pattern_version: '2.1'
+                  valid_from: '2024-09-30T10:42:06.935776Z'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Returns whether the bundle ingestion was successful.
+                    examples:
+                    - true
+                  message:
+                    type: string
+                    description: Returns additional details about the ingestion process.
+                    examples:
+                    - Successfully sent bundle to ingestion.
+              example:
+                success: true
+                message: Successfully sent bundle to ingestion.
+      x-alternate-documents:
+      - title: With Source and Collection Name
+        operationId: withSourceAndCollectionName
+        url: https://ctixapiv3.cyware.com/create-intel-via-open-api/ingest-bundle/with-source-and-collection-name
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

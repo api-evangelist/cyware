@@ -1,0 +1,916 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Data Objects API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Data Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Actions List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/actions/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve actions."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of actions to retrieve on each page."
+              },
+              {
+                "name": "app_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the app type that performed the action. Example, *ctix*."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+              },
+              {
+                "name": "action_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of actions to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions performed on a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Action Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/actions/:object_type/:object_id/stats/",
+            "params": [
+              {
+                "name": "is_third_action",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve third-party action statistics only."
+              },
+              {
+                "name": "is_ctix_action",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve Intel Exchange (CTIX) action statistics only."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves the statistics of the actions performed by third-party tools and Intel Exchange on a threat data object."
+        },
+        {
+          "info": {
+            "name": "Add Custom Aliases to Threat Actors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/threat-actor/:object_id/basic/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add custom aliases to threat actors in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Kill Chain Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/kill_chain_phases/:kill_chain_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "kill_chain_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a kill chain phase to retrieve the details. You can retrieve this ID using the **List Kill Chain Phases API**."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a STIX kill chain phase."
+        },
+        {
+          "info": {
+            "name": "Get Kill Chain Phases List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/kill_chain_phases/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the kill chain phases."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve in each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the threat data object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves kill chain phases associated with a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Published Collections of a Threat Object List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/published-collections/:object_type/:object_id/",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve in each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of the threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object IDs, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves the collections to which a threat data object is published."
+        },
+        {
+          "info": {
+            "name": "Get Source Details List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/source_details/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve sources."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of sources to be retrieved in each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves source information for a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Source External References List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/external-references/",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve in each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve external references."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of the external references that are associated with STIX SDOs."
+        },
+        {
+          "info": {
+            "name": "Get Threat Data Object Details List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/basic/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data objects. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the object to retrieve the details. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Returns basic correlated details of a threat data object in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Threat Data Object Sources List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/source-description/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of feed sources associated with a threat data object. Also, retrieves the description, fanged description, and de-fanged description of the sources."
+        },
+        {
+          "info": {
+            "name": "Get Object Source Details in List View",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/source-references/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve source instances."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "layout",
+                "value": "",
+                "type": "query",
+                "description": "Pass the layout to filter the number of returned fields in response."
+              },
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a source to retrieve the instances of the source. You can retrieve this ID using the **List Source Details API**. Example, *bc8c1d21-3bf1-4b19-bf6b-f31db555c1ec*"
+              }
+            ]
+          },
+          "docs": "List all the instances when the object has been polled into the platform for the given source ID."
+        },
+        {
+          "info": {
+            "name": "Get Object Source Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/source-reference/:id/",
+            "params": [
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Enter the ID of the source record. You can retrieve this ID using the **List Source Details API**."
+              }
+            ]
+          },
+          "docs": "Retrieves the source object information for the specified threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Threat Data Object Additional Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/advanced-details/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of an object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves additional information about a threat data object, such as kill chain phases and published collections."
+        },
+        {
+          "info": {
+            "name": "Get Threat Data Object Details in Table View",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/source-overview/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the details."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve in each page."
+              }
+            ]
+          },
+          "docs": "Retrieves the object information for the given filters in a tabular format."
+        },
+        {
+          "info": {
+            "name": "Refresh Confidence Score (Risk Score)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/refresh-score/",
+            "params": [
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type (indicator)."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the indicator threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Returns the Confidence Score (Risk Score) of an indicator threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Key Evidence of Confidence Score (Risk Score)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/key-evidence/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object (indicator)."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+              }
+            ]
+          },
+          "docs": "Retrieve the key evidence for the Confidence Score (Risk Score) calculation for an indicator."
+        },
+        {
+          "info": {
+            "name": "Get Custom Attributes List of Threat Data Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/custom_attributes/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of the object such as indicator, vulnerability, malware, and more."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the object to retrieve the custom attributes."
+              }
+            ]
+          },
+          "docs": "Retrieves the custom attributes of a threat data object with respect to all the sources the object has received."
+        },
+        {
+          "info": {
+            "name": "Get Enriched Threat Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/integration/apps/update/threatdata/",
+            "params": [
+              {
+                "name": "app_slug",
+                "value": "",
+                "type": "query",
+                "description": "Pass the slug of an enrichment tool to retrieve its enriched data. To retrieve the slug of an enrichment tool, use the **GET Enrichment Tools API** endpoint."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Pass the value of the object. For example, *sco*, *vulnerability*, and more."
+              },
+              {
+                "name": "action_slug",
+                "value": "",
+                "type": "query",
+                "description": "Pass the enrichment action name to retrieve specific details. For example, `get_ip` for IPs, `get_domain` for Domain, `get_url` for URL, `get_cve` for Vulnerability."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of an object ID (sco object ID for indicators and vulnerability object ID for vulnerabilities)."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the object type. SDO object type(indicator /or vulnerability)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the enriched data of a threat data object using enrichment tools."
+        },
+        {
+          "info": {
+            "name": "Perform Action on Threat Data Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/action/:action_type/",
+            "params": [
+              {
+                "name": "action_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the action to be performed."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Performs an action on a threat data object. You can perform actions such as deprecate, undeprecate, add analyst TLP, add analyst score, and more"
+        },
+        {
+          "info": {
+            "name": "Get Quick Action Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/quick-actions/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat data object."
+              }
+            ]
+          },
+          "docs": "Returns the status of the quick actions performed on a threat data object."
+        },
+        {
+          "info": {
+            "name": "Filter Relations by Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/source_specific_relations/",
+            "params": [
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a threat data object."
+              }
+            ]
+          },
+          "docs": "Retrieves source-specific relations of a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Relations List of Threat Data Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/relations/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve relations."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve in each page."
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query",
+                "description": "Pass the comma-separated IDs of the sources to filter the response. To retrieve the IDs, use the **List Threat Data Object Sources API**."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of related objects and the relation details of a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Relations List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/relations/card",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type. Attack pattern, campaign, course of action, grouping, etc., are examples of the object type."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object ID. Unique UUID4 is an example of the object ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the related statistics for the given object type and object ID."
+        },
+        {
+          "info": {
+            "name": "Get Relations Overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/:object_type/:object_id/relations/card/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+              }
+            ]
+          },
+          "docs": "Retrieves the overall statistics for all relations of a threat data object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

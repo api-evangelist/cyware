@@ -1,0 +1,873 @@
+{
+  "item": [
+    {
+      "id": "118960f0-0c3a-47c9-80b5-e3fef9c666dc",
+      "name": "Events",
+      "description": {
+        "content": "Events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c77268d3-d1be-4b61-9673-306451d4d06e",
+          "name": "Configure Trigger",
+          "request": {
+            "name": "Configure Trigger",
+            "description": {
+              "content": "Configure a trigger by passing the app identifier, action identifier, and labels through the payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "data-labels",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"app_identifier\": \"<string>\",\n  \"action_identifier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2e53270-6f56-44a3-a934-92c30b9a4c8d",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "data-labels",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"labels\": [\n    \"label 34\"\n  ],\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"ctix_submission\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"ctix_submission\",\n  \"labels\": [\n    \"V2.10\"\n  ],\n  \"labels_data\": [\n    {\n      \"title\": \"V2.10\",\n      \"unique_id\": \"56f49626-ae27-4692-94d2-d373f49c7c7e\",\n      \"color\": \"#1060E7\"\n    }\n  ],\n  \"unique_id\": \"719033ad-5199-48b3-ba39-8d1da8b26272\",\n  \"created\": \"2022-01-20T16:18:34.341673Z\",\n  \"modified\": \"2022-01-20T16:18:34.341673Z\",\n  \"created_by\": \"0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab\",\n  \"modified_by\": {},\n  \"created_by_data\": {\n    \"unique_id\": \"094b1d3e-b7b3-4542-afd0-7612de3a320f\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"modified_by_data\": {},\n  \"is_active\": \"true\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01725beb-35f5-4ec3-a1c5-6174ea6144d2",
+          "name": "Create Event (v2)",
+          "request": {
+            "name": "Create Event (v2)",
+            "description": {
+              "content": "Create an event by passing the app identifier, action identifier, and data through the payload. This endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>This API is available in Orchestrate v3.5.9 onwards.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"app_identifier\": \"<string>\",\n  \"action_identifier\": \"<string>\",\n  \"extra_data\": {\n    \"data\": \"<number>\"\n  },\n  \"data\": {\n    \"data\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1addbe3-7c16-4061-b8c8-9d84e5f2c5c7",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"SourceEvent20/01/2022 01:30:14\",\n  \"app_identifier\": \"Test App Identifier\",\n  \"action_identifier\": \"Test Action Identifier\",\n  \"extra_data\": {\n    \"data\": \"123\"\n  },\n  \"data\": {\n    \"data\": \"1234\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"intel_enrichment\",\n  \"readable_id\": \"TEfbb104ed-6\",\n  \"unique_id\": \"fbb104ed-6704-4127-8898-f2f6aefe9fc1\",\n  \"created\": \"2024-12-11T06:50:59.946589Z\",\n  \"source\": \"Openapi\",\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"CTIX_submission\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90c51afc-155f-499b-993b-b721e4797a68",
+          "name": "Create Event",
+          "request": {
+            "name": "Create Event",
+            "description": {
+              "content": "Create an event by passing the app identifier, action identifier, and data through the payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"app_identifier\": \"<string>\",\n  \"action_identifier\": \"<string>\",\n  \"extra_data\": {\n    \"data\": \"<number>\"\n  },\n  \"data\": {\n    \"data\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85a8f79e-6e8a-422f-a780-6c074b14791d",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"SourceEvent20/01/2022 01:30:14\",\n  \"app_identifier\": \"Test App Identifier\",\n  \"action_identifier\": \"Test Action Identifier\",\n  \"extra_data\": {\n    \"data\": \"123\"\n  },\n  \"data\": {\n    \"data\": \"1234\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"CTIX_submission\",\n  \"data\": {\n    \"data\": \"1234\"\n  },\n  \"extra_data\": {\n    \"data\": \"123\"\n  },\n  \"unique_id\": \"2c7a4166-2fa1-4619-a5fe-41bb3de2e969\",\n  \"created\": \"2022-01-20T10:06:26.171520Z\",\n  \"modified\": \"2022-01-20T10:06:26.171520Z\",\n  \"title\": \"SourceEvent20/01/2022 01:30:14\",\n  \"labels\": [],\n  \"labels_data\": [],\n  \"created_by\": \"0b5c15ff-8577-435c-9ce0-f3fb1b91b7ab\",\n  \"created_by_data\": {\n    \"unique_id\": \"094b1d3e-b7b3-4542-afd0-7612de3a320f\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"processed\": \"false\",\n  \"execution_error\": \"false\",\n  \"source\": \"Openapi\",\n  \"readable_id\": \"TE8b96aae1-4\",\n  \"splitted_columns\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2208a395-2dca-4b10-afbb-90a65bcc7271",
+          "name": "Get Events",
+          "request": {
+            "name": "Get Events",
+            "description": {
+              "content": "Returns the list of triggered events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Pass the keyword to search for in the titles of triggered events."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_identifier",
+                  "value": "<string>",
+                  "description": "Pass the source app to filter events based on the apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_identifier",
+                  "value": "<string>",
+                  "description": "Pass the event type to filter events based on the type of the event."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the keyword to search in title (event title), `app_identifier` (source app), `action_identifer` (event type) and `unique_id` (event ID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_id",
+                  "value": "<string>",
+                  "description": "Pass the unique ID of the event."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the source event list."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of items to retrieve per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "Pass the label name to filter the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "create__lte",
+                  "value": "<string>",
+                  "description": "Pass the custom date in Unix timestamp format. The list of source events modified earlier than the entered time will be returned. Example: *1655231399*."
+                },
+                {
+                  "disabled": false,
+                  "key": "created__gte",
+                  "value": "<string>",
+                  "description": "Pass the custom date in Unix timestamp format. The list of source events modified after the entered time will be returned. Example: *1655145000*."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<string>",
+                  "description": "Pass the values for the time duration to view source events."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2e8552b-5e75-4238-bce0-200c7de97a25",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "create__lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created__gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {\n    \"next\": \"openapi/v1/events/?page=1&page_size=1&Expires={{expires}}&AccessID={{open_api_access_id}}&Signature={{signature}}\"\n  },\n  \"count\": \"1\",\n  \"results\": [\n    {\n      \"readable_id\": \"TE3970854f-a\",\n      \"created\": \"2023-02-03T01:33:11.571459Z\",\n      \"unique_id\": \"3970854f-a9f5-4ed6-b214-7486a5de11a6\",\n      \"title\": \"SourceEvent03/02/2023 01:30:18\",\n      \"labels\": [],\n      \"labels_data\": [],\n      \"app_identifier\": \"App Identifier\",\n      \"action_identifier\": \"Action Identifier\",\n      \"processed\": \"false\",\n      \"execution_error\": \"false\",\n      \"source\": \"Platform\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "462305d2-6151-4b3b-8767-75a7715f9aed",
+          "name": "Download Event Data",
+          "request": {
+            "name": "Download Event Data",
+            "description": {
+              "content": "Download large files from event data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                "export",
+                ":unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "(Required) Pass the column name for which file will be generated. You can retrieve the column name in the `splitted_columns` field of the **Get Source Event Details** endpoint."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unique_id",
+                  "description": "(Required) Pass the unique ID of the event to download. You can retrieve the unique ID of the event using the **Get Source Events** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2db23593-c67c-4283-a77a-374bf413ddea",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    "export",
+                    ":unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unique_id",
+                      "description": "(Required) Pass the unique ID of the event to download. You can retrieve the unique ID of the event using the **Get Source Events** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"file_url\": \"https://server.com/csolbucket/qa/playbookresult/event-data-f593a083.json?response-content-disposition=attachment\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e758fb32-ab44-40f3-ab4e-77eab1fa8521",
+          "name": "Get Event Details",
+          "request": {
+            "name": "Get Event Details",
+            "description": {
+              "content": "Returns the details of a specific triggered event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                ":event_unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "event_unique_id",
+                  "description": "(Required) Pass the event ID to retrieve the details. You can retrieve the unique ID of an event using the **Get Source Event** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37565c23-394d-4707-ad57-1e9a38c2dd18",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    ":event_unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_unique_id",
+                      "description": "(Required) Pass the event ID to retrieve the details. You can retrieve the unique ID of an event using the **Get Source Event** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"readable_id\": \"TE3970854f-a\",\n  \"created\": \"2023-02-03T01:33:11.571459Z\",\n  \"unique_id\": \"3970854f-a9f5-4ed6-b214-7486a5de11a6\",\n  \"title\": \"SourceEvent03/02/2023 01:30:18\",\n  \"labels\": [],\n  \"labels_data\": [],\n  \"app_identifier\": \"App Identifier\",\n  \"action_identifier\": \"Action Identifier\",\n  \"created_by\": \"58ea8ed9-96c9-48a2-88e9-4ae7f4a738ca\",\n  \"created_by_data\": {\n    \"unique_id\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"data\": {\n    \"x\": \"value\"\n  },\n  \"extra_data\": {},\n  \"processed\": \"false\",\n  \"execution_error\": \"false\",\n  \"source\": \"Platform\",\n  \"splitted_columns\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "add31075-de7f-4fd9-820a-b7154410757e",
+    "name": "Cyware Orchestrate (CO) Open Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

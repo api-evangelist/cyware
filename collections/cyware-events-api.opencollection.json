@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Configure Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/webhooks/data-labels/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure a trigger by passing the app identifier, action identifier, and labels through the payload."
+        },
+        {
+          "info": {
+            "name": "Create Event (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v2/events/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an event by passing the app identifier, action identifier, and data through the payload. This endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>This API is available in Orchestrate v3.5.9 onwards.</p>\n</Callout>"
+        },
+        {
+          "info": {
+            "name": "Get Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/events/",
+            "params": [
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search for in the titles of triggered events."
+              },
+              {
+                "name": "app_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Pass the source app to filter events based on the apps."
+              },
+              {
+                "name": "action_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Pass the event type to filter events based on the type of the event."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search in title (event title), `app_identifier` (source app), `action_identifer` (event type) and `unique_id` (event ID)."
+              },
+              {
+                "name": "unique_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the event."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the source event list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Pass the label name to filter the results."
+              },
+              {
+                "name": "create__lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the custom date in Unix timestamp format. The list of source events modified earlier than the entered time will be returned. Example: *1655231399*."
+              },
+              {
+                "name": "created__gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the custom date in Unix timestamp format. The list of source events modified after the entered time will be returned. Example: *1655145000*."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Pass the values for the time duration to view source events."
+              }
+            ]
+          },
+          "docs": "Returns the list of triggered events."
+        },
+        {
+          "info": {
+            "name": "Create Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/events/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an event by passing the app identifier, action identifier, and data through the payload."
+        },
+        {
+          "info": {
+            "name": "Download Event Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/events/export/:unique_id/",
+            "params": [
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "Pass the column name for which file will be generated. You can retrieve the column name in the `splitted_columns` field of the **Get Source Event Details** endpoint."
+              },
+              {
+                "name": "unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the event to download. You can retrieve the unique ID of the event using the **Get Source Events** endpoint."
+              }
+            ]
+          },
+          "docs": "Download large files from event data."
+        },
+        {
+          "info": {
+            "name": "Get Event Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/events/:event_unique_id/",
+            "params": [
+              {
+                "name": "event_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the event ID to retrieve the details. You can retrieve the unique ID of an event using the **Get Source Event** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific triggered event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

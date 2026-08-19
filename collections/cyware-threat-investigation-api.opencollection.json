@@ -1,0 +1,285 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Investigation API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Investigation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Canvas Basic Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/canvas/:canvas_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "canvas_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a canvas"
+              }
+            ]
+          },
+          "docs": "Return the details of a canvas."
+        },
+        {
+          "info": {
+            "name": "Get Canvas Nodes Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/canvas/nodes/:canvas_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "canvas_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a threat investigation canvas."
+              }
+            ]
+          },
+          "docs": "Returns the node details of a threat investigation canvas."
+        },
+        {
+          "info": {
+            "name": "Get Canvases List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/canvas/",
+            "params": [
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the creator."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search for threat investigations by the title."
+              },
+              {
+                "name": "shared_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the sharing type to filter."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter results."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of canvases."
+        },
+        {
+          "info": {
+            "name": "Analyze Relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/investigation/ctix-enrichment/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns relationship details of threat data objects within Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Enrich Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/integration/investigation/enrichment/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve enrichment results."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of results to retrieve per page."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich threat data objects for threat investigation using third-party enrichment tools configured in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Create Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/investigation/create-intel/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates intel in the draft state from the details retrieved from the threat investigation."
+        },
+        {
+          "info": {
+            "name": "List Existing Relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/investigation/edges/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the relationship types that exist between two threat data objects."
+        },
+        {
+          "info": {
+            "name": "Get Possible Relationships List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/investigation/relationship/",
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Pass the source object type."
+              },
+              {
+                "name": "target",
+                "value": "",
+                "type": "query",
+                "description": "Pass the target object type."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of possible STIX 2.1 relationship types that can exist between two STIX Domain Objects."
+        },
+        {
+          "info": {
+            "name": "Get Threat Data Object Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/investigation/threat-data/:id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the Object ID of the threat data object"
+              }
+            ]
+          },
+          "docs": "Returns the details of a threat data object that is accessible from the Threat Investigation canvas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

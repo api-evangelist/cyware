@@ -1,0 +1,169 @@
+openapi: 3.2.0
+info:
+  title: Cyware Orchestrate (CO) Open Analytics API
+  version: v1
+  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
+
+
+    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://orchestrateapi.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{co_host}/soarapi
+  description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+  variables:
+    co_host:
+      default: demo.cyware.com
+security:
+- coOpenApiSignature: []
+tags:
+- name: Analytics
+  description: Analytics
+paths:
+  /v1/analytics/data-source/:
+    get:
+      operationId: mostActiveInstances
+      summary: Get Most Active Instances
+      tags:
+      - Analytics
+      description: Returns the most frequently used instances in playbook executions for the non-purged data.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/analytics/most-active-instances
+      parameters:
+      - name: AccessID
+        in: query
+        required: false
+        schema:
+          type: string
+          description: The Access ID is used to authenticate the Cyware Orchestrate API endpoint.
+          examples:
+          - 57d008c4-xxxx-4880-xxxx-1feb943d06ac,
+        description: The Access ID is used to authenticate the Cyware Orchestrate API endpoint.
+      - name: Signature
+        in: query
+        required: false
+        schema:
+          type: string
+          description: The Signature is used to authenticate the Cyware Orchestrate API endpoint.
+          examples:
+          - ohaUEcyA8hH3WPUo7Y/QOf+zWY0=
+        description: The Signature is used to authenticate the Cyware Orchestrate API endpoint.
+      - name: Expires
+        in: query
+        required: false
+        schema:
+          type: string
+          description: This parameter is used to define an expiry time for the API call.
+          examples:
+          - 72a48f16-xxxx-4023-xxxx-40f8e58d1f41
+        description: This parameter is used to define an expiry time for the API call.
+      - name: categorize_by
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass`categorize_by=most_active_instances` to retrieve the most active instances.
+          examples:
+          - most_active_instances
+        description: Pass`categorize_by=most_active_instances` to retrieve the most active instances.
+      - name: created__gte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the start time in unix time format to retrieve the most active instances.
+          examples:
+          - '1640131200'
+        description: Pass the start time in unix time format to retrieve the most active instances.
+      - name: created__lte
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the end time in unix time format to retrieve the most active instances.
+          examples:
+          - '1640723199'
+        description: Pass the end time in unix time format to retrieve the most active instances.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Returns the analytics data on the most active instance for the specified time range.
+                    items:
+                      type: object
+                      properties:
+                        label:
+                          type: string
+                          description: Returns the title of the instance.
+                          examples:
+                          - Test Instance
+                        value:
+                          type: number
+                          description: Returns the number of times an instance is utilized in playbooks execution.
+                          examples:
+                          - '8'
+              example:
+                data:
+                - label: Test Instance
+                  value: '8'
+      x-alternate-documents:
+      - title: Get Event Count
+        operationId: eventCount
+        url: https://orchestrateapi.cyware.com/analytics/event-count
+      - title: Get Events With Error
+        operationId: eventsWithError
+        url: https://orchestrateapi.cyware.com/analytics/events-with-error
+      - title: Get Incoming Source Events
+        operationId: incomingSourceEvents
+        url: https://orchestrateapi.cyware.com/analytics/incoming-source-events
+      - title: Get Most Active Actions
+        operationId: mostActiveActions
+        url: https://orchestrateapi.cyware.com/analytics/most-active-actions
+      - title: Get Most Active Apps
+        operationId: mostActiveApps
+        url: https://orchestrateapi.cyware.com/analytics/most-active-apps
+      - title: Get Most Active Playbooks
+        operationId: mostActivePlaybook
+        url: https://orchestrateapi.cyware.com/analytics/most-active-playbook
+      - title: Get Most Used Actions
+        operationId: mostUsedActions
+        url: https://orchestrateapi.cyware.com/analytics/most-used-actions
+      - title: Get Most Used Apps
+        operationId: mostUsedApps
+        url: https://orchestrateapi.cyware.com/analytics/most-used-apps
+      - title: Get Most Used Instance
+        operationId: mostUsedInstance
+        url: https://orchestrateapi.cyware.com/analytics/most-used-instance
+      - title: Get Playbook Average Execution Time
+        operationId: playbookAvgExecutionTime
+        url: https://orchestrateapi.cyware.com/analytics/playbook-avg-execution-time
+      - title: Get Playbook Run Count
+        operationId: playbookRunCount
+        url: https://orchestrateapi.cyware.com/analytics/playbook-run-count
+      - title: Get Unprocessed Events
+        operationId: unprocessedEvents
+        url: https://orchestrateapi.cyware.com/analytics/unprocessed-events
+components:
+  securitySchemes:
+    coOpenApiSignature:
+      type: apiKey
+      in: query
+      name: access_id
+      description: Orchestrate Open API credentials. Every request carries access_id, expires (epoch, current time + up to 30 seconds) and signature query parameters, where StringToSign = access_id + "\n" + expires and Signature = Base64(HMAC-SHA1(secret_key, StringToSign)). See https://orchestrateapi.cyware.com/authentication
+externalDocs:
+  description: Cyware Orchestrate API Reference
+  url: https://orchestrateapi.cyware.com/

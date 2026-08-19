@@ -1,0 +1,3753 @@
+{
+  "item": [
+    {
+      "id": "9187eb77-7d40-45b4-9512-4e5c593ef1c0",
+      "name": "Threat Data Objects",
+      "description": {
+        "content": "Threat Data Objects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "515e7aa9-78bf-407e-b3fb-aeb1bbb4fb6b",
+          "name": "Get Actions List",
+          "request": {
+            "name": "Get Actions List",
+            "description": {
+              "content": "Retrieves a list of actions performed on a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve actions."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of actions to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_type",
+                  "value": "<string>",
+                  "description": "Pass the app type that performed the action. Example, *ctix*."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_type",
+                  "value": "automatic",
+                  "description": "Pass the type of actions to retrieve."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e07f2cfd-0764-439d-9cef-4fc04ceaa408",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "app_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_type",
+                      "value": "automatic"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13b24caa-b2a1-4026-9f43-37b7ca422b67",
+          "name": "Get Action Statistics",
+          "request": {
+            "name": "Get Action Statistics",
+            "description": {
+              "content": "Retrieves the statistics of the actions performed by third-party tools and Intel Exchange on a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "actions",
+                ":object_type",
+                ":object_id",
+                "stats",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "is_third_action",
+                  "value": "false",
+                  "description": "Pass true to retrieve third-party action statistics only."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_ctix_action",
+                  "value": "false",
+                  "description": "Pass true to retrieve Intel Exchange (CTIX) action statistics only."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4236a411-9fce-47b5-9597-16c0779c5a9a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "actions",
+                    ":object_type",
+                    ":object_id",
+                    "stats",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_third_action",
+                      "value": "false"
+                    },
+                    {
+                      "key": "is_ctix_action",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action_stats\": [\n    {\n      \"label\": \"3rd Party Actions\",\n      \"key\": \"third_party\",\n      \"value\": \"114\"\n    }\n  ],\n  \"ctix_actions\": [\n    {\n      \"label\": \"Manual Review\",\n      \"type\": \"automatic\",\n      \"value\": \"1641555728\"\n    }\n  ],\n  \"third_party_actions\": [\n    {\n      \"name\": \"Update Context Table\",\n      \"tool\": \"starttemplate {{ marshal (index .tools \\\"29d9638d-ccb1-400b-8d7a-2f163a3eae1d\\\") }} endtemplate\",\n      \"value\": \"1641555731\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1742a414-f5df-4eec-a65e-969eea56502f",
+          "name": "Add Custom Aliases to Threat Actors",
+          "request": {
+            "name": "Add Custom Aliases to Threat Actors",
+            "description": {
+              "content": "Add custom aliases to threat actors in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "threat-actor",
+                ":object_id",
+                "basic",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"aliases\": {\n    \"custom\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85dab7f0-a1c3-4d65-be7e-b6f3e46a755f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "threat-actor",
+                    ":object_id",
+                    "basic",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliases\": {\n    \"custom\": [\n      \"sample alias 1\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Custom aliases added successfully.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "920cc072-1d6b-49e0-a071-e3704a5813b7",
+          "name": "Get Kill Chain Details",
+          "request": {
+            "name": "Get Kill Chain Details",
+            "description": {
+              "content": "Retrieves the details of a STIX kill chain phase.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "kill_chain_phases",
+                ":kill_chain_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "kill_chain_id",
+                  "description": "(Required) Pass the ID of a kill chain phase to retrieve the details. You can retrieve this ID using the **List Kill Chain Phases API**."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a08a7775-4f31-4357-828d-a1337259fd76",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "kill_chain_phases",
+                    ":kill_chain_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "kill_chain_id",
+                      "description": "(Required) Pass the ID of a kill chain phase to retrieve the details. You can retrieve this ID using the **List Kill Chain Phases API**."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1f950806-c2a7-4612-bd09-18a69366584f\",\n  \"name\": \"mandiant-attack-lifecycle-model\",\n  \"phase_name\": \"initial-compromise\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "950e3be1-4c65-4ae5-b6d3-0f4324e85cb0",
+          "name": "Get Kill Chain Phases List",
+          "request": {
+            "name": "Get Kill Chain Phases List",
+            "description": {
+              "content": "Retrieves kill chain phases associated with a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "kill_chain_phases",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the kill chain phases."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve in each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the ID of the threat data object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e812b1d3-0637-4533-a097-5b4aad9f2c4f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "kill_chain_phases",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the ID of the threat data object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"threat-data/malware/fbfee712-7661-451b-98ef-5df850cd1894/kill_chain_phases/?page=2&page_size=10\",\n  \"previous\": {},\n  \"total\": \"10\",\n  \"page_size\": \"10\",\n  \"results\": [\n    {\n      \"id\": \"0a07b1c8-c975-4ea8-b346-802405179e2c\",\n      \"name\": \"lockheed-martin-cyber-kill-chain\",\n      \"phase_name\": \"reconnaissance\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee1869ec-183a-43cb-b3a1-54488b31430b",
+          "name": "Get Published Collections of a Threat Object List",
+          "request": {
+            "name": "Get Published Collections of a Threat Object List",
+            "description": {
+              "content": "Retrieves the collections to which a threat data object is published.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "published-collections",
+                ":object_type",
+                ":object_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of the threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object IDs, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0179ef79-6b0a-4d1c-ac6d-4a038176f282",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "published-collections",
+                    ":object_type",
+                    ":object_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of the threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object IDs, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"next\": {},\n    \"previous\": {},\n    \"total\": \"2\",\n    \"page_size\": \"10\",\n    \"results\": [\n      {\n        \"id\": \"af242086-e126-44aa-b71c-b290c65e359f\",\n        \"collection\": {\n          \"id\": \"a1751d0f-5346-47b2-aeea-d6f0531fd290\",\n          \"name\": \"MISP\"\n        },\n        \"action_type\": \"Rules\",\n        \"published\": 1627992933\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6bae13e-edf6-4516-93a8-a65137834f3f",
+          "name": "Get Source Details List",
+          "request": {
+            "name": "Get Source Details List",
+            "description": {
+              "content": "Retrieves source information for a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "source_details",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pass the page number to retrieve sources."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Pass the number of sources to be retrieved in each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d83412c8-2102-42d1-9cc6-d4fd7b4ac783",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "source_details",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": null,\n  \"page_size\": 10,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"created\": 1745306387,\n      \"id\": \"4735836b-910b-4109-b5b8-0885ff8491df\",\n      \"modified\": 1745306387,\n      \"source\": {\n        \"id\": \"003d51d0-d3fd-4442-aa60-7e3d5ec8d93d\",\n        \"name\": \"Import\",\n        \"source_type\": \"CUSTOM_STIX_SOURCES\"\n      },\n      \"source_confidence\": \"HIGH\",\n      \"source_confidence_value\": 100,\n      \"tags\": []\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30b54d98-80a0-4d71-ae30-1665bfb3089c",
+          "name": "Get Source External References List",
+          "request": {
+            "name": "Get Source External References List",
+            "description": {
+              "content": "Retrieves a list of the external references that are associated with STIX SDOs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "external-references",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve external references."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "965772d5-06af-479c-88cc-516fbc017953",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "external-references",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"threat-data/vulnerability/b5767475-1d03-477d-a1ff-c1b69318f3c1/external-references/?page=2&page_size=3\",\n  \"previous\": {},\n  \"total\": \"4\",\n  \"page_size\": \"3\",\n  \"results\": [\n    {\n      \"external_id\": \"CVE-2016-1234\",\n      \"source\": \"cve\",\n      \"url\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ba55a7c-8173-4bb7-a658-277b264ddb03",
+          "name": "Get Threat Data Object Details List",
+          "request": {
+            "name": "Get Threat Data Object Details List",
+            "description": {
+              "content": "Returns basic correlated details of a threat data object in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "basic",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data objects. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the ID of the object to retrieve the details. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74b37554-19c3-4b72-9ecc-dbc9928191ae",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "basic",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data objects. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the ID of the object to retrieve the details. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analyst_description\": {},\n  \"analyst_score\": {},\n  \"analyst_tlp\": {},\n  \"asn\": {},\n  \"attribute_field\": \"value\",\n  \"attribute_value\": \"47.92.78.238\",\n  \"base_type\": \"sdo\",\n  \"confidence_score\": 81,\n  \"confidence_type\": \"CTIX\",\n  \"country\": \"China\",\n  \"created\": 1685352651,\n  \"ctix_created\": 1685353115,\n  \"ctix_modified\": 1685353115,\n  \"ctix_score\": 81,\n  \"ctix_tlp\": {},\n  \"defang_analyst_description\": {},\n  \"description\": {},\n  \"fang_analyst_description\": {},\n  \"first_seen\": {},\n  \"last_seen\": {},\n  \"modified\": 1685352662,\n  \"name\": \"47.92.78.238\",\n  \"sources\": [\n    {\n      \"id\": \"99740a47-fb33-4610-90e5-155e1dece960\",\n      \"name\": \"CrowdStrike\",\n      \"source_type\": \"API_FEEDS\"\n    }\n  ],\n  \"sub_type\": \"ipv4-addr\",\n  \"tld\": \"\",\n  \"tlp\": \"AMBER\",\n  \"type\": \"indicator\",\n  \"valid_from\": 1685352651,\n  \"valid_until\": 1745240203\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87de962c-44e6-4c81-8828-caf5dbbace85",
+          "name": "Get Threat Data Object Sources List",
+          "request": {
+            "name": "Get Threat Data Object Sources List",
+            "description": {
+              "content": "Retrieves a list of feed sources associated with a threat data object. Also, retrieves the description, fanged description, and de-fanged description of the sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "source-description",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48641ca4-cbc7-449b-8759-cb8b1bc1fa93",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "source-description",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": 2,\n  \"page_size\": 1,\n  \"results\": [\n    {\n      \"collection\": {\n        \"id\": \"decf3ae2-9efd-4c5d-a67c-ea3eba333baa\",\n        \"name\": \"Free Text\"\n      },\n      \"defang_description\": \"Detected malicious activity from this address: hxxp://malicious-domain[.]com/path/to/resource\",\n      \"description\": \"Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource\",\n      \"fang_description\": \"Detected malicious activity from this address: http://malicious-domain[.]com/path/to/resource\",\n      \"labels\": [],\n      \"source\": {\n        \"id\": \"003d51d0-d3fd-4442-aa60-7e3d5ec8d93d\",\n        \"name\": \"Import\",\n        \"source_type\": \"CUSTOM_STIX_SOURCES\"\n      },\n      \"tlp\": \"AMBER\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f06f42c-0b9e-47de-8781-002e41c97f4a",
+          "name": "Get Object Source Details in List View",
+          "request": {
+            "name": "Get Object Source Details in List View",
+            "description": {
+              "content": "List all the instances when the object has been polled into the platform for the given source ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "source-references",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pass the page number to retrieve source instances."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Pass the number of records to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "layout",
+                  "value": "<string>",
+                  "description": "Pass the layout to filter the number of returned fields in response."
+                },
+                {
+                  "disabled": false,
+                  "key": "source_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the ID of a source to retrieve the instances of the source. You can retrieve this ID using the **List Source Details API**. Example, *bc8c1d21-3bf1-4b19-bf6b-f31db555c1ec*"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32853558-d894-4058-b675-2b4588b58af9",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "source-references",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "layout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": null,\n  \"page_size\": 10,\n  \"previous\": {},\n  \"results\": [\n    {\n      \"acs\": null,\n      \"collection\": {\n        \"id\": \"decf3ae2-9efd-4c5d-a67c-ea3eba333baa\",\n        \"name\": \"Free Text\"\n      },\n      \"confidence\": 100,\n      \"created\": 1745306387,\n      \"ctix_created\": 1745306398,\n      \"ctix_modified\": 1745306399,\n      \"custom_attributes\": [],\n      \"custom_scores\": {},\n      \"defang_description\": null,\n      \"description\": \"SAVE result SET v3\",\n      \"external_references\": [],\n      \"fang_description\": null,\n      \"granular_markings\": [],\n      \"id\": \"97251976-10a0-42d4-ba58-41365204225f\",\n      \"marking_definitions\": [],\n      \"modified\": 1745306387,\n      \"name\": \"https://lf24L.4UNR8.io\",\n      \"pattern\": \"[url:value = 'https://lf24L.4UNR8.io']\",\n      \"pattern_type\": \"stix\",\n      \"pattern_version\": \"2.1\",\n      \"raw_data\": null,\n      \"received_id\": \"indicator--af7fba45-cbdf-475f-b604-87a3ad6e60ae\",\n      \"revoked\": false,\n      \"sco_object_id\": \"f74434ef-5897-4521-985b-6610cc446f6d\",\n      \"source\": {\n        \"id\": \"003d51d0-d3fd-4442-aa60-7e3d5ec8d93d\",\n        \"name\": \"Import\",\n        \"source_type\": \"CUSTOM_STIX_SOURCES\"\n      },\n      \"spec_version\": \"2.1\",\n      \"tlp\": \"AMBER\",\n      \"types\": {},\n      \"unique_hash\": \"9725197610a032d47a5841365204225f\",\n      \"valid_from\": 1745306387,\n      \"valid_until\": null\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a11fe493-8f8e-421e-839b-35b149ce3ec3",
+          "name": "Get Object Source Details",
+          "request": {
+            "name": "Get Object Source Details",
+            "description": {
+              "content": "Retrieves the source object information for the specified threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "source-reference",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Enter the ID of the source record. You can retrieve this ID using the **List Source Details API**."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bc6807e-5182-420a-a582-6ce32c71bb3d",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "source-reference",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Enter the ID of the source record. You can retrieve this ID using the **List Source Details API**."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"collection\": {\n    \"id\": \"5db40c19-d50f-4c6a-9eac-eb3c7e71b497\",\n    \"name\": \"orion-static-100-coll-0\"\n  },\n  \"confidence\": \"HIGH\",\n  \"created\": \"1641982441\",\n  \"ctix_created\": \"1641982444\",\n  \"ctix_modified\": \"1641982444\",\n  \"custom_attributes\": [],\n  \"description\": \"None\",\n  \"granular_markings\": [],\n  \"id\": \"ed19a2b7-b1b1-4c10-adf6-25b2e4790e06\",\n  \"kill_chain_phases\": [\n    {\n      \"name\": \"lockheed-martin-cyber-kill-chain\",\n      \"phase_name\": \"command and control\"\n    }\n  ],\n  \"modified\": \"1641982441\",\n  \"pattern\": [\n    \"[email-addr:value = 'kiara59@mayer.net'] OR ([ipv6-addr:value = '3cdd:1115:aec:67b7:b23a:b311:330e:9bb6'])\"\n  ],\n  \"pattern_type\": \"stix\",\n  \"pattern_version\": [\n    \"2.1\"\n  ],\n  \"received_id\": \"indicator--b2c5372f-8d7b-40a0-a70b-689daa94b99c\",\n  \"sco_object_id\": \"382c30a8-f8cf-44f9-97c7-a4d43786fd5c\",\n  \"source\": {\n    \"id\": \"c38aeede-606c-4e88-b247-87dbfe8192b1\",\n    \"name\": \"Orion 2.1 testing bug\",\n    \"source_type\": \"CUSTOM_STIX_SOURCES\"\n  },\n  \"spec_version\": \"2.1\",\n  \"tags\": [\n    {\n      \"colour_code\": {},\n      \"id\": \"277f65a4-d72c-48c3-a454-cfdcf35d0782\",\n      \"name\": \"soldier\"\n    }\n  ],\n  \"types\": {},\n  \"unique_hash\": \"8388ee5a57bacf07ec3d889867b4612a\",\n  \"valid_from\": \"1608189525\",\n  \"valid_until\": \"1610399657\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f279e795-a990-48b0-9be7-146cbe95a4f7",
+          "name": "Get Threat Data Object Additional Details",
+          "request": {
+            "name": "Get Threat Data Object Additional Details",
+            "description": {
+              "content": "Retrieves additional information about a threat data object, such as kill chain phases and published collections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "advanced-details",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the unique ID of an object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df8a1600-d4da-472d-b9a7-2331ce11f71b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "advanced-details",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the unique ID of an object. To retrieve a list of object IDs, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"published_collections\": [\n    {\n      \"id\": \"245b2206-adae-4056-b2a3-ef9270bdec16\",\n      \"collection\": {\n        \"id\": \"8c9e459f-5164-4f56-9a65-6a3004977cef\",\n        \"name\": \"default\"\n      },\n      \"action_type\": \"Rule\",\n      \"published\": 1685356046\n    }\n  ],\n  \"kill_chain_phases\": [\n    {\n      \"id\": \"9336b88e-a393-443b-81a7-2b9426d7f675\",\n      \"name\": \"lockheed-martin-cyber-kill-chain\",\n      \"phase_name\": \"c2\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a17ff39-13be-475f-9730-c1f4e45f63bb",
+          "name": "Get Threat Data Object Details in Table View",
+          "request": {
+            "name": "Get Threat Data Object Details in Table View",
+            "description": {
+              "content": "Retrieves the object information for the given filters in a tabular format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "source-overview",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the details."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve in each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c127614-162c-4888-9bde-75a40181da90",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "source-overview",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": 10,\n  \"previous\": {},\n  \"results\": [\n    {\n      \"collection\": {\n        \"id\": \"a6716d75-9a95-4c14-b1e6-d2b9ba3a1d14\",\n        \"name\": \"new-indicators-10-coll-0\"\n      },\n      \"created\": 1641562748,\n      \"custom_attribute_count\": \"0\",\n      \"first_seen\": 1633350549,\n      \"id\": \"a7bde8c2-50d6-496e-bd4e-a645d0ca2d66\",\n      \"last_seen\": 1634978804,\n      \"modified\": 1641881164,\n      \"source\": {\n        \"id\": \"91106042-dc96-4ecc-8c0e-d1cead882fdc\",\n        \"name\": \"new-indicators-10\",\n        \"source_type\": \"CUSTOM_STIX_SOURCES\"\n      },\n      \"source_confidence\": \"HIGH\",\n      \"tags\": [\n        \"exampletag1\"\n      ],\n      \"times_reported\": 3,\n      \"tlp\": \"AMBER\"\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "953b1748-d9e9-43bf-85ca-4e4826b954b7",
+          "name": "Refresh Confidence Score (Risk Score)",
+          "request": {
+            "name": "Refresh Confidence Score (Risk Score)",
+            "description": {
+              "content": "Returns the Confidence Score (Risk Score) of an indicator threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "refresh-score",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the object type (indicator)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the indicator threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f62cbdc-0ffe-40ae-bc97-da3c7f98409f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "refresh-score",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the object type (indicator)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the indicator threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"score\": \"100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30a4ec1f-7b2a-4f74-a7f6-e27473557a9a",
+          "name": "Get Key Evidence of Confidence Score (Risk Score)",
+          "request": {
+            "name": "Get Key Evidence of Confidence Score (Risk Score)",
+            "description": {
+              "content": "Retrieve the key evidence for the Confidence Score (Risk Score) calculation for an indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "key-evidence",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "indicator",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object (indicator)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b9c348b-c687-4e44-b19c-2c89788542dc",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "key-evidence",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "indicator",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object (indicator)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evidence\": {\n    \"attribute\": {},\n    \"enrichment\": {},\n    \"source\": {\n      \"calculated_score\": 100,\n      \"results\": [\n        {\n          \"calculated_score\": 100,\n          \"score\": 100,\n          \"source\": {\n            \"id\": \"003d51d0-d3fd-4442-aa60-7e3d5ec8d93d\",\n            \"name\": \"Import\"\n          },\n          \"source_id\": \"003d51d0-d3fd-4442-aa60-7e3d5ec8d93d\",\n          \"weightage\": 100\n        }\n      ],\n      \"weightage\": 50\n    }\n  },\n  \"is_premium\": true,\n  \"risk_score\": 100,\n  \"rule_name\": \"Unknown Rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e8f65fe-f75f-4245-b7cd-8bc5584822da",
+          "name": "Get Custom Attributes List of Threat Data Object",
+          "request": {
+            "name": "Get Custom Attributes List of Threat Data Object",
+            "description": {
+              "content": "Retrieves the custom attributes of a threat data object with respect to all the sources the object has received.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "custom_attributes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of the object such as indicator, vulnerability, malware, and more."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the ID of the object to retrieve the custom attributes."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c67dfec-cb5a-4e0c-ba9a-ef31e0e186a8",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "custom_attributes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of the object such as indicator, vulnerability, malware, and more."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the ID of the object to retrieve the custom attributes."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": 10,\n  \"previous\": {},\n  \"results\": [\n    {\n      \"collection\": {\n        \"id\": \"fb27dd19-2852-4650-80f9-0e6b3545ac7d\",\n        \"name\": \"RSS Feed Collection\"\n      },\n      \"custom_attribute_count\": 3,\n      \"id\": \"e2d97257-b61d-484b-9a23-4f3f4d69634b\",\n      \"source\": {\n        \"id\": \"790b1f0c-21e5-46d7-be66-bb57f4bd4074\",\n        \"name\": \"Y combi\",\n        \"source_type\": \"RSS_FEED\"\n      },\n      \"source_confidence\": \"HIGH\",\n      \"source_confidence_value\": 0,\n      \"tags\": []\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42766b32-e869-4b05-b9c4-23976c3bf745",
+          "name": "Get Enriched Threat Data",
+          "request": {
+            "name": "Get Enriched Threat Data",
+            "description": {
+              "content": "Returns the enriched data of a threat data object using enrichment tools.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integration",
+                "apps",
+                "update",
+                "threatdata",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_slug",
+                  "value": "<string>",
+                  "description": "(Required) Pass the slug of an enrichment tool to retrieve its enriched data. To retrieve the slug of an enrichment tool, use the **GET Enrichment Tools API** endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Pass the value of the object. For example, *sco*, *vulnerability*, and more."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_slug",
+                  "value": "<string>",
+                  "description": "Pass the enrichment action name to retrieve specific details. For example, `get_ip` for IPs, `get_domain` for Domain, `get_url` for URL, `get_cve` for Vulnerability."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<string>",
+                  "description": "(Required) Pass the ID of an object ID (sco object ID for indicators and vulnerability object ID for vulnerabilities)."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) Pass the object type. SDO object type(indicator /or vulnerability)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "711541c5-18b9-40db-bd4d-9881305d5db0",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integration",
+                    "apps",
+                    "update",
+                    "threatdata",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"raw_data\": {\n    \"asn\": \"13335\",\n    \"undetected_urls\": [\n      [\n        \"http://www.qwhty39.com/\"\n      ]\n    ],\n    \"undetected_downloaded_samples\": [\n      {\n        \"date\": \"2019-08-22 17:44:19\",\n        \"positives\": \"0\",\n        \"total\": \"70\",\n        \"sha256\": \"a980b60a8922f510d2da527e74ec9443a57dcc65444dbd6a3ae87dceb28090eb\"\n      }\n    ],\n    \"detected_downloaded_samples\": [\n      {\n        \"date\": \"2018-04-16 02:49:06\",\n        \"positives\": \"23\",\n        \"total\": \"62\",\n        \"sha256\": \"0773b94a2e3239eeda0d02f32d8beea116783b48172c116c9b6b382338f8be13\"\n      }\n    ],\n    \"response_code\": \"1\",\n    \"as_owner\": \"CLOUDFLARENET\",\n    \"detected_referrer_samples\": [\n      {\n        \"positives\": \"29\",\n        \"total\": \"67\",\n        \"sha256\": \"5ae867ae674046df7d313206fbe5bf8a13e46985e822638d86615687caed7113\"\n      }\n    ],\n    \"verbose_msg\": \"IP address in dataset\",\n    \"country\": \"AU\",\n    \"undetected_referrer_samples\": [\n      {\n        \"positives\": \"0\",\n        \"total\": \"55\",\n        \"sha256\": \"d59a490460e82a5fd1fd593fa2910819ac867a6029daccb6f7dd4ab1241ab084\"\n      }\n    ],\n    \"detected_urls\": [\n      {\n        \"url\": \"https://cuocuopromax.org/\",\n        \"positives\": \"1\",\n        \"total\": \"92\",\n        \"scan_date\": \"2022-04-26 02:01:03\"\n      }\n    ],\n    \"detected_communicating_samples\": [\n      {\n        \"date\": \"2022-04-13 16:35:05\",\n        \"positives\": \"0\",\n        \"total\": \"73\",\n        \"sha256\": \"71a67c5e3ff1cb1455d7aafb6978ccd29de1c4ca6a4b2c0e8395f2c69ed01438\"\n      }\n    ],\n    \"resolutions\": [\n      {\n        \"last_resolved\": \"2019-01-22 12:28:21\",\n        \"hostname\": \"08294765.cn\"\n      }\n    ],\n    \"updated\": 1651353555\n  },\n  \"parsed_data\": {\n    \"detected_referrer_samples_count\": 100,\n    \"detected_downloaded_samples_count\": 13,\n    \"detected_urls_count\": 100,\n    \"detected_communicating_samples_count\": 100\n  },\n  \"status\": 1,\n  \"timestamp\": 1651353355,\n  \"enriched_on\": 1651353555,\n  \"verdict\": \"Malicious\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cbe8855-5c72-41bb-9990-553240bc17bc",
+          "name": "Perform Action on Threat Data Object",
+          "request": {
+            "name": "Perform Action on Threat Data Object",
+            "description": {
+              "content": "Performs an action on a threat data object. You can perform actions such as deprecate, undeprecate, add analyst TLP, add analyst score, and more",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                "action",
+                ":action_type",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "action_type",
+                  "description": "(Required) Pass the action to be performed."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_id\": \"<string>\",\n  \"object_type\": \"<string>\",\n  \"data\": {\n    \"analyst_tlp\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0728cb84-ff0a-4f1c-91eb-145ee72bd00c",
+              "name": "Action Successfully Executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "action",
+                    ":action_type",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action_type",
+                      "description": "(Required) Pass the action to be performed."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_id\": \"81f699f3-314d-4a6c-a3426b-c5802552c0f7\",\n  \"object_type\": \"malware\",\n  \"data\": {\n    \"analyst_tlp\": \"GREEN\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c81e487d-fed5-4270-b38e-f8a9081fb33d",
+              "name": "Bad Request (Check if you have passed valid data)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    "action",
+                    ":action_type",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action_type",
+                      "description": "(Required) Pass the action to be performed."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_id\": \"81f699f3-314d-4a6c-a3426b-c5802552c0f7\",\n  \"object_type\": \"malware\",\n  \"data\": {\n    \"analyst_tlp\": \"GREEN\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b37aa6e-1813-4cb0-aad5-66815252190a",
+          "name": "Get Quick Action Details",
+          "request": {
+            "name": "Get Quick Action Details",
+            "description": {
+              "content": "Returns the status of the quick actions performed on a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "quick-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the ID of a threat data object."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4660c72c-fa7e-43fd-80e6-712ce6ea8352",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "quick-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the ID of a threat data object."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"acd519379d6ff071e40b5879579e0c87399a25e48885874ed74d3b2fe47b65d8\",\n  \"type\": \"indicator\",\n  \"sub_type\": \"file\",\n  \"tags\": [],\n  \"notes\": [],\n  \"is_reviewed\": \"false\",\n  \"is_under_review\": \"false\",\n  \"is_whitelisted\": \"false\",\n  \"is_revoked\": \"false\",\n  \"is_watchlist\": \"false\",\n  \"is_false_positive\": \"false\",\n  \"is_deprecated\": \"false\",\n  \"ctix_created\": \"1654518909\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f5601d4-a02a-47e0-8707-c42a05671127",
+          "name": "Filter Relations by Source",
+          "request": {
+            "name": "Filter Relations by Source",
+            "description": {
+              "content": "Retrieves source-specific relations of a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "source_specific_relations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the ID of a threat data object."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "326d2566-496f-4671-9b5c-1183aea7b834",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "source_specific_relations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the object type. For example, *attack pattern*, *campaign*, *course of action*, *grouping*, and more."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the ID of a threat data object."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"label\": \"report\",\n      \"value\": [\n        \"1\"\n      ]\n    }\n  ],\n  \"x_labels\": [\n    {\n      \"id\": \"91dd1ece-27bb-403c-84c3-13f043082532\",\n      \"name\": \"Import\",\n      \"source_type\": \"CUSTOM_STIX_SOURCES\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f3e32f9-8546-4ffd-a735-67c02c170cba",
+          "name": "Get Relations List of Threat Data Object",
+          "request": {
+            "name": "Get Relations List of Threat Data Object",
+            "description": {
+              "content": "Retrieves the list of related objects and the relation details of a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "relations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve relations."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sources",
+                  "value": "<string>",
+                  "description": "Pass the comma-separated IDs of the sources to filter the response. To retrieve the IDs, use the **List Threat Data Object Sources API**."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cec2df4-c66a-434d-ba1a-52714bb1aaf2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "relations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**. Example, *indicator*."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section. Example, *c39cbf92-1ae6-4952-958a-3f48a90d55f6*."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"threat-data/report/03f74e6e-ad8e-48d2-a7a9-4f3d47940db3/relations/?page=2&page_size=1\",\n  \"page_size\": 1,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"created_by_ref\": null,\n      \"id\": \"22410c4d-c050-4b6e-b0ab-5e0d26e90881\",\n      \"is_forward\": true,\n      \"is_redacted\": false,\n      \"relation_end\": null,\n      \"relation_start\": null,\n      \"relationship_confidence\": null,\n      \"relationship_type\": \"related-to\",\n      \"sources\": [\n        {\n          \"id\": \"790b1f0c-21e5-46d7-be66-bb57f4bd4074\",\n          \"name\": \"Feed Source\",\n          \"source_type\": \"RSS_FEED\"\n        }\n      ],\n      \"target_ref\": {\n        \"created\": 1745403589,\n        \"id\": \"b45cf121-60fb-43f6-b308-08d2f81cfff9\",\n        \"modified\": 1745403589,\n        \"name\": \"blocktheme.css\",\n        \"object_type\": \"observable\",\n        \"sub_type\": \"file\",\n        \"tlp\": \"CLEAR\"\n      }\n    }\n  ],\n  \"total\": 390\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a6d0e13-ca99-406f-93d7-36c277c8bb6c",
+          "name": "Get Relations List",
+          "request": {
+            "name": "Get Relations List",
+            "description": {
+              "content": "Retrieves the related statistics for the given object type and object ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "relations",
+                "card"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the object type. Attack pattern, campaign, course of action, grouping, etc., are examples of the object type."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the object ID. Unique UUID4 is an example of the object ID."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1e4abf7-a227-4a55-9bcc-4af46cd97e26",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "relations",
+                    "card"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the object type. Attack pattern, campaign, course of action, grouping, etc., are examples of the object type."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the object ID. Unique UUID4 is an example of the object ID."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3a4cb8c-c045-40c2-b253-92791690fbbc",
+          "name": "Get Relations Overview",
+          "request": {
+            "name": "Get Relations Overview",
+            "description": {
+              "content": "Retrieves the overall statistics for all relations of a threat data object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "threat-data",
+                ":object_type",
+                ":object_id",
+                "relations",
+                "card",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_type",
+                  "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c0d61d8-6d74-4835-8b8f-416af9729bd0",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "threat-data",
+                    ":object_type",
+                    ":object_id",
+                    "relations",
+                    "card",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_type",
+                      "description": "(Required) Pass the type of threat data object. To get the list of supported object types, see **Supported SDO Types** in **Threat Data** > **Miscellaneous**."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Pass the threat data object ID. To retrieve the object ID, use the **List Threat Data API** under the Threat Data section."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"type\": \"indicator\",\n      \"name\": \"Indicator\",\n      \"count\": 350\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7dee2303-3f87-4c85-a8cd-611b2452e11a",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Data Objects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

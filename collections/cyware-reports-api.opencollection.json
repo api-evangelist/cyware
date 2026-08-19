@@ -1,0 +1,322 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Reports API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Reports List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to filter reports."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve reports."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of reports to retrieve on each page."
+              },
+              {
+                "name": "repeat_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the frequency of the report run schedule."
+              },
+              {
+                "name": "shared_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the visibility of the reports."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the user who created the reports. You can retrieve the ID using the **Get Users** endpoint."
+              },
+              {
+                "name": "modified_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the user who modified the reports. You can retrieve the ID using the **Get Users** endpoint."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created from time of the reports in epoch format."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created to time of the reports in epoch format."
+              },
+              {
+                "name": "modified_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the modified from time of the reports in epoch format."
+              },
+              {
+                "name": "modified_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the modified to time of the reports in epoch format."
+              },
+              {
+                "name": "date_last_run_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last run from time of the reports in epoch format."
+              },
+              {
+                "name": "date_last_run_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last run to time of the reports in epoch format."
+              }
+            ]
+          },
+          "docs": "Returns a list of reports from the Intel Exchange application."
+        },
+        {
+          "info": {
+            "name": "Create Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to be created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a basic (standard) report in Intel Exchange.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to create advanced reports.</p>\n</Callout>"
+        },
+        {
+          "info": {
+            "name": "Get Report Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/:report_id/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to be retrieved."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a report.\nFor example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+              }
+            ]
+          },
+          "docs": "Returns the details of a report."
+        },
+        {
+          "info": {
+            "name": "Update Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/:report_id/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to be created."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific fields of a report.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to update advanced reports.</p>\n</Callout>"
+        },
+        {
+          "info": {
+            "name": "Delete Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/:report_id/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to be deleted."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the report to delete. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*"
+              }
+            ]
+          },
+          "docs": "Delete a report from the Intel Exchange application. You can only delete reports that are created by you. Retrieve the `report_id` using **List Reports** or **Report Details** APIs."
+        },
+        {
+          "info": {
+            "name": "Get Download File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/external_download/:file_id/",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique token to authorize the request."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the external file ID to download. Example, *3cd05d6d-3ed4-49ae-8866-4d8f87542fa1*"
+              }
+            ]
+          },
+          "docs": "Downloads a file."
+        },
+        {
+          "info": {
+            "name": "Get Report Run Logs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/:report_id/run/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to retrieve run logs."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+              }
+            ]
+          },
+          "docs": "Returns the run logs of a report."
+        },
+        {
+          "info": {
+            "name": "Run Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/reports/:report_id/run/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of report to run."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs a report and sends the file to the recipients."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

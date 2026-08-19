@@ -5,11 +5,12 @@ source: https://github.com/cyware-labs/cyware-mcpserver
 server:
   name: cywaremcp
   vendor: Cyware Labs
-  transport: [stdio, sse]
+  transport:
+  - stdio
+  - sse
   hosting: self-hosted
   url: null
-  note: >-
-    There is no Cyware-operated remote MCP endpoint. The server is open source (MIT, Go 1.24.2+),
+  note: There is no Cyware-operated remote MCP endpoint. The server is open source (MIT, Go 1.24.2+),
     built and run by the customer next to their own Cyware tenant, and configured through cmd/config.yaml
     with the tenant base URLs (for example https://demo.cyware.com/ctix/ and https://demo.cyware.com/soar/)
     plus Open API credentials (access_id + secret_key), a bearer token, or basic auth.
@@ -19,168 +20,176 @@ server:
   announced: '2025-08-05'
   announcement: https://www.cyware.com/blog/talk-to-your-threat-intelligence-platform-introducing-the-cyware-mcp-server
   setup_docs:
-    - https://github.com/cyware-labs/cyware-mcpserver/blob/main/README.md
-    - https://github.com/cyware-labs/cyware-mcpserver/blob/main/documentation/cursor_setup.md
-    - https://github.com/cyware-labs/cyware-mcpserver/blob/main/documentation/hld.md
+  - https://github.com/cyware-labs/cyware-mcpserver/blob/main/README.md
+  - https://github.com/cyware-labs/cyware-mcpserver/blob/main/documentation/cursor_setup.md
+  - https://github.com/cyware-labs/cyware-mcpserver/blob/main/documentation/hld.md
 authentication:
   modes:
-    - type: openapicreds
-      fields: [access_id, secret_key]
-      note: The same HMAC-SHA1 signed Open API credentials used by the REST APIs.
-    - type: token
-      fields: [token]
-      note: Bearer token taken from the Authorization header of a product API call.
-    - type: basic
-      fields: [username, password]
+  - type: openapicreds
+    fields:
+    - access_id
+    - secret_key
+    note: The same HMAC-SHA1 signed Open API credentials used by the REST APIs.
+  - type: token
+    fields:
+    - token
+    note: Bearer token taken from the Authorization header of a product API call.
+  - type: basic
+    fields:
+    - username
+    - password
 applications:
-  - key: ctix
-    name: Cyware Intel Exchange
-    base_url_config: applications.ctix.base_url
-    api: openapi/cyware-intel-exchange-openapi.yml
-  - key: co
-    name: Cyware Orchestrate
-    base_url_config: applications.co.base_url
-    api: openapi/cyware-orchestrate-openapi.yml
+- key: ctix
+  name: Cyware Intel Exchange
+  base_url_config: applications.ctix.base_url
+  api: openapi/cyware-intel-exchange-openapi.yml
+- key: co
+  name: Cyware Orchestrate
+  base_url_config: applications.co.base_url
+  api: openapi/cyware-orchestrate-openapi.yml
 tool_count: 40
 tools:
-  - name: logged-in-user-details
-    application: ctix
-    description: Get details of the currently logged in Intel Exchange user.
-  - name: get-ctix-user-list
-    application: ctix
-    description: List Intel Exchange users.
-  - name: get-ctix-user-group-list
-    application: ctix
-    description: List Intel Exchange user groups.
-  - name: cql-ctix-grammar-rules
-    application: ctix
-    description: Return the Cyware Query Language (CQL) grammar rules used to build searches.
-  - name: get-cql-query-search-result
-    application: ctix
-    description: Run a CQL query against threat data and return the results.
-  - name: get-threat-data-object-details
-    application: ctix
-    description: Get the details of a threat data object.
-  - name: get-threat-data-object-relations
-    application: ctix
-    description: Get the relations of a threat data object.
-  - name: get-available-relation-type
-    application: ctix
-    description: Get the available threat data relationship types.
-  - name: threat-data-list-bulk-action-add-tag
-    application: ctix
-    description: Bulk add tags to threat data objects.
-  - name: threat-data-list-bulk-mark-indicator-allowed
-    application: ctix
-    description: Bulk mark indicators as allowed.
-  - name: threat-data-list-bulk-unmark-indicator-allowed
-    application: ctix
-    description: Bulk remove indicators from the allowed list.
-  - name: threat-data-list-bulk-manual-review
-    application: ctix
-    description: Bulk add threat data objects for manual review.
-  - name: threat-data-list-bulk-mark-false-positive
-    application: ctix
-    description: Bulk mark indicators as false positive.
-  - name: threat-data-list-bulk-unmark-false-positive
-    application: ctix
-    description: Bulk unmark indicators previously marked false positive.
-  - name: threat-data-list-bulk-update-analyst-tlp
-    application: ctix
-    description: Bulk update the analyst TLP of threat data objects.
-  - name: threat-data-list-bulk-update-analyst-score
-    application: ctix
-    description: Bulk update the analyst score of threat data objects.
-  - name: threat-data-list-bulk-deprecate
-    application: ctix
-    description: Bulk deprecate indicators.
-  - name: threat-data-list-bulk-undeprecate
-    application: ctix
-    description: Bulk undeprecate indicators.
-  - name: threat-data-list-bulk-add-watchlist
-    application: ctix
-    description: Bulk add threat data objects to the watchlist.
-  - name: threat-data-list-bulk-remove-watchlist
-    application: ctix
-    description: Bulk remove threat data objects from the watchlist.
-  - name: threat-data-list-bulk-add-relation
-    application: ctix
-    description: Bulk add a relation to threat data objects.
-  - name: create-tag-in-ctix
-    application: ctix
-    description: Create a new tag in Intel Exchange.
-  - name: get-ctix-tags-list
-    application: ctix
-    description: List the available Intel Exchange tags.
-  - name: get-enrichment-tools-list
-    application: ctix
-    description: List all configured enrichment tools.
-  - name: get-enrichment-tool-details
-    application: ctix
-    description: Get the details of an enrichment tool.
-  - name: get-enrichment-tool-action-configs
-    application: ctix
-    description: Get the action configuration of an enrichment tool.
-  - name: enrichment-tool-supported-for-threat-data-object
-    application: ctix
-    description: List the enrichment tools that support a given threat data object type.
-  - name: enrich-threat-data-object
-    application: ctix
-    description: Enrich a threat data object using a configured enrichment tool.
-  - name: quick-add-intel-create
-    application: ctix
-    description: Create intel in Intel Exchange through Quick Add Intel.
-  - name: get-co-playbooks-list
-    application: co
-    description: List the playbooks created in Orchestrate.
-  - name: get-co-playbook-details
-    application: co
-    description: Get the details of an Orchestrate playbook.
-  - name: execute-playbook-in-co
-    application: co
-    description: Run an Orchestrate playbook.
-  - name: get-co-apps-list
-    application: co
-    description: List the apps present in Orchestrate.
-  - name: get-co-app-details
-    application: co
-    description: Get the details of a specific Orchestrate app.
-  - name: get-co-actions-of-app
-    application: co
-    description: List the actions supported by an Orchestrate app.
-  - name: get-co-app-action-details
-    application: co
-    description: Get the details of an Orchestrate app action.
-  - name: get-instances-of-co-app
-    application: co
-    description: List the instances configured for an Orchestrate app.
-  - name: execute-action-of-co-app
-    application: co
-    description: Run an action of an Orchestrate app.
-  - name: convert-date-string-to-epoch
-    application: general
-    description: Utility - convert a dd-mm-yyyy-hh-min-sec date string to epoch.
-  - name: get-epoch-with-delta-from-now
-    application: general
-    description: Utility - return an epoch timestamp offset from now.
+- name: logged-in-user-details
+  application: ctix
+  description: Get details of the currently logged in Intel Exchange user.
+- name: get-ctix-user-list
+  application: ctix
+  description: List Intel Exchange users.
+- name: get-ctix-user-group-list
+  application: ctix
+  description: List Intel Exchange user groups.
+- name: cql-ctix-grammar-rules
+  application: ctix
+  description: Return the Cyware Query Language (CQL) grammar rules used to build searches.
+- name: get-cql-query-search-result
+  application: ctix
+  description: Run a CQL query against threat data and return the results.
+- name: get-threat-data-object-details
+  application: ctix
+  description: Get the details of a threat data object.
+- name: get-threat-data-object-relations
+  application: ctix
+  description: Get the relations of a threat data object.
+- name: get-available-relation-type
+  application: ctix
+  description: Get the available threat data relationship types.
+- name: threat-data-list-bulk-action-add-tag
+  application: ctix
+  description: Bulk add tags to threat data objects.
+- name: threat-data-list-bulk-mark-indicator-allowed
+  application: ctix
+  description: Bulk mark indicators as allowed.
+- name: threat-data-list-bulk-unmark-indicator-allowed
+  application: ctix
+  description: Bulk remove indicators from the allowed list.
+- name: threat-data-list-bulk-manual-review
+  application: ctix
+  description: Bulk add threat data objects for manual review.
+- name: threat-data-list-bulk-mark-false-positive
+  application: ctix
+  description: Bulk mark indicators as false positive.
+- name: threat-data-list-bulk-unmark-false-positive
+  application: ctix
+  description: Bulk unmark indicators previously marked false positive.
+- name: threat-data-list-bulk-update-analyst-tlp
+  application: ctix
+  description: Bulk update the analyst TLP of threat data objects.
+- name: threat-data-list-bulk-update-analyst-score
+  application: ctix
+  description: Bulk update the analyst score of threat data objects.
+- name: threat-data-list-bulk-deprecate
+  application: ctix
+  description: Bulk deprecate indicators.
+- name: threat-data-list-bulk-undeprecate
+  application: ctix
+  description: Bulk undeprecate indicators.
+- name: threat-data-list-bulk-add-watchlist
+  application: ctix
+  description: Bulk add threat data objects to the watchlist.
+- name: threat-data-list-bulk-remove-watchlist
+  application: ctix
+  description: Bulk remove threat data objects from the watchlist.
+- name: threat-data-list-bulk-add-relation
+  application: ctix
+  description: Bulk add a relation to threat data objects.
+- name: create-tag-in-ctix
+  application: ctix
+  description: Create a new tag in Intel Exchange.
+- name: get-ctix-tags-list
+  application: ctix
+  description: List the available Intel Exchange tags.
+- name: get-enrichment-tools-list
+  application: ctix
+  description: List all configured enrichment tools.
+- name: get-enrichment-tool-details
+  application: ctix
+  description: Get the details of an enrichment tool.
+- name: get-enrichment-tool-action-configs
+  application: ctix
+  description: Get the action configuration of an enrichment tool.
+- name: enrichment-tool-supported-for-threat-data-object
+  application: ctix
+  description: List the enrichment tools that support a given threat data object type.
+- name: enrich-threat-data-object
+  application: ctix
+  description: Enrich a threat data object using a configured enrichment tool.
+- name: quick-add-intel-create
+  application: ctix
+  description: Create intel in Intel Exchange through Quick Add Intel.
+- name: get-co-playbooks-list
+  application: co
+  description: List the playbooks created in Orchestrate.
+- name: get-co-playbook-details
+  application: co
+  description: Get the details of an Orchestrate playbook.
+- name: execute-playbook-in-co
+  application: co
+  description: Run an Orchestrate playbook.
+- name: get-co-apps-list
+  application: co
+  description: List the apps present in Orchestrate.
+- name: get-co-app-details
+  application: co
+  description: Get the details of a specific Orchestrate app.
+- name: get-co-actions-of-app
+  application: co
+  description: List the actions supported by an Orchestrate app.
+- name: get-co-app-action-details
+  application: co
+  description: Get the details of an Orchestrate app action.
+- name: get-instances-of-co-app
+  application: co
+  description: List the instances configured for an Orchestrate app.
+- name: execute-action-of-co-app
+  application: co
+  description: Run an action of an Orchestrate app.
+- name: convert-date-string-to-epoch
+  application: general
+  description: Utility - convert a dd-mm-yyyy-hh-min-sec date string to epoch.
+- name: get-epoch-with-delta-from-now
+  application: general
+  description: Utility - return an epoch timestamp offset from now.
 documented_but_not_registered:
-  - name: login-to-ctix
-    note: >-
-      Listed in the README tool table but not registered as an MCP tool in the current source;
-      authentication is performed by the server from cmd/config.yaml against
-      rest-auth/login/user-pass/.
-  - name: login-to-co
-    note: >-
-      Listed in the README tool table but not registered as an MCP tool in the current source;
-      authentication is performed by the server from cmd/config.yaml against /cpapi/rest-auth/login/.
+- name: login-to-ctix
+  note: Listed in the README tool table but not registered as an MCP tool in the current source; authentication
+    is performed by the server from cmd/config.yaml against rest-auth/login/user-pass/.
+- name: login-to-co
+  note: Listed in the README tool table but not registered as an MCP tool in the current source; authentication
+    is performed by the server from cmd/config.yaml against /cpapi/rest-auth/login/.
 x-evidence:
   fetched: '2026-08-04'
   repository: https://github.com/cyware-labs/cyware-mcpserver
   default_branch: main
   last_push: '2026-07-22'
   license: MIT
-  method: cloned the public repository and enumerated registered tool names and their backing
-    endpoints from applications/ctix and applications/co
-  live_tools_list: >-
-    not applicable - the server is self-hosted and stdio/sse only, so there is no anonymous
+  method: cloned the public repository and enumerated registered tool names and their backing endpoints
+    from applications/ctix and applications/co
+  live_tools_list: not applicable - the server is self-hosted and stdio/sse only, so there is no anonymous
     tools/list endpoint to introspect.
+deployment:
+  mode: remote
+  endpoint: https://demo.cyware.com/ctix/
+  verified: probed
+  probe: http-503
+  checked: '2026-08-12'
+  source: catalog MCP census

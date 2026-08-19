@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Global Tasks API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Task in Multiple Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/bulk-action/add_task/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task in multiple threat data objects."
+        },
+        {
+          "info": {
+            "name": "Get Tasks List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve tasks."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Pass the priority to filter tasks."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status to filter tasks."
+              },
+              {
+                "name": "assignee",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter tasks by the assigned user."
+              },
+              {
+                "name": "deadline_gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start date of the task deadline in epoch format to filter tasks."
+              },
+              {
+                "name": "deadline_lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end date of the task deadline in epoch format to filter tasks."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter tasks by the user who created the task."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a threat data object."
+              }
+            ]
+          },
+          "docs": "Returns a list of global tasks."
+        },
+        {
+          "info": {
+            "name": "Create Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task for a threat data object."
+        },
+        {
+          "info": {
+            "name": "Get Task Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/:task_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a task to retrieve the details."
+              }
+            ]
+          },
+          "docs": "Returns the details of a task."
+        },
+        {
+          "info": {
+            "name": "Update Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/:task_id/",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique identifier of a task to update the details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a task."
+        },
+        {
+          "info": {
+            "name": "Delete Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/:task_id/",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique identifier of a task to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a task from the Intel Exchange platform."
+        },
+        {
+          "info": {
+            "name": "Get Task Overview in Threat Data Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tasks/stats/",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of an object to retrieve an overview of the associated tasks."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass an object type associated with the tasks."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Pass the priority of the tasks."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status of the tasks."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user who created the tasks."
+              },
+              {
+                "name": "assignee",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the assigned user of the tasks."
+              },
+              {
+                "name": "deadline_gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start date of the task deadline in epoch format to filter tasks."
+              },
+              {
+                "name": "deadline_lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end date of the task deadline in epoch format to filter tasks."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the search text to search for a task type."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns an overview of the tasks created for a threat data object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

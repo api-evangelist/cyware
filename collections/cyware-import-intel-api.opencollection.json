@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Import Intel API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import Intel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import Intel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/import/:format/",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "If the format (path variable) value is stix1 or stix2, enter the STIX version."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path",
+                "description": "Pass the format for the import. Refer to preceding table for more information."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "collection_id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Imports threat data to Intel Exchange.\n\nThe formats supported for import are as follows:\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\",\"155px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"72d731c7-ebb1-49cd-8c66-b61b425b73af\",\"title\":\"Format\"},{\"id\":\"be6d9056-f3f6-4e7e-9dec-81a55a8c377f\",\"title\":\"Value\"},{\"id\":\"5146e66f-e608-4d4c-b37f-fea0cf7e7f2a\",\"title\":\"Allowed File Type\"},{\"id\":\"c4796b75-42df-4055-ac0c-bdf2566f0608\",\"title\":\"Default Collection\"}]'>\n  <tab"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,443 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Playbooks API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Playbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Terminate Playbook Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/playbook/playbook-result/bulk-terminate/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Terminate playbook runs in bulk. You can terminate a maximum of 100 playbook runs at a time with the run status in progress, in-queue, waiting, or on hold."
+        },
+        {
+          "info": {
+            "name": "Export Playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/export/:playbook_unique_id/",
+            "params": [
+              {
+                "name": "AccessID",
+                "value": "",
+                "type": "query",
+                "description": "The Access ID is used to authenticate the Cyware Orchestrate API endpoint."
+              },
+              {
+                "name": "Expires",
+                "value": "",
+                "type": "query",
+                "description": "This parameter is used to define an expiry time for the API call."
+              },
+              {
+                "name": "Signature",
+                "value": "",
+                "type": "query",
+                "description": "The Signature is used to authenticate the Cyware Orchestrate API endpoint."
+              },
+              {
+                "name": "playbook_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the playbook to export. You can retrieve the unique ID of a playbook using the **Get Playbooks** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the export of a playbook in JSON format."
+        },
+        {
+          "info": {
+            "name": "Get Node Result Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/node-results/:node_unique_id/",
+            "params": [
+              {
+                "name": "node_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the node. You can retrieve the unique ID of a node using the **Get Playbook Run Log Details** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific node."
+        },
+        {
+          "info": {
+            "name": "Get Playbook Run Log Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/playbook-result/:playbook_result_unique_id/",
+            "params": [
+              {
+                "name": "playbook_result_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID generated during the playbook run. You can retrieve the unique ID of a run log using the **Get Playbook Run Logs** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns run logs of a specific playbook."
+        },
+        {
+          "info": {
+            "name": "Get Playbook Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/playbook-result/filter/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the playbook result."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "playbook",
+                "value": "",
+                "type": "query",
+                "description": "Pass the playbook's unique ID. You can retrieve unique IDs of playbooks using the **Get Playbooks** endoint."
+              }
+            ]
+          },
+          "docs": "Returns the playbook runlogs based on the unique ID of the playbook. If no payload is passed, it returns the complete list of playbook run logs."
+        },
+        {
+          "info": {
+            "name": "Get Playbook Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/filter/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the list of playbooks."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "scheduled",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve playbooks that are scheduled."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the tags to retrieve playbooks."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Pass the label name to retrieve playbooks."
+              },
+              {
+                "name": "apps",
+                "value": "",
+                "type": "query",
+                "description": "Pass the app identifier. You can retrieve the app identifier using the **Get Apps** endpoint."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "Pass the action identifier of an action. You can retrieve the action identifier using the **Get App Actions** endpoint."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to filter active playbooks, else false."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last modified value to filter playbooks based on their last modified time."
+              }
+            ]
+          },
+          "docs": "Returns playbook details based on the playbook ID passed. If no ID is passed, it returns the complete list of both user-created and system playbooks."
+        },
+        {
+          "info": {
+            "name": "Get Playbook Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/playbook-result/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the playbook run logs"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "playbook_status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status of the playbook to retrieve the run logs."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the playbook run status to filter playbooks."
+              },
+              {
+                "name": "source_playbook_result__is_null",
+                "value": "",
+                "type": "query",
+                "description": "Pass true or false to filter playbooks based on the master playbook."
+              },
+              {
+                "name": "apps_list",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the app. You can retrieve the unique ID of an app using the **Get Apps** endpoint."
+              },
+              {
+                "name": "playbook",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the playbook. You can retrieve the unique ID of a playbook using the **Get Playbooks** endpoint."
+              },
+              {
+                "name": "actions_list",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the app action. You can retrieve the unique ID of an action using the **Get App Actions** endpoint."
+              },
+              {
+                "name": "ran_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the user who initiated the playbook run."
+              },
+              {
+                "name": "scheduled",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve scheduled playbooks run logs, else false."
+              },
+              {
+                "name": "run_at",
+                "value": "",
+                "type": "query",
+                "description": "Pass the date to retrieve playbooks based on the playbook last run."
+              },
+              {
+                "name": "run_at__lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end time in Unix time format to retrieve the playbook run logs."
+              },
+              {
+                "name": "run_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start time in Unix time format to retrieve the playbook run logs."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ordering values, such as `modified`, `execution_time`, and `created` to filter playbooks."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of playbook run logs along with the associated playbook data."
+        },
+        {
+          "info": {
+            "name": "Download Node Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/node-results/export/:node_result_unique_id/",
+            "params": [
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "Pass the column name for which the file will be generated. The column name can be found in the `splitted_columns` field of the **Get Node Result Details** endpoint."
+              },
+              {
+                "name": "node_result_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the node to download the result. You can retrieve the unique ID of a node using the **Get Playbook Run Log Details** endpoint."
+              }
+            ]
+          },
+          "docs": "Download the input data or output data of a playbook node. This endpoint is used to download large files."
+        },
+        {
+          "info": {
+            "name": "Get Playbooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the playbook list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "scheduled",
+                "value": "",
+                "type": "query",
+                "description": "Pass true or false to filter playbooks based on their scheduled status."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Pass label names to filter playbooks."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Pass the tags to filter the playbooks."
+              },
+              {
+                "name": "apps",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `app_identifier` of the app. You can retrieve the `app_identifier` of apps using the **Get Apps** endpoint."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `action_identifier` identifier of the app action. You can retrieve the `action_identifier` of actions using the **Get App Actions** endpoint."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "Pass true for active playbooks and false for inactive playbooks."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last modified value to filter playbooks based on their last modified time."
+              }
+            ]
+          },
+          "docs": "Returns a list of active playbooks in Orchestrate."
+        },
+        {
+          "info": {
+            "name": "Download Playbook Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/playbook/playbook-result/export/:playbook_result_unique_id/",
+            "params": [
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "Pass the column name for which the file will be generated. You can retrieve the column name in the `splitted_columns` field of the **Get Playbook Result** endpoint."
+              },
+              {
+                "name": "playbook_result_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the `playbook_result` to download the result. You can retrieve the unique ID of a `playbook_result` using the **Get Playbook Run Logs** endpoint."
+              }
+            ]
+          },
+          "docs": "Download the input data of the playbook. This endpoint is used to download large files."
+        },
+        {
+          "info": {
+            "name": "Run Playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/playbook/run/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a playbook by passing the playbook unique ID through the payload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

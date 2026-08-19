@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Rules API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Action on Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/bulk-actions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates multiple rules in one operation."
+        },
+        {
+          "info": {
+            "name": "Follow or Unfollow Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/:rule_id/follow/",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables you to follow or unfollow a rule."
+        },
+        {
+          "info": {
+            "name": "Get Rules List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve rules."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of rules to retrieve on each page."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Pass a comma-separated list of source IDs to filter rules."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the creator of the rules to filter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the status of the rules. By default, rules with all statuses are retrieved."
+              },
+              {
+                "name": "last_active_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active time in epoch format to filter rules."
+              },
+              {
+                "name": "last_active_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active time in epoch format to filter rules."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the creation time in epoch format to filter rules."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the creation time in epoch format to filter rules."
+              },
+              {
+                "name": "is_manual_run",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve rules that are configured for manual execution only."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of rules from the platform."
+        },
+        {
+          "info": {
+            "name": "Get Rule Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/:rule_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a rule."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a rule."
+        },
+        {
+          "info": {
+            "name": "Update Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/:rule_id/",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique identifier of the rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update specific details of a rule."
+        },
+        {
+          "info": {
+            "name": "Run Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/one-rule/",
+            "params": [
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Filters threat data objects that are created before the passed timestamp value."
+              },
+              {
+                "name": "rule",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of a rule."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Filters threat data objects that are created after the passed timestamp value."
+              }
+            ]
+          },
+          "docs": "Runs a rule asynchronously on the existing threat data created in the specified time interval."
+        },
+        {
+          "info": {
+            "name": "Get Saved Result Set Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/rules/save_result_set/",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Pass the Saved Result Set version."
+              },
+              {
+                "name": "label_name",
+                "value": "",
+                "type": "query",
+                "description": "Pass a tag name to filter data. All data associated the passed tag will be returned."
+              },
+              {
+                "name": "from_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Pass the published time in epoch format from which you want to retrieve data."
+              },
+              {
+                "name": "to_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Pass the published time in epoch format until which you want to retrieve data."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the data published to the Saved Result Set using rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

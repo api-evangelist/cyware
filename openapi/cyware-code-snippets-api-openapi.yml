@@ -1,0 +1,263 @@
+openapi: 3.2.0
+info:
+  title: Cyware Orchestrate (CO) Open Code Snippets API
+  version: v1
+  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
+
+
+    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://orchestrateapi.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{co_host}/soarapi
+  description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+  variables:
+    co_host:
+      default: demo.cyware.com
+security:
+- coOpenApiSignature: []
+tags:
+- name: Code Snippets
+  description: Code Snippets
+paths:
+  /v1/code-snippets/{unique_id}/:
+    get:
+      operationId: codeSnippetsDetail
+      summary: Get Code Snippet Details
+      tags:
+      - Code Snippets
+      description: Returns details of a specific code snippet.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/code-snippets/code-snippets-detail
+      parameters:
+      - name: unique_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of the code snippet to retrieve the details. You can use the **Get Code Snippet List** endpoint to retrieve the unique ID of a code snippet.
+          examples:
+          - '{code_snippet_unique_id}'
+        description: Pass the unique ID of the code snippet to retrieve the details. You can use the **Get Code Snippet List** endpoint to retrieve the unique ID of a code snippet.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unique_id:
+                    type: string
+                    description: Returns the unique ID of the code snippet.
+                    examples:
+                    - 6bd5a80a-722c-45d0-a24d-8a0ab72ae12a
+                  title:
+                    type: string
+                    description: Returns the title of the code snippet.
+                    examples:
+                    - Default Script Template
+                  description:
+                    type: string
+                    description: Returns the description of the code snippet.
+                    examples:
+                    - This will be the Code Template
+                  code:
+                    type: string
+                    description: Returns the python code added to the code snippet in string format.
+                    examples:
+                    - "def script_function():\n\treturn 0"
+                  is_removed:
+                    type: boolean
+                    description: Returns if the code snippet is deleted or not.
+                    examples:
+                    - 'false'
+                  created:
+                    type: string
+                    description: Returns the date and time when the code snippet was created.
+                    examples:
+                    - '2023-06-07T08:34:05.361364Z'
+                  created_by_data:
+                    type: object
+                    description: Returns the details of the user who created the code snippet.
+                    properties:
+                      unique_id:
+                        type: string
+                        description: Returns the unique ID of the user who created the code snippet.
+                        examples:
+                        - 0832ea94-0252-49b2-80c1-9823b44a3f46
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the code snippet.
+                        examples:
+                        - john
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the code snippet.
+                        examples:
+                        - doe
+                      full_name:
+                        type: string
+                        description: Returns the full name of the user who created the code snippet.
+                        examples:
+                        - john doe
+              example:
+                unique_id: 6bd5a80a-722c-45d0-a24d-8a0ab72ae12a
+                title: Default Script Template
+                description: This will be the Code Template
+                code: "def script_function():\n\treturn 0"
+                is_removed: 'false'
+                created: '2023-06-07T08:34:05.361364Z'
+                created_by_data:
+                  unique_id: 0832ea94-0252-49b2-80c1-9823b44a3f46
+                  first_name: john
+                  last_name: doe
+                  full_name: john doe
+  /v1/code-snippets/:
+    get:
+      operationId: codeSnippetsList
+      summary: Get Code Snippets List
+      tags:
+      - Code Snippets
+      description: Returns the list of code snippets.
+      externalDocs:
+        description: Cyware Orchestrate API reference
+        url: https://orchestrateapi.cyware.com/code-snippets/code-snippets-list
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve the code snippets list.
+          examples:
+          - '1'
+        description: Pass the page number to retrieve the code snippets list.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of items to retrieve  per page.
+          examples:
+          - '10'
+        description: Pass the number of items to retrieve  per page.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the title to search for a code snippet.
+          examples:
+          - example-snippet
+        description: Pass the title to search for a code snippet.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  link:
+                    type: object
+                    description: Indicates the next and previous URLs of the code snippets list.
+                    properties:
+                      next:
+                        type: string
+                        description: Returns the API endpoint to the next page.
+                        examples:
+                        - code-snippets/?page=2&page_size=1
+                  count:
+                    type: number
+                    description: Returns the total count of the code snippets.
+                    examples:
+                    - '1'
+                  results:
+                    type: array
+                    description: Returns the list of the code snippets.
+                    items:
+                      type: object
+                      properties:
+                        unique_id:
+                          type: string
+                          description: Returns the unique ID of the code snippet.
+                          examples:
+                          - 6bd5a80a-722c-45d0-a24d-8a0ab72ae12a
+                        title:
+                          type: string
+                          description: Returns the title of the code snippet.
+                          examples:
+                          - Default Script Template
+                        description:
+                          type: string
+                          description: Returns the description of the code snippet.
+                          examples:
+                          - This will be the Code Template
+                        is_removed:
+                          type: boolean
+                          description: Returns if the code snippet is deleted or not.
+                          examples:
+                          - 'false'
+                        created:
+                          type: string
+                          description: Returns the date and time when the code snippet was created.
+                          examples:
+                          - '2023-06-07T08:34:05.361364Z'
+                        created_by_data:
+                          type: object
+                          description: Returns the details of the used who created the code snippet.
+                          properties:
+                            unique_id:
+                              type: string
+                              description: Returns the unique ID of the user who created the code snippet.
+                              examples:
+                              - 0832ea94-0252-49b2-80c1-9823b44a3f46
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who created the code snippet.
+                              examples:
+                              - John
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who created the code snippet.
+                              examples:
+                              - Doe
+                            full_name:
+                              type: string
+                              description: Returns the full name of the user who created the code snippet.
+                              examples:
+                              - john doe
+              example:
+                link:
+                  next: code-snippets/?page=2&page_size=1
+                count: '1'
+                results:
+                - unique_id: 6bd5a80a-722c-45d0-a24d-8a0ab72ae12a
+                  title: Default Script Template
+                  description: This will be the Code Template
+                  is_removed: 'false'
+                  created: '2023-06-07T08:34:05.361364Z'
+                  created_by_data:
+                    unique_id: 0832ea94-0252-49b2-80c1-9823b44a3f46
+                    first_name: John
+                    last_name: Doe
+                    full_name: john doe
+components:
+  securitySchemes:
+    coOpenApiSignature:
+      type: apiKey
+      in: query
+      name: access_id
+      description: Orchestrate Open API credentials. Every request carries access_id, expires (epoch, current time + up to 30 seconds) and signature query parameters, where StringToSign = access_id + "\n" + expires and Signature = Base64(HMAC-SHA1(secret_key, StringToSign)). See https://orchestrateapi.cyware.com/authentication
+externalDocs:
+  description: Cyware Orchestrate API Reference
+  url: https://orchestrateapi.cyware.com/

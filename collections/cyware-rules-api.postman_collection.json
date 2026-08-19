@@ -1,0 +1,1084 @@
+{
+  "item": [
+    {
+      "id": "17a2e867-7707-440b-ad6c-9e2bf2fbcddc",
+      "name": "Rules",
+      "description": {
+        "content": "Rules",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "34a9fc32-5b4e-4275-892d-d5ab709a853f",
+          "name": "Bulk Action on Rules",
+          "request": {
+            "name": "Bulk Action on Rules",
+            "description": {
+              "content": "Updates multiple rules in one operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                "bulk-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5450017b-85ad-4034-9e3d-1a83a83cce90",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    "bulk-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"710d9cbd-68e4-42be-b23a-fb2fce1fdc40\"\n  ],\n  \"action\": \"follow\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Successful\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74a54d66-37a4-4994-9c3a-ebcd20931d1e",
+          "name": "Follow or Unfollow Rule",
+          "request": {
+            "name": "Follow or Unfollow Rule",
+            "description": {
+              "content": "Enables you to follow or unfollow a rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                ":rule_id",
+                "follow",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) Pass the unique ID of a rule."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"follow\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43d0c6a8-cca4-4fa9-8a77-2b58ee46e28a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    ":rule_id",
+                    "follow",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) Pass the unique ID of a rule."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Followed Successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f2522b1-9cdd-4c00-83c3-195fac2fcde7",
+          "name": "Get Rules List",
+          "request": {
+            "name": "Get Rules List",
+            "description": {
+              "content": "Retrieves a list of rules from the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of rules to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Pass a comma-separated list of source IDs to filter rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of the creator of the rules to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Pass the status of the rules. By default, rules with all statuses are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_to",
+                  "value": "<string>",
+                  "description": "Pass the last active time in epoch format to filter rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_from",
+                  "value": "<string>",
+                  "description": "Pass the last active time in epoch format to filter rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the creation time in epoch format to filter rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the creation time in epoch format to filter rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_manual_run",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve rules that are configured for manual execution only."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b142b97-123b-48ad-b44f-fc3bcf172ed2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_active_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_active_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_manual_run",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"page_size\": 10,\n  \"total\": 5,\n  \"results\": [\n    {\n      \"name\": \"Rule with No Conditions\",\n      \"source\": [\n        \"Crowdstrike\"\n      ],\n      \"id\": \"710d9cbd-68e4-42be-b23a-fb2fce1fdc40\",\n      \"is_active\": true,\n      \"last_activity_on\": 0,\n      \"ctix_created\": 1632767764,\n      \"ctix_updated\": 1632767764,\n      \"is_follow\": true,\n      \"no_conditions\": true,\n      \"all_sources_and_collections\": false,\n      \"status\": \"ACTIVE\",\n      \"tags\": [],\n      \"created_by\": {\n        \"email\": \"youremail@example.com\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"id\": \"4745c73d-c4f8-4194-99ad-d35af61f842c\"\n      },\n      \"updated_by\": {\n        \"email\": \"youremail@example.com\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"id\": \"4745c73d-c4f8-4194-99ad-d35af61f842c\"\n      },\n      \"trigger_on_update\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0810c6ad-e92e-4554-8596-adf599cc9f72",
+          "name": "Get Rule Details",
+          "request": {
+            "name": "Get Rule Details",
+            "description": {
+              "content": "Retrieves the details of a rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                ":rule_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) Pass the unique ID of a rule."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adb9fe1f-b02a-4780-98bf-0b18d143bc4b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    ":rule_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) Pass the unique ID of a rule."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1322b13d-f866-4a82-a61b-c95cd191ee76\",\n  \"name\": \"Rule with Simple Condition\",\n  \"description\": \"Rule with Simple Condition\",\n  \"actions\": [\n    {\n      \"extra_fields\": {\n        \"account\": {\n          \"extra_fields\": {},\n          \"ssl_encrypted\": \"true\",\n          \"access_key\": {},\n          \"secret_key\": {},\n          \"id\": \"8325a2a6-16a0-4806-b1ce-f049168515b3\",\n          \"name\": \"default account\",\n          \"is_active\": \"true\"\n        },\n        \"operation\": {\n          \"id\": \"0\",\n          \"name\": \"Add\"\n        },\n        \"labels_list\": [\n          {\n            \"colour_code\": {},\n            \"created\": \"1643809109\",\n            \"created_by\": {\n              \"email\": \"youremail@example.com\",\n              \"first_name\": \"System\",\n              \"id\": \"010f5d90-f510-40e5-82a0-dd90f4546dd2\",\n              \"last_name\": \"Default1\"\n            },\n            \"id\": \"f63c98e5-cc3f-4886-8dab-9453e5918a8b\",\n            \"modified\": \"1643809109\",\n            \"modified_by\": {\n              \"email\": \"youremail@example.com\",\n              \"first_name\": \"System\",\n              \"id\": \"010f5d90-f510-40e5-82a0-dd90f4546dd2\",\n              \"last_name\": \"Default1\"\n            },\n            \"name\": \"APT\",\n            \"type\": \"automated\"\n          }\n        ]\n      },\n      \"action\": {\n        \"id\": \"87439e16-0e1c-43c6-ace1-1a4584a1249a\",\n        \"title\": \"Update Tag\",\n        \"slug\": \"update_tag\",\n        \"tp_apps_actions\": [\n          {\n            \"id\": \"43ed6977-a58c-407b-be3e-19f490d27bca\",\n            \"title\": \"CTIX\",\n            \"is_active\": \"true\",\n            \"app_config_unique_id\": \"8325a2a6-16a0-4806-b1ce-f049168515b3\"\n          }\n        ],\n        \"related_fields\": [\n          {\n            \"key\": \"operation\",\n            \"order\": \"3\",\n            \"rules\": {\n              \"required\": \"true\"\n            },\n            \"field_type\": \"select\",\n            \"identifier\": [\n              \"rule\"\n            ],\n            \"display_name\": \"Operation\"\n          }\n        ]\n      },\n      \"app_config\": {\n        \"id\": \"43ed6977-a58c-407b-be3e-19f490d27bca\",\n        \"title\": \"CTIX\",\n        \"is_active\": \"true\",\n        \"app_config_unique_id\": \"8325a2a6-16a0-4806-b1ce-f049168515b3\"\n      }\n    }\n  ],\n  \"rule\": [\n    {\n      \"expression\": {\n        \"field\": \"TITLE\",\n        \"value\": \"test\",\n        \"selector\": \"EQUAL\",\n        \"component\": \"Indicator\",\n        \"actioned_objects\": [\n          \"indicator\"\n        ]\n      },\n      \"expressions\": [],\n      \"related_object_source\": {}\n    }\n  ],\n  \"rule_source\": [\n    {\n      \"source\": {\n        \"id\": \"98bdbd31-c51a-4cd9-a8b4-1b6093cf5df1\",\n        \"name\": \"Crowdstrike\"\n      },\n      \"collections\": [\n        {\n          \"id\": \"79b9444e-8441-4b34-9e9c-83342449018a\",\n          \"name\": \"Crowdstrike\"\n        }\n      ]\n    }\n  ],\n  \"no_conditions\": \"false\",\n  \"is_active\": \"true\",\n  \"status\": \"ACTIVE\",\n  \"tags\": [],\n  \"created_by\": \"(unknown)\",\n  \"updated_by\": \"(unknown)\",\n  \"trigger_on_update\": \"false\",\n  \"run_rule_after_enrich\": \"false\",\n  \"exclude_wl\": \"true\",\n  \"exclude_fp\": \"true\",\n  \"is_follow\": \"true\",\n  \"ctix_created\": \"1632762270\",\n  \"ctix_modified\": \"1632762270\",\n  \"all_sources_and_collections\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0de035d-a02f-46cb-a82a-a62fefc71f13",
+          "name": "Update Rule",
+          "request": {
+            "name": "Update Rule",
+            "description": {
+              "content": "Update specific details of a rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                ":rule_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) Pass the unique identifier of the rule."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"trigger_on_update\": \"<boolean>\",\n  \"retry_on_broken\": \"<boolean>\",\n  \"run_rule_after_enrich\": \"<boolean>\",\n  \"exclude_wl\": \"<boolean>\",\n  \"exclude_fp\": \"<boolean>\",\n  \"is_follow\": \"<boolean>\",\n  \"is_manual_run\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c1728b3-3d27-4310-b9d2-0c02b38b6a66",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    ":rule_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) Pass the unique identifier of the rule."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"sample rule\",\n  \"description\": \"sample rule description\",\n  \"is_active\": \"false\",\n  \"status\": \"INACTIVE\",\n  \"tags\": [],\n  \"trigger_on_update\": \"true\",\n  \"retry_on_broken\": \"true\",\n  \"run_rule_after_enrich\": \"true\",\n  \"exclude_wl\": \"false\",\n  \"exclude_fp\": \"false\",\n  \"is_follow\": \"true\",\n  \"is_manual_run\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0039ac88-7fe2-4f0e-a472-7ccfe2f1db49\",\n  \"name\": \"sample rule\",\n  \"description\": \"sample rule description\",\n  \"actions\": [\n    {\n      \"id\": \"b643bf2d-7ea2-4a2a-943a-2e733d499143\",\n      \"action\": {\n        \"id\": \"c238a6ad-4c31-4100-bec1-41c1957565c0\",\n        \"slug\": \"update_tag\",\n        \"title\": \"Update Tag\",\n        \"related_fields\": [\n          {\n            \"key\": \"operation\",\n            \"order\": \"3\",\n            \"rules\": {\n              \"required\": \"true\"\n            },\n            \"field_type\": \"select\",\n            \"identifier\": [\n              \"rule\"\n            ],\n            \"display_name\": \"Operation\"\n          }\n        ],\n        \"tp_apps_actions\": [\n          {\n            \"id\": \"dd1d280f-6a4c-492a-9f68-af9d35ccd5d3\",\n            \"title\": \"CTIX\",\n            \"is_active\": \"true\",\n            \"app_config_unique_id\": \"49e3d083-2271-4691-9090-616ecdb379bc\"\n          }\n        ]\n      },\n      \"app_config\": {\n        \"id\": \"dd1d280f-6a4c-492a-9f68-af9d35ccd5d3\",\n        \"title\": \"CTIX\",\n        \"is_active\": \"true\",\n        \"app_config_unique_id\": \"49e3d083-2271-4691-9090-616ecdb379bc\"\n      },\n      \"extra_fields\": {\n        \"account\": {\n          \"id\": \"49e3d083-2271-4691-9090-616ecdb379bc\",\n          \"name\": \"default account\",\n          \"is_active\": \"true\",\n          \"access_key\": {},\n          \"secret_key\": {},\n          \"extra_fields\": {},\n          \"ssl_encrypted\": \"true\"\n        },\n        \"operation\": {\n          \"id\": \"1\",\n          \"name\": \"Remove\"\n        },\n        \"labels_list\": [\n          {\n            \"id\": \"1e769ac0-8e1b-4410-aa41-0a0b00a42405\",\n            \"name\": \"0day\",\n            \"type\": \"automated\",\n            \"created\": \"1695208336\",\n            \"modified\": \"1695208336\",\n            \"created_by\": {\n              \"id\": \"29921865-7511-452a-970f-375c7d6ccdc2\",\n              \"email\": \"system.default@cyware.com\",\n              \"last_name\": \"Default\",\n              \"first_name\": \"System\"\n            },\n            \"colour_code\": \"#0068FA\",\n            \"modified_by\": {\n              \"id\": \"29921865-7511-452a-970f-375c7d6ccdc2\",\n              \"email\": \"system.default@cyware.com\",\n              \"last_name\": \"Default\",\n              \"first_name\": \"System\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"rule\": [\n    {\n      \"operator\": {},\n      \"expression\": {\n        \"field\": \"ALL\",\n        \"component\": \"indicator\",\n        \"is_actionable\": \"true\"\n      },\n      \"expressions\": [],\n      \"related_object_source\": {\n        \"duration\": {\n          \"type\": \"created\",\n          \"unit\": \"hour\",\n          \"custom\": \"false\"\n        },\n        \"source_info\": [],\n        \"all_sources_and_collections\": \"false\"\n      }\n    }\n  ],\n  \"rule_source\": [\n    {\n      \"source\": {\n        \"id\": \"e5cc6128-494f-40ff-bec7-f3c347664839\",\n        \"name\": \"Import\",\n        \"source_type\": \"CUSTOM_STIX_SOURCES\"\n      },\n      \"collections\": [],\n      \"all_collections\": \"true\"\n    }\n  ],\n  \"no_conditions\": \"false\",\n  \"is_active\": \"false\",\n  \"status\": \"INACTIVE\",\n  \"tags\": [],\n  \"created_by\": \"029efea0-9324-4b9c-a10a-89db16724e0f\",\n  \"updated_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"trigger_on_update\": \"true\",\n  \"priority\": \"8\",\n  \"retry_on_broken\": \"true\",\n  \"run_rule_after_enrich\": \"true\",\n  \"exclude_wl\": \"false\",\n  \"exclude_fp\": \"false\",\n  \"is_follow\": \"true\",\n  \"ctix_created\": \"1703853667\",\n  \"ctix_modified\": \"1704272116\",\n  \"is_manual_run\": \"true\",\n  \"all_sources_and_collections\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72baf7dd-13fb-4620-9b5b-e7eda8964cca",
+          "name": "Run Rule",
+          "request": {
+            "name": "Run Rule",
+            "description": {
+              "content": "Runs a rule asynchronously on the existing threat data created in the specified time interval.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                "one-rule",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>",
+                  "description": "(Required) Filters threat data objects that are created before the passed timestamp value."
+                },
+                {
+                  "disabled": false,
+                  "key": "rule",
+                  "value": "<string>",
+                  "description": "(Required) Pass the unique ID of a rule."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) Filters threat data objects that are created after the passed timestamp value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d58466f5-fcc3-4a71-a1c8-a2292f8d681e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    "one-rule",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rule",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"Rule is running\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d930389-f7c9-4148-b5c1-aa642df42bce",
+          "name": "Get Saved Result Set Data",
+          "request": {
+            "name": "Get Saved Result Set Data",
+            "description": {
+              "content": "Returns the data published to the Saved Result Set using rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "rules",
+                "save_result_set",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "v2",
+                  "description": "Pass the Saved Result Set version."
+                },
+                {
+                  "disabled": false,
+                  "key": "label_name",
+                  "value": "<string>",
+                  "description": "Pass a tag name to filter data. All data associated the passed tag will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_timestamp",
+                  "value": "<string>",
+                  "description": "Pass the published time in epoch format from which you want to retrieve data."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_timestamp",
+                  "value": "<string>",
+                  "description": "Pass the published time in epoch format until which you want to retrieve data."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "443f46e8-2316-40b5-8c80-5f0164e08ab5",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "rules",
+                    "save_result_set",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "v2"
+                    },
+                    {
+                      "key": "label_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to_timestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"page_size\": \"10\",\n  \"total\": \"1\",\n  \"results\": [\n    {\n      \"id\": \"fc1c1b96-2e74-4cc1-b515-184963e311b4\",\n      \"ctix_created\": \"1649406695\",\n      \"ctix_modified\": \"1649406695\",\n      \"version\": \"v2\",\n      \"ctix_tags\": [\n        {\n          \"id\": \"acb6cafe-c688-4d10-884e-f00123dd1d42\",\n          \"name\": \"two\",\n          \"type\": \"manual\",\n          \"created\": \"1649406622\",\n          \"modified\": \"1649406622\",\n          \"created_by\": {\n            \"id\": \"59f01fa7-3628-4218-b123-c00243881adc\",\n            \"email\": \"John@gmail.com\",\n            \"last_name\": \"John\",\n            \"first_name\": \"John\"\n          },\n          \"colour_code\": \"#0068FA\",\n          \"modified_by\": {\n            \"id\": \"59f01fa7-3628-4218-b123-c00243881adc\",\n            \"email\": \"John@gmail.com\",\n            \"last_name\": \"John\",\n            \"first_name\": \"John\"\n          }\n        }\n      ],\n      \"data\": {\n        \"tlp\": \"WHITE\",\n        \"source\": {\n          \"id\": \"e10ebfe4-4e15-4a5c-9ac3-eb21251a054d\",\n          \"name\": \"Import\"\n        },\n        \"tenant_id\": \"b2f4ff80-071a-4e5e-b9bc-4f81729a981d\",\n        \"indicators\": [\n          {\n            \"ttp\": [],\n            \"name\": \"\",\n            \"name2\": \"8.8.8.8\",\n            \"score\": \"46\",\n            \"title\": \"ipv4: 8.8.8.8||indicator--3ab255ca-5664-421b-885c-17d02256a244\",\n            \"sources\": [\n              {\n                \"source__name\": \"Import\"\n              }\n            ],\n            \"deprecated\": \"false\",\n            \"criticality\": \"0\",\n            \"whitelisted\": \"false\",\n            \"risk_severity\": \"0\",\n            \"indicator_type\": \"ipv4-addr\",\n            \"stix_object_id\": \"b2f53079-d203-44c5-8806-9de5be1e9974\",\n            \"threat_data_url\": \"hxxps://xyz.com/ctix/threatdata/indicator/b2f53079-d203-44c5-8806-9de5be1e9974/overview\",\n            \"custom_properties\": {},\n            \"is_false_positive\": \"false\",\n            \"object_description\": {}\n          }\n        ],\n        \"stix_header\": {\n          \"title\": \"test Report\",\n          \"handling\": [\n            {\n              \"marking\": [\n                {\n                  \"name\": \"TLPMarking\",\n                  \"type\": \"tlp\"\n                }\n              ],\n              \"marking_structures\": [\n                {\n                  \"marking\": {\n                    \"type\": \"tlp\",\n                    \"fields\": [\n                      {\n                        \"value\": \"WHITE\"\n                      }\n                    ]\n                  }\n                }\n              ]\n            }\n          ],\n          \"profiles\": [],\n          \"description\": [\n            {\n              \"value\": {},\n              \"ordinality\": {},\n              \"structuring_format\": {}\n            }\n          ],\n          \"package_intent\": [],\n          \"short_description\": [],\n          \"information_source\": {\n            \"role\": [],\n            \"time\": {\n              \"end_time\": {\n                \"value\": {},\n                \"precision\": {}\n              },\n              \"start_time\": {\n                \"value\": {},\n                \"precision\": {}\n              },\n              \"produced_time\": {\n                \"value\": {},\n                \"precision\": {}\n              },\n              \"received_time\": {\n                \"value\": {},\n                \"precision\": {}\n              }\n            },\n            \"tools\": [],\n            \"identity\": {},\n            \"references\": [],\n            \"description\": []\n          }\n        },\n        \"csap_card_id\": \"\",\n        \"intel_package_url\": \"hxxps://xyz.com/ctix/threatdata/report/f1bac45a-9bf5-4e58-a629-19e69212564e/overview\"\n      },\n      \"timestamp\": \"1649406695\",\n      \"title\": \"test Report\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bebdc44b-ee54-495e-9add-db7287c49a93",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

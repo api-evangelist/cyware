@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Integrations API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get App Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/app-instances/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the app details."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to display per page."
+              },
+              {
+                "name": "app_unique_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the app unique ID to retrieve the instances of the app. You can retrieve the unique ID of an app using the **Get Apps** endpoint. \nIf the app ID is not passed, all available instances will be retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of available instances for all apps. To retrieve instances of a specific app, pass the unique ID of the app."
+        },
+        {
+          "info": {
+            "name": "Create App Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/integrations/app-instances/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an instance in a specific app."
+        },
+        {
+          "info": {
+            "name": "Download App Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps/download/:app_slug/",
+            "params": [
+              {
+                "name": "app_slug",
+                "value": "",
+                "type": "path",
+                "description": "Pass the app's unique resource identifier to generate a downloadable response file.\nExample: *abuse_ipdb_1_1_0*.\nYou can retrieve the app slug of an app using the **Get Apps** endpoint."
+              }
+            ]
+          },
+          "docs": "Download the app's ZIP file by entering the app identifier. You can save the response as a ZIP file to your device."
+        },
+        {
+          "info": {
+            "name": "Execute Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/integrations/actions/execute/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute an app action by passing the required parameters in the payload."
+        },
+        {
+          "info": {
+            "name": "Get Action Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/app-actions/:action_id/",
+            "params": [
+              {
+                "name": "action_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the action to retrieve the action details. \nExample: *52091b28-5daa-42f3-9eb9-926994a91ca5*.\nYou can retrieve unique ID of an action using the **Get App Actions** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific action."
+        },
+        {
+          "info": {
+            "name": "Get App Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/app-actions/",
+            "params": [
+              {
+                "name": "app_unique_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique ID of the app to retrieve the list of actions. Example: *f8f6af0e-35c8-48e3-8cda-d0fe61476441*. You can retrieve the unique ID of an app using the **Get Apps** endpoint."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the app actions list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to view per page."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available actions from all apps. To retrieve actions of a specific app, pass the Unique ID of the app."
+        },
+        {
+          "info": {
+            "name": "Get App Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps/:app_unique_id/",
+            "params": [
+              {
+                "name": "app_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Enter the unique ID of the app to retrieve its details.\nYou can retrieve the unique IDs of apps using the **Get Apps** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific app."
+        },
+        {
+          "info": {
+            "name": "Get App Instance Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps-instances/:instance_id/",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the instance to retrieve details of the app instance. \nExample: *d6a03423-52fd-479b-a79d-85102e53861*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific instance."
+        },
+        {
+          "info": {
+            "name": "Get Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a value for q to search for apps matching the query string."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Use `ordering=title` to sort by title or `ordering=modified_at` to sort by the last update date. Add `-` before the parameter to sort in descending order."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the apps list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to retrieve a list of the apps created by a user."
+              },
+              {
+                "name": "app_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass `READY_TO_USE` to list active apps, `IN_PROGRESS` to list the inactive apps, and `INSTALLED` to retrieve apps that are installed."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Pass the categories to filter apps."
+              },
+              {
+                "name": "is_system",
+                "value": "",
+                "type": "query",
+                "description": "Pass false to retrieve custom apps or true to retrieve apps."
+              },
+              {
+                "name": "is_configured",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to get configured apps or false to get non-configured apps."
+              },
+              {
+                "name": "lite_enabled",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve agent-compatible apps or false to fetch apps that are not agent-compatible."
+              },
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "Pass the `created_at` value to filter apps created in the last week, month, or year."
+              },
+              {
+                "name": "created_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start time in Unix time format. The list of apps created after the entered time will be returned. Example: *1655145000*."
+              },
+              {
+                "name": "created_at__lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end time in Unix time format. The list of apps created before the entered time will be returned. Example: *1642530599*."
+              }
+            ]
+          },
+          "docs": "Returns a list of apps from My Apps in Orchestrate."
+        },
+        {
+          "info": {
+            "name": "Install Custom Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps/import/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install custom apps on the Orchestrate application."
+        },
+        {
+          "info": {
+            "name": "Test App Instance Connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/integrations/apps-instances/test-connectivity/:instance_id/",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path",
+                "description": "Enter the unique ID of the instance to test the connectivity. \nExample: *d6a03423-52fd-479b-a79d-85102e53861f*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+              }
+            ]
+          },
+          "docs": "Verify the connectivity of an app instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

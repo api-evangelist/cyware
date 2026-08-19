@@ -1,0 +1,1279 @@
+{
+  "item": [
+    {
+      "id": "27138713-ea61-4c78-b51c-347a27574ca2",
+      "name": "Threat Investigation",
+      "description": {
+        "content": "Threat Investigation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a894bdba-5f57-4b84-b6e0-e00bd14f948f",
+          "name": "Get Canvas Basic Details",
+          "request": {
+            "name": "Get Canvas Basic Details",
+            "description": {
+              "content": "Return the details of a canvas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "canvas",
+                ":canvas_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "canvas_id",
+                  "description": "(Required) Pass the unique ID of a canvas"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcbb9a3d-cfa7-460d-ae33-c1276bfa6775",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "canvas",
+                    ":canvas_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "canvas_id",
+                      "description": "(Required) Pass the unique ID of a canvas"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fc84c3cf-570d-48e0-91f0-d23cde141612\",\n  \"name\": \"canvas\",\n  \"shared_type\": \"specific_users\",\n  \"shared_users\": [\n    \"123456789\"\n  ],\n  \"created_by\": {\n    \"email\": \"John@gmail.com\",\n    \"first_name\": \"John\",\n    \"id\": \"3a4d629c-3061-412b-9049-86d33704e608\",\n    \"last_name\": \"John\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f82c9ed3-9e72-4de0-ab8b-2f11531ea5fc",
+          "name": "Get Canvas Nodes Details",
+          "request": {
+            "name": "Get Canvas Nodes Details",
+            "description": {
+              "content": "Returns the node details of a threat investigation canvas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "canvas",
+                "nodes",
+                ":canvas_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "canvas_id",
+                  "description": "(Required) Pass the unique ID of a threat investigation canvas."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8302783-06a5-4883-b051-960b52a05078",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "canvas",
+                    "nodes",
+                    ":canvas_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "canvas_id",
+                      "description": "(Required) Pass the unique ID of a threat investigation canvas."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": \"1\",\n  \"page_size\": \"10\",\n  \"results\": [\n    {\n      \"id\": \"indicator--3c1ed30a-659b-4a82-9d35-9328943aae23\",\n      \"prop\": {\n        \"tlp_data\": \"AMBER\",\n        \"first_seen\": \"1626179839\",\n        \"source_collections\": [\n          {\n            \"name\": \"Bruteforce Web\",\n            \"id\": \"a9d46234-5948-4f88-8984-7d9701fd2c88\"\n          }\n        ],\n        \"last_seen\": \"1626179839\",\n        \"sources\": [\n          {\n            \"created\": \"1626179839\",\n            \"name\": \"Volon\",\n            \"source_type\": \"API FEEDS\",\n            \"id\": \"e302863d-845d-4272-b0a9-13eebe5e0b40\",\n            \"category\": \"System Feeds\"\n          }\n        ],\n        \"stix_object_id\": \"indicator--3c1ed30a-659b-4a82-9d35-9328943aae23\",\n        \"subscribers\": [],\n        \"deprecated\": \"false\",\n        \"intel_grading\": \"POSSIBLY TRUE | 3\",\n        \"indicator_type\": \"ipv4-addr\",\n        \"type\": \"ipv4-addr\",\n        \"labels\": [],\n        \"source_grading\": \"FAIRLY RELIABLE | C\",\n        \"score\": \"72.81\",\n        \"name2\": \"54.198.171.238\",\n        \"subscriber_collections\": [],\n        \"parent_type\": \"indicator\",\n        \"followed\": \"false\",\n        \"identifier\": \"ctix\",\n        \"label\": \"IP\"\n      },\n      \"type\": \"node\",\n      \"t\": \"54.198.171.238\",\n      \"hi\": \"false\",\n      \"u\": \"/ctix/images/graph/ipv4-addr.svg\",\n      \"x\": \"511\",\n      \"y\": \"94\",\n      \"added_node\": \"false\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "183aa853-ccf0-4969-a780-cb92f4b44796",
+          "name": "Get Canvases List",
+          "request": {
+            "name": "Get Canvases List",
+            "description": {
+              "content": "Returns a list of canvases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "canvas",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<string>",
+                  "description": "Pass the ID of the creator."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the query text to search for threat investigations by the title."
+                },
+                {
+                  "disabled": false,
+                  "key": "shared_type",
+                  "value": "<string>",
+                  "description": "Pass the sharing type to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the created time in epoch format to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the created time in epoch format to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4afee2a5-0dea-4642-9425-438b9d21a50b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "canvas",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_by_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shared_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": 4,\n  \"page_size\": 10,\n  \"results\": [\n    {\n      \"id\": \"fc84c3cf-570d-48e0-91f0-d23cde141612\",\n      \"name\": \"canvas\",\n      \"created\": 1633081533,\n      \"modified\": 1633081533,\n      \"created_by\": \"(unknown)\",\n      \"shared_type\": \"shared\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cdd2a9e-2d85-4d59-b178-6161dfcb7a35",
+          "name": "Analyze Relations",
+          "request": {
+            "name": "Analyze Relations",
+            "description": {
+              "content": "Returns relationship details of threat data objects within Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "investigation",
+                "ctix-enrichment",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1d519779-3d99-4fc9-bdc4-2a2591e00077",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "investigation",
+                    "ctix-enrichment",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"ff8fcc0f-4efb-4492-9145-230317fea9c4\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"page_size\": \"10\",\n  \"previous\": {},\n  \"results\": [\n    {\n      \"hi\": \"false\",\n      \"id\": \"ff8fcc0f-4efb-4492-9145-230317fea9c4\",\n      \"prop\": {\n        \"analyst_score\": {},\n        \"analyst_tlp\": {},\n        \"confidence_score\": \"40\",\n        \"confidence_type\": \"ctix\",\n        \"country\": {},\n        \"created\": \"1634636796\",\n        \"first_seen\": {},\n        \"id\": \"ff8fcc0f-4efb-4492-9145-230317fea9c4\",\n        \"identifier\": \"ctix\",\n        \"indicator_type\": \"url\",\n        \"is_actioned\": \"false\",\n        \"is_deprecated\": \"false\",\n        \"is_false_positive\": \"false\",\n        \"is_reviewed\": \"false\",\n        \"is_revoked\": \"false\",\n        \"is_whitelisted\": \"false\",\n        \"label\": \"Url\",\n        \"last_seen\": {},\n        \"modified\": \"1634636796\",\n        \"name\": \"http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D\",\n        \"null\": [],\n        \"parent_type\": \"indicator\",\n        \"primary_attribute\": {},\n        \"published_collections\": [],\n        \"severity\": {},\n        \"source_collections\": [],\n        \"source_confidence\": \"NONE\",\n        \"sources\": [\n          {\n            \"id\": \"b7aefa5d-511e-4487-8363-a9844bd7ecc7\",\n            \"name\": \"CrowdStrike\",\n            \"source_type\": \"API_FEEDS\"\n          }\n        ],\n        \"sub_type\": \"value\",\n        \"subscriber_collections\": [],\n        \"subscribers\": [],\n        \"tags\": [\n          \"infrastructure:-pony3.microsoftups.com-[pony]\"\n        ],\n        \"tlp\": \"AMBER\",\n        \"type\": \"indicator\",\n        \"valid_from\": \"1634636783\",\n        \"valid_until\": {}\n      },\n      \"t\": \"http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D\",\n      \"type\": \"node\",\n      \"u\": \"/ctix/images/graph/url.svg\"\n    }\n  ],\n  \"total\": \"3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83cf39d4-99e6-4d60-86c5-0cb15fe628d3",
+          "name": "Enrich Nodes",
+          "request": {
+            "name": "Enrich Nodes",
+            "description": {
+              "content": "Enrich threat data objects for threat investigation using third-party enrichment tools configured in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integration",
+                "investigation",
+                "enrichment",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve enrichment results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of results to retrieve per page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_id\": \"<string>\",\n  \"object_type\": \"<string>\",\n  \"type\": \"<string>\",\n  \"app_slug\": \"<string>\",\n  \"action_slug\": \"<string>\",\n  \"value\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"raw_data\": {\n    \"general\": {\n      \"whois\": \"<string>\",\n      \"reputation\": \"<number>\",\n      \"indicator\": \"<string>\",\n      \"type\": \"<string>\",\n      \"type_title\": \"<string>\",\n      \"base_indicator\": {\n        \"id\": \"<number>\",\n        \"indicator\": \"<string>\",\n        \"type\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"content\": \"<string>\",\n        \"access_type\": \"<string>\",\n        \"access_reason\": \"<string>\"\n      },\n      \"pulse_info\": {\n        \"count\": \"<number>\",\n        \"pulses\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"modified\": \"<string>\",\n            \"created\": \"<string>\",\n            \"references\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"public\": \"<number>\",\n            \"adversary\": \"<string>\",\n            \"TLP\": \"<string>\",\n            \"cloned_from\": \"<object>\",\n            \"export_count\": \"<number>\",\n            \"upvotes_count\": \"<number>\",\n            \"downvotes_count\": \"<number>\",\n            \"votes_count\": \"<number>\",\n            \"locked\": \"<boolean>\",\n            \"pulse_source\": \"<string>\",\n            \"validator_count\": \"<number>\",\n            \"comment_count\": \"<number>\",\n            \"follower_count\": \"<number>\",\n            \"vote\": \"<number>\",\n            \"author\": {\n              \"username\": \"<string>\",\n              \"id\": \"<string>\",\n              \"avatar_url\": \"<string>\",\n              \"is_subscribed\": \"<boolean>\",\n              \"is_following\": \"<boolean>\"\n            },\n            \"indicator_type_counts\": {\n              \"domain\": \"<number>\",\n              \"hostname\": \"<number>\",\n              \"URL\": \"<number>\",\n              \"FileHash-SHA256\": \"<number>\",\n              \"email\": \"<number>\",\n              \"FileHash-MD5\": \"<number>\",\n              \"FileHash-SHA1\": \"<number>\",\n              \"FilePath\": \"<number>\",\n              \"URI\": \"<number>\",\n              \"Mutex\": \"<number>\",\n              \"CIDR\": \"<number>\",\n              \"CVE\": \"<number>\",\n              \"SSLCertFingerprint\": \"<number>\"\n            },\n            \"indicator_count\": \"<number>\",\n            \"is_author\": \"<boolean>\",\n            \"is_subscribing\": \"<object>\",\n            \"subscriber_count\": \"<number>\",\n            \"modified_text\": \"<string>\",\n            \"is_modified\": \"<boolean>\",\n            \"in_group\": \"<boolean>\",\n            \"threat_hunter_scannable\": \"<boolean>\",\n            \"threat_hunter_has_agents\": \"<number>\",\n            \"related_indicator_type\": \"<string>\",\n            \"related_indicator_is_active\": \"<number>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"modified\": \"<string>\",\n            \"created\": \"<string>\",\n            \"references\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"public\": \"<number>\",\n            \"adversary\": \"<string>\",\n            \"TLP\": \"<string>\",\n            \"cloned_from\": \"<object>\",\n            \"export_count\": \"<number>\",\n            \"upvotes_count\": \"<number>\",\n            \"downvotes_count\": \"<number>\",\n            \"votes_count\": \"<number>\",\n            \"locked\": \"<boolean>\",\n            \"pulse_source\": \"<string>\",\n            \"validator_count\": \"<number>\",\n            \"comment_count\": \"<number>\",\n            \"follower_count\": \"<number>\",\n            \"vote\": \"<number>\",\n            \"author\": {\n              \"username\": \"<string>\",\n              \"id\": \"<string>\",\n              \"avatar_url\": \"<string>\",\n              \"is_subscribed\": \"<boolean>\",\n              \"is_following\": \"<boolean>\"\n            },\n            \"indicator_type_counts\": {\n              \"domain\": \"<number>\",\n              \"hostname\": \"<number>\",\n              \"URL\": \"<number>\",\n              \"FileHash-SHA256\": \"<number>\",\n              \"email\": \"<number>\",\n              \"FileHash-MD5\": \"<number>\",\n              \"FileHash-SHA1\": \"<number>\",\n              \"FilePath\": \"<number>\",\n              \"URI\": \"<number>\",\n              \"Mutex\": \"<number>\",\n              \"CIDR\": \"<number>\",\n              \"CVE\": \"<number>\",\n              \"SSLCertFingerprint\": \"<number>\"\n            },\n            \"indicator_count\": \"<number>\",\n            \"is_author\": \"<boolean>\",\n            \"is_subscribing\": \"<object>\",\n            \"subscriber_count\": \"<number>\",\n            \"modified_text\": \"<string>\",\n            \"is_modified\": \"<boolean>\",\n            \"in_group\": \"<boolean>\",\n            \"threat_hunter_scannable\": \"<boolean>\",\n            \"threat_hunter_has_agents\": \"<number>\",\n            \"related_indicator_type\": \"<string>\",\n            \"related_indicator_is_active\": \"<number>\"\n          }\n        ],\n        \"references\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"related\": {\n          \"alienvault\": {},\n          \"other\": {\n            \"adversary\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"malware_families\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"industries\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        }\n      },\n      \"validation\": [\n        {\n          \"source\": \"<string>\",\n          \"message\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"source\": \"<string>\",\n          \"message\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"city_data\": \"<boolean>\",\n      \"city\": \"<object>\",\n      \"region\": \"<object>\",\n      \"continent_code\": \"<string>\",\n      \"country_code3\": \"<string>\",\n      \"country_code2\": \"<string>\",\n      \"subdivision\": \"<object>\",\n      \"latitude\": \"<number>\",\n      \"postal_code\": \"<object>\",\n      \"longitude\": \"<number>\",\n      \"accuracy_radius\": \"<number>\",\n      \"country_code\": \"<string>\",\n      \"country_name\": \"<string>\",\n      \"dma_code\": \"<number>\",\n      \"charset\": \"<number>\",\n      \"area_code\": \"<number>\",\n      \"flag_url\": \"<string>\",\n      \"flag_title\": \"<string>\",\n      \"sections\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9501cfe3-de2f-46bd-9e72-5ebf11512cad",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integration",
+                    "investigation",
+                    "enrichment",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_id\": \"01cde415-bed4-40c0-aed4-dd4a52ea6450\",\n  \"object_type\": \"indicator\",\n  \"type\": \"ipv4-addr\",\n  \"app_slug\": \"alien_vault\",\n  \"action_slug\": \"get_ip\",\n  \"value\": \"311.76.208.163\",\n  \"identifier\": \"ctix\",\n  \"raw_data\": {\n    \"general\": {\n      \"whois\": \"http://whois.domaintools.com/1.2.3.4\",\n      \"reputation\": 0,\n      \"indicator\": \"185.161.208.194\",\n      \"type\": \"IPv4\",\n      \"type_title\": \"IPv4\",\n      \"base_indicator\": {\n        \"id\": 7629,\n        \"indicator\": \"1.2.3.4\",\n        \"type\": \"IPv4\",\n        \"title\": \"\",\n        \"description\": \"\",\n        \"content\": \"\",\n        \"access_type\": \"public\",\n        \"access_reason\": \"\"\n      },\n      \"pulse_info\": {\n        \"count\": 27,\n        \"pulses\": [\n          {\n            \"id\": \"5ebca7e4e49c4c7ffae8eeeb\",\n            \"name\": \"Unknown linked malware delivery using public data sets\",\n            \"description\": \"Gmail, g account take overs using google education developer access enrolled on unauthorised mdm. 1000k apis set in google console plus data sets being pulled big data & big query push ai data again unauthorised to google data pool, kiosk set up, browser shows “mendal experiments”  ?? Working across all device platforms, on the fly automated bot control.  Weather station & sensor data somehow being used as external beacons or something weird with an android customised car gps config file and a car autopairing config file which appears to be able to scan for unsecure (which means all now!!) other car bluetooth signals and creating p2p netw with the help of gaming consoles mainly xbox\",\n            \"modified\": \"2021-08-05T12:08:15.032000\",\n            \"created\": \"2020-05-14T02:07:32.487000\",\n            \"tags\": [],\n            \"references\": [\n              \"2c65c70350c67e4ec31d23379f76d92acdca2c8b1d80f5465fc685510929e05d\"\n            ],\n            \"public\": 1,\n            \"adversary\": \"\",\n            \"targeted_countries\": [],\n            \"malware_families\": [],\n            \"attack_ids\": [],\n            \"industries\": [],\n            \"TLP\": \"green\",\n            \"cloned_from\": {},\n            \"export_count\": 54,\n            \"upvotes_count\": 0,\n            \"downvotes_count\": 0,\n            \"votes_count\": 0,\n            \"locked\": false,\n            \"pulse_source\": \"web\",\n            \"validator_count\": 0,\n            \"comment_count\": 66,\n            \"follower_count\": 0,\n            \"vote\": 0,\n            \"author\": {\n              \"username\": \"dorkingbeauty1\",\n              \"id\": \"80137\",\n              \"avatar_url\": \"/otxapi/users/avatar_image/media/avatars/user_80137/resized/80/avatar_54d0ee2979.png\",\n              \"is_subscribed\": false,\n              \"is_following\": false\n            },\n            \"indicator_type_counts\": {\n              \"domain\": 2353,\n              \"hostname\": 2900,\n              \"URL\": 7751,\n              \"FileHash-SHA256\": 2205,\n              \"email\": 34,\n              \"FileHash-MD5\": 2103,\n              \"FileHash-SHA1\": 1027,\n              \"FilePath\": 16,\n              \"URI\": 15,\n              \"Mutex\": 1,\n              \"CIDR\": 3,\n              \"CVE\": 2,\n              \"SSLCertFingerprint\": 2\n            },\n            \"indicator_count\": 18412,\n            \"is_author\": false,\n            \"is_subscribing\": {},\n            \"subscriber_count\": 207,\n            \"modified_text\": \"4 days ago \",\n            \"is_modified\": true,\n            \"groups\": [],\n            \"in_group\": false,\n            \"threat_hunter_scannable\": true,\n            \"threat_hunter_has_agents\": 1,\n            \"related_indicator_type\": \"IPv4\",\n            \"related_indicator_is_active\": 0\n          }\n        ],\n        \"references\": [\n          \"https://feodotracker.abuse.ch/\"\n        ],\n        \"related\": {\n          \"alienvault\": {\n            \"adversary\": [],\n            \"malware_families\": [],\n            \"industries\": []\n          },\n          \"other\": {\n            \"adversary\": [\n              \"APT 10\"\n            ],\n            \"malware_families\": [\n              \"Dridex\"\n            ],\n            \"industries\": [\n              \"Technology\"\n            ]\n          }\n        }\n      },\n      \"false_positive\": [],\n      \"validation\": [\n        {\n          \"source\": \"whitelist\",\n          \"message\": \"contained in whitelisted prefix\",\n          \"name\": \"Whitelisted IP\"\n        }\n      ],\n      \"city_data\": true,\n      \"city\": {},\n      \"region\": {},\n      \"continent_code\": \"OC\",\n      \"country_code3\": \"AUS\",\n      \"country_code2\": \"AU\",\n      \"subdivision\": {},\n      \"latitude\": -33.494,\n      \"postal_code\": {},\n      \"longitude\": 143.2104,\n      \"accuracy_radius\": 1000,\n      \"country_code\": \"AU\",\n      \"country_name\": \"Australia\",\n      \"dma_code\": 0,\n      \"charset\": 0,\n      \"area_code\": 0,\n      \"flag_url\": \"/assets/images/flags/au.png\",\n      \"flag_title\": \"Australia\",\n      \"sections\": [\n        \"general\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"investigation/enrichment/?page=2&page_size=10\",\n  \"previous\": {},\n  \"page_size\": 10,\n  \"total\": 24,\n  \"results\": [\n    {\n      \"type\": \"node\",\n      \"id\": \"Technology\",\n      \"u\": \"/ctix/images/graph/identity.svg\",\n      \"t\": \"Technology\",\n      \"hi\": false,\n      \"prop\": {\n        \"parent_type\": \"indicator\",\n        \"enriched\": true,\n        \"tool_name\": \"alien_vault\",\n        \"identifier\": \"enriched\",\n        \"type\": \"identity\",\n        \"label\": \"Identity\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9793ada5-45bf-4883-8c66-73d6da7613e8",
+          "name": "Create Draft",
+          "request": {
+            "name": "Create Draft",
+            "description": {
+              "content": "Creates intel in the draft state from the details retrieved from the threat investigation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "investigation",
+                "create-intel",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"create_stix\": \"<boolean>\",\n  \"items\": [\n    {\n      \"t\": \"<string>\",\n      \"prop\": {\n        \"identifier\": \"<string>\",\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"parent_type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"added_node\": \"<boolean>\"\n    },\n    {\n      \"t\": \"<string>\",\n      \"prop\": {\n        \"identifier\": \"<string>\",\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"parent_type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"added_node\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "030775ed-3053-4bf4-b424-5117c982c33c",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "investigation",
+                    "create-intel",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"visualizer test 1.1\",\n  \"create_stix\": \"true\",\n  \"items\": [\n    {\n      \"t\": \"125.56.67.79\",\n      \"prop\": {\n        \"identifier\": \"added\",\n        \"label\": \"IP\",\n        \"type\": \"url\",\n        \"parent_type\": \"indicator\"\n      },\n      \"id\": \"node--54c79961-6d09-4c95-b152-6645dcc757cc\",\n      \"type\": \"node\",\n      \"added_node\": \"true\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"You will be notified once the STIX is created\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7471e74b-8fa8-4d66-905c-d74f3aa37af6",
+          "name": "List Existing Relationships",
+          "request": {
+            "name": "List Existing Relationships",
+            "description": {
+              "content": "Returns the relationship types that exist between two threat data objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "investigation",
+                "edges",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c95824ae-390c-411c-ac5c-661bb8192d5c",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "investigation",
+                    "edges",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"24859c8e-5482-4d07-a47c-f263d4c1e490\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"total\": \"1\",\n  \"results\": [\n    {\n      \"type\": \"link\",\n      \"id\": \"24859c8e-5482-4d07-a47c-f263d4c1e490647d880d-d100-47a0-bcbf-d01f85d75d4d\",\n      \"a2\": \"true\",\n      \"id1\": \"24859c8e-5482-4d07-a47c-f263d4c1e490\",\n      \"id2\": \"647d880d-d100-47a0-bcbf-d01f85d75d4d\",\n      \"t\": {},\n      \"hi\": \"false\",\n      \"prop\": {\n        \"relation\": {\n          \"type\": {},\n          \"label1\": \"domain-name\",\n          \"label2\": \"indicator\"\n        }\n      },\n      \"dt\": [\n        \"1634536777\"\n      ]\n    }\n  ],\n  \"page_size\": \"10\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0aabc72-93dd-46d6-8f6d-5f43d11aea29",
+          "name": "Get Possible Relationships List",
+          "request": {
+            "name": "Get Possible Relationships List",
+            "description": {
+              "content": "Returns the list of possible STIX 2.1 relationship types that can exist between two STIX Domain Objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "investigation",
+                "relationship",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "(Required) Pass the source object type."
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "(Required) Pass the target object type."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38ab94f3-8755-4160-8284-b0abc4ea6fd1",
+              "name": "[\n  \"indicates\",\n  \"related-to\"\n]",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "investigation",
+                    "relationship",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4634b6cd-c819-4ecb-9965-ffe899146d78",
+          "name": "Get Threat Data Object Details",
+          "request": {
+            "name": "Get Threat Data Object Details",
+            "description": {
+              "content": "Returns the details of a threat data object that is accessible from the Threat Investigation canvas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "investigation",
+                "threat-data",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the Object ID of the threat data object"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7a35616-04e8-47e6-9d83-eeebd04600e6",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "investigation",
+                    "threat-data",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the Object ID of the threat data object"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hi\": \"false\",\n  \"id\": \"ff8fcc0f-4efb-4492-9145-230317fea9c4\",\n  \"prop\": {\n    \"analyst_score\": {},\n    \"analyst_tlp\": {},\n    \"confidence_score\": \"40\",\n    \"confidence_type\": \"ctix\",\n    \"country\": {},\n    \"created\": \"1634636796\",\n    \"first_seen\": {},\n    \"id\": \"ff8fcc0f-4efb-4492-9145-230317fea9c4\",\n    \"identifier\": \"ctix\",\n    \"indicator_type\": \"url\",\n    \"is_actioned\": \"false\",\n    \"is_deprecated\": \"false\",\n    \"is_false_positive\": \"false\",\n    \"is_reviewed\": \"false\",\n    \"is_revoked\": \"false\",\n    \"is_whitelisted\": \"false\",\n    \"label\": \"Url\",\n    \"last_seen\": {},\n    \"modified\": \"1634636796\",\n    \"name\": \"http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D\",\n    \"null\": [],\n    \"parent_type\": \"indicator\",\n    \"primary_attribute\": {},\n    \"published_collections\": [],\n    \"severity\": {},\n    \"source_collections\": [],\n    \"source_confidence\": \"NONE\",\n    \"sources\": [\n      {\n        \"id\": \"b7aefa5d-511e-4487-8363-a9844bd7ecc7\",\n        \"name\": \"CrowdStrike\",\n        \"source_type\": \"API_FEEDS\"\n      }\n    ],\n    \"sub_type\": \"value\",\n    \"subscriber_collections\": [],\n    \"subscribers\": [],\n    \"tags\": [\n      \"infrastructure:-pony3.microsoftups.com-[pony]\"\n    ],\n    \"tlp\": \"AMBER\",\n    \"type\": \"indicator\",\n    \"valid_from\": \"1634636783\",\n    \"valid_until\": {}\n  },\n  \"t\": \"http://mailservicenow.com/GYfIjwS9bd1nqxSiU1LPb2jcFvhZSBVOjCM1AAAAXGbXCckzcpTILveooC0FGTR%2F8vtVn7gDOIAvF6Tce0TICkadNQh%2BSQYWw6iT6QA5o5nvQzg%3D\",\n  \"type\": \"node\",\n  \"u\": \"/ctix/images/graph/url.svg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de3a890e-b959-47b6-a04e-f81e1627297e",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Investigation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,894 @@
+{
+  "item": [
+    {
+      "id": "f77273e2-101a-4f27-8468-6e987656eea7",
+      "name": "Persistent List",
+      "description": {
+        "content": "Persistent List",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7168bfd7-cc8b-49f9-a0bf-7b8f2740e975",
+          "name": "Create a Persistent List",
+          "request": {
+            "name": "Create a Persistent List",
+            "description": {
+              "content": "Create a persistent list in Orchestrate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"storage_manager_data\": {\n    \"data\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63ab8c62-3b4e-4b5a-9d13-2f67e0d88b9a",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"IP addresses\",\n  \"storage_manager_data\": {\n    \"data\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"incident IDs\",\n  \"unique_id\": \"6e54a44b-b7bf-4680-b8ee-950bfebae2b4\",\n  \"readable_id\": \"PL129\",\n  \"slug\": \"sm\",\n  \"description\": {},\n  \"created\": \"2022-05-12T10:40:04.338353Z\",\n  \"modified\": \"2022-05-12T10:40:04.338353Z\",\n  \"created_by_data\": {\n    \"unique_id\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\",\n    \"modified_by\": \"User\",\n    \"display_name\": \"John Doe\"\n  },\n  \"storage_manager_data\": {\n    \"unique_id\": \"28bfee2d-5599-4584-98a7-fd1ea8c5d2f5\",\n    \"data\": {\n      \"name\": \"dev\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f11ead98-bfa9-47f2-9fdb-64fdcdfac4f4",
+          "name": "Get Persistent Lists",
+          "request": {
+            "name": "Get Persistent Lists",
+            "description": {
+              "content": "Returns a list of persistent lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the persistent lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of items to retrieve per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the title or query string to search for a persistent list."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9dcac1b-eb8d-402d-8de7-d8ce3a5c1d6e",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {},\n  \"count\": \"1\",\n  \"results\": [\n    {\n      \"title\": \"playbook edited\",\n      \"unique_id\": \"9b8b64f4-6366-4541-89cc-0ef739511bc9\",\n      \"readable_id\": \"PL104\",\n      \"slug\": \"playbook-edited\",\n      \"description\": {},\n      \"created\": \"2022-05-10T08:27:25.941286Z\",\n      \"modified\": \"2022-05-12T09:19:39.971523Z\",\n      \"created_by_data\": {\n        \"unique_id\": \"4695189b-4878-42dd-bd03-2b16f95bb330\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"full_name\": \"John Doe\"\n      },\n      \"modified_by_data\": {\n        \"unique_id\": \"c4d82da1-2e76-4831-9f4b-086071add09b\",\n        \"playbook_data\": {\n          \"unique_id\": \"dc57c723-e51e-4c7c-80b1-861b76563f10\",\n          \"title\": \"Report Incident\",\n          \"labels\": [],\n          \"status\": \"ACTIVE\",\n          \"playbook_last_run\": \"2022-05-12T09:19:38.490532Z\",\n          \"output_params\": {},\n          \"description\": {},\n          \"sub_playbook\": \"0\",\n          \"categories\": [],\n          \"apps_count\": \"1\",\n          \"schedule_info\": {}\n        },\n        \"modified_by\": \"PlaybookResult\",\n        \"display_name\": \"John Doe's Playbook - Persistent List DEMO\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bf89583-4ea6-4d32-a6a9-60b6862bb1a4",
+          "name": "Delete Persistent Storage Object",
+          "request": {
+            "name": "Delete Persistent Storage Object",
+            "description": {
+              "content": "Delete a persistent list by passing the unique ID. You can delete the persistent list only if it is not used in a playbook. A successful request returns a 200 status code, else the response includes a `non_field_error` object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ":persistent_storage_unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persistent_storage_unique_id",
+                  "description": "(Required) Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_removed\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05a2e673-731c-4c29-9f19-913996d71254",
+              "name": "HTTP 400 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ":persistent_storage_unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persistent_storage_unique_id",
+                      "description": "(Required) Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_removed\": \"true\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"non_field_error\": \"This persistent list has associated playbooks\"\n  },\n  \"status_code\": \"400\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c3e807f-456a-4b27-bd79-1b857a8c7f64",
+          "name": "Get Persistent List Details",
+          "request": {
+            "name": "Get Persistent List Details",
+            "description": {
+              "content": "Returns the details of a specific persistent list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ":persistent_storage_unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persistent_storage_unique_id",
+                  "description": "(Required) Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "974c38df-9aab-404d-98ac-0f96de477cc2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ":persistent_storage_unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persistent_storage_unique_id",
+                      "description": "(Required) Pass the unique ID of the persistent list to retrieve the details. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"playbook edited\",\n  \"unique_id\": \"9b8b64f4-6366-4541-89cc-0ef739511bc9\",\n  \"readable_id\": \"PL104\",\n  \"slug\": \"playbook-edited\",\n  \"description\": {},\n  \"created\": \"2022-05-10T08:27:25.941286Z\",\n  \"modified\": \"2022-05-12T09:19:39.971523Z\",\n  \"created_by_data\": {\n    \"unique_id\": \"4695189b-4878-42dd-bd03-2b16f95bb330\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"c4d82da1-2e76-4831-9f4b-086071add09b\",\n    \"playbook_data\": {\n      \"unique_id\": \"dc57c723-e51e-4c7c-80b1-861b76563f10\",\n      \"title\": \"Report Incident\",\n      \"labels\": [],\n      \"status\": \"ACTIVE\",\n      \"playbook_last_run\": \"2022-05-12T09:19:38.490532Z\",\n      \"output_params\": {},\n      \"description\": {},\n      \"sub_playbook\": \"0\",\n      \"categories\": [],\n      \"apps_count\": \"1\",\n      \"schedule_info\": {}\n    },\n    \"modified_by\": \"PlaybookResult\",\n    \"display_name\": \"John Doe's Playbook - Persistent List DEMO\"\n  },\n  \"storage_manager_data\": {\n    \"unique_id\": \"4555e183-dae4-4ecc-8c1c-8fd2a9d7c365\",\n    \"data\": {\n      \"new\": {\n        \"data\": \"Some random string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc3e393e-58e5-4569-b31e-64c880300e97",
+          "name": "Get Persistent List Slugs",
+          "request": {
+            "name": "Get Persistent List Slugs",
+            "description": {
+              "content": "Returns a list of persistent list slugs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                "slugs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98890ff6-ae6d-4981-b22d-1a76db8b0b54",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    "slugs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {},\n  \"count\": \"1\",\n  \"results\": [\n    {\n      \"title\": \"incidents_ids\",\n      \"unique_id\": \"9b8b64f4-6366-4541-89cc-0ef739511bc9\",\n      \"slug\": \"incidents\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f012e698-aeb4-41a2-889d-fdbeac87dd41",
+          "name": "Get Playbooks Count Associated with Persistent List",
+          "request": {
+            "name": "Get Playbooks Count Associated with Persistent List",
+            "description": {
+              "content": "Returns the playbook count containing the specified persistent list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ":persistent_storage_unique_id",
+                "playbook-count",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persistent_storage_unique_id",
+                  "description": "(Required) Pass the unique ID of the persistent list. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57c45cbe-b9d1-4c8f-ba88-f95a9595d082",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ":persistent_storage_unique_id",
+                    "playbook-count",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persistent_storage_unique_id",
+                      "description": "(Required) Pass the unique ID of the persistent list. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"count\": \"1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "faa7a9e5-8fd2-4869-b4dd-3f04398b7a11",
+          "name": "Get Playbooks Associated with Persistent List",
+          "request": {
+            "name": "Get Playbooks Associated with Persistent List",
+            "description": {
+              "content": "Returns the details of playbooks that contain the specified persistent list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "storage-manager",
+                ":persistent_storage_unique_id",
+                "playbooks",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persistent_storage_unique_id",
+                  "description": "(Required) Pass the unique ID of the persistent list to retrieve the associated playbooks. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecb80d27-90fb-48b5-906b-7e9c1d893e2f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "storage-manager",
+                    ":persistent_storage_unique_id",
+                    "playbooks",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persistent_storage_unique_id",
+                      "description": "(Required) Pass the unique ID of the persistent list to retrieve the associated playbooks. You can retrieve the unique ID of a persistent list using the **Get Persistent Lists** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {},\n  \"count\": \"1\",\n  \"results\": [\n    {\n      \"unique_id\": \"669bc716-9cc8-4a44-ab37-624844c25081\",\n      \"title\": \"PS TEST\",\n      \"readable_id\": \"PLB510\",\n      \"description\": {},\n      \"schedule_info\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aab1b35d-5b9f-47b3-a65e-bc9960854223",
+    "name": "Cyware Orchestrate (CO) Open Persistent List API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

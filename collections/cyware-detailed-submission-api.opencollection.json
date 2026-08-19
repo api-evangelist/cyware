@@ -1,0 +1,2861 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Detailed Submission API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Detailed Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Attack Pattern SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records shown on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "List the attack pattern SDOs in a paginated response added under the given ID of the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create Attack Pattern SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an attack pattern SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Attack Pattern SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes particular SDOs added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Attack Pattern SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/:attack-pattern-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "attack-pattern-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the attack pattern ID."
+              }
+            ]
+          },
+          "docs": "Returns an attack pattern SDO in the initiated detailed STIX form submission using the unique identifier of the attack pattern and the detailed submission."
+        },
+        {
+          "info": {
+            "name": "Update Attack Pattern SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/:attack-pattern-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "attack-pattern-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the attack pattern ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the attack pattern SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Attack Pattern SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/attack-pattern/:attack-pattern-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "attack-pattern-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the attack pattern ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Campaign SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Campaign SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the campaign SDO to the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Campaign SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Campaign SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/:campaign-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "campaign-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the campaign ID."
+              }
+            ]
+          },
+          "docs": "Returns the SDO added in the detailed submission using the campaign's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Campaign SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/:campaign-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "campaign-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the campaign ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the campaign SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Campaign SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/campaign/:campaign-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "campaign-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the campaign ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Vocabulary List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/vocab/:vocab-type/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to show on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "vocab-type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the vocabulary type, such as `malware-type-ov`, `country-ov`."
+              }
+            ]
+          },
+          "docs": "Request to get the STIX 2.1 vocab."
+        },
+        {
+          "info": {
+            "name": "Get Relation List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/relation/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Request to get the static information about the types of relationships that exists between different types of SODs."
+        },
+        {
+          "info": {
+            "name": "Get Course of Action SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Course of Action SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a course of action SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Course of Action SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Course of Action SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/:course-of-action-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "course-of-action-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the course of action ID."
+              }
+            ]
+          },
+          "docs": "Returns the SDO added in the detailed submission using the campaign's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Course of Action SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/:course-of-action-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "course-of-action-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the course of action ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Course of Action SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Course of Action SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/course-of-action/:course-of-action-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "course-of-action-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the course of action ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the SDO's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Create DRAFT Intel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request to create/start a STIX form detailed submission, the API returns a unique Identifier that will be used for all the subsequent calls in the create intel/detailed submission."
+        },
+        {
+          "info": {
+            "name": "Get DRAFT Intel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the detailed intel submission."
+              }
+            ]
+          },
+          "docs": "Returns the STIX form that the user has initiated."
+        },
+        {
+          "info": {
+            "name": "Update DRAFT Intel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the detailed STIX form submission that the user initiated."
+        },
+        {
+          "info": {
+            "name": "Discard Draft API",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the detailed intel submission."
+              }
+            ]
+          },
+          "docs": "Discards the draft STIX form that the user has initiated."
+        },
+        {
+          "info": {
+            "name": "Clone API for Partial Success",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/clone/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clones the STIX or Detailed Submission form."
+        },
+        {
+          "info": {
+            "name": "Download Logs from Detailed Submission/Threat Bulletin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/file/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the file ID to download the logs."
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Pass the component from which we want to download the logs."
+              }
+            ]
+          },
+          "docs": "Download logs from the Detailed Submission or Threat Bulletin page."
+        },
+        {
+          "info": {
+            "name": "Download Logs from Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/file/:file_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number of the log file."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page size of the log file."
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the file ID to download."
+              }
+            ]
+          },
+          "docs": "Download logs from the notification tab."
+        },
+        {
+          "info": {
+            "name": "Get Export API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/export/download/:token/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download the token ID."
+              }
+            ]
+          },
+          "docs": "Exports the API to download the failure logs with the provided token."
+        },
+        {
+          "info": {
+            "name": "Get Identity SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Identity SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Identity SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Identity SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Identity SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/:identity-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "identity-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Returns the SDO added in the detailed STIX form submission using the identity's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Identity SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/:identity-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "identity-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the identity ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an Identity SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Identity SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/identity/:identity-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "identity-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the identity ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Indicator SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string used to filter the records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the indicator SDOs in a paginated response for the given ID of the detailed submission."
+        },
+        {
+          "info": {
+            "name": "Create indicator SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Indicator SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Indicator SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes SDOs that are added to the detailed submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Indicator SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/:indicator-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "indicator-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the indicator ID."
+              }
+            ]
+          },
+          "docs": "Returns the indicator SDO that the user added in the detailed submission using the unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Indicator SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/:indicator-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "indicator-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the indicator ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an indicator SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Indicator SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/indicator/:indicator-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "indicator-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the indicator ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Infrastructure SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the infrastructure SDOs added under the given ID of the detailed submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Infrastructure SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the infrastructure SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Infrastructure SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the detailed intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the particular SDO using bulk actions that are added to the detailed submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Infrastructure SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/:infrastructure-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "infrastructure-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the infrastructure ID."
+              }
+            ]
+          },
+          "docs": "Returns infrastructure SDO details as added in the detailed submission."
+        },
+        {
+          "info": {
+            "name": "Update Infrastructure SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/:infrastructure-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "infrastructure-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the infrastructure ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the infrastructure SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Infrastructure SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/infrastructure/:infrastructure-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "infrastructure-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the infrastructure ID."
+              }
+            ]
+          },
+          "docs": "Deletes the particular SDO added to the detailed submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Location SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Location SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a location SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Location SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Location SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/:location-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "location-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the location ID."
+              }
+            ]
+          },
+          "docs": "Returns the SDO location added in the detailed STIX form submission using the location's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Location SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/:location-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "location-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the location ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a location SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Location SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/location/:location-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "location-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the location ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Malware SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/malware/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Malware SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/malware/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Malware SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/malware/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a malware SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Malware SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/malware/:malware-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "malware-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the malware ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Malware SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/malware/:malware-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "malware-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the malware ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a malware SDO in the initiated detailed STIX form submission using its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Malware SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/malware/:malware-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "malware-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the malware ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a malware SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Get Relationship SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the relationship SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Relationship SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<span style=\"color:rgb(0, 0, 0);background-color:rgb(255, 255, 255)\">Adds relation SRO in the initiated detailed STIX form submission.</span>"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Relationship SDOs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Relationship SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/:relationship-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the Intel submission."
+              },
+              {
+                "name": "relationship-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the relationship ID."
+              }
+            ]
+          },
+          "docs": "Returns the SDO relation that is added in the detailed submission using the relation's unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Relationship SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/:relationship-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "relationship-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the relationship ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the relation SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Relationship SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/relationship/:relationship-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "relationship-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the relationship ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Report SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the report SDOs added under the given ID of the detailed submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Report SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the report SDO to the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Report SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the particular SDO using bulk actions that are added to the detailed submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Report SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/:report-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "report-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the report ID."
+              }
+            ]
+          },
+          "docs": "Returns report SDO details as added in the detailed submission."
+        },
+        {
+          "info": {
+            "name": "Update Report SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/:report-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the detailed intel submission."
+              },
+              {
+                "name": "report-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the report ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to update the report SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Report SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/report/:report-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "report-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the report ID."
+              }
+            ]
+          },
+          "docs": "Deletes the particular SDO added to the detailed submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Create Domain Name SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/domain-name/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a domain SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create Email-addr SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/email-addr/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an email address SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create Email Message SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/email-message/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an email message SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create File SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/file/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a file SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create IPv4-addr SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/ipv4-addr/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an IPv4 SCO in a detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create IPv6-addr SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/ipv6-addr/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an IPv6 SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create Mutex SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/mutex/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a mutex SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create Software SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/software/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a software SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Create URL SCO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/shareable-intel/:intel-id/url/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a URL SCO in the detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Get Sighting SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/sighting/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Sighting SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/sighting/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Sighting SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/sighting/:sighting-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "sighting-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the sighting ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the SDO relation that is added in the detailed submission using the relation unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Sighting SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/sighting/:sighting-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "sighting-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the Sighting ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates sighting SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Sighting SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/sighting/:sighting-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "sighting-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the sighting ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Threat Actor SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the threat actor SDOs added under the given ID of the detailed submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Threat Actor SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a threat actor SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Threat Actor SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the detailed intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the particular SDO using bulk actions that are added to the detailed submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Threat Actor SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/:threat-actor-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "threat-actor-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat actor ID."
+              }
+            ]
+          },
+          "docs": "Returns infrastructure SDO details as added in the detailed submission."
+        },
+        {
+          "info": {
+            "name": "Update Threat Actor SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/:threat-actor-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "threat-actor-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat actor ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the threat actor SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Delete Threat Actor SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/threat-actor/:threat-actor-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of intel submission."
+              },
+              {
+                "name": "threat-actor-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the threat actor ID."
+              }
+            ]
+          },
+          "docs": "Deletes the particular SDO added to the detailed submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Tool SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Tool SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the tool SDO to the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Tool SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Tool SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/:tool-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "tool-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the tool ID."
+              }
+            ]
+          },
+          "docs": "Returns the SDO added in the detailed submission using the unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Tool SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/:tool-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "tool-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the tool ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the tool SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Tool SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/tool/:tool-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "tool-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the tool ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability SDOs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query string to filter the result based on the string passed."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records displayed on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ]
+          },
+          "docs": "Lists the SDOs added under the given ID of the detailed STIX form submission in a paginated response."
+        },
+        {
+          "info": {
+            "name": "Create Vulnerability SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the vulnerability SDO in the initiated detailed submission."
+        },
+        {
+          "info": {
+            "name": "Bulk Delete Vulnerability SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk deletes a particular SDO added to the detailed STIX form submission using the unique identifiers of the SDO."
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/:vulnerability-id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "vulnerability-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the vulnerability ID."
+              }
+            ]
+          },
+          "docs": "Returns the vulnerability SDO added in the detailed submission using the unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update Vulnerability SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/:vulnerability-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "vulnerability-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the vulnerability ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the vulnerability SDO in the initiated detailed STIX form submission."
+        },
+        {
+          "info": {
+            "name": "Delete Vulnerability SDO",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/shareable-intel/:intel-id/vulnerability/:vulnerability-id/",
+            "params": [
+              {
+                "name": "intel-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the intel submission."
+              },
+              {
+                "name": "vulnerability-id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the vulnerability ID."
+              }
+            ]
+          },
+          "docs": "Deletes a particular SDO added to the detailed STIX form submission using the unique identifier of the SDO."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

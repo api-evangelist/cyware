@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Custom Email Templates API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Email Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Custom Email Template Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/custom-templates/:unique_id/",
+            "params": [
+              {
+                "name": "unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the custom template. You can retrieve the unique ID of a custom email template using the **Get Custom Template List** endpoint."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific custom email template."
+        },
+        {
+          "info": {
+            "name": "Get Custom Email Template List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/custom-templates/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the templates list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a value to q to search for custom templates. You can search email templates using the title."
+              }
+            ]
+          },
+          "docs": "Returns the list of custom email templates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

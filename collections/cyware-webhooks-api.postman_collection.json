@@ -1,0 +1,500 @@
+{
+  "item": [
+    {
+      "id": "c494f9f6-6ee7-4922-bd0c-d60c942c4b60",
+      "name": "Webhooks",
+      "description": {
+        "content": "Webhooks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62043c03-4625-4477-8160-8d7f140e358a",
+          "name": "Create Event (v2)",
+          "request": {
+            "name": "Create Event (v2)",
+            "description": {
+              "content": "Creates an event by passing the app identifier and action identifier through the URL and data through the payload. This API provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The following is the example webhook URL that retrieves the detailed response: <code class=\"slate-code\">https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356</code>.</p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":webhook_url",
+                ":app-identifier",
+                ":action-identifier",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Pass the webhook authentication token generated in Orchestrate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_url",
+                  "description": "(Required) Pass the webhook URL retrieved from Orchestrate."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app-identifier",
+                  "description": "(Required) Pass the source app to create an event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "action-identifier",
+                  "description": "(Required) Pass the event type to create an event."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6186f4d1-9834-4661-ba3e-002b449fe09a",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":webhook_url",
+                    ":app-identifier",
+                    ":action-identifier",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_url",
+                      "description": "(Required) Pass the webhook URL retrieved from Orchestrate."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app-identifier",
+                      "description": "(Required) Pass the source app to create an event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action-identifier",
+                      "description": "(Required) Pass the event type to create an event."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"testing\",\n  \"data\": \"event data\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"intel_enrichment\",\n  \"readable_id\": \"TEfbb104ed-6\",\n  \"unique_id\": \"fbb104ed-6704-4127-8898-f2f6aefe9fc1\",\n  \"created\": \"2024-12-11T06:50:59.946589Z\",\n  \"source\": \"Webhooks\",\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"CTIX_submission\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e70af830-48ea-4421-a6c2-e92e65319b0f",
+          "name": "Create Events through Payload (v2)",
+          "request": {
+            "name": "Create Events through Payload (v2)",
+            "description": {
+              "content": "Creates an event by passing the app identifier, action identifier, and data through the payload. This API endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The following is the example webhook URL that retrieves the detailed response: <code class=\"slate-code\">https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356.</code></p>\n</Callout>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":webhook_url",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Pass the webhooks authentication token generated in Cyware Orchestrate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_url",
+                  "description": "(Required) Pass the webhook URL generated in Cyware Orchestrate."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"app_identifier\": \"<string>\",\n  \"data\": \"<object>\",\n  \"action_identifier\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f80778aa-6a90-454f-9277-c1c99b88b64f",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":webhook_url",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_url",
+                      "description": "(Required) Pass the webhook URL generated in Cyware Orchestrate."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"intel_submission\",\n  \"app_identifier\": \"{{app-identifier}}\",\n  \"data\": {},\n  \"action_identifier\": \"{{action-identifier}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"intel enrichment\",\n  \"readable_id\": \"TE5d8bba33-d\",\n  \"unique_id\": \"5d8bba33-dec1-41cb-b230-f94ade63ad62\",\n  \"created\": \"2024-12-11T07:05:42.095277Z\",\n  \"source\": \"Webhooks\",\n  \"app_identifier\": \"CTIX\",\n  \"action_identifier\": \"CTIX_submission\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07c69ce8-5562-4666-9d41-5d4555ed8aee",
+          "name": "Test connectivity",
+          "request": {
+            "name": "Test connectivity",
+            "description": {
+              "content": "Use this API to test the connectivity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":webhook_url",
+                "test_connectivity",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Pass the webhooks authentication token generated in Cyware Orchestrate. For example, ab1929a2-7d56-4511-b130-a5c3b6592702."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_url",
+                  "description": "(Required) Pass the webhook URL retrieved from Orchestrate application."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8654f58f-71c7-4db2-98ad-47f438f405ce",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":webhook_url",
+                    "test_connectivity",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_url",
+                      "description": "(Required) Pass the webhook URL retrieved from Orchestrate application."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d410f3e5-d0a7-4407-aab2-91a8cd1e297b",
+    "name": "Cyware Orchestrate (CO) Open Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

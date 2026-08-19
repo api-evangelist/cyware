@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Webhooks API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Event (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/:webhook_url/:app-identifier/:action-identifier/",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pass the webhook authentication token generated in Orchestrate."
+              },
+              {
+                "name": "webhook_url",
+                "value": "",
+                "type": "path",
+                "description": "Pass the webhook URL retrieved from Orchestrate."
+              },
+              {
+                "name": "app-identifier",
+                "value": "",
+                "type": "path",
+                "description": "Pass the source app to create an event."
+              },
+              {
+                "name": "action-identifier",
+                "value": "",
+                "type": "path",
+                "description": "Pass the event type to create an event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an event by passing the app identifier and action identifier through the URL and data through the payload. This API provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The follow"
+        },
+        {
+          "info": {
+            "name": "Create Events through Payload (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{co_host}/soarapi/:webhook_url/",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pass the webhooks authentication token generated in Cyware Orchestrate."
+              },
+              {
+                "name": "webhook_url",
+                "value": "",
+                "type": "path",
+                "description": "Pass the webhook URL generated in Cyware Orchestrate."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an event by passing the app identifier, action identifier, and data through the payload. This API endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The following is th"
+        },
+        {
+          "info": {
+            "name": "Test connectivity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/:webhook_url/test_connectivity/",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pass the webhooks authentication token generated in Cyware Orchestrate. For example, ab1929a2-7d56-4511-b130-a5c3b6592702."
+              },
+              {
+                "name": "webhook_url",
+                "value": "",
+                "type": "path",
+                "description": "Pass the webhook URL retrieved from Orchestrate application."
+              }
+            ]
+          },
+          "docs": "Use this API to test the connectivity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,846 @@
+{
+  "item": [
+    {
+      "id": "f0574ab8-2785-47b5-9101-fc354bd46ad3",
+      "name": "Tags",
+      "description": {
+        "content": "Tags",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a7b6f72-3979-40c5-9ef5-45eab308f10e",
+          "name": "Create Tag",
+          "request": {
+            "name": "Create Tag",
+            "description": {
+              "content": "Creates a tag in the Intel Exchange platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tags",
+                ""
+              ],
+              "host": [
+                "{{ingestion-tags--Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "AccessID"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"colour_code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f5383a9-b3f0-4cdc-be5c-507f96f34e06",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tags",
+                    ""
+                  ],
+                  "host": [
+                    "{{ingestion-tags--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SuperMalware\",\n  \"colour_code\": \"#5236E2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"010beca6-719c-4288-9791-10ec913317b8\",\n  \"name\": \"SuperMalware\",\n  \"colour_code\": \"#0068FA\",\n  \"created\": 1744376435,\n  \"created_by\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n  \"modified_by\": \"70f3d3ee-b7bc-4ceb-849e-16db0de5278b\",\n  \"modified\": 1744376435,\n  \"tag_type\": {\n    \"id\": \"user\",\n    \"name\": \"User\"\n  },\n  \"is_active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "916318ee-0fe2-4ba7-a7b5-b6698e3a9d8a",
+          "name": "Get Tag Details",
+          "request": {
+            "name": "Get Tag Details",
+            "description": {
+              "content": "Returns the details of a tag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tags",
+                ":tag_id",
+                ""
+              ],
+              "host": [
+                "{{ingestion-tags-tag_id--Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_id",
+                  "description": "(Required) Pass the ID of a tag to retrieve the details."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "AccessID"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "353c877e-afe7-4b50-b22b-1691a2479d34",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tags",
+                    ":tag_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{ingestion-tags-tag_id--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_id",
+                      "description": "(Required) Pass the ID of a tag to retrieve the details."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "599cf9f9-0e38-4055-9662-761b9fa13d0d",
+          "name": "Get Allowed Tag Categories",
+          "request": {
+            "name": "Get Allowed Tag Categories",
+            "description": {
+              "content": "Returns a list of tag categories that the current user has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "tags",
+                "tag-category",
+                "allowed",
+                ""
+              ],
+              "host": [
+                "{{ingestion-tags-tag-category-allowed--Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "AccessID"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "316a41e1-281e-4307-b4ee-5919190c083a",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "tags",
+                    "tag-category",
+                    "allowed",
+                    ""
+                  ],
+                  "host": [
+                    "{{ingestion-tags-tag-category-allowed--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"user\",\n      \"name\": \"User\",\n      \"colour_code\": \"#0068FA\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dfe6678-1dd0-4db1-898d-e46ca63f67ae",
+          "name": "Get Tags List",
+          "request": {
+            "name": "Get Tags List",
+            "description": {
+              "content": "Returns the list of tags.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tags",
+                ""
+              ],
+              "host": [
+                "{{v1-tags--Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the tags list."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of items to retrieve per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified__gte",
+                  "value": "<string>",
+                  "description": "Pass the custom date in Unix timestamp format. Returns a list of tags modified after the specified time."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified__lte",
+                  "value": "<string>",
+                  "description": "Pass the custom date in Unix timestamp format. Returns a list of tags modified before the specified time."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Pass a sorting option to filter tags based on it. For example: *title*."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<string>",
+                  "description": "Pass the last modified value to filter tags."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "access_id"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78632529-3c59-474e-8d62-6374c71eb0c2",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tags",
+                    ""
+                  ],
+                  "host": [
+                    "{{v1-tags--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "modified__gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified__lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {\n    \"next\": \"openapi/v1/tags/?page=9&page_size=1&Expires={{expires}}&AccessID={{open_api_access_id}}&Signature={{signature}}\",\n    \"previous\": \"openapi/v1/tags/?page=7&page_size=1&Expires={{expires}}&AccessID={{open_api_access_id}}&Signature={{signature}}\"\n  },\n  \"count\": 1,\n  \"results\": [\n    {\n      \"unique_id\": \"8cdb66cb-3671-4cc0-a3d8-4b433e081535\",\n      \"title\": \"Detection\",\n      \"description\": \"Incident Detection Phase\",\n      \"color\": \"#86F822\",\n      \"created\": \"2021-11-15T04:36:23.630418Z\",\n      \"modified\": \"2021-11-15T04:36:39.608580Z\",\n      \"created_by_data\": {\n        \"unique_id\": \"62d3f79e-6139-4ba7-a162-33d69f87f8d1\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"full_name\": \"John Doe\"\n      },\n      \"modified_by_data\": {\n        \"unique_id\": \"62d3f79e-6139-4ba7-a162-33d69f87f8d1\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Smith\",\n        \"full_name\": \"John Smith\"\n      },\n      \"playbook_count\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25e5697f-22cf-4ec4-8c0e-52a5a98b0ab5",
+          "name": "Get Tag Details",
+          "request": {
+            "name": "Get Tag Details",
+            "description": {
+              "content": "Returns the details of a specific tag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tags",
+                ":tag_unique_id",
+                ""
+              ],
+              "host": [
+                "{{v1-tags-tag_unique_id--Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_unique_id",
+                  "description": "(Required) Pass the unique ID of the tag to retrieve the details. You can retrieve the unique ID of tags using the **Get Tags List** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "access_id"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "468ec42c-4066-4b2a-beb8-fa584d5479ee",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tags",
+                    ":tag_unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{v1-tags-tag_unique_id--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_unique_id",
+                      "description": "(Required) Pass the unique ID of the tag to retrieve the details. You can retrieve the unique ID of tags using the **Get Tags List** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"unique_id\": \"7e0d1309-cd11-4e5d-8325-42f62f4d6762\",\n  \"title\": \"Detection\",\n  \"description\": \"Incident Detection Phase\",\n  \"color\": \"#172b4d\",\n  \"created\": \"2021-12-23T11:53:26.726065Z\",\n  \"modified\": \"2022-01-17T18:57:37.102341Z\",\n  \"created_by_data\": {\n    \"unique_id\": \"83bd4970-dcd2-4108-81e5-8ce4989d10e4\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"John Doe\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"62d3f79e-6139-4ba7-a162-33d69f87f8d1\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Smith\",\n    \"full_name\": \"John Smith\"\n  },\n  \"playbook_count\": \"3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "ingestion-tags--Url"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "ingestion-tags-tag_id--Url"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "ingestion-tags-tag-category-allowed--Url"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "v1-tags--Url"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "v1-tags-tag_unique_id--Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "f645aa99-79b6-4e93-8028-52e187c4a764",
+    "name": "Cyware Tags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Tags across 2 of this provider's published API definitions: cyware-intel-exchange-openapi.yml, cyware-orchestrate-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

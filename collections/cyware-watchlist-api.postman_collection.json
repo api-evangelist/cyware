@@ -1,0 +1,747 @@
+{
+  "item": [
+    {
+      "id": "8b23bf88-738c-4336-a689-2046ff2db339",
+      "name": "Watchlist",
+      "description": {
+        "content": "Watchlist",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e22ef4a4-e672-44eb-956a-2c52ba2d5d82",
+          "name": "Add Keyword to Watchlist",
+          "request": {
+            "name": "Add Keyword to Watchlist",
+            "description": {
+              "content": "Adds a keyword to the watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "watchlist",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_email_alert\": \"<boolean>\",\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cc\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"bcc\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ef3a9c6-2270-4e3e-9bf4-794dd1d0d99e",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "watchlist",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_email_alert\": \"false\",\n  \"external_recipients\": {\n    \"to\": [\n      \"abc@domain.com\"\n    ],\n    \"cc\": [\n      \"abc2@domain.com\"\n    ],\n    \"bcc\": [\n      \"abc3@domain.com\"\n    ]\n  },\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"48c1b826-c8c6-48a6-a1b2-f52faef1035d\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"email\": \"john.doe@domain.com\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"74b34e52-a0e3-4277-915c-65096f8ceeba\",\n        \"first_name\": \"jane\",\n        \"last_name\": \"doe\",\n        \"email\": \"jane.doe@cyware.com\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"f2e42899-f13d-47b0-bf52-57b444f3c881\",\n        \"first_name\": \"sara\",\n        \"last_name\": \"taylor\",\n        \"email\": \"sara.taylor@cyware.com\"\n      }\n    ]\n  },\n  \"name\": \"sample keyword\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cd5acb44-506d-41ea-a347-54363c379b14\",\n  \"name\": \"sample keyword\",\n  \"created\": \"1703679482\",\n  \"modified\": \"1703679482\",\n  \"created_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"updated_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"last_activity_on\": {},\n  \"is_active\": \"true\",\n  \"is_removed\": \"false\",\n  \"is_email_alert\": \"false\",\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"48c1b826-c8c6-48a6-a1b2-f52faef1035d\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"email\": \"john.doe@domain.com\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"74b34e52-a0e3-4277-915c-65096f8ceeba\",\n        \"first_name\": \"jane\",\n        \"last_name\": \"doe\",\n        \"email\": \"jane.doe@cyware.com\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"f2e42899-f13d-47b0-bf52-57b444f3c881\",\n        \"first_name\": \"sara\",\n        \"last_name\": \"taylor\",\n        \"email\": \"sara.taylor@cyware.com\"\n      }\n    ]\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"abc@domain.com\"\n    ],\n    \"cc\": [\n      \"abc2@domain.com\"\n    ],\n    \"bcc\": [\n      \"abc3@domain.com\"\n    ]\n  },\n  \"occurrences\": \"0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2187344-a11e-472d-8734-3a08a3ec89fa",
+          "name": "Get Watchlist Keywords List",
+          "request": {
+            "name": "Get Watchlist Keywords List",
+            "description": {
+              "content": "Returns a list of keywords from the watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "watchlist",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve watchlist keywords."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of keywords to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_on_from",
+                  "value": "<string>",
+                  "description": "Pass the last active from time in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_active_on_to",
+                  "value": "<string>",
+                  "description": "Pass the last active to time in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve active keywords only. By default, both active and inactive keywords are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_from",
+                  "value": "<string>",
+                  "description": "Pass the created from time in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_to",
+                  "value": "<string>",
+                  "description": "Pass the created to time in epoch format."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "Pass the ID of a creator to filter keywords."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85f9ffe8-77da-4bd6-a264-02f8960072ee",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "watchlist",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "last_active_on_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_active_on_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5d1cab9-3948-4901-9730-d4acf5b44d12",
+          "name": "Delete Watchlist",
+          "request": {
+            "name": "Delete Watchlist",
+            "description": {
+              "content": "Deletes a keyword from the watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "watchlist",
+                ":watchlist_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "watchlist_id",
+                  "description": "(Required) Pass the ID of the watchlist keyword to delete."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d9c2b9e-d452-4ec1-ace8-5b6e9eff9ea4",
+              "name": "The keyword has been deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "watchlist",
+                    ":watchlist_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "watchlist_id",
+                      "description": "(Required) Pass the ID of the watchlist keyword to delete."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"raw\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15ffd91b-48c2-44a5-8d03-b1aec7af43a2",
+          "name": "Update Watchlist",
+          "request": {
+            "name": "Update Watchlist",
+            "description": {
+              "content": "Updates the details of a keyword in the watchlist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "watchlist",
+                ":watchlist_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "watchlist_id",
+                  "description": "(Required) Pass the ID of the watchlist keyword to update."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"is_removed\": \"<boolean>\",\n  \"is_email_alert\": \"<boolean>\",\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    ]\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cc\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"bcc\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b169e3a7-fe56-4563-8994-fd399055b394",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "watchlist",
+                    ":watchlist_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "watchlist_id",
+                      "description": "(Required) Pass the ID of the watchlist keyword to update."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"sample keyword\",\n  \"is_active\": \"true\",\n  \"is_removed\": \"false\",\n  \"is_email_alert\": \"false\",\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"48c1b826-c8c6-48a6-a1b2-f52faef1035d\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"email\": \"john.doe@domain.com\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"74b34e52-a0e3-4277-915c-65096f8ceeba\",\n        \"first_name\": \"jane\",\n        \"last_name\": \"doe\",\n        \"email\": \"jane.doe@cyware.com\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"f2e42899-f13d-47b0-bf52-57b444f3c881\",\n        \"first_name\": \"sara\",\n        \"last_name\": \"taylor\",\n        \"email\": \"sara.taylor@cyware.com\"\n      }\n    ]\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"abc1@domain.com\"\n    ],\n    \"cc\": [\n      \"abc2@domain.com\"\n    ],\n    \"bcc\": [\n      \"abc3@domain.com\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cd5acb44-506d-41ea-a347-54363c379b14\",\n  \"name\": \"sample keyword\",\n  \"created\": \"1703679482\",\n  \"modified\": \"1703679482\",\n  \"created_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"updated_by\": \"a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad\",\n  \"last_activity_on\": {},\n  \"is_active\": \"true\",\n  \"is_removed\": \"false\",\n  \"is_email_alert\": \"false\",\n  \"internal_recipients\": {\n    \"to\": [\n      {\n        \"id\": \"48c1b826-c8c6-48a6-a1b2-f52faef1035d\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"email\": \"john.doe@domain.com\"\n      }\n    ],\n    \"cc\": [\n      {\n        \"id\": \"74b34e52-a0e3-4277-915c-65096f8ceeba\",\n        \"first_name\": \"jane\",\n        \"last_name\": \"doe\",\n        \"email\": \"jane.doe@cyware.com\"\n      }\n    ],\n    \"bcc\": [\n      {\n        \"id\": \"f2e42899-f13d-47b0-bf52-57b444f3c881\",\n        \"first_name\": \"sara\",\n        \"last_name\": \"taylor\",\n        \"email\": \"sara.taylor@cyware.com\"\n      }\n    ]\n  },\n  \"external_recipients\": {\n    \"to\": [\n      \"abc1@domain.com\"\n    ],\n    \"cc\": [\n      \"abc2@domain.com\"\n    ],\n    \"bcc\": [\n      \"abc3@domain.com\"\n    ]\n  },\n  \"occurrences\": \"0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "caceed7c-6143-4ad0-bea3-02a26ec2a4bc",
+          "name": "Get Watchlist Feeds",
+          "request": {
+            "name": "Get Watchlist Feeds",
+            "description": {
+              "content": "Returns the occurrence details of a watchlist keyword.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingestion",
+                "watchlist",
+                ":watchlist_id",
+                "feeds",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve feeds."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of feeds to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "watchlist_id",
+                  "description": "(Required) Pass the ID of the watchlist for which we are receiving feeds."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb35cbb6-d66c-4d0c-8a0e-e1b9c59d1f75",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingestion",
+                    "watchlist",
+                    ":watchlist_id",
+                    "feeds",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "watchlist_id",
+                      "description": "(Required) Pass the ID of the watchlist for which we are receiving feeds."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8122af71-a069-482d-9ad2-7d056789c23d",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Watchlist API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

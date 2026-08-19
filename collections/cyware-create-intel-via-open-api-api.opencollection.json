@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Create Intel via Open API API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Create Intel via Open API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Intel via Open API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/open-api/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create intel with additional details such as the source and collection. You can also include details for each object, such as description, notes, custom attributes, and more.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"The All SDOs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">all_sdos</code> object accepts <code class=\"slate-code\">all_iocs</code> and the SDO type as the key, and a list of objects for the respective IOC and SDO type.</p>\n<p>For a list of the s"
+        },
+        {
+          "info": {
+            "name": "With Source and Collection ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/ingestion-api/ingest_bundle/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to ingest a STIX bundle into Intel Exchange by specifying the source and collection ID. A STIX bundle can include any combination of STIX Domain Objects (SDOs). For more information on supported objects, see the [STIX documentation](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html).\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>If you pass an invalid or missing <code class=\"slate-code\">source_id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1383 @@
+{
+  "item": [
+    {
+      "id": "4b24b123-89f5-4099-9a9f-b99c77eef198",
+      "name": "Threat Mailbox",
+      "description": {
+        "content": "Threat Mailbox",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3a64d5e-ce13-4be4-bf65-61122268d806",
+          "name": "Create Intel from Email",
+          "request": {
+            "name": "Create Intel from Email",
+            "description": {
+              "content": "Creates intel from Threat Mailbox emails in Intel Exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                ":email_id",
+                "stix",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_type\": \"<string>\",\n  \"content\": {\n    \"emails\": {\n      \"all\": \"<boolean>\"\n    },\n    \"domains\": {\n      \"all\": \"<boolean>\",\n      \"negation\": \"<boolean>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ips\": {\n      \"all\": \"<boolean>\",\n      \"negation\": \"<boolean>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"attached_content\": {\n    \"b95fe110-8bdd-4274-8d80-7318c97732eb\": {\n      \"domains\": {\n        \"all\": \"<boolean>\",\n        \"negation\": \"<boolean>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  },\n  \"metadata\": {\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"confidence\": \"<number>\",\n    \"tlp\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7501764-14a7-4982-b9ac-dba8321c7ecb",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    ":email_id",
+                    "stix",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_type\": \"email_accounts\",\n  \"content\": {\n    \"emails\": {\n      \"all\": \"true\"\n    },\n    \"domains\": {\n      \"all\": \"false\",\n      \"negation\": \"true\",\n      \"values\": [\n        \"abc.com\"\n      ]\n    },\n    \"ips\": {\n      \"all\": \"false\",\n      \"negation\": \"false\",\n      \"values\": [\n        \"1.1.1.1\"\n      ]\n    }\n  },\n  \"attached_content\": {\n    \"b95fe110-8bdd-4274-8d80-7318c97732eb\": {\n      \"domains\": {\n        \"all\": \"false\",\n        \"negation\": \"true\",\n        \"values\": [\n          \"def.com\"\n        ]\n      }\n    }\n  },\n  \"metadata\": {\n    \"title\": \"sample\",\n    \"description\": \"desc\",\n    \"confidence\": \"80\",\n    \"tlp\": \"GREEN\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"you will be notified once stix get created.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6db3a954-ab6d-452b-be67-269f27003cf0",
+          "name": "Get Attachments List",
+          "request": {
+            "name": "Get Attachments List",
+            "description": {
+              "content": "Returns a list of attachments of an email message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ":email_id",
+                "attachments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a76d138d-4951-479b-bb43-6a82b8d07227",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ":email_id",
+                    "attachments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"0\": {\n    \"id\": \"761dfd0c-7a4d-4bb6-9fb4-995f954a0b8e\",\n    \"name\": \"no_pwd_pdf.pdf\",\n    \"mime_type\": \"application/pdf\",\n    \"is_protected\": \"false\",\n    \"parsing_status\": \"0\",\n    \"error_message\": \"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "addb9451-b3ec-4a16-89aa-0a5e5ff672d6",
+          "name": "Download Single Threat Mail Attachment",
+          "request": {
+            "name": "Download Single Threat Mail Attachment",
+            "description": {
+              "content": "Use this API to download one attachment of an email message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ":email_id",
+                "attachments",
+                ":file_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) Pass the unique ID of an attachment."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf79457e-a0e7-44f6-95cc-bf8469daa001",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ":email_id",
+                    "attachments",
+                    ":file_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) Pass the unique ID of an attachment."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"\\\"http://localhost:8000/feed_sources/email/inbox/b8945432-f1fd-4e05-9fbd-b1afe358f654/attachments/869e2f40-1dfd-4856-939f-4e453746490a/download/?token=40209101-7b18-4984-b5eb-4e4c1c65d346\\\"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59fd19f8-d5fb-4c34-8d62-a71eb3997b92",
+          "name": "Get Email Details",
+          "request": {
+            "name": "Get Email Details",
+            "description": {
+              "content": "Returns the details of an email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdc1355e-0e29-452e-9e33-3ef39561c1c0",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"96979ada-1a74-4528-96cf-a7d83b579077\",\n  \"email_config\": \"5578d40e-90c7-4ec7-a63a-0a3244158444\",\n  \"to\": \"john.doe@gmail.com\",\n  \"to_email\": \"john.doe@gmail.com\",\n  \"_from\": \"Google Community Team <googlecommunityteam-noreply@google.com>\",\n  \"_from_email\": \"googlecommunityteam-noreply@google.com\",\n  \"subject\": \"Threatmailbox, finish setting up your new Google Account\",\n  \"date\": \"1616682859\",\n  \"is_read\": \"false\",\n  \"is_starred\": \"false\",\n  \"is_delete\": \"false\",\n  \"stix_created\": \"false\",\n  \"tenant_id\": \"27e7256e-edf9-41cc-a325-6fde16e793db\",\n  \"created\": \"1621846793\",\n  \"raw_body\": \"<sample html>\",\n  \"raw_header\": \"sample header\",\n  \"is_regulatory_email\": \"false\",\n  \"folder_id\": \"142\",\n  \"folder_name\": \"INBOX\",\n  \"has_attachments\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d85f03fa-1ce9-4307-a5ce-1b16751765d0",
+          "name": "Get IOCs Count",
+          "request": {
+            "name": "Get IOCs Count",
+            "description": {
+              "content": "Returns the number of IOCs in the email body and email attachments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ":email_id",
+                "iocs-count",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6a08254-8917-4a7b-b109-dd2458ba751c",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ":email_id",
+                    "iocs-count",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": {\n    \"total\": \"1\"\n  },\n  \"attachments\": [\n    {\n      \"id\": \"07ae1961-1292-4c8b-aeb9-108beb32151f\",\n      \"name\": \"CSV botnet and RF - recorded future (1).csv\",\n      \"total\": \"5\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b57056de-7da0-4126-8a89-155179c7a5f6",
+          "name": "Get IOCs Listing",
+          "request": {
+            "name": "Get IOCs Listing",
+            "description": {
+              "content": "Returns a list of IOCs and attachments in an email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                ":email_id",
+                "iocs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type (value will be `email_accounts_attachment` or `email_accounts`)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa43af20-42ff-4d9a-a2fb-4fc53635cd41",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    ":email_id",
+                    "iocs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"urls\": [],\n    \"registry_key_path\": [],\n    \"ips\": [\n      {\n        \"value\": \"1.1.1.1\",\n        \"is_previously_created\": \"false\"\n      }\n    ],\n    \"ipv6\": [],\n    \"emails\": [],\n    \"domains\": [],\n    \"file_paths\": [],\n    \"sha512\": [],\n    \"sha256\": [],\n    \"sha1\": [\n      {\n        \"value\": \"751a9cbffec28b22105cdcaf073a371de255f176\",\n        \"is_previously_created\": \"false\"\n      }\n    ],\n    \"md5\": [],\n    \"sha224\": [],\n    \"sha384\": [],\n    \"ssdeeps\": [],\n    \"cve_ids\": [],\n    \"asn\": [],\n    \"mutex\": [],\n    \"as\": [],\n    \"cidrs\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4f658ff-7f10-4330-88fe-833f19e90a1b",
+          "name": "Get Emails List",
+          "request": {
+            "name": "Get Emails List",
+            "description": {
+              "content": "Returns a list of email messages received from email feed sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email_config",
+                  "value": "<string>",
+                  "description": "Pass the ID of the email feed source to retrieve emails from a specific source. By default, emails from all email sources are retrieved. To retrieve the email source ID, use the **GET Email Source List API** under **Administration** > **Integration management** > **Email Feed Sources**."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_read",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve read emails only. By default, both read and unread emails are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_starred",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve starred emails only. By default, both starred and non-starred emails are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_regulatory_email",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve regulatory emails only. By default, both regulatory and non-regulatory emails are retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_delete",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve trashed emails only. By default, trashed emails are not returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the query text to search in the subject and body of emails."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of emails to retrieve on each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve emails."
+                },
+                {
+                  "disabled": false,
+                  "key": "has_attachments",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve emails with attachments."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_reviewed",
+                  "value": "<string>",
+                  "description": "Pass true to retrieve reviewed emails only. By default, both reviewed and unreviewed emails are retrieved."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50fec123-13e8-4985-8652-b17c4842203d",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email_config",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_read",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_starred",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regulatory_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_delete",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "has_attachments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_reviewed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": {},\n  \"previous\": {},\n  \"page_size\": \"10\",\n  \"total\": \"1\",\n  \"results\": [\n    {\n      \"id\": \"96979ada-1a74-4528-96cf-a7d83b579077\",\n      \"email_config\": \"5578d40e-90c7-4ec7-a63a-0a3244158444\",\n      \"to\": \"john.doe@gmail.com\",\n      \"to_email\": \"john.doe@gmail.com\",\n      \"_from\": \"Google Community Team <googlecommunityteam-noreply@google.com>\",\n      \"_from_email\": \"googlecommunityteam-noreply@google.com\",\n      \"subject\": \"Threatmailbox, finish setting up your new Google Account\",\n      \"date\": \"1616682859\",\n      \"is_read\": \"false\",\n      \"is_starred\": \"false\",\n      \"is_delete\": \"false\",\n      \"stix_created\": \"false\",\n      \"tenant_id\": \"27e7256e-edf9-41cc-a325-6fde16e793db\",\n      \"created\": \"1621846793\",\n      \"raw_body\": \"<sample html>\",\n      \"raw_header\": \"sample header\",\n      \"is_regulatory_email\": \"false\",\n      \"folder_id\": \"142\",\n      \"folder_name\": \"INBOX\",\n      \"has_attachments\": \"false\",\n      \"is_reviewed\": {\n        \"value\": \"true\",\n        \"comment\": \"test\",\n        \"created_by\": {\n          \"first_name\": \"john\",\n          \"last_name\": \"\",\n          \"id\": \"32edd7dc-7629-4057-a844-63e44b7aab4d\",\n          \"email\": \"john.doe@cyware.com\"\n        },\n        \"created_date\": \"1708074579\"\n      }\n    }\n  ],\n  \"unread_email_count\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce1f1eda-14fa-45b9-8a85-91a37e642e99",
+          "name": "Get Search URL",
+          "request": {
+            "name": "Get Search URL",
+            "description": {
+              "content": "Search URLs in email messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "deep-search",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "(Required) Pass a URL to search in threat mailbox feeds."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve records."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to retrieve on each page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7859b956-937b-4504-8ec5-96489f22305d",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "deep-search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fdfbdf0-8471-42bc-a95a-263cad80a829",
+          "name": "Update Email Message",
+          "request": {
+            "name": "Update Email Message",
+            "description": {
+              "content": "Use this API to update the details of an email message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conversion",
+                "feed-sources",
+                "email",
+                "inbox",
+                ":email_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "email_id",
+                  "description": "(Required) Pass the unique ID of an email."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{ctix_host}}",
+                  "key": "ctix_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_reviewed\": {\n    \"value\": \"<boolean>\",\n    \"comment\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c983a70b-6659-4b43-9613-ce4fc43fc11f",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversion",
+                    "feed-sources",
+                    "email",
+                    "inbox",
+                    ":email_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccessID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "email_id",
+                      "description": "(Required) Pass the unique ID of an email."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{ctix_host}}",
+                      "key": "ctix_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_reviewed\": {\n    \"value\": \"true\",\n    \"comment\": \"reviewed\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"96979ada-1a74-4528-96cf-a7d83b579077\",\n  \"email_config\": \"5578d40e-90c7-4ec7-a63a-0a3244158444\",\n  \"to\": \"threatmailboxtesting@gmail.com\",\n  \"to_email\": \"threatmailboxtesting@gmail.com\",\n  \"_from\": \"Google Community Team <googlecommunityteam-noreply@google.com>\",\n  \"_from_email\": \"googlecommunityteam-noreply@google.com\",\n  \"subject\": \"Threatmailbox, finish setting up your new Google Account\",\n  \"date\": \"1616682859\",\n  \"is_read\": \"true\",\n  \"is_starred\": \"false\",\n  \"is_delete\": \"false\",\n  \"stix_created\": \"false\",\n  \"tenant_id\": \"27e7256e-edf9-41cc-a325-6fde16e793db\",\n  \"created\": \"1621846793\",\n  \"raw_body\": \"<!doctype html public \\\"- / /w3c / /dtd xhtml 1.0 transitional / /en\\\" \\\"http: / /www.w3.org /tr /xhtml1 /dtd /xhtml1-transitional.dtd\\\">\\n  <html xmlns=http://www.w3.org/1999/xhtml xmlns:v=urn:schemas-microsoft-com:vml xmlns:o=urn:schemas-microsoft-com:office:office lang=en>\\n    <head>\\n\\t  <title>Welcome to your Google Account</title>\\n      <meta name=format-detection content=address=no>\\n      <meta name=format-detection content=telephone=no>\\n      <meta name=x-apple-disable-message-reformatting>\\n      <meta http-equiv=Content-Type content=\\\"text/html; charset=utf-8\\\">\\n      <meta name=viewport content=\\\"width=device-width, initial-scale=1, maximum-scale=1\\\">\\n      <link href=//fonts.googleapis.com/css?family=Google+Sans rel=stylesheet type=text/css>\\n      <style type=text/css>\\n      body{text-decoration:none;}\\n      </style>\\n        <style>\\n    @media screen and (max-width:900px){\\n      .mobile_only{display: block !important;}\\n    }\\n  </style>\\n      <style type=text/css>\\n           @media only screen and (max-width: 767px){\\n             .body_wrapper{min-width:540px !important;}\\n             .body_size{width: 320px !important;min-width:320px !important;}\\n             .subheadline{font-size:22px!important;line-height: 35px !important;}\\n             .device_txt{font-size:26px!important;}\\n             .greeting_name{font-size:32px!important;}\\n             .google_mobile{width:135px !important; height:43px !important;}\\n             .bulb_mobile{width:22px !important; height:31px !important;padding-top:20px !important;}\\n             .module_mobile{width:110px !important; height:110px !important;}\\n             .shield_mobile{width:24px !important; height:31px !important;}\\n             .fmd_mobile{width:30px !important; height:24px !important;}\\n             .fa_mobile{width:30px !important; height:30px !important;}\\n            \\n             .btn_mod2_mobile1{padding:9px 24px 11px 24px !important; border-radius: 4px !important;}\\n             .btn_mod2_mobile2{min-width:205px; padding:9px 24px 11px 24px !important; border-radius: 4px !important;}\\n\\t\\t\\t \\n             .btn_mod3_mobile{padding:9px 24px 11px 24px !important; border-radius: 4px !important;}\\n             .btn_mod4_mobile{padding:9px 24px 11px 24px !important; border-radius: 4px !important;}\\n             \\n\\n             .space1{height:19px !important;}\\n             .space2{padding:3px 35px 0 35px !important;}\\n             .space3{padding-top: 22px !important;}\\n             .space4{padding: 6px 0 0 0 !important;}\\n             .space5{padding-top: 17px !important;}\\n             .space6{padding:0 35px 0 35px !important;}\\n             .space7{padding-right: 0px !important;}\\n             .enwid{min-width: 236px !important;}\\n           \\n\\n\\t\\t\\t}\\n           @media screen and (min-resolution: 288dpi) {\\n             .device_txt{font-size:26px!important;}\\n           }\\n       </style>\\n    <!--[if gte mso 9]>\\n<xml>\\n    <o:OfficeDocumentSettings>\\n    <o:AllowPNG/>\\n    <o:PixelsPerInch>96</o:PixelsPerInch>\\n    </o:OfficeDocumentSettings>\\n</xml>\\n<![endif]-->\\n    </head>\\n\\n\\n\\n\\n        \\n       \\n      \\n    \\n    \\n    \\n\\n\\n\\n        \\n<body bgcolor=#ffffff class=body_wrapper>\\n      <style>\\n          @media screen{@font-face{font-family:'Open Sans';font-style:normal;font-weight:normal;src:local('Open Sans Light'),local('OpenSans-Light'),url(http://fonts.gstatic.com/s/opensans/v9/DXI1ORHCpsQm3Vp6mXoaTRampu5_7CjHW5spxoeN3Vs.woff2) format('woff2'),url(http://fonts.gstatic.com/s/opensans/v9/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff')}}\\n          /*body{padding:0;margin:0}@media only screen and (max-width:520px){-webkit-text-size-adjust:100%}*/\\n          body{text-decoration:none;}\\n      </style>\\n  <div style=\\\"font-size: 0px; line-height:0px; color: #ffffff; display: none;\\\">                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </div>\\n  \\n      <center>\\n        <table role=presentation class=body_size border=0 cellspacing=0 cellpadding=0 align=center width=520 bgcolor=#ffffff style=\\\"background: #ffffff; min-width: 520px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%;\\\">\\n          <tr><td align=center style=\\\"padding-top: 20px;\\\">  <img role=presentation class=google_mobile width=82 height=26 border=0 src=https://services.google.com/fh/files/emails/google_logo_orig.png style=\\\"width: 82px; height:26px; text-align: center; border: none;\\\">\\n</td></tr>\\n          <tr><td class=space1 height=15></td></tr>\\n          <tr>\\n            <td width=480 style=\\\"-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2px solid #E8EAED; border-radius: 16px;\\\">\\n              <table role=presentation border=0 cellspacing=0 cellpadding=0 width=100%>\\n                <tr>\\n                  <td align=center>    <img role=presentation class=top_img width=100% height=109 border=0 src=https://services.google.com/fh/files/emails/topdesign.png style=\\\"width: 100%; height: 109px; text-align: center; border: none;\\\">\\n</td>\\n                </tr>\\n                <tr>\\n                  <td>\\n  \\t\\t\\t\\t    <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n                      <tr>\\n                        <!--[if mso]>\\n                        <td align=\\\"center\\\" class=\\\"greeting_name space6\\\" style='color:#202124; font-family:Google Sans, Roboto, Arial; font-size:22px; font-weight:normal; line-height:44px; margin:0; padding:0 80px 20px 80px; text-align:center;word-break:normal;direction:ltr;' dir=\\\"ltr\\\">Hi Threatmailbox,</td>\\n                        <![endif]-->\\n                        <!--[if !mso]><!-->\\n                        <td align=center class=\\\"greeting_name space6\\\" style=\\\"color:#202124; font-family:Google Sans, Roboto, Arial; font-size:22px; font-weight:normal; line-height:44px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Hi Threatmailbox,</td>\\n                        <!--<![endif]-->\\n                      </tr>\\n                      <!--[if !mso]><!-->\\n                      <tr>\\n                        <td height=15 style=\\\"line-height: 4px; font-size: 4px;\\\"></td>\\n                      </tr>\\n                      <!--<![endif]-->\\n                      <tr>\\n                        <td class=\\\"subheadline space2\\\" align=center style=\\\"color:#3C4043; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 70px 0 70px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr> Welcome to Google. Your new account comes with access to Google products, apps, and services.</td>\\n                      </tr>\\n                      <tr>\\n                        <td class=\\\"subheadline space6\\\" align=center style=\\\"color:#3C4043; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr> Here are a few tips to get you started.</td>\\n                      </tr>\\n                      <tr><td height=45></td></tr>\\n                    </table>\\n\\t\\t\\t\\t  </td>\\n                </tr>\\n\\t\\t\\t\\t\\n\\t\\t\\t\\t <tr>\\n                  <td>\\n                    <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n                      <tr><td height=50></td></tr>\\n                      <tr>\\n                        <td align=center>  <img role=presentation class=module_mobile width=64 height=64 border=0 src=https://www.gstatic.com/images/branding/product/2x/email_64dp.png style=\\\"width: 64px; height:64px; text-align: center; border: none; font-size:9px;\\\">\\n</td>\\n                      </tr>\\n                  \\n                      <tr><td height=15></td></tr>\\n                      <tr>\\n                        \\n                        <!--[if mso]>\\n                        <td align=\\\"center\\\" class=\\\"device_txt space6\\\" style='color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80px; text-align:center; word-break:normal;direction:ltr;' dir=\\\"ltr\\\">Want to stay in the loop?</td>\\n                        <![endif]-->\\n                        <!--[if !mso]><!-->\\n                        <td align=center class=\\\"device_txt space6\\\" style=\\\"color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Want to stay in the loop?</td>\\n                        <!--<![endif]-->\\n                        \\n                      </tr>\\n                      <!--[if !mso]><!-->\\n                      <tr>\\n                  <td height=15 style=\\\"line-height: 4px; font-size: 4px;\\\"></td>\\n                      </tr>\\n                      <!--<![endif]-->\\n                      <tr>\\n                          <td class=\\\"subheadline space6\\\" align=center style=\\\"color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Sign up to receive personalized tips, news and recommendations to help you get the most out of your Google Account.</td>\\n                      </tr>\\n                 \\n                      <tr><td height=30></td></tr>\\n                      <tr>\\n                          <td class=space4 style=\\\"text-align: center;\\\">\\n                             <div>\\n                \\t\\t\\t\\t<!--[if mso]>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\n                                \\t<v:roundrect xmlns:v=\\\"urn:schemas-microsoft-com:vml\\\" xmlns:w=\\\"urn:schemas-microsoft-com:office:word\\\" href=\\\"https://notifications.google.com/g/p/AD-FnEyndec72XBvcI2FZtASIkMDr2gI-p9KQj7W_nlDsa2XYbrILYz0nhq9uMgLNV51eCnPJZEYhjsW11WTS2TrLeSDZIZTbwnYb5PRQeVQ4bK9nBHu-UQDf6Bbke1kBvlPuPQ1Gg4-NM0CWnazWazo49MDYWrE3naDehYA2mil6FzFgpdvYU7zEGPhyjG8TK3ozYYFF2I9d16qlhjZ_NZpiTZ8LL561JaJK9IMX-RsAwVMcMLw8VPGIU_u_MqBCVbw47WDi1xRpdGj1eQEAs3zUbpdSrkrsB8xd_bYzPh0A31P5ieRLPlhzH9NA4O5Oe86vUB1U6E\\\" style=\\\"height:48px; v-text-anchor:middle; width:205px; \\\" line-height: 22px; arcsize=\\\"10%\\\" strokecolor=\\\"#1A73E8\\\" fillcolor=\\\"#1A73E8;\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t<w:anchorlock/>\\n                                    <center style=\\\"color:#ffffff;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:normal; word-break:normal; line-height: 22px; mso-line-height-rule: exactly; direction:ltr;\\\" dir=\\\"ltr\\\">Keep me updated</center>\\n                                    </v:roundrect>\\n<a href=\\\"https://notifications.google.com/g/p/AD-FnEyndec72XBvcI2FZtASIkMDr2gI-p9KQj7W_nlDsa2XYbrILYz0nhq9uMgLNV51eCnPJZEYhjsW11WTS2TrLeSDZIZTbwnYb5PRQeVQ4bK9nBHu-UQDf6Bbke1kBvlPuPQ1Gg4-NM0CWnazWazo49MDYWrE3naDehYA2mil6FzFgpdvYU7zEGPhyjG8TK3ozYYFF2I9d16qlhjZ_NZpiTZ8LL561JaJK9IMX-RsAwVMcMLw8VPGIU_u_MqBCVbw47WDi1xRpdGj1eQEAs3zUbpdSrkrsB8xd_bYzPh0A31P5ieRLPlhzH9NA4O5Oe86vUB1U6E\\\" class=\\\"subheadline btn_mod2_mobile2\\\"  target=\\\"_blank\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;  direction:ltr;\\\" dir=\\\"ltr\\\">Keep me updated</a>\\n                                <![endif]-->\\n\\t\\t\\t\\t\\t\\t\\t\\t\\n                               <!--[if !mso]><!-->\\n                               <a href=https://notifications.google.com/g/p/AD-FnEyndec72XBvcI2FZtASIkMDr2gI-p9KQj7W_nlDsa2XYbrILYz0nhq9uMgLNV51eCnPJZEYhjsW11WTS2TrLeSDZIZTbwnYb5PRQeVQ4bK9nBHu-UQDf6Bbke1kBvlPuPQ1Gg4-NM0CWnazWazo49MDYWrE3naDehYA2mil6FzFgpdvYU7zEGPhyjG8TK3ozYYFF2I9d16qlhjZ_NZpiTZ8LL561JaJK9IMX-RsAwVMcMLw8VPGIU_u_MqBCVbw47WDi1xRpdGj1eQEAs3zUbpdSrkrsB8xd_bYzPh0A31P5ieRLPlhzH9NA4O5Oe86vUB1U6E target=_blank dir=ltr style=\\\"text-align: center; display: inline-block;\\\">\\n<table role=presentation cellspacing=0 cellpadding=0 align=center>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 3px solid #ffffff;border-top-left-radius: 4px;border-top-right-radius: 4px;display:inline-block; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n        <tr>\\n\\t\\t<td class=\\\"subheadline btn_mod2_mobile2 enwid\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none;  min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;  direction:ltr;\\\">\\nKeep me updated\\n</td>\\n</tr>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 3px solid #ffffff;display:inline-block;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n</table></a>\\n                               <!--<![endif]-->\\n                             </div>\\n                          </td>\\n                      </tr>\\n\\n                 <tr><td height=50></td></tr>\\n                  <tr><td border=0><hr role=presentation width=516 border=0 bgcolor=#F8F9FA style=\\\"margin:0; border-collapse: collapse; background-color: #F8F9FA;color: #F8F9FA; height: 8px; border: none; width:516px;\\\"></td></tr>\\n                    </table>\\n                  </td>\\n                </tr>\\n                \\n                <tr>\\n                  <td>\\n                    <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n                      <tr><td height=45></td></tr>\\n                      <tr>\\n                          <td class=space3 align=center>    <img role=presentation class=module_mobile width=64 height=64 border=0 src=https://services.google.com/fh/files/emails/g_logo1.png style=\\\"width: 64px; height:64px; text-align: center; border: none; font-size:9px;\\\">\\n</td>\\n                      </tr>\\n                      <tr><td height=17></td></tr>\\n                      <tr>\\n\\n                            <!--[if mso]>\\n                            <td align=\\\"center\\\" class=\\\"device_txt space6\\\" style='color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80px; text-align:center; word-break:normal;direction:ltr;' dir=\\\"ltr\\\">Get a lighter, faster way to search</td>\\n                            <![endif]-->\\n                            <!--[if !mso]><!-->\\n                            <td align=center class=\\\"device_txt space6\\\" style=\\\"color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Get a lighter, faster way to search</td>\\n                            <!--<![endif]-->\\n                   \\n                      </tr>\\n                      <!--[if !mso]><!-->\\n                      <tr>\\n                        <td height=15 style=\\\"line-height: 4px; font-size: 4px;\\\"></td>\\n                      </tr>\\n                      <!--<![endif]-->\\n                      <tr>\\n                          <td class=\\\"subheadline space6\\\" align=center style=\\\"color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Search in a fast, fun, and easy way. Type less and save time by using your voice.</td>\\n                          \\n                      </tr>\\n                      <tr><td height=30></td></tr>\\n                      <tr>\\n                        <td align=center valign=top>\\n                            <table role=presentation border=0 cellspacing=0 cellpadding=0 width=100%>\\n                                <tr>\\n                                    <td class=space4 style=\\\"text-align: center; padding: 0;\\\">\\n                                      \\n                                        <div>\\n                                            <!--[if mso]>\\n                                              <v:roundrect xmlns:v=\\\"urn:schemas-microsoft-com:vml\\\" xmlns:w=\\\"urn:schemas-microsoft-com:office:word\\\" href=\\\"https://notifications.google.com/g/p/AD-FnExgNuXDWxUscOXKCI8-X9oYP9vHzpG9xPZGqsb-bZLbXewbN4luTJzMBnsmQYJmMz8oqnVxV-09_wPA8lsNwj3y90Z1MH23ZEwsoK6kk7zaLrAY4vqJeVyT61rMhxmsmnhLMGkzlO88KVV7mjsKhbhsU-R9qPyQ9t7-PoJzO76Ggtj4KKKd2jD91GZuK6_FQS37o58lZRpPEcMYcJUSzJYXDvJlpU9kNHmHCyi1TCXCdBwH_nvspHireD4csmoi9JYyOzbukngCQBhrtiiV3fsSIG8cCKlj3QaKGnEPMzLuPcY\\\" style=\\\"height:48px; v-text-anchor:middle; width:205px;\\\" arcsize=\\\"10%\\\" strokecolor=\\\"#1A73E8\\\" fillcolor=\\\"#1A73E8;\\\">\\n                                              <w:anchorlock/>\\n                                              <center style=\\\"color:#ffffff;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:normal; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">Get Google Go</center>\\n                                              </v:roundrect>\\n<a href=\\\"https://notifications.google.com/g/p/AD-FnExgNuXDWxUscOXKCI8-X9oYP9vHzpG9xPZGqsb-bZLbXewbN4luTJzMBnsmQYJmMz8oqnVxV-09_wPA8lsNwj3y90Z1MH23ZEwsoK6kk7zaLrAY4vqJeVyT61rMhxmsmnhLMGkzlO88KVV7mjsKhbhsU-R9qPyQ9t7-PoJzO76Ggtj4KKKd2jD91GZuK6_FQS37o58lZRpPEcMYcJUSzJYXDvJlpU9kNHmHCyi1TCXCdBwH_nvspHireD4csmoi9JYyOzbukngCQBhrtiiV3fsSIG8cCKlj3QaKGnEPMzLuPcY\\\" class=\\\"subheadline btn_mod2_mobile2\\\"  target=\\\"_blank\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; padding:7px 24px 7px 24px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">Get Google Go</a>\\n                                            <![endif]-->\\n                                                        <!--[if !mso]><!-->\\n                               <a href=https://notifications.google.com/g/p/AD-FnExgNuXDWxUscOXKCI8-X9oYP9vHzpG9xPZGqsb-bZLbXewbN4luTJzMBnsmQYJmMz8oqnVxV-09_wPA8lsNwj3y90Z1MH23ZEwsoK6kk7zaLrAY4vqJeVyT61rMhxmsmnhLMGkzlO88KVV7mjsKhbhsU-R9qPyQ9t7-PoJzO76Ggtj4KKKd2jD91GZuK6_FQS37o58lZRpPEcMYcJUSzJYXDvJlpU9kNHmHCyi1TCXCdBwH_nvspHireD4csmoi9JYyOzbukngCQBhrtiiV3fsSIG8cCKlj3QaKGnEPMzLuPcY target=_blank dir=ltr style=\\\"text-align: center; display: inline-block;\\\">\\n<table role=presentation cellspacing=0 cellpadding=0 align=center>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 3px solid #ffffff;border-top-left-radius: 4px;border-top-right-radius: 4px;display:inline-block; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n        <tr>\\n\\t\\t<td class=\\\"subheadline btn_mod2_mobile2 enwid\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;  direction:ltr;\\\">\\nGet Google Go\\n</td>\\n</tr>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 4px solid #ffffff;display:inline-block;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n</table></a>\\n                               <!--<![endif]-->\\n                                        </div>\\n                                        \\n                                    </td>\\n                                </tr>\\n                            </table>\\n                        </td>\\n                      </tr>\\n                      \\n                      <tr><td height=50></td></tr>\\n                      <tr><td border=0><hr role=presentation width=516 bgcolor=#F8F9FA border=0 style=\\\"margin:0; border-collapse: collapse; background-color: #F8F9FA;color: #F8F9FA; height: 8px; border: none; width:516px;\\\"></td></tr>\\n                    </table>\\n                  </td>\\n                </tr>\\n                  \\n\\n                  \\n                <tr>\\n                  <td>\\n                    <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n             <tr><td height=40></td></tr>\\n                      <tr>\\n                  <td align=center>    <img role=presentation class=module_mobile width=64 height=64 border=0 src=https://services.google.com/fh/files/emails/more_logo.png style=\\\"width: 64px; height:64px; text-align: center; border: none;\\\">\\n\\n\\t\\t\\t\\t</td>\\n                </tr>\\n\\n                      <tr><td height=15></td></tr>\\n                      <tr>\\n\\n                        <!--[if mso]>\\n                        <td align=\\\"center\\\" class=\\\"device_txt space6\\\" style='color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80px; text-align:center; word-break:normal;direction:ltr;' dir=\\\"ltr\\\">More from Google</td>\\n                        <![endif]-->\\n                        <!--[if !mso]><!-->\\n                        <td align=center class=\\\"device_txt space6\\\" style=\\\"color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>More from Google</td>\\n                        <!--<![endif]-->\\n                      </tr>\\n                      <!--[if !mso]><!-->\\n                      <tr>\\n                        <td height=15 style=\\\"line-height: 4px; font-size: 4px;\\\"></td>\\n                      </tr>\\n                      <!--<![endif]-->\\n                      <tr>\\n                          <td class=\\\"subheadline space6\\\" align=center style=\\\"color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Discover the latest apps from Google</td>\\n                      </tr>\\n                      <tr><td height=30></td></tr>\\n                      <tr>\\n                          <td align=center valign=top>\\n                              <table role=presentation>\\n                                  <tr>\\n                                      <td style=\\\"text-align: center; padding: 0;\\\">\\n                                          <div>\\n                                            <!--[if mso]>\\n                                              <v:roundrect xmlns:v=\\\"urn:schemas-microsoft-com:vml\\\" xmlns:w=\\\"urn:schemas-microsoft-com:office:word\\\" href=\\\"https://notifications.google.com/g/p/AD-FnEyP4CP4QC0Ynk3G3PjmcNzqGIetZn8YQeaQtKUlp8CDz9dIYuaE7f7Wo62K3Am3N_TIdEvfkmmJYrxK4-q5A1uj4nJlJsvMWyAfY3mXBgIongDxHGEnGt9Sy_Sj1gM_JpC-IahCMsqWNlz0wi4CUUAsIPyfXN7jlOcurX751obbKMc_HnS3Dvi09r0g_UKCpQyMamjhWX7DMlAhDKmq38FBk2tszrOunUN6S9FVSmLNPdQ7TW1zDe5CewaBytZD8QtrhqMcbfPZs2SCn7tmhexlSRg9oFqxzLzg9pzEBR1kBJlSRV_EZVMAOHbbj-Ed846L0PWhPEvLP4fypIoE9KJtuB2C2owrCHSwmMxlIyhZ5AYRNCl7bJAJIyy3cLEdm076GxbzyaxDIzgYE9SNjA0Z9zQqg5_YVsm3-8lbrL4Ylru8LXy8TBNtnZT1ulMbx71PLibTXEaK8XJ5SuBie-1JqH5u4FNEjgXTyo9oDLVKLvAN_AU_At9zggU3fGoX6Y5zeSPmSNRtF-8jAqF9TmF9XC4cJjgoCgkPG--ApQf-Vb3Yeemn6ZFFkZwW5hSefZ6r3SwJlzv3qo_U25HguZdHPsUDrCwKMaHtgeoaKx8xmOkep-yohwpD5UWSfU4zMHYyghdXxthk4r-zmtFLoNbEUQ6bkBwaoBcvA4D36X4jdl2VcgPiMm68wvV2hiBwHlEwl1Bb6NBGrv3dVokymxj47Bp0V-cDSTarP7WZJY5_4pLFvz424rU8cpfMndi4Fe91LSXE-RcAn8IQKPoeynVWIEZnzO0N4A\\\" style=\\\"height:48px; v-text-anchor:middle; width:205px;\\\" arcsize=\\\"10%\\\" strokecolor=\\\"#1A73E8\\\" fillcolor=\\\"#1A73E8;\\\">\\n                                              <w:anchorlock/>\\n                                              <center style=\\\"color:#ffffff;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:normal; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">More apps from Google</center>\\n                                              </v:roundrect>\\n<a href=\\\"https://notifications.google.com/g/p/AD-FnEyP4CP4QC0Ynk3G3PjmcNzqGIetZn8YQeaQtKUlp8CDz9dIYuaE7f7Wo62K3Am3N_TIdEvfkmmJYrxK4-q5A1uj4nJlJsvMWyAfY3mXBgIongDxHGEnGt9Sy_Sj1gM_JpC-IahCMsqWNlz0wi4CUUAsIPyfXN7jlOcurX751obbKMc_HnS3Dvi09r0g_UKCpQyMamjhWX7DMlAhDKmq38FBk2tszrOunUN6S9FVSmLNPdQ7TW1zDe5CewaBytZD8QtrhqMcbfPZs2SCn7tmhexlSRg9oFqxzLzg9pzEBR1kBJlSRV_EZVMAOHbbj-Ed846L0PWhPEvLP4fypIoE9KJtuB2C2owrCHSwmMxlIyhZ5AYRNCl7bJAJIyy3cLEdm076GxbzyaxDIzgYE9SNjA0Z9zQqg5_YVsm3-8lbrL4Ylru8LXy8TBNtnZT1ulMbx71PLibTXEaK8XJ5SuBie-1JqH5u4FNEjgXTyo9oDLVKLvAN_AU_At9zggU3fGoX6Y5zeSPmSNRtF-8jAqF9TmF9XC4cJjgoCgkPG--ApQf-Vb3Yeemn6ZFFkZwW5hSefZ6r3SwJlzv3qo_U25HguZdHPsUDrCwKMaHtgeoaKx8xmOkep-yohwpD5UWSfU4zMHYyghdXxthk4r-zmtFLoNbEUQ6bkBwaoBcvA4D36X4jdl2VcgPiMm68wvV2hiBwHlEwl1Bb6NBGrv3dVokymxj47Bp0V-cDSTarP7WZJY5_4pLFvz424rU8cpfMndi4Fe91LSXE-RcAn8IQKPoeynVWIEZnzO0N4A\\\" class=\\\"subheadline btn_mod3_mobile\\\"  target=\\\"_blank\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; padding:7px 24px 7px 24px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">More apps from Google</a>\\n                                            <![endif]-->\\n\\n                                           \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   <!--[if !mso]><!-->\\n                               <a href=https://notifications.google.com/g/p/AD-FnEyP4CP4QC0Ynk3G3PjmcNzqGIetZn8YQeaQtKUlp8CDz9dIYuaE7f7Wo62K3Am3N_TIdEvfkmmJYrxK4-q5A1uj4nJlJsvMWyAfY3mXBgIongDxHGEnGt9Sy_Sj1gM_JpC-IahCMsqWNlz0wi4CUUAsIPyfXN7jlOcurX751obbKMc_HnS3Dvi09r0g_UKCpQyMamjhWX7DMlAhDKmq38FBk2tszrOunUN6S9FVSmLNPdQ7TW1zDe5CewaBytZD8QtrhqMcbfPZs2SCn7tmhexlSRg9oFqxzLzg9pzEBR1kBJlSRV_EZVMAOHbbj-Ed846L0PWhPEvLP4fypIoE9KJtuB2C2owrCHSwmMxlIyhZ5AYRNCl7bJAJIyy3cLEdm076GxbzyaxDIzgYE9SNjA0Z9zQqg5_YVsm3-8lbrL4Ylru8LXy8TBNtnZT1ulMbx71PLibTXEaK8XJ5SuBie-1JqH5u4FNEjgXTyo9oDLVKLvAN_AU_At9zggU3fGoX6Y5zeSPmSNRtF-8jAqF9TmF9XC4cJjgoCgkPG--ApQf-Vb3Yeemn6ZFFkZwW5hSefZ6r3SwJlzv3qo_U25HguZdHPsUDrCwKMaHtgeoaKx8xmOkep-yohwpD5UWSfU4zMHYyghdXxthk4r-zmtFLoNbEUQ6bkBwaoBcvA4D36X4jdl2VcgPiMm68wvV2hiBwHlEwl1Bb6NBGrv3dVokymxj47Bp0V-cDSTarP7WZJY5_4pLFvz424rU8cpfMndi4Fe91LSXE-RcAn8IQKPoeynVWIEZnzO0N4A target=_blank dir=ltr style=\\\"text-align: center; display: inline-block;\\\">\\n<table role=presentation cellspacing=0 cellpadding=0 align=center>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 3px solid #ffffff;border-top-left-radius: 4px;border-top-right-radius: 4px;display:inline-block; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n        <tr>\\n\\t\\t<td class=\\\"subheadline btn_mod2_mobile2 two_line_button enwid\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;  direction:ltr;\\\">\\nMore apps from Google\\n</td>\\n</tr>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 4px solid #ffffff;display:inline-block;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n</table></a>\\n                               <!--<![endif]-->\\n                                          </div>\\n                                      </td>\\n                                  </tr>\\n                                <tr><td height=10></td></tr>\\n                              </table>\\n                          </td>\\n                      </tr>\\n                    </table>\\n                  </td>\\n                </tr>\\n                  <tr><td height=50></td></tr>\\n                      <tr><td border=0><hr role=presentation width=516 border=0 bgcolor=#F8F9FA style=\\\"margin:0; border-collapse: collapse; background-color: #F8F9FA;color: #F8F9FA; height: 8px; border: none; width:516px;\\\"></td></tr>\\n                <tr>\\n                  <td>\\n                    <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n                      <tr><td height=40></td></tr>\\n                      <tr>\\n                        <td align=center>    <img role=presentation class=module_mobile width=64 height=64 border=0 src=https://services.google.com/fh/files/emails/security_logo.png style=\\\"width: 64px; height:64px; text-align: center; border: none;\\\">\\n</td>\\n                      </tr>\\n                      <tr><td height=15></td></tr>\\n                      <tr>\\n                        <!--[if mso]>\\n                        <td align=\\\"center\\\" class=\\\"device_txt space6\\\" style='color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80px; text-align:center; word-break:normal;direction:ltr;' dir=\\\"ltr\\\">Confirm your options are right for you</td>\\n                        <![endif]-->\\n                        <!--[if !mso]><!-->\\n                        <td align=center class=\\\"device_txt space6\\\" style=\\\"color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Confirm your options are right for you</td>\\n                        <!--<![endif]-->\\n                      </tr>\\n                      <!--[if !mso]><!-->\\n                      <tr>\\n                        <td height=15 style=\\\"line-height: 4px; font-size: 4px;\\\"></td>\\n                      </tr>\\n                      <!--<![endif]-->\\n                      <tr>\\n                        <td class=\\\"subheadline space6\\\" align=center style=\\\"color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:16px; font-weight:normal; line-height:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Review and change your privacy and security options to make <span style=\\\"white-space:nowrap; \\\" class=\\\"\\\">Google</span> work better for you.</td>\\n                      </tr>\\n\\n                      <tr><td height=30></td></tr>\\n                      <tr>\\n                          <td align=center valign=top>\\n                              <table role=presentation>\\n                                  <tr>\\n                                      <td style=\\\"text-align: center; padding: 0;\\\">\\n                                          <div>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<!--[if mso]>\\n                                                <v:roundrect xmlns:v=\\\"urn:schemas-microsoft-com:vml\\\" xmlns:w=\\\"urn:schemas-microsoft-com:office:word\\\" href=\\\"https://notifications.google.com/g/p/AD-FnEycf0-jYiIScz0u0dSNPi4FrbwU8R2uZUsMOvjndwJ1CSqYkzDZkj-H4UdEvkEFP6DpOXtCe2bbd7kbONVtoxKjFa7eUAKacqfx8Os1tF8kc1XJ_T5PZgkhCdfIk4sUJ0S7CAv-LQBSvMg2eeQ-ZS8CkQS1OWsOKvrWI_rKR8FVeIlIkFdbZgl4TFz-vZWZyiXxk9BReC4o1ufKfQ\\\" style=\\\"height:48px; v-text-anchor:middle; width:205px;\\\" arcsize=\\\"10%\\\" strokecolor=\\\"#1A73E8\\\" fillcolor=\\\"#1A73E8;\\\">\\n                                                <w:anchorlock/>\\n                                                <center style=\\\"color:#ffffff;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:normal; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">Confirm</center>\\n                                                </v:roundrect>\\n                                              <![endif]-->\\n\\n                                        <!--[if mso]>\\n                                              <a href=\\\"https://notifications.google.com/g/p/AD-FnEycf0-jYiIScz0u0dSNPi4FrbwU8R2uZUsMOvjndwJ1CSqYkzDZkj-H4UdEvkEFP6DpOXtCe2bbd7kbONVtoxKjFa7eUAKacqfx8Os1tF8kc1XJ_T5PZgkhCdfIk4sUJ0S7CAv-LQBSvMg2eeQ-ZS8CkQS1OWsOKvrWI_rKR8FVeIlIkFdbZgl4TFz-vZWZyiXxk9BReC4o1ufKfQ\\\" class=\\\"subheadline btn_mod4_mobile\\\"  target=\\\"_blank\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\">Confirm</a>\\n<![endif]-->\\n                                        \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  <!--[if !mso]><!-->\\n                               <a href=https://notifications.google.com/g/p/AD-FnEycf0-jYiIScz0u0dSNPi4FrbwU8R2uZUsMOvjndwJ1CSqYkzDZkj-H4UdEvkEFP6DpOXtCe2bbd7kbONVtoxKjFa7eUAKacqfx8Os1tF8kc1XJ_T5PZgkhCdfIk4sUJ0S7CAv-LQBSvMg2eeQ-ZS8CkQS1OWsOKvrWI_rKR8FVeIlIkFdbZgl4TFz-vZWZyiXxk9BReC4o1ufKfQ target=_blank dir=ltr style=\\\"text-align: center; display: inline-block;\\\">\\n<table role=presentation cellspacing=0 cellpadding=0 align=center>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 3px solid #ffffff;border-top-left-radius: 4px;border-top-right-radius: 4px;display:inline-block; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n        <tr>\\n             <td class=\\\"subheadline btn_mod2_mobile2 enwid\\\" style=\\\"background-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-decoration:none; min-width:205px; padding:8px 0px 7px 0px; -webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: center; word-break:normal;  direction:ltr;\\\">\\nConfirm\\n</td>\\n</tr>\\n    <tr style=\\\"padding: 0; margin: 0; font-size: 0; line-height: 0;\\\"><td style=\\\"border-top: 4px solid #ffffff;display:inline-block;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px; -webkit-text-size-adjust:none;mso-hide:all;text-align: center;\\\"></td></tr>\\n</table></a>\\n                               <!--<![endif]-->\\n                                            </div>\\n                                          \\n                                      </td>\\n                                  </tr>\\n                              </table>\\n                          </td>\\n                      </tr>\\n                      \\n                      <tr><td height=50></td></tr>\\n                    </table>\\n                  </td>\\n                </tr>\\n              </table>\\n\\t\\t        </td>\\n          </tr>\\n          \\n         \\n          <tr><td height=24></td></tr>\\n          \\n          <tr>\\n              <td width=480 style=\\\"-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2px solid #E8EAED; border-radius: 16px;\\\">\\n                    <table role=presentation border=0 cellspacing=0 cellpadding=0 width=100% dir=ltr style=direction:ltr;>\\n                           \\n                            <tr>\\n                                <td style=\\\"font-size:0pt; line-height:0pt; padding:0; margin:0;\\\" width=24></td>\\n                                <!--[if mso]>\\n                                <td style=\\\"margin-bottom:67px; padding: 21px 10px 35px 20px;\\\">    <img role=\\\"presentation\\\" class=\\\"fa_mobile\\\" width=\\\"24\\\" height=\\\"24\\\" border=\\\"0\\\" src=\\\"https://services.google.com/fh/files/emails/help_outline.png\\\" style=\\\"width: 24px; height:24px; text-align: center; border: none; font-size:3px;\\\">\\n</td>\\n                                <![endif]-->\\n                                <!--[if !mso]><!-->\\n                                <td style=\\\"padding: 47px 10px 40px 20px;\\\" valign=top>    <img role=presentation class=fa_mobile width=24 height=24 border=0 src=https://services.google.com/fh/files/emails/help_outline.png style=\\\"width: 24px; height:24px; text-align: center; border: none; font-size:3px;\\\">\\n</td>\\n                                <!--<![endif]-->\\n                                \\n                                <td valign=top>\\n                                    <!--[if mso]>\\n                                    <div class=\\\"device_txt\\\" style=\\\"margin-bottom:15px; padding-left: 20px; color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; line-height:28px; text-align:left; padding-top:18px; padding-bottom:12px; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\" valign=\\\"top\\\">Find answers</div>\\n                                    <![endif]-->\\n                                    <!--[if !mso]><!-->\\n                                    <div class=device_txt style=\\\"padding-left: 20px; color:#202124; font-family:Google Sans, Roboto, Arial; font-size:18px; line-height:28px; text-align:left; padding-top:45px; padding-bottom:12px; word-break:normal;direction:ltr;\\\" dir=ltr valign=top>Find answers</div>\\n                                    <!--<![endif]-->\\n                                  \\n                                    <!--[if mso]>\\n                                    <div class=\\\"subheadline space7\\\" style=\\\"margin-bottom:20px; padding-left: 20px; padding-right: 20px; color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-weight: normal; font-size:16px; line-height:24px; text-align:left; padding-bottom:35px; word-break:normal;direction:ltr;\\\" dir=\\\"ltr\\\" valign=\\\"top\\\">Visit the <a class=\\\"tstt\\\" href=\\\"https://notifications.google.com/g/p/AD-FnEyoBWRDEfxhTFsOUOdRI_dY4EOg58QFkTeAaRjpWYDRtWvKp4dyv_ngV7vtF6MkVCGaQ4g-jkrN044YDR7OM2YFav7BfLKyQj05QFR1BmBi7TYFjgiR2L6oJXO_csmLtImDIkuNAqY3msbyZ8nmE1xs_jd27fwTjATtLKnYf2fq42h4r5Sb7UdSEg\\\" target=\\\"_blank\\\" style=\\\"color:#1A73E8; text-decoration:none; font-weight:normal; border:0; ; white-space: normal; text-decoration: underline;\\\"> Help Center</a> to learn all about your new Google Account.</div>\\n                                    <![endif]-->\\n                                    <!--[if !mso]><!-->\\n                                    <div class=\\\"subheadline space7\\\" style=\\\"padding-left: 20px; padding-right: 20px; color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-weight: normal; font-size:16px; line-height:24px; text-align:left; padding-bottom:50px; word-break:normal;direction:ltr;\\\" dir=ltr valign=top>Visit the <a class=tstt href=https://notifications.google.com/g/p/AD-FnEyoBWRDEfxhTFsOUOdRI_dY4EOg58QFkTeAaRjpWYDRtWvKp4dyv_ngV7vtF6MkVCGaQ4g-jkrN044YDR7OM2YFav7BfLKyQj05QFR1BmBi7TYFjgiR2L6oJXO_csmLtImDIkuNAqY3msbyZ8nmE1xs_jd27fwTjATtLKnYf2fq42h4r5Sb7UdSEg target=_blank style=\\\"color:#1A73E8; text-decoration:none; font-weight:normal; border:0; ; white-space: normal; text-decoration: underline;\\\"> Help Center</a> to learn all about your new Google Account.</div>\\n                                    <!--<![endif]-->\\n                                </td>\\n                                <td style=\\\"font-size:0pt; line-height:0pt; padding:0; margin:0;\\\" width=24></td>\\n                            </tr>\\n                    </table>\\n              </td>\\n          </tr>\\n\\n          \\n                  <tr>\\n                      <td style=\\\"-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%;\\\">\\n                        <table role=presentation border=0 cellspacing=0 cellpadding=0 align=center width=100%>\\n                         \\n                          <tr><td height=30></td></tr>\\n                          <tr>\\n                            <td width=134 height=46 align=center style=\\\"font-size:8px; word-break:normal;direction:ltr;\\\" dir=ltr>    <img role=presentation class=google_mobile width=82 height=26 border=0 src=https://services.google.com/fh/files/emails/google_logo2.png style=\\\"width: 82px; height:26px; text-align: center; border: none;\\\">\\n</td>\\n                          </tr>\\n                          <tr><td height=19></td></tr>\\n                          <tr>\\n                            <td class=space6 align=center style=\\\"color:#5F6368; font-family:Roboto, OpenSans, Arial, sans-serif; font-size:12px; line-height:18px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:normal;direction:ltr;\\\" dir=ltr>Replies to this email aren't monitored. If you have a question about your new account, the <a class=tstt href=https://notifications.google.com/g/p/AD-FnExy_50yPYb0RHFvebs9O3dwP7mul3Op8_F9XWU123-l5Sug-Ufrw_kyrayfKub72KS5gMldRqYUTMp-oVKQj22sadXv3A3TfivQ6XiCNS9ja0ezBqcP4PqYrp5DNCGqeaZZQMxuuGsrwoFc29LWJY74MUQKDLwPtTKJ9Oj1mLibb8efsKgpuIIqSlIFKc-8nA target=_blank style=\\\"color:#1A73E8; text-decoration:none; font-weight:normal; border:0; ; white-space: normal; text-decoration: underline;\\\"> Help Center</a> likely has the answer you're looking for.</td>\\n                          </tr>\\n                          <tr><td height=19></td></tr>\\n                          <tr>\\n                            <td class=space6 valign=middle style=\\\"color:#5F6368; font-family:\\\"Roboto\\\", OpenSans, \\\"Open Sans\\\", Arial, sans-serif; font-size:10px; line-height:15px; margin:0; padding:0 80px 0 80px; text-align:center\\\" align=center>\\n \\n\\n      <span style=\\\"font-size:inherit; color:inherit; font-weight:inherit; line-height:inherit; font-family:inherit;\\\">Google LLC<br>1600 Amphitheatre Parkway,<br>Mountain View, CA 94043</span>\\n   \\n   \\n\\n<br><br><span style=\\\"word-break:normal; direction:ltr; font-family:Roboto, OpenSans, Arial, sans-serif;\\\" dir=ltr>This email was sent to you because you created a Google Account.</span></td>\\n                          </tr>\\n                        </table>\\n                      </td>\\n                  </tr>\\n                  <tr><td height=18></td></tr>\\n        </table>\\n        <div style=\\\"display:none; white-space:nowrap; font:15px courier; line-height:0;\\\">\\n                                    \\n                                     \\n        </div>\\n      </center>\\n    <img alt=\\\"\\\" height=1 width=3 src=https://notifications.google.com/g/img/AD-FnEwuexOnRV6tiq42JPSTQrVJZCLNH0WoFEJIVNyIT6WMKQ.gif></body>\\n  </html>\\n\",\n  \"raw_header\": \"{\\\"Delivered-To\\\": \\\"threatmailboxtesting@gmail.com\\\", \\\"Received\\\": \\\"from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])\\\\n        by mx.google.com with SMTPS id p79sor3140981iod.73.2021.03.25.07.34.19\\\\n        for <threatmailboxtesting@gmail.com>\\\\n        (Google Transport Security);\\\\n        Thu, 25 Mar 2021 07:34:26 -0700 (PDT)\\\", \\\"X-Received\\\": \\\"by 2002:a5d:8149:: with SMTP id f9mr6770529ioo.191.1616682859192;\\\\n Thu, 25 Mar 2021 07:34:19 -0700 (PDT)\\\", \\\"ARC-Seal\\\": \\\"i=1; a=rsa-sha256; t=1616682866; cv=none;\\\\n        d=google.com; s=arc-20160816;\\\\n        b=jXGOJRjgsqYmzNxg4X/mIzRU36/SxUMwYD049kIGLJYAssAUEiiZ6xJdhVdEGHRyHk\\\\n         MJr+lEohPdtvF2+Q+bq1eul33f/Yyz5EvYOQNBiw2LCTXRRjCx+0oJPoPgSBXtfdCLKD\\\\n         K8lYMHOfVXJiNdw/f/MVVOH1ZJn/KVYQDKPE5cS/a0adKrv3eC4C3hWZNc7bDDgUAro3\\\\n         rPqq6RHjbPjkiroCRq1eEEtANWsuFPZUOMC/mGJ1nbkuyF+pHxoLPd0TgtTyZXkxSiq6\\\\n         wusz6ywgvdCPUL5a8BxNq+I+0u4XOgkcC4EjDq6AHcIvm0mxS8/jWFf/0R8umyalm5ZF\\\\n         5+/w==\\\", \\\"ARC-Message-Signature\\\": \\\"i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;\\\\n        h=to:from:subject:message-id:feedback-id:reply-to:date:mime-version\\\\n         :dkim-signature;\\\\n        bh=LRxL+A66WLRJJX0PJkttMQZLfrR/qiMhnL44bjmz0dk=;\\\\n        b=yiY8QtYhlUJAIMeGOVbOb4sk0HXCBnMX5NW56EXyiSYjnnZnOigeaBG9xzmg+Qjndm\\\\n         kUt6w0+kC9SjDsZL165i8S29mlP7r39xenIcBQMmYXY2Tj3+vekcBRL+lEuFw6lun4gw\\\\n         E10VWbxL1eB684tx2jLl8RbJ4MVwS/ce1HunVNU3TPmN5BY9m9Px/On2T+TvT7ifulpY\\\\n         0u0R7W36hNXhQpFI1uri+gk3TdIvH6tWtJCwS07CEHqjcr/TAuuaV/jV6YsVf6uLRDv+\\\\n         5PgYpBiwwCura49FpVhBEqNa7T/5BRI6A6JSDIF3ep7VHFKzZrORHhMIoFAr1hLm1Av6\\\\n         C39g==\\\", \\\"ARC-Authentication-Results\\\": \\\"i=1; mx.google.com;\\\\n       dkim=pass header.i=@google.com header.s=20161025 header.b=ESmR5mw7;\\\\n       spf=pass (google.com: domain of 3a59cybskacyiqqingeqoowpkvavgco-pqtgrnaiqqing.eqo@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3a59cYBsKACYIQQINGEQOOWPKVaVGCO-PQTGRNaIQQING.EQO@scoutcamp.bounces.google.com;\\\\n       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com\\\", \\\"Return-Path\\\": \\\"<3a59cYBsKACYIQQINGEQOOWPKVaVGCO-PQTGRNaIQQING.EQO@scoutcamp.bounces.google.com>\\\", \\\"Received-SPF\\\": \\\"pass (google.com: domain of 3a59cybskacyiqqingeqoowpkvavgco-pqtgrnaiqqing.eqo@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;\\\", \\\"Authentication-Results\\\": \\\"mx.google.com;\\\\n       dkim=pass header.i=@google.com header.s=20161025 header.b=ESmR5mw7;\\\\n       spf=pass (google.com: domain of 3a59cybskacyiqqingeqoowpkvavgco-pqtgrnaiqqing.eqo@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3a59cYBsKACYIQQINGEQOOWPKVaVGCO-PQTGRNaIQQING.EQO@scoutcamp.bounces.google.com;\\\\n       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com\\\", \\\"DKIM-Signature\\\": \\\"v=1; a=rsa-sha256; c=relaxed/relaxed;\\\\n        d=google.com; s=20161025;\\\\n        h=mime-version:date:reply-to:feedback-id:message-id:subject:from:to;\\\\n        bh=LRxL+A66WLRJJX0PJkttMQZLfrR/qiMhnL44bjmz0dk=;\\\\n        b=ESmR5mw79D/gXjrl4z6QNMe6530ZPlx1Rc3fx8zFAtnkji/7ZlBcJPNW5uAtP3ZGo9\\\\n         LuzaVt28+R12nS8HewmMTzZnefOVJ+JIWP4uavYju37R2OApmcV2JecFbSToVny3PFu/\\\\n         +oXXiSizrRdyqKRs/ORkkG9bWwQggiL0NgzpDRrczadzSn1U+O+rhFwXrb9xVMfL4n/Z\\\\n         NdcfrhGNUXmyTLsvM3XjbwHPUY2JyoVyUoS72h44jAewqJ3L/2FaQCYwaInFmaZ8CTOE\\\\n         xBT7wbfEpCrLgof8vlupZVI8fTgIXHAwVIGlK+4CLAWYWjWadH/+1Q+HRnR2Hl6r0BJ5\\\\n         FxUQ==\\\", \\\"X-Google-DKIM-Signature\\\": \\\"v=1; a=rsa-sha256; c=relaxed/relaxed;\\\\n        d=1e100.net; s=20161025;\\\\n        h=x-gm-message-state:mime-version:date:reply-to:feedback-id\\\\n         :message-id:subject:from:to;\\\\n        bh=LRxL+A66WLRJJX0PJkttMQZLfrR/qiMhnL44bjmz0dk=;\\\\n        b=JGXiUGxa+fQJBjPLmeHxY3vdn9frSTCFKECvdC5xAuh6CQpMyl+hq1u2psEtr2BiWE\\\\n         IEGJVTVrMHlsB6NXk6ridsNyB6xh9qUaO1iZMfoH/dq/aBAOKQ9L0MRRP7+CgjPvItyt\\\\n         UPNFS7ZpujDWukVERe9YLsu72kaAcbD0NcyNd8aFwTMUId+t54m62VUrUp6W1NQneLB4\\\\n         M6FA8UTrcyYB7Ol0EzOrAN4Up2xvvCrEgJEqhH5PQgmdakGEDeTJjuP3U11YKEcW2sJ9\\\\n         Y3SbUGew17tlppP2YTPknR+mT5xofkmPG8ik4J4+rsZ/VnvcUHBVDgJBoUy0z1HqM24D\\\\n         nXKw==\\\", \\\"X-Gm-Message-State\\\": \\\"AOAM531/qa8M77ZttNydP0MhDLZjJSS/++WQAH9EyT1dlxNehQ28SE6Q\\\\n\\\\tpbps/bN039kC2O7CZkHeLxTj\\\", \\\"X-Google-Smtp-Source\\\": \\\"ABdhPJzuZMHDxrOpzSZRgO02xOaR58NnOERcdhCi7a4xFBY02FudiCHyp1MYs2XPUDmWEGuc46PUWks=\\\", \\\"MIME-Version\\\": \\\"1.0\\\", \\\"Date\\\": \\\"Thu, 25 Mar 2021 07:34:19 -0700\\\", \\\"Reply-To\\\": \\\"Google Community Team <googlecommunityteam-noreply@google.com>\\\", \\\"X-Google-Id\\\": \\\"4016765\\\", \\\"Feedback-ID\\\": \\\"P-232-0:C20113407:M110377189-en:gamma\\\", \\\"X-Notifications\\\": \\\"GAMMA:<d48b871d2e5e6b01f04e1ca5ccb37ba49c178341-20113407-110703341@google.com>\\\", \\\"Message-ID\\\": \\\"<d48b871d2e5e6b01f04e1ca5ccb37ba49c178341-20113407-110703341@google.com>\\\", \\\"Subject\\\": \\\"Threatmailbox, finish setting up your new Google Account\\\", \\\"From\\\": \\\"Google Community Team <googlecommunityteam-noreply@google.com>\\\", \\\"To\\\": \\\"threatmailboxtesting@gmail.com\\\", \\\"Content-Type\\\": \\\"multipart/alternative; boundary=\\\\\\\"0000000000008960e105be5d4f9f\\\\\\\"\\\"}\",\n  \"is_regulatory_email\": \"false\",\n  \"folder_id\": \"142\",\n  \"folder_name\": \"INBOX\",\n  \"has_attachments\": \"false\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "ctix_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ctix_host}}/ctixapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AccessID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0719d1b-985d-4d44-960c-1b17ffc8d852",
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Threat Mailbox API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.\n\nIntel Exchange is deployed per tenant, so the server host is the customer's own Intel Exchange deployment; the API is mounted under `/ctixapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,625 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open PIR API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PIR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/cpapi/rest-auth/login/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user against the API Gateway and returns a session token. Store the token and pass it as `CYW <token>` in the `Authorization` header for all subsequent API calls.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>The login endpoint is served under <code class=\"slate-code\">/cpapi</code>, not under the <code class=\"slate-code\">/cpapi/cpir</code> prefix used by all other PIR endpoints.</p>\n</Callout>"
+        },
+        {
+          "info": {
+            "name": "Bulk Delink Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/matches/delink/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually remove one or more intelligence objects from a PIR by setting their link status to `manual_delink`. Delinked entities are permanently suppressed from auto-relinking on future sweep cycles unless manually linked again. Triggers a match snapshot write on success."
+        },
+        {
+          "info": {
+            "name": "Bulk Link Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/matches/link/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually links one or more intelligence objects to a PIR by setting their link status to `manual_link`. The entities must already exist as match records for the PIR. If an entity is not a match record for this PIR, it is silently skipped, and the `updated` count reflects only the entities that were actually changed. Triggers a match snapshot write on success."
+        },
+        {
+          "info": {
+            "name": "List Entity Matches for PIR",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/matches/",
+            "params": [
+              {
+                "name": "include_object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass a comma-separated list of object types. Returns matches whose type is any of the listed values (OR semantics)."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Pass a single object type. Returns matches of exactly that type. Takes precedence over `include__object_type` when both are present. Do not pass multiple comma-separated values; multi-value AND always returns an empty result set."
+              },
+              {
+                "name": "entity_kind",
+                "value": "",
+                "type": "query",
+                "description": "Pass an entity kind to expand to all object types within that kind."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of results per page."
+              },
+              {
+                "name": "overview",
+                "value": "",
+                "type": "query",
+                "description": "Pass `true` to return the top 7 matches by sort order, ignoring pagination."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the sort order."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword for a case-insensitive substring search across entity name, tags, and source tags."
+              },
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the intelligence objects currently matched to a specific PIR, ordered by relevance score in descending by default. At least one of `include__object_type`, `object_type`, or `entity_kind` is required; omitting all three returns `400` `CPIR-002`.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">object_type</code> now applies AND semantics across multiple values. Because each matched row holds a single ob"
+        },
+        {
+          "info": {
+            "name": "Top Objects by Type (Cross-PIR)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/matches/:object_type/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of results per page."
+              },
+              {
+                "name": "Boolean",
+                "value": "",
+                "type": "query",
+                "description": "Pass `true` to return the top 7 objects by `link_count`, ignoring pagination. Intended for dashboard widget use."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword for a case-insensitive substring search across object name, tags, and source tags."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "path",
+                "description": "Pass the object type as a path parameter. Unknown values return an empty result set without an error."
+              }
+            ]
+          },
+          "docs": "Returns intelligence objects of a given type ranked by the number of active PIRs they are linked to. Use this for a tenant-wide view of which objects are most broadly relevant across all requirements. Pass `overview=true` to retrieve the top 7 objects for use in dashboard widgets, bypassing standard pagination."
+        },
+        {
+          "info": {
+            "name": "Analyse Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/analyze-intent/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates a proposed intent string across four quality dimensions without persisting any data. Returns a composite quality score, per-dimension scores, suggested improvements, and a suggested title and category. Use this before creating or updating a PIR to surface gaps in the intent before committing.\n\nRequires LiteLLM. When the LLM is unavailable, all dimension scores and the quality score return as zero and a default set of suggestion chips is returned."
+        },
+        {
+          "info": {
+            "name": "Check Overlap",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/check-overlap/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks whether a proposed intent semantically duplicates one or more existing PIRs in the tenant. Returns overlapping PIRs ranked by similarity score. Use this during PIR creation to identify consolidation opportunities before committing to a new requirement. When checking overlap for an existing PIR during an update, pass `exclude_pir_id` to exclude it from the results."
+        },
+        {
+          "info": {
+            "name": "List PIRs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of results per page."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass the lifecycle status to filter by."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Pass the priority to filter by."
+              },
+              {
+                "name": "health",
+                "value": "",
+                "type": "query",
+                "description": "Pass the health band to filter by."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword for a case-insensitive substring search on the PIR title."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass the sort field and direction. Unknown values silently fall back to the default."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of PIRs visible to the authenticated user within their tenant. Supports filtering by status, priority, health band, and keyword search."
+        },
+        {
+          "info": {
+            "name": "Create PIR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Priority Intelligence Requirement for the authenticated tenant. On creation, an embedding job is queued in the Central Embedding Service (CES), and a match sweep runs automatically once the embedding completes.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">category_ids</code> is required when <code class=\"slate-code\">status</code> is <code class=\"slate-code\">active</code>. A PIR activated with"
+        },
+        {
+          "info": {
+            "name": "Enhance Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/enhance-intent/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rewrites a vague or incomplete intent into a precise, well-structured monitoring requirement using an LLM. Returns the enhanced text for analyst review before it is committed. Only `intent` is required. Passing quality context from a prior Analyze Intent call focuses the rewrite on the weakest dimensions.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Returns <code class=\"slate-code\">500</code> when LiteLLM is unavailable.</p>\n</"
+        },
+        {
+          "info": {
+            "name": "Get PIR by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the full details of a single PIR. Accepts either a KSUID or a human-readable ID such as `PIR001`. Returns `404 CPIR-003` , if the PIR does not exist or belongs to a different tenant."
+        },
+        {
+          "info": {
+            "name": "Update PIR",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the mutable fields of an existing PIR. This is a partial update; only fields present in the request body are applied. Omitted fields retain their current values. `intent` is the only required field. Changing it re-queues the CES embedding job and triggers a new match sweep cycle."
+        },
+        {
+          "info": {
+            "name": "Update PIR Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/status/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transitions a PIR to a new lifecycle status. Status changes affect whether the PIR participates in match sweeps and signal evaluation and may trigger side effects such as auto-resolving open signals.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Lifecycle States\" iconUrl=\"\"><p>State</p>\n<p>Behaviour</p>\n<p>Match Sweeps</p>\n<p><code class=\"slate-code\">draft</code></p>\n<p>Saved but not yet submitted for monitoring.</p>\n<p>Excluded</p>\n<p><code class=\"slate-code\">active"
+        },
+        {
+          "info": {
+            "name": "Get PIR Health Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/health/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the most recent health snapshot for a specific PIR. The health score is computed by the Health Worker on a schedule and after each match sweep. Returns `404` `CPIR-003` until the Health Worker has run at least once for the PIR."
+        },
+        {
+          "info": {
+            "name": "Most-Active PIRs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/metrics/most-active/"
+          },
+          "docs": "Returns up to 5 PIRs ranked by the most recent signal emission time. Use this to populate the Most Active PIRs widget on the dashboard."
+        },
+        {
+          "info": {
+            "name": "Per-PIR Signal Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/metrics/signals-count/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the count of signals in `triggered` or `acknowledged` status for a specific PIR."
+        },
+        {
+          "info": {
+            "name": "Per-PIR Top Prioritized Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/metrics/signals-prioritized/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the top-prioritized signals for a specific PIR using the same ranking logic as the tenant-wide endpoint."
+        },
+        {
+          "info": {
+            "name": "PIR Health Aggregate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/metrics/health/"
+          },
+          "docs": "Returns the count of active PIRs in each health band plus the 7-day change in unhealthy PIRs. Use this to populate the Health Status widget on the dashboard."
+        },
+        {
+          "info": {
+            "name": "PIR Trends (7-day)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/pirs/:pir_id/trends/",
+            "params": [
+              {
+                "name": "pir_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the KSUID or human-readable ID of the PIR as a path parameter."
+              }
+            ]
+          },
+          "docs": "Returns the 7-day link and delink deltas for matched intelligence objects of a specific PIR. The response is a flat object: top-level keys carry the overall totals, and one additional key per active object type carries a per-type breakdown. Object types with no activity in the window are omitted."
+        },
+        {
+          "info": {
+            "name": "Active Signal Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/signals/metrics/count/"
+          },
+          "docs": "Returns the count of signals in `triggered` or `acknowledged` status across the tenant. This is the same value surfaced as the open signals count in the dashboard."
+        },
+        {
+          "info": {
+            "name": "List Signals (Tenant-wide)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/signals/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of results per page."
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by severity level."
+              },
+              {
+                "name": "signal_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by signal type."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by signal status."
+              },
+              {
+                "name": "emitted_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass an RFC3339 timestamp as the inclusive start of the emission date range."
+              },
+              {
+                "name": "emitted_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass an RFC3339 timestamp as the inclusive end of the emission date range."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a keyword for a case-insensitive substring search on the signal title."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all signals across the tenant. Filter parameters that accept multiple values use OR semantics; repeat the parameter to filter by more than one value."
+        },
+        {
+          "info": {
+            "name": "Top Prioritized Signals (Tenant-wide)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/signals/metrics/prioritized/"
+          },
+          "docs": "Returns the top 3 signals across the tenant ranked by a composite of severity and confidence. Only signals in triggered or acknowledged status are eligible. Use this to power the prioritised signals widget on the dashboard."
+        },
+        {
+          "info": {
+            "name": "Update Signal Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/api/v1/signals/:signal_id/",
+            "params": [
+              {
+                "name": "signal_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the signal identifier as a path parameter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transitions a signal to a new status. Not all transitions are permitted; see the transition rules below. Returns `409` `CPIR-007` when the transition is not allowed from the signal's current state.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"Transition Rules\" iconUrl=\"\"><p>Target status</p>\n<p>Allowed from</p>\n<p>Failure</p>\n<p><code class=\"slate-code\">acknowledged</code></p>\n<p><code class=\"slate-code\">triggered</code> only</p>\n<p><code class=\"slate-code\">409</cod"
+        },
+        {
+          "info": {
+            "name": "Liveness Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/health-check/"
+          },
+          "docs": "Confirms the service process is running. Does not probe downstream dependencies. Used by the container orchestrator as a process-level health check."
+        },
+        {
+          "info": {
+            "name": "Prometheus Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/metrics"
+          },
+          "docs": "Exposes operational metrics in Prometheus text exposition format. Served on a dedicated port (\\`:2424\\`) separate from the API port. Both the API server and the worker binary expose this endpoint independently on their own `:2424` ports."
+        },
+        {
+          "info": {
+            "name": "Readiness Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/readiness-check/"
+          },
+          "docs": "Confirms that the service and its dependencies, the database (via PgBouncer) and the Central Embedding Service (CES), are reachable. Returns `200` only when all dependencies are healthy; returns `503` when any dependency is down. Used by the orchestrator to gate traffic routing."
+        },
+        {
+          "info": {
+            "name": "Get Tenant Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/api/v1/tenant/configuration/"
+          },
+          "docs": "Returns the tenant's CES tuning parameters, escalation thresholds, and telemetry configuration. The telemetry fields are passed through to the frontend to enable click-event capture and are not stored per tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

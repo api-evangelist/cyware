@@ -1,0 +1,458 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Allowed Indicators API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Allowed Indicators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Allowed Indicators List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve indicators."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass an allowed indicator type to filter the result. To retrieve the supported list of allowed indicator types, see the **GET List Supported Allowed Indicator Types API**."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter records by the creator."
+              },
+              {
+                "name": "modified_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user to filter records by the modifier."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created from time in epoch format to filter records based on the created time."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format to filter records based on the created time."
+              },
+              {
+                "name": "last_active_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active time in epoch format to filter records based on the last activity time."
+              },
+              {
+                "name": "last_active_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last active to time in epoch format to filter records based on the last activity time."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass `-created` to sort the result in descending order based on the created time. Pass `created` to sort the result in ascending order."
+              }
+            ]
+          },
+          "docs": "Returns a list of allowed indicators from the Intel Exchange platform."
+        },
+        {
+          "info": {
+            "name": "Add Indicators to Allowed List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a list of indicators of a common IOC type to the allowed indicators list."
+        },
+        {
+          "info": {
+            "name": "Get Allowed Indicator Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/:indicator_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "indicator_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of an allowed indicator."
+              }
+            ]
+          },
+          "docs": "Returns the details of an allowed indicator."
+        },
+        {
+          "info": {
+            "name": "Update Allowed Indicator",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/:indicator_id/",
+            "params": [
+              {
+                "name": "indicator_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the allowed list indicator."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified allowed indicator."
+        },
+        {
+          "info": {
+            "name": "Delete Allowed Indicator",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/:indicator_id/",
+            "params": [
+              {
+                "name": "indicator_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of an allowed indicator to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a particular allowed indicator entry from the dashboard."
+        },
+        {
+          "info": {
+            "name": "Bulk Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/bulk-actions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform bulk actions such as follow, unfollow, and delete on multiple allowed indicators in one API request."
+        },
+        {
+          "info": {
+            "name": "Get Reasons List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/reasons/",
+            "params": [
+              {
+                "name": "indicator_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the unique key of the allowed list object."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated response with all the saved reasons for an allowed indicator."
+        },
+        {
+          "info": {
+            "name": "Create Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/reasons/",
+            "params": [
+              {
+                "name": "indicator_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of the indicator."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new reason for an allowed indicator."
+        },
+        {
+          "info": {
+            "name": "Update Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/reasons/:reason_id/",
+            "params": [
+              {
+                "name": "reason_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the reason object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a particular reason to add an indicator to the allowed list."
+        },
+        {
+          "info": {
+            "name": "Delete Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/reasons/:reason_id/",
+            "params": [
+              {
+                "name": "reason_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the reason to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a particular reason for an allowed indicator."
+        },
+        {
+          "info": {
+            "name": "Get Supported Allowed Indicator Types List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/getoptions/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the query text to search indicator types."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the supported types of IOCs that can be added to the allowed indicators list."
+        },
+        {
+          "info": {
+            "name": "Parse IOC",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/parse-ioc/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Parse the IOCs provided by the user. Further, validate and categorize the IOCs as valid or invalid."
+        },
+        {
+          "info": {
+            "name": "Get Third-Party Ignored Indicators List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/third_party_indicators/",
+            "params": [
+              {
+                "name": "ignored",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to list third-party ignored indicators in Intel Exchange."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the domain to search in the third-party ignored indicator list."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the type of indicator to filter records."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a user who added the indicators in the third-party allowed indicator list."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the created time in epoch format."
+              }
+            ]
+          },
+          "docs": "Returns the third-party indicators added to the ignored list in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Add Third-Party Allowed Indicator to Ignored List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/third_party_indicators/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an indicator from the third-party allowed indicator repository to the third-party ignored indicator list in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Remove Indicator from Third-Party Ignored List",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/third_party_indicators/bulk-actions/",
+            "params": [
+              {
+                "name": "ignored",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to remove an indicator from the third-party ignored indicator list."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an indicator from the third-party ignored list."
+        },
+        {
+          "info": {
+            "name": "Verify Allowed Indicators",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/allowed_indicators/verify/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify if an indicator is added to the allowed indicators list in the platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

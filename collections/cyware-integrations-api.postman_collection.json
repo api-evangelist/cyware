@@ -1,0 +1,1513 @@
+{
+  "item": [
+    {
+      "id": "d719eb3a-8cac-4f3b-a499-ccaf8900a13f",
+      "name": "Integrations",
+      "description": {
+        "content": "Integrations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "242c84d9-8e86-4f9a-b7d2-cb3602b6a769",
+          "name": "Create App Instance",
+          "request": {
+            "name": "Create App Instance",
+            "description": {
+              "content": "Create an instance in a specific app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "app-instances",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"app_unique_id\": \"<string>\",\n  \"is_default\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"configuration\": \"<object>\",\n  \"version_slug\": \"<string>\",\n  \"expiry_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7054b5d-b47d-4113-a34c-5f8e27b25c80",
+              "name": "HTTP 201 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "app-instances",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_default\": \"true\",\n  \"title\": \"Final Test\",\n  \"description\": \"Slack test instance\",\n  \"app_unique_id\": \"a1027657-4e63-49d2-b3c9-e29949d02359\",\n  \"configuration\": {},\n  \"version_slug\": \"1.0.0\",\n  \"expiry_date\": \"2025-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app_unique_id\": \"a1027657-4e63-49d2-b3c9-e29949d02359\",\n  \"unique_id\": \"dcc1b286-b34f-4f87-a662-3ef45d4aefa9\",\n  \"created_at\": \"2022-07-27T11:02:22.496Z\",\n  \"modified_at\": \"2022-07-27T11:02:22.496Z\",\n  \"title\": \"Final Test\",\n  \"slug\": \"final_test\",\n  \"created_by\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n  \"modified_by\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n  \"is_default\": \"true\",\n  \"expiry_date\": \"2025-01-01T00:00:00Z\",\n  \"description\": \"instance description\",\n  \"connectivity_status\": \"UNTESTED\",\n  \"connector_version\": \"2.2.2\",\n  \"configuration\": {\n    \"token\": \"*******\"\n  },\n  \"app_title\": \"App\",\n  \"is_removed\": \"false\",\n  \"on_lite\": \"false\",\n  \"csol_lite_id\": null,\n  \"tested_by\": null,\n  \"connectivity_message\": null,\n  \"connectivity_detail\": null,\n  \"status_code\": null,\n  \"uploaded_file_data\": [],\n  \"expiry_mail_sent\": \"false\",\n  \"tested_by_data\": {\n    \"first_name\": \"John \",\n    \"last_name\": \"Doe\"\n  },\n  \"created_by_data\": {\n    \"unique_id\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n    \"first_name\": \"Jon\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"Jon Doe\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"bf62bdbe-c280-4882-b947-c750b31062fb\",\n    \"first_name\": \"Jon\",\n    \"last_name\": \"Doe\",\n    \"full_name\": \"Jon Doe\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13b33253-f655-466c-b6e1-12f01b330877",
+          "name": "Get App Instances",
+          "request": {
+            "name": "Get App Instances",
+            "description": {
+              "content": "Retrieves a list of available instances for all apps. To retrieve instances of a specific app, pass the unique ID of the app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "app-instances",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the app details."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of records to display per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_unique_id",
+                  "value": "<string>",
+                  "description": "Pass the app unique ID to retrieve the instances of the app. You can retrieve the unique ID of an app using the **Get Apps** endpoint. \nIf the app ID is not passed, all available instances will be retrieved."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83bb30fc-bd2e-4e46-890f-db10cf6a31dd",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "app-instances",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "app_unique_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"app_unique_id\": \"e591047c-8879-4579-b2db-f6a1eae44c15\",\n      \"unique_id\": \"d6a03423-52fd-479b-a79d-85102e53861f\",\n      \"created_at\": \"2021-06-30T20:52:29.968Z\",\n      \"modified_at\": \"2021-11-10T09:07:33.942Z\",\n      \"title\": \"UAT\",\n      \"slug\": \"uat_instance\",\n      \"created_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"modified_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"description\": \"new\",\n      \"tested_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"tested_date\": \"2021-11-10T09:07:33.941Z\",\n      \"connectivity_status\": \"SUCCESS\",\n      \"connectivity_message\": \"Connection test successful!\",\n      \"connector_version\": \"1.0.1\",\n      \"configuration\": {\n        \"api_key\": \"061331ee8e0efb19dbf0c60d60e67597e91594185031b798dca24cff0810a24a\"\n      },\n      \"app_title\": \"Virus Total Alpha\",\n      \"is_removed\": false,\n      \"is_default\": false,\n      \"on_lite\": false,\n      \"csol_lite_id\": \"e0011ab0-af8b-44c4-b3f1-ede9143b0507 A\",\n      \"connectivity_detail\": null,\n      \"status_code\": null,\n      \"uploaded_file_data\": [],\n      \"expiry_mail_sent\": false,\n      \"tested_by_data\": {\n        \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"David\",\n        \"full_name\": \"Bob David\"\n      },\n      \"created_by_data\": {\n        \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"David\",\n        \"full_name\": \"Bob David\"\n      },\n      \"modified_by_data\": {\n        \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"David\",\n        \"full_name\": \"Bob David\"\n      }\n    }\n  ],\n  \"count\": 1,\n  \"link\": {\n    \"next\": null,\n    \"previous\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db39852c-ef94-4433-ba3f-fa15dd8fcf79",
+          "name": "Download App Package",
+          "request": {
+            "name": "Download App Package",
+            "description": {
+              "content": "Download the app's ZIP file by entering the app identifier. You can save the response as a ZIP file to your device.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps",
+                "download",
+                ":app_slug",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_slug",
+                  "description": "(Required) Pass the app's unique resource identifier to generate a downloadable response file.\nExample: *abuse_ipdb_1_1_0*.\nYou can retrieve the app slug of an app using the **Get Apps** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38312cf5-d679-4eba-87c4-baf562bd27ce",
+              "name": "This API endpoint has no response parameters. However, the result of this API can be saved as a ZIP file on your device.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps",
+                    "download",
+                    ":app_slug",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_slug",
+                      "description": "(Required) Pass the app's unique resource identifier to generate a downloadable response file.\nExample: *abuse_ipdb_1_1_0*.\nYou can retrieve the app slug of an app using the **Get Apps** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0549a636-c731-492e-a6be-31ba04995f5b",
+          "name": "Execute Action",
+          "request": {
+            "name": "Execute Action",
+            "description": {
+              "content": "Execute an app action by passing the required parameters in the payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "actions",
+                "execute",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"app_identifier\": \"<string>\",\n  \"action_identifier\": \"<string>\",\n  \"action_params\": {\n    \"ip_address\": \"<string>\"\n  },\n  \"app_instance_slug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4af01c0f-0887-4424-8e86-d0062ee6807c",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "actions",
+                    "execute",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"app_identifier\": \"abuse_ipdb\",\n  \"action_identifier\": \"check_ip_address\",\n  \"action_params\": {\n    \"ip_address\": \"8.8.8.8\"\n  },\n  \"app_instance_slug\": \"uat_instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"result\": {\n      \"filescan_id\": {},\n      \"permalink\": \"https://www.virustotal.com/gui/url/cf4b367e49bf0b22041c6f065f4aa19f3cfe39c8d5abc0617343d1a66c6a26f5/detection/u-cf4b367e49bf0b22041c6f065f4aa19f3cfe39c8d5abc0617343d1a66c6a26f5-1642656275\",\n      \"resource\": \"google.com\",\n      \"response_code\": 1,\n      \"scans\": {},\n      \"total\": 93,\n      \"url\": \"http://google.com/\"\n    },\n    \"status_code\": 200\n  },\n  \"execution_status\": \"SUCCESS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19a640c9-0c42-4380-9f52-659ae48ee874",
+          "name": "Get Action Details",
+          "request": {
+            "name": "Get Action Details",
+            "description": {
+              "content": "Returns the details of a specific action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "app-actions",
+                ":action_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "action_id",
+                  "description": "(Required) Pass the unique ID of the action to retrieve the action details. \nExample: *52091b28-5daa-42f3-9eb9-926994a91ca5*.\nYou can retrieve unique ID of an action using the **Get App Actions** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66f441db-1e07-49c0-a87c-ab00704d4588",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "app-actions",
+                    ":action_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action_id",
+                      "description": "(Required) Pass the unique ID of the action to retrieve the action details. \nExample: *52091b28-5daa-42f3-9eb9-926994a91ca5*.\nYou can retrieve unique ID of an action using the **Get App Actions** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Action to scan URL\",\n  \"description\": \"Enter a valid url to scan\",\n  \"action_identifier\": \"url_scan\",\n  \"app_identifier\": \"virus_total_alpha\",\n  \"accepted_params\": [\n    {\n      \"title\": \"url\",\n      \"field_key\": \"url\",\n      \"field_type\": \"any\",\n      \"description\": \"Check for malicious activity\",\n      \"is_required\": \"false\",\n      \"options\": [],\n      \"option_type\": null\n    }\n  ],\n  \"unique_id\": \"09ee5c03-32d1-4a96-9223-e0bf15c9f9bf\",\n  \"app_unique_id\": \"e591047c-8879-4579-b2db-f6a1eae44c15\",\n  \"created_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n  \"modified_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n  \"created_at\": \"2021-06-30T20:48:22.273Z\",\n  \"modified_at\": \"2021-09-28T08:47:58.328Z\",\n  \"app_slug\": \"virus_total_alpha_1_0_1\",\n  \"connector_version\": \"1.0.1\",\n  \"app_title\": \"Virus Total Alpha\",\n  \"return_values\": [],\n  \"system_app\": \"false\",\n  \"created_by_data\": {\n    \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "965dc110-c387-4068-89f4-bfd8d98f6bef",
+          "name": "Get App Actions",
+          "request": {
+            "name": "Get App Actions",
+            "description": {
+              "content": "Returns a list of all available actions from all apps. To retrieve actions of a specific app, pass the Unique ID of the app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "app-actions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_unique_id",
+                  "value": "<string>",
+                  "description": "Pass the unique ID of the app to retrieve the list of actions. Example: *f8f6af0e-35c8-48e3-8cda-d0fe61476441*. You can retrieve the unique ID of an app using the **Get Apps** endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the app actions list."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of items to view per page."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebeba5d2-9b45-4c31-9397-9493c9fcff1b",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "app-actions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_unique_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"title\": \" Get Bucket Lifecycle\",\n      \"description\": \"This action retrieves the lifecycle configuration information of a bucket.\",\n      \"action_identifier\": \"aws_s3_get_bucket_lifecycle\",\n      \"app_identifier\": \"aws_s3\",\n      \"return_values\": [\n        {\n          \"title\": \"Rules\",\n          \"description\": \"This path is used to retrieve Rules from the action response.\",\n          \"data_source\": \"Rules\"\n        }\n      ],\n      \"accepted_params\": [\n        {\n          \"title\": \"Bucket Name\",\n          \"field_key\": \"bucket_name\",\n          \"field_type\": \"text\",\n          \"description\": \"Enter name of bucket.(E.g.\\\"testingbucket\\\")\",\n          \"is_required\": true,\n          \"options\": [],\n          \"option_type\": null\n        }\n      ],\n      \"unique_id\": \"ecd9c2d4-2443-44d0-ba9c-6f927e02fdcc\",\n      \"app_unique_id\": \"f8f6af0e-35c8-48e3-8cda-d0fe61476441\",\n      \"created_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"modified_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"created_at\": \"2022-01-18T11:32:10.091Z\",\n      \"modified_at\": \"2022-01-18T11:32:10.091Z\",\n      \"app_slug\": \"aws_s3_1_1_0\",\n      \"connector_version\": \"1.1.0\",\n      \"app_title\": \"AWS S3\",\n      \"system_app\": true,\n      \"created_by_data\": {\n        \"unique_id\": \"f7caf369-bf63-44a9-a8f9-b9f7605f4916\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"David\",\n        \"full_name\": \"Bob David\"\n      },\n      \"modified_by_data\": {\n        \"unique_id\": \"f7caf369-bf63-44a9-a8f9-b9f7605f4916\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"David\",\n        \"full_name\": \"Bob David\"\n      }\n    }\n  ],\n  \"count\": 1,\n  \"link\": {\n    \"next\": \"/integrations/app-action/?page=2&page_size=10&AccessID=75c235d2-c096-43ff-817b-2e137e2cdd4c&Signature=bhCSACuhvtudS55QJCULNuJFkJA=&Expires=1642567435\",\n    \"previous\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4b69710-7b7a-4823-8c22-d12458fd7557",
+          "name": "Get App Details",
+          "request": {
+            "name": "Get App Details",
+            "description": {
+              "content": "Returns the details of a specific app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps",
+                ":app_unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_unique_id",
+                  "description": "(Required) Enter the unique ID of the app to retrieve its details.\nYou can retrieve the unique IDs of apps using the **Get Apps** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db59ed88-0eac-44d8-bd83-34f28ab85119",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps",
+                    ":app_unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_unique_id",
+                      "description": "(Required) Enter the unique ID of the app to retrieve its details.\nYou can retrieve the unique IDs of apps using the **Get Apps** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"unique_id\": \"6d9c0ec4-bdf4-4334-99a0-83fffb7c3af9\",\n  \"title\": \"AbuseIPDB\",\n  \"description\": \"This app provides integration with AbuseIPDB, a project dedicated to helping combat the spread of hackers, spammers, and abusive activity on the internet.\",\n  \"app_identifier\": \"abuse_ipdb\",\n  \"published_by\": \"Cyware\",\n  \"published_date\": \"2021-10-20T08:38:03Z\",\n  \"is_system\": true,\n  \"connector_version\": \"1.0.0\",\n  \"actions_count\": 3,\n  \"instances_count\": 1,\n  \"supported_versions\": \"1.0.0\",\n  \"config_template\": [\n    {\n      \"title\": \"API Token\",\n      \"field_key\": \"api_token\",\n      \"field_type\": \"text\",\n      \"description\": \"Input the API token for authentication.\",\n      \"is_required\": true,\n      \"valid_file_type\": []\n    }\n  ],\n  \"app_slug\": \"abuse_ipdb_1_0_0\",\n  \"logo\": \"https://production.domain.com/enterprise/img/appname_logo_composite_colored.683b73e.svg\",\n  \"is_installed\": true,\n  \"major_version\": \"1\",\n  \"categories\": [\n    {\n      \"title\": \"Data Enrichment & Threat Intelligence\",\n      \"description\": \"Data Enrichment & Threat Intelligence\",\n      \"unique_id\": \"b429e1ed-1f78-483c-af29-e70c2381bbf2\"\n    }\n  ],\n  \"latest_installed_version\": \"1.0.1\",\n  \"all_installed_versions\": [\n    {\n      \"connector_version\": \"1.0.1\",\n      \"app_unique_id\": \"04373357-8f9f-4a5e-b4e7-19d9afca60ff\",\n      \"created_at\": \"2021-12-01T11:06:52.916Z\",\n      \"modified_at\": \"2021-12-21T17:00:49.941Z\",\n      \"app_identifier\": \"abuse_ipdb\"\n    }\n  ],\n  \"total_instance_count\": 6,\n  \"created_by\": \"xxxxxxxxxxxxxxxxxxxxxxxxxx\",\n  \"modified_by\": \"xxxxxxxxxxxxxxxxxxxxxxxxxx\",\n  \"app_type\": \"INSTALLED\",\n  \"connector_code\": {},\n  \"created_at\": \"2021-12-01T11:06:52.916Z\",\n  \"modified_at\": \"2021-12-21T17:00:49.941Z\",\n  \"package_hash\": \"0d8361da9dda1b7018d8123b3d3150aa\",\n  \"publisher_logo_url\": \"https://production.app.com/enterprise/img/demo_logo_composite_colored.683b73e.svg\",\n  \"python_class_name\": \"AbuseIpdbConnector\",\n  \"logo_url\": null,\n  \"download_counter\": null,\n  \"lite_enabled\": false,\n  \"documentation_url\": \"https://techdocs.cyware.com/en/index-en.html?contextId=app_name\",\n  \"major_agent_version\": \"0\",\n  \"minor_agent_version\": \"0\",\n  \"patch_agent_version\": \"0\",\n  \"minor_version\": \"1\",\n  \"patch_version\": \"0\",\n  \"created_by_data\": {\n    \"unique_id\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  },\n  \"actions_data\": [\n    {\n      \"title\": \"Check Subnet Reputation\",\n      \"description\": \"This action can be used to get the reputation of a subnet from Abuse IPDB.\",\n      \"action_identifier\": \"check_cidr\",\n      \"app_identifier\": \"cftr_v2\",\n      \"accepted_params\": [\n        {\n          \"title\": \"IP Address Subnet\",\n          \"field_key\": \"network_subnet\",\n          \"field_type\": \"text\",\n          \"description\": \"Input the IP address Subnet (CIDR)\\n- 127.0.0.1/26\",\n          \"is_required\": true,\n          \"options\": [],\n          \"option_type\": null\n        }\n      ],\n      \"unique_id\": \"52091b28-5daa-42f3-9eb9-926994a91ca5\",\n      \"app_unique_id\": \"6d9c0ec4-bdf4-4334-99a0-83fffb7c3af9\",\n      \"created_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n      \"modified_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n      \"created_at\": \"2021-12-01T11:06:52.943Z\",\n      \"modified_at\": \"2021-12-01T11:06:52.943Z\",\n      \"app_slug\": \"abuse_ipdb_1_0_0\",\n      \"connector_version\": \"1.0.0\",\n      \"app_title\": \"Abuse IPDB\",\n      \"system_app\": true,\n      \"return_values\": []\n    }\n  ],\n  \"appinstance_set_data\": [\n    {\n      \"app_unique_id\": \"6d9c0ec4-bdf4-4334-99a0-83fffb7c3af9\",\n      \"unique_id\": \"23b5d0d0-4cd0-42b6-9979-aa47d98d0790\",\n      \"created_at\": \"2021-12-21T17:00:49.934Z\",\n      \"modified_at\": \"2022-01-05T08:44:22.924Z\",\n      \"title\": \"instance name\",\n      \"slug\": \"instance name\",\n      \"created_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n      \"modified_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n      \"is_default\": true,\n      \"description\": \"This istance is used to test the action\",\n      \"tested_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n      \"tested_date\": \"2022-01-05T08:44:22.922Z\",\n      \"connectivity_status\": \"SUCCESS\",\n      \"connectivity_message\": \"Connection test successful!\",\n      \"connector_version\": \"1.0.0\",\n      \"configuration\": {},\n      \"lite_model\": \"PULL\",\n      \"app_title\": \"Abuse IPDB\",\n      \"is_removed\": false,\n      \"on_lite\": false,\n      \"csol_lite_id\": \"e0011ab0-af8b-44c4-b3f1-ede9143b0507\",\n      \"connectivity_detail\": null,\n      \"status_code\": null,\n      \"uploaded_file_data\": [],\n      \"expiry_mail_sent\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaf5fe85-9673-4d16-b2b7-42245d1c6742",
+          "name": "Get App Instance Details",
+          "request": {
+            "name": "Get App Instance Details",
+            "description": {
+              "content": "Returns the details of a specific instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps-instances",
+                ":instance_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instance_id",
+                  "description": "(Required) Pass the unique ID of the instance to retrieve details of the app instance. \nExample: *d6a03423-52fd-479b-a79d-85102e53861*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb97f8ee-d2b5-4076-88fb-ed23e3fb3192",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps-instances",
+                    ":instance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instance_id",
+                      "description": "(Required) Pass the unique ID of the instance to retrieve details of the app instance. \nExample: *d6a03423-52fd-479b-a79d-85102e53861*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app_unique_id\": \"e591047c-8879-4579-b2db-f6a1eae44c15\",\n  \"unique_id\": \"d6a03423-52fd-479b-a79d-85102e53861f\",\n  \"created_at\": \"2021-06-30T20:52:29.968Z\",\n  \"modified_at\": \"2021-11-10T09:07:33.942Z\",\n  \"title\": \"uat\",\n  \"slug\": \"uat_instance\",\n  \"created_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n  \"modified_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n  \"description\": \"new\",\n  \"tested_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n  \"tested_date\": \"2021-11-10T09:07:33.941Z\",\n  \"connectivity_status\": \"SUCCESS\",\n  \"connectivity_message\": \"Connection test successful!\",\n  \"connector_version\": \"1.0.1\",\n  \"configuration\": {\n    \"api_key\": \"061331ee8e0efb19dbf0c60d60e67597e91594185031b798dca24cff0810a24a\"\n  },\n  \"app_title\": \"Virus Total Alpha\",\n  \"is_removed\": \"false\",\n  \"is_default\": \"false\",\n  \"on_lite\": \"false\",\n  \"csol_lite_id\": null,\n  \"connectivity_detail\": null,\n  \"status_code\": null,\n  \"uploaded_file_data\": [],\n  \"expiry_mail_sent\": \"false\",\n  \"tested_by_data\": {\n    \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  },\n  \"created_by_data\": {\n    \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  },\n  \"modified_by_data\": {\n    \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n    \"first_name\": \"Bob\",\n    \"last_name\": \"David\",\n    \"full_name\": \"Bob David\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "156d260c-c478-4bae-b8cf-7dbf83d49ff4",
+          "name": "Get Apps",
+          "request": {
+            "name": "Get Apps",
+            "description": {
+              "content": "Returns a list of apps from My Apps in Orchestrate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass a value for q to search for apps matching the query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Use `ordering=title` to sort by title or `ordering=modified_at` to sort by the last update date. Add `-` before the parameter to sort in descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pass the page number to retrieve the apps list."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10",
+                  "description": "Pass the number of items to retrieve per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "Pass the user ID to retrieve a list of the apps created by a user."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_type",
+                  "value": "<string>",
+                  "description": "Pass `READY_TO_USE` to list active apps, `IN_PROGRESS` to list the inactive apps, and `INSTALLED` to retrieve apps that are installed."
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Pass the categories to filter apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_system",
+                  "value": "<boolean>",
+                  "description": "Pass false to retrieve custom apps or true to retrieve apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_configured",
+                  "value": "<boolean>",
+                  "description": "Pass true to get configured apps or false to get non-configured apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "lite_enabled",
+                  "value": "<boolean>",
+                  "description": "Pass true to retrieve agent-compatible apps or false to fetch apps that are not agent-compatible."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<string>",
+                  "description": "Pass the `created_at` value to filter apps created in the last week, month, or year."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at__gte",
+                  "value": "<string>",
+                  "description": "Pass the start time in Unix time format. The list of apps created after the entered time will be returned. Example: *1655145000*."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at__lte",
+                  "value": "<string>",
+                  "description": "Pass the end time in Unix time format. The list of apps created before the entered time will be returned. Example: *1642530599*."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66ac15b7-5728-4e78-93ff-a81c696503f4",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_system",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_configured",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lite_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at__gte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at__lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"unique_id\": \"7d0bfe45-23e3-4842-a6c2-18df18ca37d1\",\n      \"title\": \"Example App\",\n      \"description\": \"The app provides helpful actions to automate small tasks.\",\n      \"app_identifier\": \"app\",\n      \"published_by\": \"Cyware\",\n      \"is_system\": true,\n      \"connector_version\": \"1.9.7\",\n      \"actions_count\": 1,\n      \"instances_count\": 1,\n      \"lite_enabled\": true,\n      \"documentation_url\": \"https://support.cyware.com/hc/en-us/articles/4415032299277-example-app\",\n      \"supported_versions\": \"NA\",\n      \"app_slug\": \"utility_1_9_7\",\n      \"is_installed\": true,\n      \"total_instance_count\": 1,\n      \"created_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"modified_by\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n      \"app_type\": \"INSTALLED\",\n      \"created_at\": \"2024-11-05T13:31:12.322653Z\",\n      \"modified_at\": \"2024-11-05T13:31:41.751520Z\",\n      \"package_hash\": \"94b42132d1cf6cfd802d679a0236037e\",\n      \"publisher_logo_url\": \"https://production.cyware.com/enterprise/img/cyware_logo_composite_colored.683b73e.svg\",\n      \"logo_url\": \"https://production.domain.com/enterprise/img/appname_logo_composite_colored.683b73e.svg\",\n      \"download_counter\": 0,\n      \"config_template\": [],\n      \"major_agent_version\": \"0\",\n      \"minor_agent_version\": \"0\",\n      \"patch_agent_version\": \"0\",\n      \"logo\": \"https://production.domain.com/enterprise/img/appname_logo_composite_colored.683b73e.svg\",\n      \"major_version\": \"0\",\n      \"minor_version\": \"0\",\n      \"patch_version\": \"0\",\n      \"categories\": [],\n      \"latest_installed_version\": \"2.0.0\",\n      \"all_installed_versions\": [],\n      \"connector_code\": \"\",\n      \"python_class_name\": \"\",\n      \"is_active\": false,\n      \"playbook_count_all_versions\": 4,\n      \"created_by_data\": {\n        \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"full_name\": \"john doe\"\n      },\n      \"modified_by_data\": {\n        \"unique_id\": \"49c5781f-ed52-4e13-ad25-9deffdfba7a8\",\n        \"first_name\": \"john\",\n        \"last_name\": \"doe\",\n        \"full_name\": \"john doe\"\n      },\n      \"actions_data\": [\n        {\n          \"title\": \"Append Content to file\",\n          \"description\": \"This action can be used to append content to a specific file.\",\n          \"action_identifier\": \"append_file\",\n          \"app_identifier\": \"utility\",\n          \"accepted_params\": [\n            {\n              \"title\": \"Content\",\n              \"field_key\": \"content\",\n              \"field_type\": \"text\",\n              \"description\": \"Enter the content you wish to append.\",\n              \"is_required\": true,\n              \"options\": [],\n              \"option_type\": \"\"\n            }\n          ],\n          \"appinstance_set_data\": [\n            {\n              \"app_unique_id\": \"d2ef24db-e904-479c-806f-0baed192fed1\",\n              \"unique_id\": \"05b5c637-142a-4368-b5e3-7497e6123058\",\n              \"created_at\": \"2021-05-16T00:00:00Z\",\n              \"modified_at\": \"2021-08-25T06:34:10.697Z\",\n              \"title\": \"feodo tracker\",\n              \"created_by\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n              \"modified_by\": \"xxxxxxxxxxxxxxxxxxxxxxxx\",\n              \"is_default\": true,\n              \"expiry_date\": \"2025-11-30T18:29:59Z\",\n              \"description\": \"Used for testing\",\n              \"tested_by\": \"xxxxxxxxxxxxxxxxxxxxxxxxxx\",\n              \"tested_date\": \"2021-08-25T06:34:10.696Z\",\n              \"connectivity_status\": \"ERROR\",\n              \"connectivity_message\": \"Connection test failed! Check the configuration and try again.\",\n              \"connector_version\": \"1.0.0\",\n              \"configuration\": \"{}\",\n              \"app_title\": \"Feodo Tracker\",\n              \"slug\": \"\",\n              \"is_removed\": false,\n              \"on_lite\": false,\n              \"csol_lite_id\": \"\",\n              \"connectivity_detail\": \"\",\n              \"status_code\": \"\",\n              \"lite_model\": \"\",\n              \"uploaded_file_data\": [],\n              \"expiry_mail_sent\": false\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"count\": 1,\n  \"link\": {\n    \"next\": \"URL\",\n    \"previous\": \"URL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9a0945f-6d33-41a7-86d9-f8e2083c9fe1",
+          "name": "Install Custom Apps",
+          "request": {
+            "name": "Install Custom Apps",
+            "description": {
+              "content": "Install custom apps on the Orchestrate application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps",
+                "import",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"module\": \"<binary>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f898c543-9b63-450a-88cb-848647b90f92",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps",
+                    "import",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"module\": \"Respond_sample.zip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce27eea2-552c-4f4e-8c94-b28a23b26853",
+          "name": "Test App Instance Connectivity",
+          "request": {
+            "name": "Test App Instance Connectivity",
+            "description": {
+              "content": "Verify the connectivity of an app instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "integrations",
+                "apps-instances",
+                "test-connectivity",
+                ":instance_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instance_id",
+                  "description": "(Required) Enter the unique ID of the instance to test the connectivity. \nExample: *d6a03423-52fd-479b-a79d-85102e53861f*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aafcbf84-ca26-454a-ac06-b688c2603131",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "integrations",
+                    "apps-instances",
+                    "test-connectivity",
+                    ":instance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instance_id",
+                      "description": "(Required) Enter the unique ID of the instance to test the connectivity. \nExample: *d6a03423-52fd-479b-a79d-85102e53861f*.\nYou can retrieve the instance ID using the **Get App Instances** endpoint."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "json"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "69deaf23-36b7-4b2a-b7c1-eb8dbcc5f092",
+    "name": "Cyware Orchestrate (CO) Open Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

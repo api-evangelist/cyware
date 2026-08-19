@@ -1,0 +1,303 @@
+{
+  "item": [
+    {
+      "id": "06f0e32c-a5a2-4006-b748-4237a015bc23",
+      "name": "Code Snippets",
+      "description": {
+        "content": "Code Snippets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54f3d88a-4491-4e5a-9eb1-fde444babe62",
+          "name": "Get Code Snippet Details",
+          "request": {
+            "name": "Get Code Snippet Details",
+            "description": {
+              "content": "Returns details of a specific code snippet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "code-snippets",
+                ":unique_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unique_id",
+                  "description": "(Required) Pass the unique ID of the code snippet to retrieve the details. You can use the **Get Code Snippet List** endpoint to retrieve the unique ID of a code snippet."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aae3b39e-78de-4970-afb2-f29232de3e32",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "code-snippets",
+                    ":unique_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unique_id",
+                      "description": "(Required) Pass the unique ID of the code snippet to retrieve the details. You can use the **Get Code Snippet List** endpoint to retrieve the unique ID of a code snippet."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"unique_id\": \"6bd5a80a-722c-45d0-a24d-8a0ab72ae12a\",\n  \"title\": \"Default Script Template\",\n  \"description\": \"This will be the Code Template\",\n  \"code\": \"def script_function():\\n\\treturn 0\",\n  \"is_removed\": \"false\",\n  \"created\": \"2023-06-07T08:34:05.361364Z\",\n  \"created_by_data\": {\n    \"unique_id\": \"0832ea94-0252-49b2-80c1-9823b44a3f46\",\n    \"first_name\": \"john\",\n    \"last_name\": \"doe\",\n    \"full_name\": \"john doe\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cb84cee-25a4-4183-809f-50ce2b390c5c",
+          "name": "Get Code Snippets List",
+          "request": {
+            "name": "Get Code Snippets List",
+            "description": {
+              "content": "Returns the list of code snippets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "code-snippets",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pass the page number to retrieve the code snippets list."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Pass the number of items to retrieve  per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Pass the title to search for a code snippet."
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{co_host}}",
+                  "key": "co_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc7dd902-b480-4aed-9f2c-41e2b65efd36",
+              "name": "HTTP 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "code-snippets",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_id",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{co_host}}",
+                      "key": "co_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": {\n    \"next\": \"code-snippets/?page=2&page_size=1\"\n  },\n  \"count\": \"1\",\n  \"results\": [\n    {\n      \"unique_id\": \"6bd5a80a-722c-45d0-a24d-8a0ab72ae12a\",\n      \"title\": \"Default Script Template\",\n      \"description\": \"This will be the Code Template\",\n      \"is_removed\": \"false\",\n      \"created\": \"2023-06-07T08:34:05.361364Z\",\n      \"created_by_data\": {\n        \"unique_id\": \"0832ea94-0252-49b2-80c1-9823b44a3f46\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"full_name\": \"john doe\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo.cyware.com",
+      "key": "co_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{co_host}}/soarapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f74770f-0127-48e0-b46e-7bed9dcdd6dc",
+    "name": "Cyware Orchestrate (CO) Open Code Snippets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.\n\nOrchestrate is deployed per tenant, so the server host is the customer's own Orchestrate deployment; the API is mounted under `/soarapi`.\n\nThis document was assembled by API Evangelist from Cyware's own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host's llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.\n\nContact Support:\n Name: Cyware",
+      "type": "text/plain"
+    }
+  }
+}

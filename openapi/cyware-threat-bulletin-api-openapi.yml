@@ -1,0 +1,1233 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Threat Bulletin API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Threat Bulletin
+  description: Threat Bulletin
+paths:
+  /conversion/threat-bulletin/:
+    post:
+      operationId: createThreatBulletin
+      summary: Create Threat Bulletin
+      tags:
+      - Threat Bulletin
+      description: Creates a threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/create-threat-bulletin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass the title for the threat bulletin.
+                  examples:
+                  - yoyo
+                description:
+                  type: string
+                  description: Pass the description for the threat bulletin.
+                  examples:
+                  - '<table class='''' style=''width: 91%; margin-left: calc(9%);''><tbody> <tr><td style=''width: 50.0000%;''>Object Type</td><td style=''width: 50.0000%;'' class=''''>Value</td></tr><tr :data-new=''1.2.1.1''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>1.2.1.1</td></tr><tr :data-new=''3.3.2.1''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>3.3.2.1</td></tr><tr :data-new=''33.22.1.11''><td style=''width: 50.0000%;'' class=''''>ipv4</td><td style=''width: 50.0000%;''>33.22.1.11</td></tr><tr :data-new=''google.com''><td style=''width: 50.0000%;''>Domain</td><td style=''width: 50.0000%;''>google.com</td></tr><tr :data-new=''Graphite''><td style=''width: 50.0000%;''>Malware</td><td style=''width: 50.0000%;''>Graphite</td></tr></tbody></table><table class='''' style=''width: 91%; margin-left: calc(9%);''><tbody><tr><td style=''width: 50.0000%;''>Object Type</td><td style=''width: 50.0000%;'' class=''''>Value</td></tr><tr :data-cql=''b24f49e0-a411-4a0a-9b57-6e2628fe299f''><td style=''width: 50.0000%;''>Domain</td><td style=''width: 50.0000%;''>testing3.com</td></tr><tr :data-cql=''05e7ca93-4135-491a-8c52-02ff16137b55''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>94.140.112.178</td></tr><tr :data-cql=''663cafd3-e74a-4ed1-89d2-a151c0343b2c''><td style=''width: 50.0000%;''>ipv4</td><td style=''width: 50.0000%;''>12.22.33.44</td></tr><tr :data-cql=''e926e6bb-7125-4037-90e5-1a820f1a8523''><td style=''width: 50.0000%;>Domain</td><td style=''width: 50.0000%;''>google.com</td></tr><tr :data-cql=''60db773b-387c-4cbb-b23a-6e7e73924d21''><td style=''width: 50.0000%;''>Identity</td><td style=''width: 50.0000%;''>Media</td></tr></tbody></table>'''
+                status:
+                  type: string
+                  description: Pass the status of the creation of the threat bulletin.
+                  examples:
+                  - CREATED
+                tlp:
+                  type: string
+                  description: Pass the TLP for the threat bulletin.
+                  examples:
+                  - RED
+                server_collections:
+                  type: array
+                  description: Pass the list of server collections.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Pass the collection ID.
+                        examples:
+                        - collection_id
+                      name:
+                        type: string
+                        description: Pass the collection name.
+                        examples:
+                        - collection1
+                tags:
+                  type: array
+                  description: Pass the collection name.
+                  items:
+                    type: object
+                    properties:
+                      colour_code:
+                        type: object
+                        description: Pass the colour code.
+                      created:
+                        type: number
+                        description: Pass the time of the creation of the threat bulletin.
+                        examples:
+                        - 1627778138.196819
+                      modified_by:
+                        type: string
+                        description: Pass the user who modified the threat bulletin.
+                        examples:
+                        - system@default.tld
+                      name:
+                        type: string
+                        description: Pass the tag name.
+                        examples:
+                        - espionage
+                      modified:
+                        type: number
+                        description: Pass the time of modification of threat bulletin.
+                        examples:
+                        - 1627778138.197279
+                      id:
+                        type: string
+                        description: Pass the tag ID.
+                        examples:
+                        - 2a1218ae-8560-4c5b-a4d0-edadd25f9710
+                      created_by:
+                        type: string
+                        description: Pass the user who created the threat bulletin.
+                        examples:
+                        - system@default.tld
+                attachments:
+                  type: array
+                  description: Pass the list of attachments.
+                  items:
+                    type: object
+                    properties:
+                      data:
+                        type: string
+                        description: Pass the data for the attachment.
+                        examples:
+                        - PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K
+                      mime_type:
+                        type: string
+                        description: Pass the attachment type.
+                        examples:
+                        - text/xml
+                      size:
+                        type: string
+                        description: Pass the attachment size.
+                        examples:
+                        - '1062'
+                      name:
+                        type: string
+                        description: Pass the attachment name.
+                        examples:
+                        - 0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml
+              required:
+              - title
+            example:
+              title: yoyo
+              description: '<table class='''' style=''width: 91%; margin-left: calc(9%);''><tbody> <tr><td style=''width: 50.0000%;''>Object Type</td><td style=''width: 50.0000%;'' class=''''>Value</td></tr><tr :data-new=''1.2.1.1''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>1.2.1.1</td></tr><tr :data-new=''3.3.2.1''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>3.3.2.1</td></tr><tr :data-new=''33.22.1.11''><td style=''width: 50.0000%;'' class=''''>ipv4</td><td style=''width: 50.0000%;''>33.22.1.11</td></tr><tr :data-new=''google.com''><td style=''width: 50.0000%;''>Domain</td><td style=''width: 50.0000%;''>google.com</td></tr><tr :data-new=''Graphite''><td style=''width: 50.0000%;''>Malware</td><td style=''width: 50.0000%;''>Graphite</td></tr></tbody></table><table class='''' style=''width: 91%; margin-left: calc(9%);''><tbody><tr><td style=''width: 50.0000%;''>Object Type</td><td style=''width: 50.0000%;'' class=''''>Value</td></tr><tr :data-cql=''b24f49e0-a411-4a0a-9b57-6e2628fe299f''><td style=''width: 50.0000%;''>Domain</td><td style=''width: 50.0000%;''>testing3.com</td></tr><tr :data-cql=''05e7ca93-4135-491a-8c52-02ff16137b55''><td style=''width: 50.0000%;''>Ipv4</td><td style=''width: 50.0000%;''>94.140.112.178</td></tr><tr :data-cql=''663cafd3-e74a-4ed1-89d2-a151c0343b2c''><td style=''width: 50.0000%;''>ipv4</td><td style=''width: 50.0000%;''>12.22.33.44</td></tr><tr :data-cql=''e926e6bb-7125-4037-90e5-1a820f1a8523''><td style=''width: 50.0000%;>Domain</td><td style=''width: 50.0000%;''>google.com</td></tr><tr :data-cql=''60db773b-387c-4cbb-b23a-6e7e73924d21''><td style=''width: 50.0000%;''>Identity</td><td style=''width: 50.0000%;''>Media</td></tr></tbody></table>'''
+              status: CREATED
+              tlp: RED
+              server_collections:
+              - id: collection_id
+                name: collection1
+              tags:
+              - colour_code: {}
+                created: 1627778138.196819
+                modified_by: system@default.tld
+                name: espionage
+                modified: 1627778138.197279
+                id: 2a1218ae-8560-4c5b-a4d0-edadd25f9710
+                created_by: system@default.tld
+              attachments:
+              - data: PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K
+                mime_type: text/xml
+                size: '1062'
+                name: 0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml
+      responses:
+        '201':
+          description: HTTP 201 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the ID of the threat bulletin.
+                    examples:
+                    - 4d01804f-86b8-48d7-9afd-a1bbb65e7bc3
+                  created:
+                    type: string
+                    description: Returns the epoch time of the created date.
+                    examples:
+                    - '2022-02-12T18:05:16.830634Z'
+                  modified:
+                    type: string
+                    description: Returns the epoch time of the last modified date.
+                    examples:
+                    - '2022-02-12T18:05:16.830634Z'
+                  object_id:
+                    type: object
+                    description: Returns the unique identifier of the object.
+                  created_by:
+                    type: string
+                    description: Returns the details of the user who created the bulletin.
+                    examples:
+                    - 38f5828c-74b6-43b5-91f3-4f653ddf85c6
+                  modified_by:
+                    type: string
+                    description: Returns the email address of the user who last modified the bulletin.
+                    examples:
+                    - 38f5828c-74b6-43b5-91f3-4f653ddf85c6
+                  name:
+                    type: string
+                    description: Returns the name of the bulletin.
+                    examples:
+                    - my_bulletin1
+                  status:
+                    type: string
+                    description: Returns the status of creation.
+                    examples:
+                    - DRAFT
+                  tags:
+                    type: string
+                    description: Returns the tags associated with the bulletin.
+                    examples:
+                    - '[{"colour_code": null, "created": 1627778138.196819, "modified_by": "system@default.tld", "name": "espionage", "modified": 1627778138.197279, "id": "2a1218ae-8560-4c5b-a4d0-edadd25f9710", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1626170193.96807, "modified_by": "system@default.tld", "name": "APT29", "modified": 1626170193.968943, "id": "8f60e945-a5bc-4d76-ae5f-d83bea1d7b6d", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1628756542.839106, "modified_by": "system@default.tld", "name": "wellmail", "modified": 1628756542.839431, "id": "9283f065-f057-4ed5-8bcc-f2aa162514c3", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1628756542.83903, "modified_by": "system@default.tld", "name": "wellmess", "modified": 1628756542.839391, "id": "9a58306f-81df-4f36-8e3a-fb425c7b3b4e", "created_by": "system@default.tld"}]'
+                  score:
+                    type: object
+                    description: Returns the score associated.
+                  tlp:
+                    type: object
+                    description: Returns the TLP marked.
+                  server_collections:
+                    type: string
+                    description: Returns the list of server collections.
+                    examples:
+                    - '[]'
+              example:
+                id: 4d01804f-86b8-48d7-9afd-a1bbb65e7bc3
+                created: '2022-02-12T18:05:16.830634Z'
+                modified: '2022-02-12T18:05:16.830634Z'
+                object_id: {}
+                created_by: 38f5828c-74b6-43b5-91f3-4f653ddf85c6
+                modified_by: 38f5828c-74b6-43b5-91f3-4f653ddf85c6
+                name: my_bulletin1
+                status: DRAFT
+                tags: '[{"colour_code": null, "created": 1627778138.196819, "modified_by": "system@default.tld", "name": "espionage", "modified": 1627778138.197279, "id": "2a1218ae-8560-4c5b-a4d0-edadd25f9710", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1626170193.96807, "modified_by": "system@default.tld", "name": "APT29", "modified": 1626170193.968943, "id": "8f60e945-a5bc-4d76-ae5f-d83bea1d7b6d", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1628756542.839106, "modified_by": "system@default.tld", "name": "wellmail", "modified": 1628756542.839431, "id": "9283f065-f057-4ed5-8bcc-f2aa162514c3", "created_by": "system@default.tld"}, {"colour_code": null, "created": 1628756542.83903, "modified_by": "system@default.tld", "name": "wellmess", "modified": 1628756542.839391, "id": "9a58306f-81df-4f36-8e3a-fb425c7b3b4e", "created_by": "system@default.tld"}]'
+                score: {}
+                tlp: {}
+                server_collections: '[]'
+    get:
+      operationId: listThreatBulletins
+      summary: Get Threat Bulletin List
+      tags:
+      - Threat Bulletin
+      description: Returns a list of threat bulletins with details.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/list-threat-bulletins
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a query text to search for threat bulletin names.
+          examples:
+          - redhat
+        description: Pass a query text to search for threat bulletin names.
+      - name: received
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a true to retrieve received threat bulletins only.
+          default: 'false'
+          examples:
+          - 'false'
+        description: Pass a true to retrieve received threat bulletins only.
+      - name: is_active
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a true to retrieve active threat bulletins only.
+          default: 'false'
+          examples:
+          - 'false'
+        description: Pass a true to retrieve active threat bulletins only.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve threat bulletins.
+          default: '1'
+          examples:
+          - '1'
+        description: Pass the page number to retrieve threat bulletins.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of threat bulletins to retrieve on each page.
+          maxLength: 100
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of threat bulletins to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link for the next page.
+                  page_size:
+                    type: number
+                    description: Returns the page size.
+                    examples:
+                    - '10'
+                  previous:
+                    type: object
+                    description: Returns the link for the previous page.
+                  results:
+                    type: array
+                    description: Returns the list of threat bulletins.
+                    items:
+                      type: object
+                      properties:
+                        client_collections:
+                          type: object
+                          description: Returns the list of client collections.
+                        confidence:
+                          type: string
+                          description: Returns the confidence score of the threat bulletin.
+                          examples:
+                          - MEDIUM
+                        created:
+                          type: number
+                          description: Returns the time of creation in epoch format.
+                          examples:
+                          - '1685944400'
+                        created_by:
+                          type: object
+                          description: Returns the details of the user who created the threat bulletin.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address of the user who created the bulletin.
+                              examples:
+                              - john@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who created the bulletin.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the ID of the user who created the bulletin.
+                              examples:
+                              - 4218968c-acf3-4789-a92f-7231d0858590
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who created the bulletin.
+                        id:
+                          type: string
+                          description: Returns the ID of the threat bulletin.
+                          examples:
+                          - a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+                        metadata:
+                          type: string
+                          description: Returns the metadata associated with the threat bulletin.
+                          examples:
+                          - '{"is_added_object":true,"height":640,"width":1064}'
+                        modified:
+                          type: number
+                          description: Returns the time of modification of threat bulletin in epoch format.
+                          examples:
+                          - '1686547577'
+                        modified_by:
+                          type: object
+                          description: Returns the details of the user who modified the threat bulletin.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address of the user who last modified the bulletin.
+                              examples:
+                              - john@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who last modified the bulletin.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the user ID of the user who last modified the bulletin.
+                              examples:
+                              - db2139ce-29d1-4db3-9848-2a75a686aacf
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who last modified the bulletin.
+                        published:
+                          type: boolean
+                          description: Returns True to indicate if the threat bulletin is published, else returns False.
+                          examples:
+                          - 'false'
+                        published_on:
+                          type: object
+                          description: Returns the published time of the threat bulletin in epoch format.
+                        received:
+                          type: boolean
+                          description: Returns true if the the threat bulletin is received from a source.
+                          examples:
+                          - 'false'
+                        report_id:
+                          type: object
+                          description: Returns the report ID.
+                        server_collections:
+                          type: object
+                          description: Returns the list of server collections with the ID and name of the servers.
+                        status:
+                          type: string
+                          description: Returns the creation status of the threat bulletin.
+                          examples:
+                          - DRAFT
+                        tags:
+                          type: object
+                          description: Returns the list of tags.
+                        title:
+                          type: string
+                          description: Returns the title for the threat bulletin.
+                          examples:
+                          - RedHat
+                        tlp:
+                          type: string
+                          description: Returns the TLP of the threat bulletin.
+                          examples:
+                          - AMBER
+                  total:
+                    type: number
+                    description: Returns the total number of threat bulletins available in the CTIX application.
+                    examples:
+                    - '1'
+              example:
+                next: {}
+                page_size: '10'
+                previous: {}
+                results:
+                - client_collections: {}
+                  confidence: MEDIUM
+                  created: '1685944400'
+                  created_by:
+                    email: john@cyware.com
+                    first_name: john
+                    id: 4218968c-acf3-4789-a92f-7231d0858590
+                    last_name: ''
+                  id: a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+                  metadata: '{"is_added_object":true,"height":640,"width":1064}'
+                  modified: '1686547577'
+                  modified_by:
+                    email: john@cyware.com
+                    first_name: john
+                    id: db2139ce-29d1-4db3-9848-2a75a686aacf
+                    last_name: ''
+                  published: 'false'
+                  published_on: {}
+                  received: 'false'
+                  report_id: {}
+                  server_collections: {}
+                  status: DRAFT
+                  tags: {}
+                  title: RedHat
+                  tlp: AMBER
+                total: '1'
+  /conversion/threat-bulletin/{threat_bulletin_id}/attachments/{attachment_id}/download/:
+    get:
+      operationId: downloadAttachment
+      summary: Download Threat Bulletin Attachment
+      tags:
+      - Threat Bulletin
+      description: Downloads an attachment from a threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/download-attachment
+      parameters:
+      - name: token
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the download token.
+          examples:
+          - '{token}'
+        description: Pass the download token.
+      - name: threat_bulletin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat bulletin.
+          examples:
+          - 6ecd8c8a-c869-426e-8d78-b4bf26314bb2
+        description: Pass the ID of a threat bulletin.
+      - name: attachment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of an attachment.
+          examples:
+          - 599aae95-0e77-4bfe-bcdf-efb9a7633e8e
+        description: Pass the ID of an attachment.
+      responses:
+        '200':
+          description: Returns the attachment from a threat bulletin in downloadable format.
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  raw:
+                    type: object
+              example:
+                raw: {}
+  /conversion/threat-bulletin/{threat_bulletin_id}/attachments/:
+    get:
+      operationId: listThreatBulletinAttachments
+      summary: Get Threat Bulletin Attachments List
+      tags:
+      - Threat Bulletin
+      description: Returns all attachments of one threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/list-threat-bulletin-attachments
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: threat_bulletin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat bulletin.
+          examples:
+          - 6ecd8c8a-c869-426e-8d78-b4bf26314bb2
+        description: Pass the ID of a threat bulletin.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the link for the next page.
+                  previous:
+                    type: object
+                    description: Returns the link for the previous page.
+                  page_size:
+                    type: number
+                    description: Returns the page size.
+                    examples:
+                    - '10'
+                  total:
+                    type: number
+                    description: Returns the count of attachments.
+                    examples:
+                    - '2'
+                  results:
+                    type: array
+                    description: Returns the list of attachments.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the attachment ID.
+                          examples:
+                          - 599aae95-0e77-4bfe-bcdf-efb9a7633e8e
+                        data:
+                          type: string
+                          description: Returns the attachment data.
+                          examples:
+                          - PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K
+                        name:
+                          type: string
+                          description: Returns the attachment name.
+                          examples:
+                          - 0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml
+                        size:
+                          type: number
+                          description: Returns the attachment size.
+                          examples:
+                          - '1062'
+                        mime_type:
+                          type: string
+                          description: Returns the type of attachment.
+                          examples:
+                          - text/xml
+              example:
+                next: {}
+                previous: {}
+                page_size: '10'
+                total: '2'
+                results:
+                - id: 599aae95-0e77-4bfe-bcdf-efb9a7633e8e
+                  data: PHN0aXg6U1RJWF9QYWNrYWdlIAoJeG1sbnM6c3RpeD0iaHR0cDovL3N0aXgubWl0cmUub3JnL3N0aXgtMSIKCXhtbG5zOnR0cD0iaHR0cDovL3N0aXgubWl0cmUub3JnL1RUUC0xIgoJeG1sbnM6Y3RpeD0iaHR0cHM6Ly9jeXdhcmUuY29tIgoJeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgl4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyIKCXhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIKCXhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCgkgaWQ9ImN0aXg6UGFja2FnZS1mYmI2M2RjNS0xYmRjLTQwNWItOWYyNy1iMTA2NDM5OTgyMDgiIHZlcnNpb249IjEuMiIgdGltZXN0YW1wPSIyMDIxLTA3LTE1VDE0OjE3OjEzLjA2MjM4NCswMDowMCI+CiAgICA8c3RpeDpTVElYX0hlYWRlcj4KICAgICAgICA8c3RpeDpUaXRsZT5kY2ZndmJobmo8L3N0aXg6VGl0bGU+CiAgICA8L3N0aXg6U1RJWF9IZWFkZXI+CiAgICA8c3RpeDpUVFBzPgogICAgICAgIDxzdGl4OlRUUCBpZD0iY3RpeDp0dHAtMDdjYmY1NTYtMjU5Yi00YmUxLTg1MDctZjhhN2E3NzBhNzliIiB0aW1lc3RhbXA9IjIwMjEtMDctMTVUMTQ6MTc6MzMuNDA4NTM1KzAwOjAwIiB4c2k6dHlwZT0ndHRwOlRUUFR5cGUnPgogICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgIDx0dHA6QmVoYXZpb3I+CiAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJucz4KICAgICAgICAgICAgICAgICAgICA8dHRwOkF0dGFja19QYXR0ZXJuPgogICAgICAgICAgICAgICAgICAgICAgICA8dHRwOlRpdGxlPmNmdmdiaG5tPC90dHA6VGl0bGU+CiAgICAgICAgICAgICAgICAgICAgPC90dHA6QXR0YWNrX1BhdHRlcm4+CiAgICAgICAgICAgICAgICA8L3R0cDpBdHRhY2tfUGF0dGVybnM+CiAgICAgICAgICAgIDwvdHRwOkJlaGF2aW9yPgogICAgICAgIDwvc3RpeDpUVFA+CiAgICA8L3N0aXg6VFRQcz4KPC9zdGl4OlNUSVhfUGFja2FnZT4K
+                  name: 0a95b83f-70b7-43d1-a5d2-cf76faaacc6f_15_Jul_2021.xml
+                  size: '1062'
+                  mime_type: text/xml
+  /conversion/threat-bulletin/send-email/:
+    post:
+      operationId: sendEmail
+      summary: Send Email
+      tags:
+      - Threat Bulletin
+      description: Sends the threat bulletin to internal and external recipients through email.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/send-email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  description: Pass the subject for the mail.
+                  examples:
+                  - subject2
+                id:
+                  type: string
+                  description: Pass the ID.
+                  examples:
+                  - 03d972c5-468a-44bf-ba7d-65001a4ad9a5
+                external_recipients:
+                  type: object
+                  description: Pass the list of external recipients.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass the list of recipient email addresses.
+                      items:
+                        type: string
+                        description: This is an example value.
+                        examples:
+                        - abc@gmail.com
+                    cc:
+                      type: array
+                      description: Pass the list of recipient email addresses.
+                      items:
+                        type: string
+                        description: This is an example value.
+                        examples:
+                        - abc1@gmail.com
+                    bcc:
+                      type: array
+                      description: Pass the list of recipient email addresses.
+                      items:
+                        type: string
+                        description: This is an example value.
+                        examples:
+                        - abc2@gmail.com
+                  required:
+                  - to
+                internal_recipients:
+                  type: object
+                  description: Pass the list of internal recipients.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass details of the internal recipient of the report.
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: Pass the user ID.
+                            examples:
+                            - 48c1b826-c8c6-48a6-a1b2-f52faef1035d
+                          first_name:
+                            type: string
+                            description: Pass the first name of the internal recipient.
+                            examples:
+                            - LDAP
+                          last_name:
+                            type: string
+                            description: Pass the last name of the internal recipient.
+                            examples:
+                            - User
+                          email:
+                            type: string
+                            description: Pass the email address.
+                            examples:
+                            - sushant.choudhary+2@cyware.com
+                    cc:
+                      type: array
+                      description: Pass the cc email addresses for the internal recipients
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: Pass the user ID.
+                            examples:
+                            - 74b34e52-a0e3-4277-915c-65096f8ceeba
+                          first_name:
+                            type: string
+                            description: Pass the first name of the internal recipient.
+                            examples:
+                            - hrithik.puppala
+                          last_name:
+                            type: string
+                            description: Pass the last name of the internal recipient.
+                            examples:
+                            - hrithik.puppala
+                          email:
+                            type: string
+                            description: Pass the email address.
+                            examples:
+                            - hrithik.puppala@cyware.com
+                    bcc:
+                      type: array
+                      description: Pass the bcc email addresses for the internal recipients
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: Pass the user ID.
+                            examples:
+                            - f2e42899-f13d-47b0-bf52-57b444f3c881
+                          first_name:
+                            type: string
+                            description: Pass the first name of the internal recipient.
+                            examples:
+                            - Test
+                          last_name:
+                            type: string
+                            description: Pass the last name of the internal recipient.
+                            examples:
+                            - User
+                          email:
+                            type: string
+                            description: Pass the email address.
+                            examples:
+                            - sushant.choudhary+1@cyware.com
+              required:
+              - subject
+            example:
+              subject: subject2
+              id: 03d972c5-468a-44bf-ba7d-65001a4ad9a5
+              external_recipients:
+                to:
+                - abc@gmail.com
+                cc:
+                - abc1@gmail.com
+                bcc:
+                - abc2@gmail.com
+              internal_recipients:
+                to:
+                - id: 48c1b826-c8c6-48a6-a1b2-f52faef1035d
+                  first_name: LDAP
+                  last_name: User
+                  email: sushant.choudhary+2@cyware.com
+                cc:
+                - id: 74b34e52-a0e3-4277-915c-65096f8ceeba
+                  first_name: hrithik.puppala
+                  last_name: hrithik.puppala
+                  email: hrithik.puppala@cyware.com
+                bcc:
+                - id: f2e42899-f13d-47b0-bf52-57b444f3c881
+                  first_name: Test
+                  last_name: User
+                  email: sushant.choudhary+1@cyware.com
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: string
+                    description: Returns a success or failure message.
+                    examples:
+                    - Task enqueued for pdf generation and mail
+              example:
+                details: Task enqueued for pdf generation and mail
+  /conversion/threat-bulletin/{threat_bulletin_id}/:
+    get:
+      operationId: threatBulletinDetails
+      summary: Get Threat Bulletin Details
+      tags:
+      - Threat Bulletin
+      description: Returns the details of a threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/threat-bulletin-details
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: threat_bulletin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat bulletin.
+          examples:
+          - a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+        description: Pass the ID of a threat bulletin.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attachments:
+                    type: array
+                    description: Returns the list of attachments.
+                    items: {}
+                  client_collections:
+                    type: object
+                    description: Returns the list or group of collections associated with or accessible to the client.
+                  confidence:
+                    type: string
+                    description: Returns the confidence of the bulletin.
+                    examples:
+                    - MEDIUM
+                  created:
+                    type: number
+                    description: Returns the time of creation.
+                    examples:
+                    - '1685944400'
+                  created_by:
+                    type: object
+                    description: Returns the user who created the threat bulletin.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the bulletin.
+                        examples:
+                        - john@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the bulletin.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the bulletin.
+                        examples:
+                        - 4218968c-acf3-4789-a92f-7231d0858590
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the bulletin.
+                  description:
+                    type: string
+                    description: Returns the description for the threat bulletin.
+                    examples:
+                    - '<h2>List of Objects</h2><table cy:data-table="c8ea7c80-af59-43f9-b890-364f527b8529" style="width: 100%; padding: 16px 0px; border-spacing: 0px;"><thead><tr><th cy:data-th="name" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Value</th><th cy:data-th="type" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Type</th><th cy:data-th="sources" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Source</th></tr></thead><tbody><tr cy:data-tr="undefined" cy:data-id="63fd8eb4-7ad9-4e27-8818-da4767efcaaa" cy:data-ref="c8ea7c80-af59-43f9-b890-364f527b8529"><td cy:data-td="name" cy:data-id="63fd8eb4-7ad9-4e27-8818-da4767efcaaa" cy:data-ref="c8ea7c80-af59-43f9-b890-364f527b8529" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">77.91.68.62</td><td cy:data-td="type" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">indicator</td><td cy:data-td="sources" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">CrowdStrike</td></tr></tbody></table>'
+                  id:
+                    type: string
+                    description: Returns the collection ID.
+                    examples:
+                    - a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+                  metadata:
+                    type: string
+                    description: Returns the metadata associated with the threat bulletin.
+                    examples:
+                    - '{"is_added_object":true,"height":640,"width":1064}'
+                  modified:
+                    type: number
+                    description: Returns the time of modification.
+                    examples:
+                    - '1686547577'
+                  modified_by:
+                    type: object
+                    description: Returns the user who modified the threat bulletin.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who last modified the bulletin.
+                        examples:
+                        - john@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who last modified the bulletin.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the user ID of the user who last modified the bulletin.
+                        examples:
+                        - db2139ce-29d1-4db3-9848-2a75a686aacf
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who last modified the bulletin.
+                  published:
+                    type: boolean
+                    description: Returns True to indicate if the threat bulletin is published, else returns False.
+                    examples:
+                    - 'false'
+                  published_on:
+                    type: object
+                    description: Returns the published time of the threat bulletin in epoch format.
+                  received:
+                    type: boolean
+                    description: Returns true if the the threat bulletin is received from a source.
+                    examples:
+                    - 'false'
+                  report_id:
+                    type: object
+                    description: Returns the ID of the report.
+                  server_collections:
+                    type: object
+                    description: Returns the list of server collections.
+                  status:
+                    type: string
+                    description: Returns the status of the creation of the threat bulletin.
+                    examples:
+                    - DRAFT
+                  tags:
+                    type: object
+                    description: Returns the list of tags.
+                  title:
+                    type: string
+                    description: Returns the title for the threat bulletin.
+                    examples:
+                    - RedHat
+                  tlp:
+                    type: string
+                    description: Returns the TLP of the threat bulletin.
+                    examples:
+                    - AMBER
+              example:
+                attachments: []
+                client_collections: {}
+                confidence: MEDIUM
+                created: '1685944400'
+                created_by:
+                  email: john@cyware.com
+                  first_name: john
+                  id: 4218968c-acf3-4789-a92f-7231d0858590
+                  last_name: ''
+                description: '<h2>List of Objects</h2><table cy:data-table="c8ea7c80-af59-43f9-b890-364f527b8529" style="width: 100%; padding: 16px 0px; border-spacing: 0px;"><thead><tr><th cy:data-th="name" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Value</th><th cy:data-th="type" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Type</th><th cy:data-th="sources" style="padding: 2px 16px; border: 0.5px solid rgb(223, 226, 231); font-weight: 500; font-size: 14px; background: rgb(250, 251, 252);">Source</th></tr></thead><tbody><tr cy:data-tr="undefined" cy:data-id="63fd8eb4-7ad9-4e27-8818-da4767efcaaa" cy:data-ref="c8ea7c80-af59-43f9-b890-364f527b8529"><td cy:data-td="name" cy:data-id="63fd8eb4-7ad9-4e27-8818-da4767efcaaa" cy:data-ref="c8ea7c80-af59-43f9-b890-364f527b8529" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">77.91.68.62</td><td cy:data-td="type" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">indicator</td><td cy:data-td="sources" style="padding: 2px 16px; word-break: break-all; font-size: 14px; border: 0.5px solid rgb(223, 226, 231); background: rgb(250, 251, 252);">CrowdStrike</td></tr></tbody></table>'
+                id: a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+                metadata: '{"is_added_object":true,"height":640,"width":1064}'
+                modified: '1686547577'
+                modified_by:
+                  email: john@cyware.com
+                  first_name: john
+                  id: db2139ce-29d1-4db3-9848-2a75a686aacf
+                  last_name: ''
+                published: 'false'
+                published_on: {}
+                received: 'false'
+                report_id: {}
+                server_collections: {}
+                status: DRAFT
+                tags: {}
+                title: RedHat
+                tlp: AMBER
+    put:
+      operationId: updateThreatBulletin
+      summary: Update Threat Bulletin
+      tags:
+      - Threat Bulletin
+      description: Updates the threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/update-threat-bulletin
+      parameters:
+      - name: threat_bulletin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the threat bulletin ID.
+          examples:
+          - e0ff6847-8657-4419-9b00-2e5b688e7827
+        description: Pass the threat bulletin ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass the title for the threat bulletin.
+                  examples:
+                  - my_bulletin
+                description:
+                  type: string
+                  description: Pass the description for the threat bulletin.
+                  examples:
+                  - my_bulletin
+                tags:
+                  type: array
+                  description: Pass the list of tags.
+                  items: {}
+                server_collections:
+                  type: array
+                  description: Pass the list of server collections.
+                  items: {}
+                status:
+                  type: string
+                  description: Pass the status of creation.
+                  examples:
+                  - DRAFT
+              required:
+              - title
+            example:
+              title: my_bulletin
+              description: my_bulletin
+              tags: []
+              server_collections: []
+              status: DRAFT
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the collection ID.
+                    examples:
+                    - c96e8a8a-d9d6-4c2f-8def-9d08d628b157
+                  title:
+                    type: string
+                    description: Returns the title for the threat bulletin.
+                    examples:
+                    - my_bulletin
+                  created:
+                    type: number
+                    description: Returns the time of the creation of the threat bulletin.
+                    examples:
+                    - '1708925624'
+                  modified:
+                    type: number
+                    description: Returns the time of modification of the threat bulletin.
+                    examples:
+                    - '1708926876'
+                  report_id:
+                    type: string
+                    description: Returns the report ID.
+                    examples:
+                    - 13ad990c-2125-4546-89b3-fce8db538eeb
+                  created_by:
+                    type: string
+                    description: Returns the user who created the threat bulletin.
+                    examples:
+                    - a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                  modified_by:
+                    type: string
+                    description: Returns the user who modified the threat bulletin.
+                    examples:
+                    - a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                  status:
+                    type: string
+                    description: Returns the status of creation.
+                    examples:
+                    - DRAFT
+                  tags:
+                    type: array
+                    description: Returns the list of tags.
+                    items: {}
+                  description:
+                    type: string
+                    description: Returns the description for the threat bulletin.
+                    examples:
+                    - my_bulletin
+                  tlp:
+                    type: object
+                    description: Returns the TLP for the threat bulletin.
+                  server_collections:
+                    type: object
+                    description: Returns the list of server collections.
+                  client_collections:
+                    type: object
+                    description: Returns the list of client collections.
+                  received:
+                    type: boolean
+                    description: Returns true if the the threat bulletin is received from a source.
+                    examples:
+                    - 'false'
+                  published_on:
+                    type: object
+                    description: Returns the published time of the threat bulletin in epoch format.
+                  attachments:
+                    type: array
+                    description: Returns the list of attachments.
+                    items: {}
+                  metadata:
+                    type: string
+                    description: Returns the additional field of the bulletin.
+                    examples:
+                    - '{"is_added_object":false,"height":640,"width":1064}'
+                  published:
+                    type: boolean
+                    description: Returns True to indicate if the threat bulletin is published, else returns False.
+                    examples:
+                    - 'false'
+                  confidence:
+                    type: string
+                    description: Returns the confidence of the bulletin.
+                    examples:
+                    - MEDIUM
+              example:
+                id: c96e8a8a-d9d6-4c2f-8def-9d08d628b157
+                title: my_bulletin
+                created: '1708925624'
+                modified: '1708926876'
+                report_id: 13ad990c-2125-4546-89b3-fce8db538eeb
+                created_by: a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                modified_by: a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                status: DRAFT
+                tags: []
+                description: my_bulletin
+                tlp: {}
+                server_collections: {}
+                client_collections: {}
+                received: 'false'
+                published_on: {}
+                attachments: []
+                metadata: '{"is_added_object":false,"height":640,"width":1064}'
+                published: 'false'
+                confidence: MEDIUM
+  /conversion/threat-bulletin/{threat_bulletin_id}/attachments/link/:
+    get:
+      operationId: tokenToDownloadAttachment
+      summary: Get Token to Download Attachment
+      tags:
+      - Threat Bulletin
+      description: Returns the token to download the attachments of a threat bulletin.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/threat-bulletin/token-to-download-attachment
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: threat_bulletin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a threat bulletin.
+          examples:
+          - a3a785c5-1d11-46d9-8f86-9b0bd65ed8f8
+        description: Pass the ID of a threat bulletin.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: Returns the link to the attachment that includes the download token.
+                    examples:
+                    - /threat-bulletin/6ecd8c8a-c869-426e-8d78-b4bf26314bb2/attachments/download/?token=2cba13b5-4e7c-40e9-8f1b-3daf69f27510&all_files=True
+              example:
+                result: /threat-bulletin/6ecd8c8a-c869-426e-8d78-b4bf26314bb2/attachments/download/?token=2cba13b5-4e7c-40e9-8f1b-3daf69f27510&all_files=True
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

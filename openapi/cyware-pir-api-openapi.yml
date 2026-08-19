@@ -1,0 +1,2940 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open PIR API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: PIR
+  description: PIR
+paths:
+  /cpapi/rest-auth/login/:
+    post:
+      operationId: login
+      summary: Login
+      tags:
+      - PIR
+      description: "Authenticates a user against the API Gateway and returns a session token. Store the token and pass it as `CYW <token>` in the `Authorization` header for all subsequent API calls.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>The login endpoint is served under <code class=\"slate-code\">/cpapi</code>, not under the <code class=\"slate-code\">/cpapi/cpir</code> prefix used by all other PIR endpoints.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/auth/login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Pass the user's email address.
+                  examples:
+                  - <email>
+                password:
+                  type: string
+                  description: Pass the user's password.
+                  examples:
+                  - <password>
+              required:
+              - email
+              - password
+            example:
+              email: <email>
+              password: <password>
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: Returns the session token to use as `CYW <token>` in the `Authorization` header for all authenticated requests.
+                    examples:
+                    - e1a2b3c4d5f6...
+                  email:
+                    type: string
+                    description: Returns the email address of the authenticated user.
+                    examples:
+                    - john.doe@example.com
+              example:
+                token: e1a2b3c4d5f6...
+                email: john.doe@example.com
+  /api/v1/pirs/{pir_id}/matches/delink/:
+    post:
+      operationId: bulkDelinkEntities
+      summary: Bulk Delink Entities
+      tags:
+      - PIR
+      description: Manually remove one or more intelligence objects from a PIR by setting their link status to `manual_delink`. Delinked entities are permanently suppressed from auto-relinking on future sweep cycles unless manually linked again. Triggers a match snapshot write on success.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/matches/bulk-delink-entities
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entity_ids:
+                  type: array
+                  description: Pass a list of CES entity IDs to delink.
+                  items:
+                    type: string
+                    description: This is an example value.
+                    examples:
+                    - ces-chunk-abc123
+              required:
+              - entity_ids
+            example:
+              entity_ids:
+              - ces-chunk-abc123
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: number
+                    description: Returns the number of entity records whose link status was set to `manual_delink`.
+                    examples:
+                    - 1
+              example:
+                updated: 1
+  /api/v1/pirs/{pir_id}/matches/link/:
+    post:
+      operationId: bulkLinkEntities1
+      summary: Bulk Link Entities
+      tags:
+      - PIR
+      description: Manually links one or more intelligence objects to a PIR by setting their link status to `manual_link`. The entities must already exist as match records for the PIR. If an entity is not a match record for this PIR, it is silently skipped, and the `updated` count reflects only the entities that were actually changed. Triggers a match snapshot write on success.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/matches/bulk-link-entities-1
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entity_ids:
+                  type: array
+                  description: 'Pass a list of CES entity IDs to link. Pass an empty array to receive `updated: 0` without an error.'
+                  items:
+                    type: string
+                    description: This is an example value.
+                    examples:
+                    - ces-chunk-abc123
+            example:
+              entity_ids:
+              - ces-chunk-abc123
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: number
+                    description: Returns the number of entity records whose link status was changed to `manual_link`.
+                    examples:
+                    - 2
+              example:
+                updated: 2
+  /api/v1/pirs/{pir_id}/matches/:
+    get:
+      operationId: listEntityMatchesForPir
+      summary: List Entity Matches for PIR
+      tags:
+      - PIR
+      description: "Returns the intelligence objects currently matched to a specific PIR, ordered by relevance score in descending by default. At least one of `include__object_type`, `object_type`, or `entity_kind` is required; omitting all three returns `400` `CPIR-002`.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">object_type</code> now applies AND semantics across multiple values. Because each matched row holds a single object type, a multi-value AND is structurally unsatisfiable and always returns an empty result. Use <code class=\"slate-code\">include__object_type</code> for OR filtering across multiple types. Single-value <code class=\"slate-code\">object_type</code> is unaffected.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/matches/list-entity-matches-for-pir
+      parameters:
+      - name: include_object_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a comma-separated list of object types. Returns matches whose type is any of the listed values (OR semantics).
+        description: Pass a comma-separated list of object types. Returns matches whose type is any of the listed values (OR semantics).
+      - name: object_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a single object type. Returns matches of exactly that type. Takes precedence over `include__object_type` when both are present. Do not pass multiple comma-separated values; multi-value AND always returns an empty result set.
+        description: Pass a single object type. Returns matches of exactly that type. Takes precedence over `include__object_type` when both are present. Do not pass multiple comma-separated values; multi-value AND always returns an empty result set.
+      - name: entity_kind
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass an entity kind to expand to all object types within that kind.
+          enum:
+          - threat_object
+          - rss_item
+          - twitter_post
+          - threat_bulletin
+          - threatmailbox
+          - note
+          - document
+        description: Pass an entity kind to expand to all object types within that kind.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve.
+        description: Pass the page number to retrieve.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of results per page.
+        description: Pass the number of results per page.
+      - name: overview
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass `true` to return the top 7 matches by sort order, ignoring pagination.
+        description: Pass `true` to return the top 7 matches by sort order, ignoring pagination.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the sort order.
+          enum:
+          - -score
+          - score
+          - -first_matched_at
+          - first_matched_at
+          default: -score
+        description: Pass the sort order.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a keyword for a case-insensitive substring search across entity name, tags, and source tags.
+        description: Pass a keyword for a case-insensitive substring search across entity name, tags, and source tags.
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns a list of matched entity objects for the PIR.
+                    items:
+                      type: object
+                      properties:
+                        ces_entity_id:
+                          type: string
+                          description: Returns the CES entity identifier.
+                          examples:
+                          - ces-chunk-abc123
+                        object_id:
+                          type: string
+                          description: Returns the object identifier from the source product.
+                          examples:
+                          - obj-lockbit-3
+                        object_type:
+                          type: string
+                          description: Returns the STIX object type.
+                          examples:
+                          - malware
+                        source_product_type:
+                          type: string
+                          description: Returns the STIX type of the matched object in the source product.
+                          examples:
+                          - malware
+                        score:
+                          type: number
+                          description: Returns the semantic similarity score (0–1) from the vector search.
+                          examples:
+                          - 0.91
+                        link_status:
+                          type: string
+                          description: Returns the current link state.
+                          enum:
+                          - auto_link
+                          - manual_link
+                          - manual_delink
+                          examples:
+                          - auto_link
+                        first_matched_at:
+                          type: string
+                          description: Returns the timestamp when this object was first matched to the PIR.
+                          examples:
+                          - '2026-05-15T10:00:00Z'
+                        last_matched_at:
+                          type: string
+                          description: Returns the timestamp of the most recent match update.
+                          examples:
+                          - '2026-05-19T14:00:00Z'
+                        metadata:
+                          type: object
+                          description: Returns entity metadata. Same shape as the Top Objects by Type endpoint.
+                          properties:
+                            object_type:
+                              type: string
+                              description: Returns the STIX type.
+                              examples:
+                              - malware
+                            tlp:
+                              type: string
+                              description: Returns the TLP marking.
+                              examples:
+                              - amber
+                            source_name:
+                              type: array
+                              description: Returns the deduped list of source feed names that contributed to this object.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - feed-a
+                            risk_severity:
+                              type: string
+                              description: Returns the risk severity from the source product. Omitted when not supplied by CES.
+                              examples:
+                              - high
+                            name:
+                              type: string
+                              description: Returns the display name of the object.
+                              examples:
+                              - LockBit 3.0
+                            tags:
+                              type: array
+                              description: Returns the union of all tags across entity variants.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - ransomware
+                            description_preview:
+                              type: string
+                              description: Returns a truncated description.
+                              examples:
+                              - LockBit 3.0 ransomware variant observed targeting...
+                            collection_id:
+                              type: string
+                              description: Returns the CES collection identifier.
+                              examples:
+                              - col-123
+                            source_id:
+                              type: string
+                              description: Returns the CES source identifier.
+                              examples:
+                              - src-9
+                            source_tags:
+                              type: array
+                              description: Returns tags from the originating source feed.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - apac
+                            cvss_score:
+                              type: number
+                              description: Returns the CVSS score for vulnerability objects. Omitted when CES does not supply any CVSS field. A real score of `0` is preserved.
+                              examples:
+                              - 8.6
+                            object_created_at:
+                              type: string
+                              description: Returns the timestamp when the object was ingested into the source product. Omitted when not supplied by CES.
+                              examples:
+                              - '2026-05-15T10:00:00Z'
+                            object_modified_at:
+                              type: string
+                              description: Returns the most recent modification timestamp from the source product. Omitted when not supplied by CES.
+                              examples:
+                              - '2026-05-18T12:30:00Z'
+                  total:
+                    type: number
+                    description: Returns the total number of matching objects.
+                    examples:
+                    - 1
+              example:
+                results:
+                - ces_entity_id: ces-chunk-abc123
+                  object_id: obj-lockbit-3
+                  object_type: malware
+                  source_product_type: malware
+                  score: 0.91
+                  link_status: auto_link
+                  first_matched_at: '2026-05-15T10:00:00Z'
+                  last_matched_at: '2026-05-19T14:00:00Z'
+                  metadata:
+                    object_type: malware
+                    tlp: amber
+                    source_name:
+                    - feed-a
+                    risk_severity: high
+                    name: LockBit 3.0
+                    tags:
+                    - ransomware
+                    description_preview: LockBit 3.0 ransomware variant observed targeting...
+                    collection_id: col-123
+                    source_id: src-9
+                    source_tags:
+                    - apac
+                    cvss_score: 8.6
+                    object_created_at: '2026-05-15T10:00:00Z'
+                    object_modified_at: '2026-05-18T12:30:00Z'
+                total: 1
+  /api/v1/pirs/matches/{object_type}/:
+    get:
+      operationId: topObjectsByTypeCrossPir
+      summary: Top Objects by Type (Cross-PIR)
+      tags:
+      - PIR
+      description: Returns intelligence objects of a given type ranked by the number of active PIRs they are linked to. Use this for a tenant-wide view of which objects are most broadly relevant across all requirements. Pass `overview=true` to retrieve the top 7 objects for use in dashboard widgets, bypassing standard pagination.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/matches/top-objects-by-type-cross-pir
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve.
+        description: Pass the page number to retrieve.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of results per page.
+        description: Pass the number of results per page.
+      - name: Boolean
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass `true` to return the top 7 objects by `link_count`, ignoring pagination. Intended for dashboard widget use.
+        description: Pass `true` to return the top 7 objects by `link_count`, ignoring pagination. Intended for dashboard widget use.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a keyword for a case-insensitive substring search across object name, tags, and source tags.
+        description: Pass a keyword for a case-insensitive substring search across object name, tags, and source tags.
+      - name: object_type
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the object type as a path parameter. Unknown values return an empty result set without an error.
+          enum:
+          - threat-actor
+          - intrusion-set
+          - malware
+          - attack-pattern
+          - vulnerability
+          - campaign
+          - report
+          - course-of-action
+          - identity
+          - infrastructure
+          - location
+          - malware-analysis
+          - opinion
+          - tool
+          - custom-object
+          - incident
+          - grouping
+          - rss_item
+          - twitter_post
+          - threat_bulletin
+          - threatmailbox
+          - note
+          - document
+        description: Pass the object type as a path parameter. Unknown values return an empty result set without an error.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns a ranked list of matched intelligence objects.
+                    items:
+                      type: object
+                      properties:
+                        object_id:
+                          type: string
+                          description: Returns the object identifier from the source product.
+                          examples:
+                          - obj-lockbit-3
+                        object_type:
+                          type: string
+                          description: Returns the STIX object type.
+                          examples:
+                          - malware
+                        link_count:
+                          type: number
+                          description: Returns the number of distinct active PIRs this object is linked to.
+                          examples:
+                          - 5
+                        first_matched_at:
+                          type: string
+                          description: Returns the earliest timestamp this object was matched across all linked PIRs.
+                          examples:
+                          - '2026-05-15T10:00:00Z'
+                        metadata:
+                          type: object
+                          description: Returns the display name of the object.
+                          properties:
+                            object_type:
+                              type: string
+                              description: Returns the STIX type.
+                              examples:
+                              - malware
+                            tlp:
+                              type: string
+                              description: Returns the TLP marking.
+                              examples:
+                              - amber
+                            source_name:
+                              type: array
+                              description: Returns the deduped list of source feed names that contributed to this object.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - feed-a
+                            risk_severity:
+                              type: string
+                              description: Returns the risk severity from the source product. Omitted when not supplied by CES.
+                              examples:
+                              - high
+                            name:
+                              type: string
+                              description: Returns the display name of the object.
+                              examples:
+                              - LockBit 3.0
+                            tags:
+                              type: array
+                              description: Returns the union of all tags across entity variants.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - ransomware
+                            description_preview:
+                              type: string
+                              description: Returns a truncated description.
+                              examples:
+                              - LockBit 3.0 ransomware variant observed targeting...
+                            collection_id:
+                              type: string
+                              description: Returns the CES collection identifier.
+                              examples:
+                              - col-123
+                            source_id:
+                              type: string
+                              description: Returns the CES source identifier.
+                              examples:
+                              - src-9
+                            source_tags:
+                              type: array
+                              description: Returns tags from the originating source feed.
+                              items:
+                                type: string
+                                description: This is an example value.
+                                examples:
+                                - apac
+                            cvss_score:
+                              type: number
+                              description: Returns the CVSS score for vulnerability objects. Omitted when CES does not supply any CVSS field. A real score of `0` is preserved.
+                              examples:
+                              - 8.6
+                            object_created_at:
+                              type: string
+                              description: Returns the timestamp when the object was ingested into the source product. Omitted when not supplied by CES.
+                              examples:
+                              - '2026-05-15T10:00:00Z'
+                            object_modified_at:
+                              type: string
+                              description: Returns the most recent modification timestamp from the source product. Omitted when not supplied by CES.
+                              examples:
+                              - '2026-05-18T12:30:00Z'
+                  total:
+                    type: number
+                    description: Returns the total number of matching objects.
+                    examples:
+                    - 1
+              example:
+                results:
+                - object_id: obj-lockbit-3
+                  object_type: malware
+                  link_count: 5
+                  first_matched_at: '2026-05-15T10:00:00Z'
+                  metadata:
+                    object_type: malware
+                    tlp: amber
+                    source_name:
+                    - feed-a
+                    risk_severity: high
+                    name: LockBit 3.0
+                    tags:
+                    - ransomware
+                    description_preview: LockBit 3.0 ransomware variant observed targeting...
+                    collection_id: col-123
+                    source_id: src-9
+                    source_tags:
+                    - apac
+                    cvss_score: 8.6
+                    object_created_at: '2026-05-15T10:00:00Z'
+                    object_modified_at: '2026-05-18T12:30:00Z'
+                total: 1
+  /api/v1/pirs/analyze-intent/:
+    post:
+      operationId: analyseIntent
+      summary: Analyse Intent
+      tags:
+      - PIR
+      description: 'Evaluates a proposed intent string across four quality dimensions without persisting any data. Returns a composite quality score, per-dimension scores, suggested improvements, and a suggested title and category. Use this before creating or updating a PIR to surface gaps in the intent before committing.
+
+
+        Requires LiteLLM. When the LLM is unavailable, all dimension scores and the quality score return as zero and a default set of suggestion chips is returned.'
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/analyse-intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+                  description: Pass the intent text to evaluate.
+                  examples:
+                  - Track APT29 against US government
+              required:
+              - intent
+            example:
+              intent: Track APT29 against US government
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quality_dimensions:
+                    type: object
+                    description: Returns per-dimension scores. Each dimension is scored as 0 (fail), 1 (warning), or 2 (pass).
+                    properties:
+                      scope_clarity:
+                        type: number
+                        description: Returns the scope clarity score, indicating how well the intent defines the geographic, sector, or asset boundary.
+                        examples:
+                        - 2
+                      threat_focus:
+                        type: number
+                        description: Returns the threat focus score, indicating how precisely the intent identifies the threat surface.
+                        examples:
+                        - 2
+                      specificity:
+                        type: number
+                        description: Returns the specificity score, indicating how concretely the intent names entities, techniques, or indicators.
+                        examples:
+                        - 1
+                      atomicity:
+                        type: number
+                        description: Returns the atomicity score, indicating whether the intent covers a single focused monitoring need.
+                        examples:
+                        - 1
+                  quality_score:
+                    type: number
+                    description: Returns the composite quality score on a 0–100 scale, computed as `sum(dimensions) / 8 × 100`.
+                    examples:
+                    - 75
+                  suggestion_chips:
+                    type: string
+                    description: Returns short improvement prompts for dimensions that scored below 2. Returns `null` when the intent scores the maximum on all dimensions.
+                  suggested_title:
+                    type: string
+                    description: Returns an LLM-generated title of 5–10 words that captures the monitoring intent. Returns an empty string when the LLM is unavailable.
+                    examples:
+                    - APT29 Operations Targeting U.S. Government
+                  suggested_categories:
+                    type: array
+                    description: Returns up to one category object `{id, name}` from the platform's fixed category taxonomy. Returns an empty array when no confident match is found or the LLM is unavailable.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the id of the category object.
+                          examples:
+                          - 3Er8ytk1jNEZhNEfemagu4y0JxO
+                        name:
+                          type: string
+                          description: Returns the name of the category object.
+                          examples:
+                          - Advanced Persistent Threats (APTs)
+                  low_confidence:
+                    type: boolean
+                    description: Returns `true` when no confident category match was found. When `true`, `suggested_categories` is always an empty array.
+                    examples:
+                    - false
+              example:
+                quality_dimensions:
+                  scope_clarity: 2
+                  threat_focus: 2
+                  specificity: 1
+                  atomicity: 1
+                quality_score: 75
+                suggestion_chips: null
+                suggested_title: APT29 Operations Targeting U.S. Government
+                suggested_categories:
+                - id: 3Er8ytk1jNEZhNEfemagu4y0JxO
+                  name: Advanced Persistent Threats (APTs)
+                low_confidence: false
+  /api/v1/pirs/check-overlap/:
+    post:
+      operationId: checkOverlap
+      summary: Check Overlap
+      tags:
+      - PIR
+      description: Checks whether a proposed intent semantically duplicates one or more existing PIRs in the tenant. Returns overlapping PIRs ranked by similarity score. Use this during PIR creation to identify consolidation opportunities before committing to a new requirement. When checking overlap for an existing PIR during an update, pass `exclude_pir_id` to exclude it from the results.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/check-overlap
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+                  description: Pass the intent text to check for semantic overlap against existing PIRs.
+                  examples:
+                  - Monitor LockBit ransomware
+                exclude_pir_id:
+                  type: string
+                  description: Pass the ID of a PIR to exclude from the results. Use this when checking overlap for an intent that already has an existing PIR.
+              required:
+              - intent
+            example:
+              intent: Monitor LockBit ransomware
+              exclude_pir_id: ''
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns a list of existing PIRs with significant semantic similarity to the submitted intent, ordered by score in descending. Returns an empty array when no meaningful overlap is found.
+                    items:
+                      type: object
+                      properties:
+                        pir_id:
+                          type: string
+                          description: Returns the KSUID of the overlapping PIR.
+                          examples:
+                          - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        readable_id:
+                          type: string
+                          description: Returns the human-readable ID of the overlapping PIR. For example, `PIR001`.
+                          examples:
+                          - PIR001
+                        title:
+                          type: string
+                          description: Returns the title of the overlapping PIR.
+                          examples:
+                          - LockBit Ransomware Campaign
+                        score:
+                          type: number
+                          description: Returns the cosine similarity score on a 0–1 scale. Scores above 0.75 typically indicate meaningful overlap.
+                          examples:
+                          - 0.87
+                        overlap_band:
+                          type: string
+                          description: Returns the qualitative overlap severity.
+                          enum:
+                          - low
+                          - medium
+                          - high
+                          examples:
+                          - high
+                  total:
+                    type: number
+                    description: Returns the total number of overlapping PIRs found.
+                    examples:
+                    - 1
+              example:
+                results:
+                - pir_id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id: PIR001
+                  title: LockBit Ransomware Campaign
+                  score: 0.87
+                  overlap_band: high
+                total: 1
+  /api/v1/pirs/:
+    post:
+      operationId: createPir
+      summary: Create PIR
+      tags:
+      - PIR
+      description: "Creates a new Priority Intelligence Requirement for the authenticated tenant. On creation, an embedding job is queued in the Central Embedding Service (CES), and a match sweep runs automatically once the embedding completes.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">category_ids</code> is required when <code class=\"slate-code\">status</code> is <code class=\"slate-code\">active</code>. A PIR activated without categories returns <code class=\"slate-code\">400 CPIR-002</code>.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/create-pir
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Pass the display name for the PIR. Maximum 255 characters.
+                  examples:
+                  - Ransomware Campaign Tracking
+                intent:
+                  type: string
+                  description: Pass the natural language description of the intelligence monitoring requirement. Drives embedding quality and match precision. Maximum 2000 characters.
+                  examples:
+                  - Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                priority:
+                  type: string
+                  description: Pass the operational priority.
+                  enum:
+                  - unknown
+                  - low
+                  - high
+                  - medium
+                  - critical
+                  - crisis
+                  examples:
+                  - high
+                sharing_policy:
+                  type: string
+                  description: Pass the visibility scope.
+                  enum:
+                  - public
+                  - org
+                  - specific_users
+                  default: org
+                  examples:
+                  - org
+                time_duration:
+                  type: number
+                  description: Pass the retrospective match window in seconds. When set, the match worker restricts results to intelligence objects ingested within this window. Pass `0` or omit to evaluate the full corpus.
+                  examples:
+                  - 604800
+              required:
+              - title
+              - intent
+            example:
+              title: Ransomware Campaign Tracking
+              intent: Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+              priority: high
+              sharing_policy: org
+              time_duration: 604800
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the KSUID of the created PIR.
+                    examples:
+                    - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id:
+                    type: string
+                    description: Returns the human-readable identifier. For example, `PIR001`.
+                    examples:
+                    - PIR001
+                  tenant_id:
+                    type: string
+                    description: Returns the tenant identifier.
+                    examples:
+                    - tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                  title:
+                    type: string
+                    description: Returns the PIR title.
+                    examples:
+                    - Ransomware Campaign Tracking
+                  intent:
+                    type: string
+                    description: Returns the PIR intent text.
+                    examples:
+                    - Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                  priority:
+                    type: string
+                    description: Returns the priority level.
+                    examples:
+                    - high
+                  status:
+                    type: string
+                    description: Returns the initial lifecycle status.
+                    examples:
+                    - active
+                  owner_id:
+                    type: string
+                    description: Returns the ID of the user who created the PIR.
+                    examples:
+                    - 01KR3SG8X0CYQNG4YGYQ28R76Y
+                  sharing_policy:
+                    type: string
+                    description: Returns the sharing visibility policy.
+                    examples:
+                    - org
+                  quality_score:
+                    type: number
+                    description: Returns the quality score. Returns `0` until the intent analysis worker runs.
+                    examples:
+                    - 0
+                  embedding_status:
+                    type: string
+                    description: 'Returns the CES embedding job state: `pending`, `queued`, `completed`, or `failed`.'
+                    examples:
+                    - pending
+                  created_at:
+                    type: string
+                    description: Returns the creation timestamp.
+                    examples:
+                    - '0001-01-01T00:00:00Z'
+                  updated_at:
+                    type: string
+                    description: Returns the last-modified timestamp.
+                    examples:
+                    - '0001-01-01T00:00:00Z'
+              example:
+                id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                readable_id: PIR001
+                tenant_id: tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                title: Ransomware Campaign Tracking
+                intent: Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                priority: high
+                status: active
+                owner_id: 01KR3SG8X0CYQNG4YGYQ28R76Y
+                sharing_policy: org
+                quality_score: 0
+                embedding_status: pending
+                created_at: '0001-01-01T00:00:00Z'
+                updated_at: '0001-01-01T00:00:00Z'
+    get:
+      operationId: listPirs
+      summary: List PIRs
+      tags:
+      - PIR
+      description: Returns a paginated list of PIRs visible to the authenticated user within their tenant. Supports filtering by status, priority, health band, and keyword search.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/list-pirs
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve.
+          default: '1'
+        description: Pass the page number to retrieve.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of results per page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of results per page.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the lifecycle status to filter by.
+          enum:
+          - draft
+          - active
+          - inactive
+          - expired
+          - deleted
+        description: Pass the lifecycle status to filter by.
+      - name: priority
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the priority to filter by.
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+          - crisis
+        description: Pass the priority to filter by.
+      - name: health
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the health band to filter by.
+          enum:
+          - healthy
+          - unhealthy
+          - degrading
+          - unknown
+        description: Pass the health band to filter by.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a keyword for a case-insensitive substring search on the PIR title.
+        description: Pass a keyword for a case-insensitive substring search on the PIR title.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the sort field and direction. Unknown values silently fall back to the default.
+          enum:
+          - -created_at
+          - created_at
+          - -updated_at
+          - updated_at
+          - -health
+          - health
+          - -last_activity_at
+          - last_activity_at
+          - -last_matched_at
+          - last_matched_at
+        description: Pass the sort field and direction. Unknown values silently fall back to the default.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the KSUID of the created PIR.
+                          examples:
+                          - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        readable_id:
+                          type: string
+                          description: Returns the human-readable identifier. For example, PIR001.
+                          examples:
+                          - PIR001
+                        tenant_id:
+                          type: string
+                          description: Returns the tenant identifier.
+                          examples:
+                          - tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                        title:
+                          type: string
+                          description: Returns the PIR title.
+                          examples:
+                          - Ransomware Campaign Tracking
+                        intent:
+                          type: string
+                          description: Returns the PIR intent text.
+                          examples:
+                          - Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                        priority:
+                          type: string
+                          description: Returns the priority level.
+                          examples:
+                          - high
+                        status:
+                          type: string
+                          description: Returns the initial lifecycle status.
+                          examples:
+                          - active
+                        owner_id:
+                          type: string
+                          description: Returns the ID of the user who created the PIR.
+                          examples:
+                          - 01KR3SG8X0CYQNG4YGYQ28R76Y
+                        sharing_policy:
+                          type: string
+                          description: Returns the sharing visibility policy.
+                          examples:
+                          - org
+                        quality_score:
+                          type: number
+                          description: Returns the quality score. Returns `0` until the intent analysis worker runs.
+                          examples:
+                          - 82
+                        time_duration:
+                          type: number
+                          description: Returns the retrospective match window in seconds. Omitted when not set.
+                          examples:
+                          - 604800
+                        embedding_status:
+                          type: string
+                          description: Returns the CES embedding job state.
+                          enum:
+                          - pending
+                          - queued
+                          - failed
+                          - completed
+                          examples:
+                          - completed
+                        created_at:
+                          type: string
+                          description: Returns the creation timestamp.
+                          examples:
+                          - '2026-05-10T09:12:00Z'
+                        updated_at:
+                          type: string
+                          description: Returns the last-modified timestamp.
+                          examples:
+                          - '2026-05-12T07:00:00Z'
+                        last_activity_at:
+                          type: string
+                          description: Returns the timestamp of the most recent signal emitted for this PIR. Omitted for PIRs that have never emitted a signal.
+                          examples:
+                          - '2026-05-19T14:57:35.332419Z'
+                        last_match_sweep_at:
+                          type: string
+                          description: Returns the timestamp of the most recent completed match sweep. Omitted until the first sweep completes.
+                          examples:
+                          - '2026-05-19T14:00:00Z'
+                        health:
+                          type: string
+                          description: Returns the current health band.
+                          enum:
+                          - healthy
+                          - degrading
+                          - unhealthy
+                          - unknown
+                          examples:
+                          - healthy
+                        signal_count:
+                          type: number
+                          description: Returns the count of signals in `triggered` or `acknowledged` status for this PIR.
+                          examples:
+                          - 4
+                  total:
+                    type: number
+                    description: Returns the total number of PIRs matching the query.
+                    examples:
+                    - 1
+              example:
+                results:
+                - id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id: PIR001
+                  tenant_id: tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                  title: Ransomware Campaign Tracking
+                  intent: Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                  priority: high
+                  status: active
+                  owner_id: 01KR3SG8X0CYQNG4YGYQ28R76Y
+                  sharing_policy: org
+                  quality_score: 82
+                  time_duration: 604800
+                  embedding_status: completed
+                  created_at: '2026-05-10T09:12:00Z'
+                  updated_at: '2026-05-12T07:00:00Z'
+                  last_activity_at: '2026-05-19T14:57:35.332419Z'
+                  last_match_sweep_at: '2026-05-19T14:00:00Z'
+                  health: healthy
+                  signal_count: 4
+                total: 1
+  /api/v1/pirs/enhance-intent/:
+    post:
+      operationId: enhanceIntent
+      summary: Enhance Intent
+      tags:
+      - PIR
+      description: "Rewrites a vague or incomplete intent into a precise, well-structured monitoring requirement using an LLM. Returns the enhanced text for analyst review before it is committed. Only `intent` is required. Passing quality context from a prior Analyze Intent call focuses the rewrite on the weakest dimensions.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Returns <code class=\"slate-code\">500</code> when LiteLLM is unavailable.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/enhance-intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+                  description: Pass the original intent text to enhance.
+                  examples:
+                  - track APT activity
+                quality_dimensions:
+                  type: object
+                  description: Pass the dimension scores from a prior Analyze Intent response. When supplied, the LLM targets the lowest-scoring dimensions in the rewrite.
+                  properties:
+                    scope_clarity:
+                      type: number
+                      description: Pass the scope clarity score, indicating how well the intent defines the geographic, sector, or asset boundary.
+                      examples:
+                      - 1
+                    threat_focus:
+                      type: number
+                      description: Pass the threat focus score, indicating how precisely the intent identifies the threat surface.
+                      examples:
+                      - 2
+                    specificity:
+                      type: number
+                      description: Pass the specificity score, indicating how concretely the intent names entities, techniques, or indicators.
+                      examples:
+                      - 0
+                    atomicity:
+                      type: number
+                      description: Pass the atomicity score, indicating whether the intent covers a single focused monitoring need.
+                      examples:
+                      - 2
+                quality_score:
+                  type: number
+                  description: Pass the composite quality score from a prior Analyze Intent response.
+                  examples:
+                  - 62.5
+                suggestion_chips:
+                  type: array
+                  description: Pass the suggestion labels from a prior Analyze Intent response. The LLM uses these as rewrite directives.
+                  items:
+                    type: string
+                    description: This is an example value.
+                    examples:
+                    - Narrow the geographic or sector scope
+              required:
+              - intent
+            example:
+              intent: track APT activity
+              quality_dimensions:
+                scope_clarity: 1
+                threat_focus: 2
+                specificity: 0
+                atomicity: 2
+              quality_score: 62.5
+              suggestion_chips:
+              - Narrow the geographic or sector scope
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  original_intent:
+                    type: string
+                    description: Returns the original intent text unchanged.
+                    examples:
+                    - Track APT29 against US government
+                  enhanced_intent:
+                    type: string
+                    description: Returns the LLM-rewritten intent with improved clarity, specificity, and scope.
+                    examples:
+                    - Monitor APT29 (Cozy Bear) intrusion campaigns targeting U.S. federal government networks, focusing on spearphishing, credential theft, and cloud-service abuse TTPs.
+              example:
+                original_intent: Track APT29 against US government
+                enhanced_intent: Monitor APT29 (Cozy Bear) intrusion campaigns targeting U.S. federal government networks, focusing on spearphishing, credential theft, and cloud-service abuse TTPs.
+  /api/v1/pirs/{pir_id}/:
+    get:
+      operationId: getPirById
+      summary: Get PIR by ID
+      tags:
+      - PIR
+      description: Returns the full details of a single PIR. Accepts either a KSUID or a human-readable ID such as `PIR001`. Returns `404 CPIR-003` , if the PIR does not exist or belongs to a different tenant.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/get-pir-by-id
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the KSUID of the created PIR.
+                    examples:
+                    - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id:
+                    type: string
+                    description: Returns the human-readable identifier. For example, `PIR001`.
+                    examples:
+                    - PIR001
+                  tenant_id:
+                    type: string
+                    description: Returns the tenant identifier.
+                    examples:
+                    - tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                  title:
+                    type: string
+                    description: Returns the PIR title.
+                    examples:
+                    - Ransomware Campaign Tracking
+                  intent:
+                    type: string
+                    description: Returns the PIR intent text.
+                    examples:
+                    - Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                  priority:
+                    type: string
+                    description: Returns the priority level.
+                    examples:
+                    - high
+                  status:
+                    type: string
+                    description: Returns the initial lifecycle status.
+                    examples:
+                    - active
+                  owner_id:
+                    type: string
+                    description: Returns the ID of the user who created the PIR.
+                    examples:
+                    - 01KR3SG8X0CYQNG4YGYQ28R76Y
+                  sharing_policy:
+                    type: string
+                    description: Returns the sharing visibility policy.
+                    examples:
+                    - org
+                  quality_score:
+                    type: number
+                    description: Returns the quality score. Returns `0` until the intent analysis worker runs.
+                    examples:
+                    - 82
+                  time_duration:
+                    type: number
+                    description: Returns the retrospective match window in seconds. Omitted when not set.
+                    examples:
+                    - 604800
+                  embedding_status:
+                    type: string
+                    description: Returns the CES embedding job state.
+                    enum:
+                    - pending
+                    - queued
+                    - failed
+                    - completed
+                    examples:
+                    - completed
+                  created_at:
+                    type: string
+                    description: Returns the creation timestamp.
+                    examples:
+                    - '2026-05-10T09:12:00Z'
+                  updated_at:
+                    type: string
+                    description: Returns the last-modified timestamp.
+                    examples:
+                    - '2026-05-12T07:00:00Z'
+                  last_activity_at:
+                    type: string
+                    description: Returns the timestamp of the most recent signal emitted for this PIR. Omitted for PIRs that have never emitted a signal.
+                    examples:
+                    - '2026-05-19T14:57:35.332419Z'
+                  last_match_sweep_at:
+                    type: string
+                    description: Returns the timestamp of the most recent completed match sweep. Omitted until the first sweep completes.
+                    examples:
+                    - '2026-05-19T14:00:00Z'
+                  health:
+                    type: string
+                    description: Returns the current health band.
+                    enum:
+                    - health
+                    - degrading
+                    - unhealthy
+                    - unknown
+                  signal_count:
+                    type: number
+                    description: Returns the count of signals in `triggered` or `acknowledged` status for this PIR.
+                    examples:
+                    - 4
+              example:
+                id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                readable_id: PIR001
+                tenant_id: tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                title: Ransomware Campaign Tracking
+                intent: Monitor LockBit 3.0 ransomware group targeting financial sector organizations in APAC
+                priority: high
+                status: active
+                owner_id: 01KR3SG8X0CYQNG4YGYQ28R76Y
+                sharing_policy: org
+                quality_score: 82
+                time_duration: 604800
+                embedding_status: completed
+                created_at: '2026-05-10T09:12:00Z'
+                updated_at: '2026-05-12T07:00:00Z'
+                last_activity_at: '2026-05-19T14:57:35.332419Z'
+                last_match_sweep_at: '2026-05-19T14:00:00Z'
+                health: ''
+                signal_count: 4
+    put:
+      operationId: updatePir
+      summary: Update PIR
+      tags:
+      - PIR
+      description: Updates the mutable fields of an existing PIR. This is a partial update; only fields present in the request body are applied. Omitted fields retain their current values. `intent` is the only required field. Changing it re-queues the CES embedding job and triggers a new match sweep cycle.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/update-pir
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+                  description: Pass the updated intent text. Changing this value re-triggers embedding and a match sweep.
+                  maxLength: 2000
+                  examples:
+                  - updated intent
+                priority:
+                  type: string
+                  description: Pass the updated priority.
+                  enum:
+                  - unknown
+                  - low
+                  - medium
+                  - high
+                  - critical
+                  - crisis
+                  examples:
+                  - critical
+                sharing_policy:
+                  type: string
+                  description: Pass the updated visibility scope.
+                  enum:
+                  - public
+                  - org
+                  - specific_users
+                  - private
+                  examples:
+                  - org
+                time_duration:
+                  type: number
+                  description: Pass the updated retrospective match window in seconds. Omitting this key leaves the existing value unchanged.
+                  examples:
+                  - 2592000
+            example:
+              intent: updated intent
+              priority: critical
+              sharing_policy: org
+              time_duration: 2592000
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Returns the KSUID of the created PIR.
+                    examples:
+                    - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id:
+                    type: string
+                    description: Returns the human-readable identifier. For example, `PIR001`.
+                    examples:
+                    - PIR001
+                  tenant_id:
+                    type: string
+                    description: Returns the tenant identifier.
+                    examples:
+                    - tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                  title:
+                    type: string
+                    description: Returns the PIR title.
+                    examples:
+                    - Ransomware Campaign Tracking
+                  intent:
+                    type: string
+                    description: Returns the PIR intent text.
+                    examples:
+                    - updated intent
+                  priority:
+                    type: string
+                    description: Returns the priority level.
+                    examples:
+                    - critical
+                  status:
+                    type: string
+                    description: Returns the initial lifecycle status.
+                    examples:
+                    - active
+                  owner_id:
+                    type: string
+                    description: Returns the ID of the user who created the PIR.
+                    examples:
+                    - 01KR3SG8X0CYQNG4YGYQ28R76Y
+                  sharing_policy:
+                    type: string
+                    description: Returns the sharing visibility policy.
+                    examples:
+                    - org
+                  quality_score:
+                    type: number
+                    description: Returns the quality score. Returns `0` until the intent analysis worker runs.
+                    examples:
+                    - 82
+                  time_duration:
+                    type: number
+                    description: Returns the retrospective match window in seconds. Omitted when not set.
+                    examples:
+                    - 2592000
+                  embedding_status:
+                    type: string
+                    description: Returns the CES embedding job state.
+                    enum:
+                    - pending
+                    - queued
+                    - completed
+                    - failed
+                    examples:
+                    - completed
+                  created_at:
+                    type: string
+                    description: Returns the creation timestamp.
+                    examples:
+                    - '2026-05-10T09:12:00Z'
+                  updated_at:
+                    type: string
+                    description: Returns the last-modified timestamp.
+                    examples:
+                    - '2026-05-12T07:00:00Z'
+                  last_activity_at:
+                    type: string
+                    description: Returns the timestamp of the most recent signal emitted for this PIR. Omitted for PIRs that have never emitted a signal.
+                    examples:
+                    - '2026-05-19T14:57:35.332419Z'
+                  last_match_sweep_at:
+                    type: string
+                    description: Returns the timestamp of the most recent completed match sweep. Omitted until the first sweep completes.
+                    examples:
+                    - '2026-05-19T14:00:00Z'
+                  health:
+                    type: string
+                    description: Returns the current health band.
+                    enum:
+                    - healthy
+                    - degrading
+                    - unhealthy
+                    - unknown
+                    examples:
+                    - healthy
+                  signal_count:
+                    type: number
+                    description: Returns the count of signals in `triggered` or `acknowledged` status for this PIR.
+                    examples:
+                    - 4
+              example:
+                id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                readable_id: PIR001
+                tenant_id: tnt_3dzc1updqqaxspfvsdpxh4q5m8p
+                title: Ransomware Campaign Tracking
+                intent: updated intent
+                priority: critical
+                status: active
+                owner_id: 01KR3SG8X0CYQNG4YGYQ28R76Y
+                sharing_policy: org
+                quality_score: 82
+                time_duration: 2592000
+                embedding_status: completed
+                created_at: '2026-05-10T09:12:00Z'
+                updated_at: '2026-05-12T07:00:00Z'
+                last_activity_at: '2026-05-19T14:57:35.332419Z'
+                last_match_sweep_at: '2026-05-19T14:00:00Z'
+                health: healthy
+                signal_count: 4
+  /api/v1/pirs/{pir_id}/status/:
+    put:
+      operationId: updatePirStatus
+      summary: Update PIR Status
+      tags:
+      - PIR
+      description: 'Transitions a PIR to a new lifecycle status. Status changes affect whether the PIR participates in match sweeps and signal evaluation and may trigger side effects such as auto-resolving open signals.
+
+
+        <Accordion attributes=''{"style":{"width":"100%"}}''>
+
+        <AccordionItem title="Lifecycle States" iconUrl=""><p>State</p>
+
+        <p>Behaviour</p>
+
+        <p>Match Sweeps</p>
+
+        <p><code class="slate-code">draft</code></p>
+
+        <p>Saved but not yet submitted for monitoring.</p>
+
+        <p>Excluded</p>
+
+        <p><code class="slate-code">active</code></p>
+
+        <p>Fully operational. Requires at least one category; returns <code class="slate-code">400</code> <code class="slate-code">CPIR-002</code> otherwise.</p>
+
+        <p>Included</p>
+
+        <p><code class="slate-code">inactive</code></p>
+
+        <p>Temporarily suspended. Open signals are auto-resolved on transition.</p>
+
+        <p>Excluded</p>
+
+        <p><code class="slate-code">expired</code></p>
+
+        <p>End-of-life. Open signals are auto-resolved and the CES record is deprecated.</p>
+
+        <p>Excluded</p>
+
+        <p><code class="slate-code">deleted</code></p>
+
+        <p>Soft-deleted. Excluded from list results. Open signals are auto-resolved and matches are marked removed.</p>
+
+        <p>Excluded</p>
+
+        <p></p></AccordionItem>
+
+        </Accordion>'
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-management/update-pir-status
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: Pass the target lifecycle status.
+                  examples:
+                  - active
+              required:
+              - status
+            example:
+              status: active
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns the new lifecycle status of the PIR.
+                    examples:
+                    - inactive
+              example:
+                status: inactive
+  /api/v1/pirs/{pir_id}/health/:
+    get:
+      operationId: getPirHealthScore
+      summary: Get PIR Health Score
+      tags:
+      - PIR
+      description: Returns the most recent health snapshot for a specific PIR. The health score is computed by the Health Worker on a schedule and after each match sweep. Returns `404` `CPIR-003` until the Health Worker has run at least once for the PIR.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/get-pir-health-score
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pir_id:
+                    type: string
+                    description: Returns the KSUID of the PIR.
+                    examples:
+                    - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  score_total:
+                    type: number
+                    description: Returns the overall health score on a 0–100 scale, computed as a weighted sum of the four dimensions.
+                    examples:
+                    - 72
+                  band:
+                    type: string
+                    description: 'Returns the health band derived from `score_total`: `healthy` (70–100), `degrading` (40–69), or `unhealthy` (0–39).'
+                    examples:
+                    - healthy
+                  coverage:
+                    type: number
+                    description: Returns the coverage dimension score, indicating how broadly the PIR is matched across expected object types.
+                    examples:
+                    - 80
+                  freshness:
+                    type: number
+                    description: Returns the freshness dimension score, indicating how recently new matches have arrived relative to the PIR's priority.
+                    examples:
+                    - 65
+                  confidence:
+                    type: number
+                    description: Returns the confidence dimension score, indicating the average strength of the semantic match across matched objects.
+                    examples:
+                    - 70
+                  velocity:
+                    type: number
+                    description: Returns the signal velocity dimension score, indicating the rate of new intelligence arriving for this PIR.
+                    examples:
+                    - 75
+                  detection_readiness:
+                    type: number
+                    description: Returns the detection readiness dimension score, indicating the presence of actionable detection artefacts in matched objects.
+                    examples:
+                    - 68
+                  computed_at:
+                    type: string
+                    description: Returns the timestamp when this snapshot was computed.
+                    examples:
+                    - '2026-05-12T07:00:00Z'
+              example:
+                pir_id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                score_total: 72
+                band: healthy
+                coverage: 80
+                freshness: 65
+                confidence: 70
+                velocity: 75
+                detection_readiness: 68
+                computed_at: '2026-05-12T07:00:00Z'
+  /api/v1/pirs/metrics/most-active/:
+    get:
+      operationId: mostActivePirs
+      summary: Most-Active PIRs
+      tags:
+      - PIR
+      description: Returns up to 5 PIRs ranked by the most recent signal emission time. Use this to populate the Most Active PIRs widget on the dashboard.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/most-active-pirs
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns up to 5 PIR objects ordered by most recent signal activity.
+                    items:
+                      type: object
+                      properties:
+                        pir_id:
+                          type: string
+                          description: Returns the KSUID of the PIR.
+                          examples:
+                          - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        readable_id:
+                          type: string
+                          description: Returns the human-readable ID.
+                          examples:
+                          - PIR001
+                        title:
+                          type: string
+                          description: Returns the PIR title.
+                          examples:
+                          - LockBit Ransomware Campaign
+                        last_signal_type:
+                          type: string
+                          description: Returns the type of the most recent signal emitted for this PIR.
+                          examples:
+                          - emerging_threat
+                        last_signal_type_label:
+                          type: string
+                          description: Returns the display label for the most recent signal type.
+                          examples:
+                          - Emerging Threat
+                        last_emitted_at:
+                          type: string
+                          description: Returns the timestamp of the most recent signal.
+                          examples:
+                          - '2026-05-19T14:57:35.332419Z'
+                        health_band:
+                          type: string
+                          description: Returns the current health band.
+                          examples:
+                          - healthy
+              example:
+                results:
+                - pir_id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  readable_id: PIR001
+                  title: LockBit Ransomware Campaign
+                  last_signal_type: emerging_threat
+                  last_signal_type_label: Emerging Threat
+                  last_emitted_at: '2026-05-19T14:57:35.332419Z'
+                  health_band: healthy
+  /api/v1/pirs/{pir_id}/metrics/signals-count/:
+    get:
+      operationId: perPirSignalCount
+      summary: Per-PIR Signal Count
+      tags:
+      - PIR
+      description: Returns the count of signals in `triggered` or `acknowledged` status for a specific PIR.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/per-pir-signal-count
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    description: Returns the number of active signals for the PIR.
+                    examples:
+                    - 7
+              example:
+                count: 7
+  /api/v1/pirs/{pir_id}/metrics/signals-prioritized/:
+    get:
+      operationId: perPirTopPrioritizedSignals
+      summary: Per-PIR Top Prioritized Signals
+      tags:
+      - PIR
+      description: Returns the top-prioritized signals for a specific PIR using the same ranking logic as the tenant-wide endpoint.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/per-pir-top-prioritized-signals
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active_count:
+                    type: number
+                    description: Returns the total number of active signals for this PIR.
+                    examples:
+                    - 4
+                  results:
+                    type: array
+                    description: Returns the top-prioritised signal objects scoped to this PIR.
+                    items:
+                      type: object
+                      properties:
+                        signal_id:
+                          type: string
+                          description: Returns the signal identifier.
+                          examples:
+                          - sig-1
+                        title:
+                          type: string
+                          description: Returns the signal title.
+                          examples:
+                          - Emerging Threat
+                        description:
+                          type: string
+                          description: Returns the signal description.
+                          examples:
+                          - '...'
+                        signal_type:
+                          type: string
+                          description: Returns the signal type.
+                          examples:
+                          - emerging_threat
+                        severity:
+                          type: string
+                          description: Returns the severity level.
+                          examples:
+                          - crisis
+                        status:
+                          type: string
+                          description: Returns the current signal status.
+                          examples:
+                          - triggered
+                        confidence:
+                          type: number
+                          description: Returns the confidence score (0–100).
+                          examples:
+                          - 92.5
+                        emitted_at:
+                          type: string
+                          description: Returns the timestamp when the signal was emitted.
+                          examples:
+                          - '2026-05-19T14:57:35.332419Z'
+                        recommended_actions:
+                          type: array
+                          description: Returns the list of recommended analyst actions.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - Validate match relevance to each affected PIR
+                        rank_score:
+                          type: number
+                          description: Returns the composite ranking score used to order signals (`severity_weight × confidence`).
+                          examples:
+                          - 5
+                        pir_ids:
+                          type: array
+                          description: Returns the complete list of PIR IDs associated with this signal.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        associated_pirs_count:
+                          type: number
+                          description: Returns the total number of linked PIRs.
+                          examples:
+                          - 1
+                        associated_pirs:
+                          type: array
+                          description: Returns up to the first 5 associated PIR objects as {`id`, `readable_id`}.
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: Returns the KSUID of the associated PIR.
+                                examples:
+                                - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                              readable_id:
+                                type: string
+                                description: Returns the human-readable ID.
+                                examples:
+                                - PIR001
+              example:
+                active_count: 4
+                results:
+                - signal_id: sig-1
+                  title: Emerging Threat
+                  description: '...'
+                  signal_type: emerging_threat
+                  severity: crisis
+                  status: triggered
+                  confidence: 92.5
+                  emitted_at: '2026-05-19T14:57:35.332419Z'
+                  recommended_actions:
+                  - Validate match relevance to each affected PIR
+                  rank_score: 5
+                  pir_ids:
+                  - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  associated_pirs_count: 1
+                  associated_pirs:
+                  - id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                    readable_id: PIR001
+  /api/v1/pirs/metrics/health/:
+    get:
+      operationId: pirHealthAggregate
+      summary: PIR Health Aggregate
+      tags:
+      - PIR
+      description: Returns the count of active PIRs in each health band plus the 7-day change in unhealthy PIRs. Use this to populate the Health Status widget on the dashboard.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/pir-health-aggregate
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  counts:
+                    type: object
+                    description: Returns the no of PIR along with the health metrics.
+                    properties:
+                      healthy:
+                        type: number
+                        description: Returns the number of active PIRs in the Healthy band (score 70–100).
+                        examples:
+                        - 12
+                      degrading:
+                        type: number
+                        description: Returns the number of active PIRs in the Degrading band (score 40–69).
+                        examples:
+                        - 4
+                      unhealthy:
+                        type: number
+                        description: Returns the number of active PIRs in the Unhealthy band (score 0–39).
+                        examples:
+                        - 2
+                      unknown:
+                        type: number
+                        description: Returns the number of active PIRs with no health snapshot yet.
+                        examples:
+                        - 1
+                  unhealthy_delta_7d:
+                    type: number
+                    description: Returns the change in the number of unhealthy PIRs over the last 7 days. A positive value means more PIRs have become unhealthy.
+                    examples:
+                    - 1
+              example:
+                counts:
+                  healthy: 12
+                  degrading: 4
+                  unhealthy: 2
+                  unknown: 1
+                unhealthy_delta_7d: 1
+  /api/v1/pirs/{pir_id}/trends/:
+    get:
+      operationId: pirTrends7Day
+      summary: PIR Trends (7-day)
+      tags:
+      - PIR
+      description: 'Returns the 7-day link and delink deltas for matched intelligence objects of a specific PIR. The response is a flat object: top-level keys carry the overall totals, and one additional key per active object type carries a per-type breakdown. Object types with no activity in the window are omitted.'
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/pir-metrics/pir-trends-7-day
+      parameters:
+      - name: pir_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+        description: Pass the KSUID or human-readable ID of the PIR as a path parameter.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: number
+                    description: Returns the total number of live matches across all object types at the time of the snapshot.
+                    examples:
+                    - 43
+                  delta_link:
+                    type: number
+                    description: Returns the number of new links added in the past 7 days.
+                    examples:
+                    - 6
+                  delta_delink:
+                    type: number
+                    description: Returns the total number of delinks in the past 7 days, including both automatic and manual removals.
+                    examples:
+                    - 1
+                  delta_manual_delink:
+                    type: number
+                    description: Returns the number of user-initiated delinks in the past 7 days. A subset of `delta_delink`.
+                    examples:
+                    - 1
+                  baseline_at:
+                    type: number
+                    description: Returns the Unix timestamp in milliseconds of the snapshot used as the 7-day baseline. Returns `0` when no baseline snapshot exists yet.
+                    examples:
+                    - 1715635200000
+                  malware:
+                    type: object
+                    description: Returns a per-type breakdown for malware object type with non-zero activity.
+                    properties:
+                      total:
+                        type: number
+                        description: Returns the total number of live matches across all malwares at the time of the snapshot.
+                        examples:
+                        - 4
+                      delta_link:
+                        type: number
+                        description: Returns the number of new links added in the past 7 days.
+                        examples:
+                        - 2
+                      delta_delink:
+                        type: number
+                        description: Returns the total number of delinks in the past 7 days, including both automatic and manual removals.
+                        examples:
+                        - 0
+                      delta_manual_delink:
+                        type: number
+                        description: Returns the number of user-initiated delinks in the past 7 days. A subset of `delta_delink`.
+                        examples:
+                        - 0
+                  report:
+                    type: object
+                    description: Returns a per-type breakdown for the report object type with non-zero activity.
+                    properties:
+                      total:
+                        type: number
+                        description: Returns the total number of live matches across all reports at the time of the snapshot.
+                        examples:
+                        - 8
+                      delta_link:
+                        type: number
+                        description: Returns the number of new links added in the past 7 days.
+                        examples:
+                        - 0
+                      delta_delink:
+                        type: number
+                        description: Returns the total number of delinks in the past 7 days, including both automatic and manual removals.
+                        examples:
+                        - 2
+                      delta_manual_delink:
+                        type: number
+                        description: Returns the number of user-initiated delinks in the past 7 days. A subset of `delta_delink`.
+                        examples:
+                        - 1
+                  vulnerability:
+                    type: object
+                    description: Returns a per-type breakdown for the vulnerability object type with non-zero activity.
+                    properties:
+                      total:
+                        type: number
+                        description: Returns the total number of live matches across all vulnerabilities at the time of the snapshot.
+                        examples:
+                        - 31
+                      delta_link:
+                        type: number
+                        description: Returns the number of new links added in the past 7 days.
+                        examples:
+                        - 4
+                      delta_delink:
+                        type: number
+                        description: Returns the total number of delinks in the past 7 days, including both automatic and manual removals.
+                        examples:
+                        - 0
+                      delta_manual_delink:
+                        type: number
+                        description: Returns the number of user-initiated delinks in the past 7 days. A subset of `delta_delink`.
+                        examples:
+                        - 0
+              example:
+                total: 43
+                delta_link: 6
+                delta_delink: 1
+                delta_manual_delink: 1
+                baseline_at: 1715635200000
+                malware:
+                  total: 4
+                  delta_link: 2
+                  delta_delink: 0
+                  delta_manual_delink: 0
+                report:
+                  total: 8
+                  delta_link: 0
+                  delta_delink: 2
+                  delta_manual_delink: 1
+                vulnerability:
+                  total: 31
+                  delta_link: 4
+                  delta_delink: 0
+                  delta_manual_delink: 0
+  /api/v1/signals/metrics/count/:
+    get:
+      operationId: activeSignalCount
+      summary: Active Signal Count
+      tags:
+      - PIR
+      description: Returns the count of signals in `triggered` or `acknowledged` status across the tenant. This is the same value surfaced as the open signals count in the dashboard.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/signals/active-signal-count
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                    description: Returns the number of signals in `triggered` or `acknowledged` status.
+                    examples:
+                    - 17
+              example:
+                count: 17
+  /api/v1/signals/:
+    get:
+      operationId: listSignalsTenantWide
+      summary: List Signals (Tenant-wide)
+      tags:
+      - PIR
+      description: Returns a paginated list of all signals across the tenant. Filter parameters that accept multiple values use OR semantics; repeat the parameter to filter by more than one value.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/signals/list-signals-tenant-wide
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve.
+          default: '1'
+        description: Pass the page number to retrieve.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of results per page.
+        description: Pass the number of results per page.
+      - name: severity
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Filter by severity level.
+          enum:
+          - unknown
+          - low
+          - medium
+          - high
+          - critical
+          - crisis
+        description: Filter by severity level.
+      - name: signal_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Filter by signal type.
+          enum:
+          - emerging_threat
+          - actor_attribution
+          - vulnerability
+          - pattern_detected
+          - activity_spike
+          - intelligence_gap
+          - escalating_risk
+        description: Filter by signal type.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Filter by signal status.
+          enum:
+          - triggered
+          - acknowledged
+          - stale
+          - archived
+          - resolved
+          - dismissed
+        description: Filter by signal status.
+      - name: emitted_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass an RFC3339 timestamp as the inclusive start of the emission date range.
+        description: Pass an RFC3339 timestamp as the inclusive start of the emission date range.
+      - name: emitted_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass an RFC3339 timestamp as the inclusive end of the emission date range.
+        description: Pass an RFC3339 timestamp as the inclusive end of the emission date range.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a keyword for a case-insensitive substring search on the signal title.
+        description: Pass a keyword for a case-insensitive substring search on the signal title.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: Returns a list of signal objects.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Returns the signal identifier.
+                          examples:
+                          - 3Esig000000000000000000001
+                        title:
+                          type: string
+                          description: Returns the signal title rendered from the tenant's signal configuration at emit time.
+                          examples:
+                          - Emerging Threat
+                        description:
+                          type: string
+                          description: Returns a description of what triggered the signal.
+                          examples:
+                          - New activity detected across linked objects for this PIR.
+                        signal_type:
+                          type: string
+                          description: Returns the signal type.
+                          examples:
+                          - emerging_threat
+                        severity:
+                          type: string
+                          description: Returns the severity level.
+                          examples:
+                          - critical
+                        status:
+                          type: string
+                          description: Returns the current signal status.
+                          examples:
+                          - triggered
+                        confidence:
+                          type: number
+                          description: Returns the confidence score on a 0–100 scale.
+                          examples:
+                          - 88
+                        recommended_actions:
+                          type: array
+                          description: Returns analyst action recommendations rendered at emit time.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - Validate match relevance to each affected PIR
+                        pir_ids:
+                          type: array
+                          description: Returns the complete list of PIR IDs this signal is associated with.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        associated_pirs_count:
+                          type: number
+                          description: Returns the total number of PIRs linked to this signal.
+                          examples:
+                          - 1
+                        associated_pirs:
+                          type: array
+                          description: Returns up to the first 5 associated PIR objects as {`id`, `readable_id`}. Use `pir_ids` and `associated_pirs_count` for the full picture.
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: Returns the KSUID of the PIR.
+                                examples:
+                                - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                              readable_id:
+                                type: string
+                                description: Returns the human-readable ID.
+                                examples:
+                                - PIR001
+                        emitted_at:
+                          type: string
+                          description: Returns the timestamp when the signal was emitted.
+                          examples:
+                          - '2026-05-19T14:57:35.332419Z'
+              example:
+                results:
+                - id: 3Esig000000000000000000001
+                  title: Emerging Threat
+                  description: New activity detected across linked objects for this PIR.
+                  signal_type: emerging_threat
+                  severity: critical
+                  status: triggered
+                  confidence: 88
+                  recommended_actions:
+                  - Validate match relevance to each affected PIR
+                  pir_ids:
+                  - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  associated_pirs_count: 1
+                  associated_pirs:
+                  - id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                    readable_id: PIR001
+                  emitted_at: '2026-05-19T14:57:35.332419Z'
+  /api/v1/signals/metrics/prioritized/:
+    get:
+      operationId: topPrioritizedSignalsTenantWide
+      summary: Top Prioritized Signals (Tenant-wide)
+      tags:
+      - PIR
+      description: Returns the top 3 signals across the tenant ranked by a composite of severity and confidence. Only signals in triggered or acknowledged status are eligible. Use this to power the prioritised signals widget on the dashboard.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/signals/top-prioritized-signals-tenant-wide
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active_count:
+                    type: number
+                    description: Returns the total count of signals in `triggered` or `acknowledged` status across the tenant.
+                    examples:
+                    - 4
+                  results:
+                    type: array
+                    description: Returns up to 3 signal objects ranked by priority.
+                    items:
+                      type: object
+                      properties:
+                        signal_id:
+                          type: string
+                          description: Returns the signal identifier.
+                          examples:
+                          - sig-1
+                        title:
+                          type: string
+                          description: Returns the signal title.
+                          examples:
+                          - Emerging Threat
+                        description:
+                          type: string
+                          description: Returns the signal description.
+                          examples:
+                          - '...'
+                        signal_type:
+                          type: string
+                          description: Returns the signal type.
+                          examples:
+                          - emerging_threat
+                        severity:
+                          type: string
+                          description: Returns the severity level.
+                          examples:
+                          - crisis
+                        status:
+                          type: string
+                          description: Returns the current signal status.
+                          examples:
+                          - triggered
+                        confidence:
+                          type: number
+                          description: Returns the confidence score (0–100).
+                          examples:
+                          - 92.5
+                        emitted_at:
+                          type: string
+                          description: Returns the timestamp when the signal was emitted.
+                          examples:
+                          - '2026-05-19T14:57:35.332419Z'
+                        recommended_actions:
+                          type: array
+                          description: Returns the list of recommended analyst actions.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - Validate match relevance to each affected PIR
+                        rank_score:
+                          type: number
+                          description: Returns the composite ranking score used to order signals (`severity_weight × confidence`).
+                          examples:
+                          - 5
+                        pir_ids:
+                          type: array
+                          description: Returns the complete list of PIR IDs associated with this signal.
+                          items:
+                            type: string
+                            description: This is an example value.
+                            examples:
+                            - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                        associated_pirs_count:
+                          type: number
+                          description: Returns the total number of linked PIRs.
+                          examples:
+                          - 2
+                        associated_pirs:
+                          type: array
+                          description: Returns up to the first 5 associated PIR objects as {`id`, `readable_id`}.
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: Returns the KSUID of the associated PIR.
+                                examples:
+                                - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                              readable_id:
+                                type: string
+                                description: Returns the human-readable identifier. For example, `PIR001`.
+                                examples:
+                                - PIR001
+              example:
+                active_count: 4
+                results:
+                - signal_id: sig-1
+                  title: Emerging Threat
+                  description: '...'
+                  signal_type: emerging_threat
+                  severity: crisis
+                  status: triggered
+                  confidence: 92.5
+                  emitted_at: '2026-05-19T14:57:35.332419Z'
+                  recommended_actions:
+                  - Validate match relevance to each affected PIR
+                  rank_score: 5
+                  pir_ids:
+                  - 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                  associated_pirs_count: 2
+                  associated_pirs:
+                  - id: 3DwpvMWyNIuf33QFpyRJXIcKYVB
+                    readable_id: PIR001
+  /api/v1/signals/{signal_id}/:
+    post:
+      operationId: updateSignalStatus
+      summary: Update Signal Status
+      tags:
+      - PIR
+      description: 'Transitions a signal to a new status. Not all transitions are permitted; see the transition rules below. Returns `409` `CPIR-007` when the transition is not allowed from the signal''s current state.
+
+
+        <Accordion attributes=''{"style":{"width":"100%"}}''>
+
+        <AccordionItem title="Transition Rules" iconUrl=""><p>Target status</p>
+
+        <p>Allowed from</p>
+
+        <p>Failure</p>
+
+        <p><code class="slate-code">acknowledged</code></p>
+
+        <p><code class="slate-code">triggered</code> only</p>
+
+        <p><code class="slate-code">409</code> <code class="slate-code">CPIR-007</code> with "signal is not in triggered state"</p>
+
+        <p><code class="slate-code">resolved</code></p>
+
+        <p><code class="slate-code">triggered</code> or <code class="slate-code">acknowledged</code></p>
+
+        <p><code class="slate-code">409</code> <code class="slate-code">CPIR-007</code> with "signal cannot be resolved from its current state"</p>
+
+        <p><code class="slate-code">dismissed</code></p>
+
+        <p>Any status</p>
+
+        <p>N/A</p>
+
+        <p></p></AccordionItem>
+
+        </Accordion>'
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/signals/update-signal-status
+      parameters:
+      - name: signal_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the signal identifier as a path parameter.
+        description: Pass the signal identifier as a path parameter.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: Pass the target status. Passing `triggered` or any other value returns `422` `CPIR-008`.
+                  examples:
+                  - acknowledged
+              required:
+              - status
+            example:
+              status: acknowledged
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns the applied target status.
+                    examples:
+                    - acknowledged
+              example:
+                status: acknowledged
+  /api/health-check/:
+    get:
+      operationId: livenessCheck
+      summary: Liveness Check
+      tags:
+      - PIR
+      description: Confirms the service process is running. Does not probe downstream dependencies. Used by the container orchestrator as a process-level health check.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/system/liveness-check
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns `ok` when the process is running.
+                    examples:
+                    - ok
+              example:
+                status: ok
+  /metrics:
+    get:
+      operationId: prometheusMetrics
+      summary: Prometheus Metrics
+      tags:
+      - PIR
+      description: Exposes operational metrics in Prometheus text exposition format. Served on a dedicated port (\`:2424\`) separate from the API port. Both the API server and the worker binary expose this endpoint independently on their own `:2424` ports.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/system/prometheus-metrics
+      responses:
+        '200':
+          description: 'Returns Prometheus text format. Metric namespaces:
+
+
+            HELP cpir_http_requests_total Total HTTP requests.
+
+            TYPE cpir_http_requests_total counter
+
+            cpir_http_requests_total{method="GET",route="/api/v1/pirs/",status="200"} 1423
+
+            HELP cpir_db_query_duration_seconds DB query duration.
+
+            TYPE cpir_db_query_duration_seconds histogram
+
+            cpir_db_query_duration_seconds_bucket{op="select",table="pirs",le="0.005"} 892'
+  /api/readiness-check/:
+    get:
+      operationId: readinessCheck
+      summary: Readiness Check
+      tags:
+      - PIR
+      description: Confirms that the service and its dependencies, the database (via PgBouncer) and the Central Embedding Service (CES), are reachable. Returns `200` only when all dependencies are healthy; returns `503` when any dependency is down. Used by the orchestrator to gate traffic routing.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/system/readiness-check
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns `ok` when all dependencies are healthy, or `unhealthy` when one or more are unreachable.
+                    examples:
+                    - ok
+                  components:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        description: Returns `ok` when the database is reachable, or `unhealthy` when it is not.
+                        examples:
+                        - ok
+                      ces:
+                        type: string
+                        description: Returns `ok` when the database is reachable, or `unhealthy` when it is not.
+                        examples:
+                        - ok
+              example:
+                status: ok
+                components:
+                  database: ok
+                  ces: ok
+        '503':
+          description: HTTP 503 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns `ok` when all dependencies are healthy, or `unhealthy` when one or more are unreachable.
+                    examples:
+                    - unhealthy
+                  components:
+                    type: object
+                    properties:
+                      database:
+                        type: string
+                        description: Returns `ok` when the database is reachable, or `unhealthy` when it is not.
+                        examples:
+                        - ok
+                      ces:
+                        type: string
+                        description: Returns `ok` when the database is reachable, or `unhealthy` when it is not.
+                        examples:
+                        - unhealthy
+              example:
+                status: unhealthy
+                components:
+                  database: ok
+                  ces: unhealthy
+  /api/v1/tenant/configuration/:
+    get:
+      operationId: getTenantConfiguration
+      summary: Get Tenant Configuration
+      tags:
+      - PIR
+      description: Returns the tenant's CES tuning parameters, escalation thresholds, and telemetry configuration. The telemetry fields are passed through to the frontend to enable click-event capture and are not stored per tenant.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/pir/tenant-configuration/get-tenant-configuration
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vector_min_score:
+                    type: object
+                    description: Returns the minimum cosine similarity threshold for CES matches. Contains a `global` default and optional `per_entity` overrides keyed by entity kind.
+                    properties:
+                      global:
+                        type: number
+                        description: Returns the default minimum cosine similarity threshold applied to entity kinds without a `per_entity` override.
+                        examples:
+                        - 0.78
+                      per_entity:
+                        type: object
+                        description: Returns per-entity-kind overrides of the minimum cosine similarity threshold, keyed by entity kind. Omitted when no overrides are configured.
+                        properties:
+                          threat_object:
+                            type: number
+                            description: Returns the minimum cosine similarity threshold override for `threat_object` matches.
+                            examples:
+                            - 0.7
+                          alert:
+                            type: number
+                            description: Returns the minimum cosine similarity threshold override for `alert` matches.
+                            examples:
+                            - 0.6
+                  top_k:
+                    type: object
+                    description: Returns the maximum number of CES candidates considered per sweep. Same shape as `vector_min_score`.
+                    properties:
+                      global:
+                        type: number
+                        description: Returns the default maximum number of CES candidates considered per sweep for entity kinds without a `per_entity` override.
+                        examples:
+                        - 100
+                      per_entity:
+                        type: object
+                        description: Returns per-entity-kind overrides of the maximum candidate count, keyed by entity kind. Omitted when no overrides are configured.
+                        properties:
+                          threat_object:
+                            type: number
+                            description: Returns the maximum candidate count override for `threat_object` matches.
+                            examples:
+                            - 20
+                          alert:
+                            type: number
+                            description: Returns the maximum candidate count override for `alert` matches.
+                            examples:
+                            - 30
+                  base_config:
+                    type: object
+                    description: Returns tenant-wide operational tunables such as `pir__max_active`.
+                    properties:
+                      pir__max_active:
+                        type: number
+                        description: Returns the maximum number of PIRs that can be in `active` status simultaneously for the tenant.
+                        examples:
+                        - 1000
+                  auto_escalation_count:
+                    type: number
+                    description: Returns the signal count threshold that triggers a Medium to High severity escalation.
+                    examples:
+                    - 2
+                  auto_escalation_window_hours:
+                    type: number
+                    description: Returns the time window in hours for the Medium to High escalation evaluation.
+                    examples:
+                    - 4
+                  telemetry_token:
+                    type: string
+                    description: Returns the per-product telemetry token used by the frontend to connect to the telemetry service.
+                    examples:
+                    - <per-product token>
+                  telemetry_type:
+                    type: string
+                    description: Returns the telemetry provider identifier. For example, `mixpanel`.
+                    examples:
+                    - mixpanel
+              example:
+                vector_min_score:
+                  global: 0.78
+                  per_entity:
+                    threat_object: 0.7
+                    alert: 0.6
+                top_k:
+                  global: 100
+                  per_entity:
+                    threat_object: 20
+                    alert: 30
+                base_config:
+                  pir__max_active: 1000
+                auto_escalation_count: 2
+                auto_escalation_window_hours: 4
+                telemetry_token: <per-product token>
+                telemetry_type: mixpanel
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

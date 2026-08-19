@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open RSS Feeds API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RSS Feeds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Intel from RSS Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/:article_id/stix/",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of an RSS article"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates intel from the IOCs of an RSS article."
+        },
+        {
+          "info": {
+            "name": "Get IOCs Listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/:article_id/iocs/",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Pass the entity type as `rss_feed`."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of an RSS article."
+              }
+            ]
+          },
+          "docs": "Returns the IOCs of an RSS article."
+        },
+        {
+          "info": {
+            "name": "Get RSS Feed Articles List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/rss/articles/",
+            "params": [
+              {
+                "name": "feed_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the ID of a source to filter articles based on the source."
+              },
+              {
+                "name": "bookmarked",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve bookmarked articles."
+              },
+              {
+                "name": "is_read",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve read articles."
+              },
+              {
+                "name": "is_reviewed",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to retrieve articles that are marked as reviewed."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of articles from RSS feed sources."
+        },
+        {
+          "info": {
+            "name": "Update RSS Feed Article",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ctix_host}/ctixapi/conversion/feed-sources/rss/articles/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an RSS feed article."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

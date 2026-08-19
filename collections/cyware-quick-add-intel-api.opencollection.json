@@ -1,0 +1,358 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Quick Add Intel API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quick Add Intel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Parse IOCs Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/free-text/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an IOC parsing task to extract STIX objects from free text data or a web page.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Currently, this API endpoint does not support parsing IOCs from files such as PDF, CSV, XLS, and others.</p>\n</Callout>"
+        },
+        {
+          "info": {
+            "name": "Get Country Codes List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/vocabs/country_enum/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns a list of country codes based on the [STIX 2.1 enumeration](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These country codes can be used to specify locations in the **Quick Add Intel** endpoint."
+        },
+        {
+          "info": {
+            "name": "Get Quick Add Intel History List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/intel-history/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass a query text to search for an intel based on the title."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Pass a comma-separated list of fields to sort the history."
+              },
+              {
+                "name": "created_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format to apply the created after (inclusive) filter."
+              },
+              {
+                "name": "created_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format to apply the created before (inclusive) filter."
+              },
+              {
+                "name": "published_from",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format to apply the published after (inclusive) filter."
+              },
+              {
+                "name": "published_to",
+                "value": "",
+                "type": "query",
+                "description": "Pass the time in epoch format to apply the published before (inclusive) filter."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID to apply the created by filter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Pass a status to apply the status filter."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the records."
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Pass `quick-add-intel` to retrieve the quick add intel history."
+              }
+            ]
+          },
+          "docs": "Returns a list of intel added using quick add intel."
+        },
+        {
+          "info": {
+            "name": "Get Regions List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/vocabs/region_ov/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the list of [STIX 2.1 region open vocabulary](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These regions can be used to specify locations in the **Quick Add Intel** endpoint."
+        },
+        {
+          "info": {
+            "name": "Quick Add Intel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/create-stix/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates intel by providing minimal details of indicators, SDOs, relations, custom objects, and indicators parsed from free text.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Default Source</strong>: Import</p>\n  <p><strong class=\"slate-bold\">Default Collection</strong>: Free Text</p>\n</Callout>\n\n**Note**: At least one of the `indicators`, `sdos`, `observables`, or `custom_objects` is required to create a"
+        },
+        {
+          "info": {
+            "name": "Get Parse IOCs Task Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/tasks/:task_id/",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Pass `status` to retrieve the status of a task."
+              },
+              {
+                "name": "num_status",
+                "value": "",
+                "type": "query",
+                "description": "Pass `true` to retrieve the numeric status of the task."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a parse IOCs task."
+              }
+            ]
+          },
+          "docs": "Returns the status of a parse IOCs task.\n\n### Parsing Task Status Codes\n\nThe following table provides an overview of the different statuses for a parsing task\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"121px\",\"143px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"8f70bc14-bb07-48b1-bd12-f249c90f8a7a\",\"title\":\"Numeric Status\"},{\"id\":\"d40d086a-e785-40d2-8529-69e9f3c6027d\",\"title\":\"Status Value\"},{\"id\":\"b3c11ff0-e7e2-496f-949c-12ea98e41749\",\"title\":\"Description\"}]'>\n  <table-row>\n"
+        },
+        {
+          "info": {
+            "name": "Get Parsed IOCs List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/tasks/:task_id/parse-iocs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a parse IOCs task."
+              }
+            ]
+          },
+          "docs": "Returns a list of parsed IOCs as STIX objects after successfully processing the **Create Parse IOCs Task** endpoint. Also indicates whether each IOC exists in the platform’s Allowed Indicators list."
+        },
+        {
+          "info": {
+            "name": "Get Quick Add Intel Relation Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/threat-data/report/:report_id/relations/",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of objects to retrieve on each page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the keyword to search based on the object name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve objects."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of a report object to retrieve the related objects. You can retrieve the report ID using the **List Quick Add Intel History** endpoint."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of the threat objects (indicators, SDOs, SCOs, relations, and custom objects) that are ingested and added as relationship objects of the report that is created as part of the quick add intel submission."
+        },
+        {
+          "info": {
+            "name": "Get Quick Add Intel Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/intel-history-stat/",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Pass `quick-add-intel` to retrieve the statistics of the Quick Add Intel history."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns the statistics of the Quick Add Intel history.\n\n### Intel Processing Statuses\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"cf4b84a4-8824-4fb2-88a3-743338792450\",\"title\":\"Status\"},{\"id\":\"e1e57983-1f94-4270-bde4-ace3385a5640\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DRAFT</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been created but has not yet been submitted for"
+        },
+        {
+          "info": {
+            "name": "Get Quick Add Intel Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/conversion/quick-intel/receive-report/",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the quick add intel task ID to retrieve the intel creation status. You can retrieve the ID using the **Quick Add Intel API**."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Retrieve the intel creation status of a quick add intel submission. This API requires the unique ID of the background task created by the system to create intel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

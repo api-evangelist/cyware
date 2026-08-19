@@ -1,0 +1,259 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Intel Exchange (CTIX) v3 Open Dashboards API",
+    "version": "3.6.2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AccessID",
+      "value": "{{AccessID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dashboard Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/dashboard/:dashboard_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of the dashboard. You can retrieve this ID using the **List Dashboards** API. For example: *7749e131-2161-4b19-b77d-e92aa7e945a9*."
+              }
+            ]
+          },
+          "docs": "Returns data about the specific dashboard ID."
+        },
+        {
+          "info": {
+            "name": "Delete Custom Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/dashboard/:dashboard_id/",
+            "params": [
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a custom dashboard. You can only delete dashboards that you have previously created."
+              }
+            ]
+          },
+          "docs": "Deletes a custom dashboard for the given dashboard ID. You can retrieve the ID using the **List Dashboards API**."
+        },
+        {
+          "info": {
+            "name": "Export Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/dashboard_export/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a dashboard in the Intel Exchange application. On successful exporting, you will receive an email with the subject line **Cyware Dashboard Report Mail**."
+        },
+        {
+          "info": {
+            "name": "Get Dashboards List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/dashboard/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ]
+          },
+          "docs": "Returns all system dashboards as well as dashboards you created."
+        },
+        {
+          "info": {
+            "name": "Get Top Level Domain (TLD)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/utilities/tld/data/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve details from."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of TLDs to be retrieved on each page."
+              }
+            ]
+          },
+          "docs": "Returns all top-level domains in Intel Exchange."
+        },
+        {
+          "info": {
+            "name": "Get Widget Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/widget/:widget_slug/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "widget_slug",
+                "value": "",
+                "type": "path",
+                "description": "Pass the slug of a widget."
+              }
+            ]
+          },
+          "docs": "Returns the configuration details of a widget."
+        },
+        {
+          "info": {
+            "name": "Delete Widget",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/widget/:widget_slug/",
+            "params": [
+              {
+                "name": "widget_slug",
+                "value": "",
+                "type": "path",
+                "description": "Pass the slug of a widget. You can retrieve the slug using the **List Widgets API**. For example: *01JE8E8WA4VPW9DQB96GW2F1XS*."
+              }
+            ]
+          },
+          "docs": "Deletes a custom widget from the platform."
+        },
+        {
+          "info": {
+            "name": "Get Widgets List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/widget/",
+            "params": [
+              {
+                "name": "widget_location",
+                "value": "",
+                "type": "query",
+                "description": "Pass the types of widgets to retrieve in comma-separated values."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve widgets from."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of widgets to retrieve in each page of the response"
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Pass the user ID of the creator of the widgets to filter widgets. If you are passing this parameter, ensure you also pass the `widget_location` value as custom-dashboard-widget or custom-hero-card. For example: *a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad*"
+              }
+            ]
+          },
+          "docs": "Returns the list of widgets in the widget library."
+        },
+        {
+          "info": {
+            "name": "Get Widget Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/analytics/widget/:widget_slug/data/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "widget_slug",
+                "value": "",
+                "type": "path",
+                "description": "Pass the slug of a widget. You can retrieve the slug using the **List Widgets** API. For example: *ioc_vs_allowed*."
+              }
+            ]
+          },
+          "docs": "Returns the data returned by a widget based on the widget configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

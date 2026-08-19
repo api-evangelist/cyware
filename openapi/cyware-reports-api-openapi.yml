@@ -1,0 +1,2575 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Reports API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Reports
+  description: Reports
+paths:
+  /ingestion/reports/:
+    post:
+      operationId: createReport
+      summary: Create Report
+      tags:
+      - Reports
+      description: "Create a basic (standard) report in Intel Exchange.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to create advanced reports.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/create-report
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to be created.
+          enum:
+          - basic
+          examples:
+          - basic
+        description: Pass the type of report to be created.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Pass the name of the report.
+                  examples:
+                  - Intel Exchange report
+                type:
+                  type: string
+                  description: Pass the type of report to be created.
+                  enum:
+                  - basic
+                  examples:
+                  - basic
+                basic_report_type:
+                  type: string
+                  description: Pass the type of basic report to be created.
+                  enum:
+                  - custom
+                  examples:
+                  - custom
+                shared_type:
+                  type: string
+                  description: Pass the share type value.
+                  enum:
+                  - private
+                  - global
+                  examples:
+                  - global
+                saved_search:
+                  type: object
+                  description: Pass the saved search or custom query details used for generating the report. You can use the List Saved Search endpoint to retrieve the required details.
+                  properties:
+                    meta_data:
+                      type: string
+                      description: Pass the saved search metadata to include in the report.
+                      examples:
+                      - '{\"object_type\":[\"indicator\"],\"query\":[{\"length\":28,\"dataKey\":{\"id\":\"type\",\"type\":\"select\",\"addAll\":true,\"reset\":true,\"multiple\":true,\"value\":\"id\",\"label\":\"Object Type\",\"values\":[{\"id\":\"indicator\",\"name\":\"Indicator\"},{\"id\":\"malware\",\"name\":\"Malware\"},{\"id\":\"threat-actor\",\"name\":\"Threat Actor\"},{\"id\":\"vulnerability\",\"name\":\"Vulnerability\"},{\"id\":\"attack-pattern\",\"name\":\"Attack Pattern\"},{\"id\":\"campaign\",\"name\":\"Campaign\"},{\"id\":\"course-of-action\",\"name\":\"Course of Action\"},{\"id\":\"identity\",\"name\":\"Identity\"},{\"id\":\"infrastructure\",\"name\":\"Infrastructure\"},{\"id\":\"intrusion-set\",\"name\":\"Intrusion Set\"},{\"id\":\"location\",\"name\":\"Location\"},{\"id\":\"malware-analysis\",\"name\":\"Malware Analysis\"},{\"id\":\"observed-data\",\"name\":\"Observed Data\"},{\"id\":\"opinion\",\"name\":\"Opinion\"},{\"id\":\"tool\",\"name\":\"Tool\"},{\"id\":\"report\",\"name\":\"Report\"},{\"id\":\"custom-object\",\"name\":\"Custom Object\"},{\"id\":\"observable\",\"name\":\"Observable\"},{\"id\":\"incident\",\"name\":\"Incident\"}]},\"key\":\"''Object Type''\",\"keyType\":\"select\",\"dataOperator\":{\"id\":\"=\",\"label\":\"=\"},\"operator\":\"=\",\"dataValue\":{\"id\":\"indicator\",\"name\":\"Indicator\"},\"value\":\"\\\"Indicator\\\"\"}]}'
+                    name:
+                      type: string
+                      description: Pass the saved search name.
+                      examples:
+                      - Malware
+                    query:
+                      type: string
+                      description: Pass the saved search query to generate the report.
+                      examples:
+                      - type = "malware"
+                  required:
+                  - meta_data
+                  - query
+                schedule:
+                  type: object
+                  description: Pass the schedule details such as repeat type, start date and time, duration time, duration value, and repeat value.
+                  properties:
+                    repeat_type:
+                      type: string
+                      description: Pass the frequency of the schedule.
+                      enum:
+                      - once
+                      - daily
+                      - weekly
+                      - monthly
+                      examples:
+                      - daily
+                    start_datetime:
+                      type: number
+                      description: Pass the start time of the report in epoch format.
+                      examples:
+                      - '1638124200'
+                    duration_value:
+                      type: number
+                      description: Pass the time frame in days to include the data in the report.
+                      examples:
+                      - '2'
+                    repeat_value:
+                      type: number
+                      description: Pass the number of times to repeat the schedule.
+                      examples:
+                      - '2'
+                  required:
+                  - repeat_type
+                  - start_datetime
+                  - duration_value
+                  - repeat_value
+                file_types:
+                  type: array
+                  description: Pass the report type.
+                  items:
+                    type: string
+                    description: Pass the report type, such as CSV, XLS.
+                    examples:
+                    - csv
+                columns:
+                  type: array
+                  description: Pass the list of columns to be displayed in a basic report.
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        description: Pass the report column key.
+                        examples:
+                        - valid_until
+                      label:
+                        type: string
+                        description: Pass the report column label.
+                        examples:
+                        - Valid Until
+                internal_recipients:
+                  type: object
+                  description: Pass the list of internal recipients with whom to share the report.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass details of the internal recipient of the report.
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: Enter the user ID.
+                            examples:
+                            - 3504aa4a-1e56-40c6-89d7-fc3c6adc2b03
+                          first_name:
+                            type: string
+                            description: Enter the first name of the internal recipient.
+                            examples:
+                            - John
+                          last_name:
+                            type: string
+                            description: Enter the last name of the internal recipient.
+                            examples:
+                            - Doe
+                          email:
+                            type: string
+                            description: Enter the email address.
+                            examples:
+                            - johndoe@example.com
+                    cc:
+                      type: array
+                      description: Enter the cc email addresses for the internal recipients
+                      items: {}
+                    bcc:
+                      type: array
+                      description: Enter the bcc email addresses for the internal recipients
+                      items: {}
+                query_key:
+                  type: string
+                  description: Pass the key to sort data in the report.
+                  enum:
+                  - '`ctix_created`'
+                  - '`ctix_modified`'
+                  default: '`ctix_created`'
+                external_recipients:
+                  type: object
+                  description: Pass the list of external recipients (outside Intel Exchange) with whom to share the report.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass details of the external recipients
+                      items:
+                        type: string
+                        description: The email address of the external recipient.
+                        examples:
+                        - bca@cyware.com
+                    cc:
+                      type: array
+                      description: The cc email address of external recipients
+                      items: {}
+                    bcc:
+                      type: array
+                      description: The bcc email address of external recipients
+                      items: {}
+              required:
+              - name
+              - type
+              - shared_type
+              - saved_search
+              - schedule
+              - file_types
+              - columns
+            example:
+              name: Intel Exchange report
+              type: basic
+              basic_report_type: custom
+              shared_type: global
+              saved_search:
+                meta_data: '{\"object_type\":[\"indicator\"],\"query\":[{\"length\":28,\"dataKey\":{\"id\":\"type\",\"type\":\"select\",\"addAll\":true,\"reset\":true,\"multiple\":true,\"value\":\"id\",\"label\":\"Object Type\",\"values\":[{\"id\":\"indicator\",\"name\":\"Indicator\"},{\"id\":\"malware\",\"name\":\"Malware\"},{\"id\":\"threat-actor\",\"name\":\"Threat Actor\"},{\"id\":\"vulnerability\",\"name\":\"Vulnerability\"},{\"id\":\"attack-pattern\",\"name\":\"Attack Pattern\"},{\"id\":\"campaign\",\"name\":\"Campaign\"},{\"id\":\"course-of-action\",\"name\":\"Course of Action\"},{\"id\":\"identity\",\"name\":\"Identity\"},{\"id\":\"infrastructure\",\"name\":\"Infrastructure\"},{\"id\":\"intrusion-set\",\"name\":\"Intrusion Set\"},{\"id\":\"location\",\"name\":\"Location\"},{\"id\":\"malware-analysis\",\"name\":\"Malware Analysis\"},{\"id\":\"observed-data\",\"name\":\"Observed Data\"},{\"id\":\"opinion\",\"name\":\"Opinion\"},{\"id\":\"tool\",\"name\":\"Tool\"},{\"id\":\"report\",\"name\":\"Report\"},{\"id\":\"custom-object\",\"name\":\"Custom Object\"},{\"id\":\"observable\",\"name\":\"Observable\"},{\"id\":\"incident\",\"name\":\"Incident\"}]},\"key\":\"''Object Type''\",\"keyType\":\"select\",\"dataOperator\":{\"id\":\"=\",\"label\":\"=\"},\"operator\":\"=\",\"dataValue\":{\"id\":\"indicator\",\"name\":\"Indicator\"},\"value\":\"\\\"Indicator\\\"\"}]}'
+                name: Malware
+                query: type = "malware"
+              schedule:
+                repeat_type: daily
+                start_datetime: '1638124200'
+                duration_value: '2'
+                repeat_value: '2'
+              file_types:
+              - csv
+              columns:
+              - key: valid_until
+                label: Valid Until
+              internal_recipients:
+                to:
+                - user_id: 3504aa4a-1e56-40c6-89d7-fc3c6adc2b03
+                  first_name: John
+                  last_name: Doe
+                  email: johndoe@example.com
+                cc: []
+                bcc: []
+              query_key: ''
+              external_recipients:
+                to:
+                - bca@cyware.com
+                cc: []
+                bcc: []
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  basic_report_type:
+                    type: string
+                    description: Returns the type of basic report, such as saved or custom.
+                    examples:
+                    - custom
+                  columns:
+                    type: array
+                    description: Returns the list of columns in a report.
+                    items:
+                      type: object
+                      description: Retrieves the report column details
+                      properties:
+                        key:
+                          type: string
+                          description: Returns the valid until column key.
+                          examples:
+                          - valid_until
+                        label:
+                          type: string
+                          description: Returns the valid until column label.
+                          examples:
+                          - Valid Until
+                  created:
+                    type: number
+                    description: Returns the epoch time of when the report was created.
+                    examples:
+                    - '1692188813'
+                  created_by:
+                    type: object
+                    description: Returns the details of the user who created the report.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the report.
+                        examples:
+                        - john.doe@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the report.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the report.
+                        examples:
+                        - 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the report.
+                  date_last_run:
+                    type: object
+                    description: Returns the date and time in epoch format at which the report was manually run.
+                  external_recipients:
+                    type: object
+                    description: Returns the list of external recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the external recipients marked as bcc
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the external recipients marked as cc
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns the external recipient details of the report
+                        items:
+                          type: string
+                          description: Returns the email address of the external recipient.
+                          examples:
+                          - bca@cyware.com
+                  file_types:
+                    type: array
+                    description: Returns the report formats, such as CSV and XLS.
+                    items:
+                      type: string
+                      description: Returns the report format.
+                      examples:
+                      - csv
+                  id:
+                    type: string
+                    description: Returns the unique ID of the report.
+                    examples:
+                    - 334c3ff3-bfcc-402c-ad6a-e13cb830a602
+                  internal_recipients:
+                    type: object
+                    description: Returns the list of internal recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the internal recipients marked as bcc.
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the internal recipients marked as cc.
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns the internal recipient details.
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: object
+                              description: Enter the user details
+                  modified:
+                    type: number
+                    description: Returns the epoch time of the last modified date.
+                    examples:
+                    - '1692188813'
+                  modified_by:
+                    type: object
+                    description: Returns the details of the user who last modified the report
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who last modified the report.
+                        examples:
+                        - john.doe@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who last modified the report.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the user ID of the user who last modified the report.
+                        examples:
+                        - 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who last modified the report.
+                        examples:
+                        - doe
+                  name:
+                    type: string
+                    description: Returns the name of the report.
+                    examples:
+                    - Vulnerability Report
+                  query_key:
+                    type: string
+                    description: Returns the sorting type in basic reports.
+                    examples:
+                    - ctix_created
+                  saved_search:
+                    type: object
+                    description: Returns the saved search object for the corresponding report used for generating the report.
+                    properties:
+                      created_by:
+                        type: object
+                        description: Returns the details of the user who created the report
+                        properties:
+                          email:
+                            type: string
+                            description: Returns the email address of the user who last created the report.
+                            examples:
+                            - john.doe@cyware.com
+                          first_name:
+                            type: string
+                            description: Returns the first name of the user who last created the report.
+                            examples:
+                            - john
+                          id:
+                            type: string
+                            description: Returns the user ID of the user who last created the report.
+                            examples:
+                            - 76fbe1c3-5fd0-4674-9666-69921edafb94
+                          last_name:
+                            type: string
+                            description: Returns the last name of the user who last created the report.
+                            examples:
+                            - doe
+                      description:
+                        type: object
+                        description: Returns the report description, if any
+                      editable:
+                        type: boolean
+                        description: Returns if the report is editable.
+                        examples:
+                        - 'false'
+                      id:
+                        type: string
+                        description: Returns the unique ID of the report.
+                        examples:
+                        - 57d957a8-c468-4a94-8c23-b74aa3540fb0
+                      is_threat_data_search:
+                        type: boolean
+                        description: Returns a boolean indicating whether the search pertains to threat data.
+                        examples:
+                        - 'true'
+                      meta_data:
+                        type: string
+                        description: Returns the metadata about the search query, filters, and object types.
+                        examples:
+                        - '{"object_type":["vulnerability"],"query":[{"length":32,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"vulnerability","name":"Vulnerability"},"value":"\"Vulnerability\""}]}'
+                      name:
+                        type: string
+                        description: Returns the name of the report.
+                        examples:
+                        - Vulnerability
+                      order:
+                        type: number
+                        description: Returns the ordering index for the saved search.
+                        examples:
+                        - '1'
+                      pinned:
+                        type: boolean
+                        description: Returns a boolean indicating if the saved search is pinned for quick access.
+                        examples:
+                        - 'false'
+                      query:
+                        type: string
+                        description: Returns the query string used in the saved search.
+                        examples:
+                        - type = "vulnerability"
+                      shared_type:
+                        type: string
+                        description: Returns the shared type, such as global or private.
+                        examples:
+                        - global
+                      shared_users:
+                        type: array
+                        description: Returns the list of users with whom the saved search is shared.
+                        items: {}
+                      type:
+                        type: string
+                        description: Returns the type of report, such as basic or advanced.
+                        examples:
+                        - cql
+                  schedule:
+                    type: object
+                    description: Returns the schedule details of the report
+                    properties:
+                      duration_value:
+                        type: number
+                        description: Returns the duration in days to capture data in the report.
+                        examples:
+                        - '2'
+                      ends_on:
+                        type: object
+                        description: Returns details of when the report ends
+                        properties:
+                          attempts_left:
+                            type: number
+                            description: Returns the number of attempts left.
+                            examples:
+                            - '10'
+                          type:
+                            type: string
+                            description: Returns the number of occurrences.
+                            examples:
+                            - occurrences
+                          value:
+                            type: number
+                            description: Returns the value associated with the end condition.
+                            examples:
+                            - '10'
+                      id:
+                        type: string
+                        description: Returns the unique ID of the schedule.
+                        examples:
+                        - 37bbeaac-a8d2-4571-a259-ee710342213e
+                      repeat_on:
+                        type: object
+                        description: Returns the details of how often the report schedule repeats
+                      repeat_type:
+                        type: string
+                        description: Returns the time interval for the re-run of the report.
+                        examples:
+                        - daily
+                      start_datetime:
+                        type: number
+                        description: Returns the starting date and time in epoch format from which the report captures the received data.
+                        examples:
+                        - '1638124200'
+                  shared_type:
+                    type: string
+                    description: Returns the shared type, such as global or private.
+                    examples:
+                    - global
+                  type:
+                    type: string
+                    description: Returns the type of report, such as basic or advanced.
+                    examples:
+                    - basic
+              example:
+                basic_report_type: custom
+                columns:
+                - key: valid_until
+                  label: Valid Until
+                created: '1692188813'
+                created_by:
+                  email: john.doe@cyware.com
+                  first_name: john
+                  id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                  last_name: ''
+                date_last_run: {}
+                external_recipients:
+                  bcc: []
+                  cc: []
+                  to:
+                  - bca@cyware.com
+                file_types:
+                - csv
+                id: 334c3ff3-bfcc-402c-ad6a-e13cb830a602
+                internal_recipients:
+                  bcc: []
+                  cc: []
+                  to:
+                  - user: {}
+                modified: '1692188813'
+                modified_by:
+                  email: john.doe@cyware.com
+                  first_name: john
+                  id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                  last_name: doe
+                name: Vulnerability Report
+                query_key: ctix_created
+                saved_search:
+                  created_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: 76fbe1c3-5fd0-4674-9666-69921edafb94
+                    last_name: doe
+                  description: {}
+                  editable: 'false'
+                  id: 57d957a8-c468-4a94-8c23-b74aa3540fb0
+                  is_threat_data_search: 'true'
+                  meta_data: '{"object_type":["vulnerability"],"query":[{"length":32,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"vulnerability","name":"Vulnerability"},"value":"\"Vulnerability\""}]}'
+                  name: Vulnerability
+                  order: '1'
+                  pinned: 'false'
+                  query: type = "vulnerability"
+                  shared_type: global
+                  shared_users: []
+                  type: cql
+                schedule:
+                  duration_value: '2'
+                  ends_on:
+                    attempts_left: '10'
+                    type: occurrences
+                    value: '10'
+                  id: 37bbeaac-a8d2-4571-a259-ee710342213e
+                  repeat_on: {}
+                  repeat_type: daily
+                  start_datetime: '1638124200'
+                shared_type: global
+                type: basic
+    get:
+      operationId: listReports
+      summary: Get Reports List
+      tags:
+      - Reports
+      description: Returns a list of reports from the Intel Exchange application.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/list-reports
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the type of report to filter reports.
+          enum:
+          - basic
+          - advanced
+          examples:
+          - basic
+        description: Pass the type of report to filter reports.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve reports.
+          examples:
+          - '1'
+        description: Pass the page number to retrieve reports.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of reports to retrieve on each page.
+          maxLength: 100
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of reports to retrieve on each page.
+      - name: repeat_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the frequency of the report run schedule.
+          enum:
+          - daily
+          - weekly
+          - monthly
+          examples:
+          - daily
+        description: Pass the frequency of the report run schedule.
+      - name: shared_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the visibility of the reports.
+          enum:
+          - private
+          - global
+          examples:
+          - global
+        description: Pass the visibility of the reports.
+      - name: created_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of the user who created the reports. You can retrieve the ID using the **Get Users** endpoint.
+          examples:
+          - 0d0f1f5b-752a-4987-a806-8a42822256b4
+        description: Pass the ID of the user who created the reports. You can retrieve the ID using the **Get Users** endpoint.
+      - name: modified_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the ID of the user who modified the reports. You can retrieve the ID using the **Get Users** endpoint.
+          examples:
+          - 0d0f1f5b-752a-4987-a806-8a42822256b4
+        description: Pass the ID of the user who modified the reports. You can retrieve the ID using the **Get Users** endpoint.
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the created from time of the reports in epoch format.
+          examples:
+          - '1650882890'
+        description: Pass the created from time of the reports in epoch format.
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the created to time of the reports in epoch format.
+          examples:
+          - '1650882898'
+        description: Pass the created to time of the reports in epoch format.
+      - name: modified_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the modified from time of the reports in epoch format.
+          examples:
+          - '1650882890'
+        description: Pass the modified from time of the reports in epoch format.
+      - name: modified_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the modified to time of the reports in epoch format.
+          examples:
+          - '1650882898'
+        description: Pass the modified to time of the reports in epoch format.
+      - name: date_last_run_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the last run from time of the reports in epoch format.
+          examples:
+          - '1651318940'
+        description: Pass the last run from time of the reports in epoch format.
+      - name: date_last_run_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the last run to time of the reports in epoch format.
+          examples:
+          - '1651318942'
+        description: Pass the last run to time of the reports in epoch format.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns the URL link to the next page.
+                    examples:
+                    - reports/?page=2&page_size=2&type=basic
+                  page_size:
+                    type: number
+                    description: Returns the size of the requested page.
+                    examples:
+                    - 2
+                  previous:
+                    type: object
+                    description: Returns the URL link of the previous page.
+                  results:
+                    type: array
+                    description: Returns result in JSON objects for each report.
+                    items:
+                      type: object
+                      properties:
+                        basic_report_type:
+                          type: string
+                          description: Returns the type of basic report.
+                          examples:
+                          - saved
+                        columns:
+                          type: array
+                          description: Returns the list of columns in a basic report.
+                          items:
+                            type: object
+                            description: Returns the keys and values of the report columns.
+                            properties:
+                              key:
+                                type: string
+                                description: Returns the internal key name used for the column in the report.
+                                examples:
+                                - name
+                              label:
+                                type: string
+                                description: Returns the display label for the column as shown in the report.
+                                examples:
+                                - Value
+                        created:
+                          type: number
+                          description: Returns the epoch time of when the report was created.
+                          examples:
+                          - 1690977181
+                        created_by:
+                          type: object
+                          description: Returns the details of the user who created the report.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address of the user who created the report.
+                              examples:
+                              - john.doe@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who created the report.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the ID of the user who created the report.
+                              examples:
+                              - 0d4408bd-9f94-47ec-98eb-6f32ecfd8bxx
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who created the report.
+                              examples:
+                              - doe
+                        date_last_run:
+                          type: number
+                          description: Returns the date and time in epoch format at which the report was last run.
+                          examples:
+                          - 1690977526
+                        external_recipients:
+                          type: object
+                          description: Returns the list of external recipients with whom to share the report.
+                          properties:
+                            bcc:
+                              type: array
+                              description: Enter the bcc email addresses for the external recipients.
+                              items: {}
+                            cc:
+                              type: array
+                              description: Enter the cc email addresses for the external recipients.
+                              items: {}
+                            to:
+                              type: array
+                              description: Pass details of the external recipient of the report.
+                              items: {}
+                        file_types:
+                          type: array
+                          description: Returns the report format, such as CSV and XLS for basic reports and PDF for advanced reports.
+                          items:
+                            type: string
+                            description: This is an example of file type.
+                            examples:
+                            - csv
+                        id:
+                          type: string
+                          description: Returns the unique ID of the report.
+                          examples:
+                          - 243558ea-b0e5-4290-a1dc-688d830f6e81
+                        internal_recipients:
+                          type: object
+                          description: Returns the list of internal recipients with whom to share the report.
+                          properties:
+                            bcc:
+                              type: array
+                              description: Enter the bcc email addresses for the internal recipients.
+                              items: {}
+                            cc:
+                              type: array
+                              description: Enter the cc email addresses for the internal recipients.
+                              items: {}
+                            to:
+                              type: array
+                              description: Pass details of the internal recipient of the report.
+                              items:
+                                type: object
+                                properties:
+                                  user:
+                                    type: object
+                                    description: Returns the user object representing an internal recipient.
+                        modified:
+                          type: number
+                          description: Returns the epoch time of when the report was last modified.
+                          examples:
+                          - 1690977526
+                        modified_by:
+                          type: object
+                          description: Returns the details of the user who last modified the report.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email address of the user who last modified the report.
+                              examples:
+                              - john.doe@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the user who last modified the report.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the user ID of the user who last modified the report.
+                              examples:
+                              - 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                            last_name:
+                              type: string
+                              description: Returns the last name of the user who last modified the report.
+                              examples:
+                              - doe
+                        name:
+                          type: string
+                          description: Returns the title of the report.
+                          examples:
+                          - Malware report
+                        query_key:
+                          type: object
+                          description: Returns the sorting type in basic reports.
+                          enum:
+                          - ctix_created
+                          - ctix_modified
+                        saved_search:
+                          type: object
+                          description: Returns the details of the saved search associated with the report.
+                          properties:
+                            created_by:
+                              type: object
+                              description: Returns the details of the user who created the saved search
+                              properties:
+                                email:
+                                  type: string
+                                  description: Returns the email address of the user who created the report.
+                                  examples:
+                                  - john.doe@cyware.com
+                                first_name:
+                                  type: string
+                                  description: Returns the first name of the user who created the report.
+                                  examples:
+                                  - john
+                                id:
+                                  type: string
+                                  description: Returns the ID of the user who created the report.
+                                  examples:
+                                  - 76fbe1c3-5fd0-4674-9666-69921edafb94
+                                last_name:
+                                  type: string
+                                  description: Returns the last name of the user who created the report.
+                                  examples:
+                                  - doe
+                            description:
+                              type: object
+                              description: Returns the description of the saved search
+                            editable:
+                              type: boolean
+                              description: Returns if the report is editable.
+                              examples:
+                              - false
+                            id:
+                              type: string
+                              description: Returns the unique ID of the report.
+                              examples:
+                              - a8a01156-d63a-42ed-810f-041b5b8bc4e3
+                            is_threat_data_search:
+                              type: boolean
+                              description: Returns true if the search pertains to threat intelligence data.
+                              examples:
+                              - true
+                            meta_data:
+                              type: string
+                              description: Returns metadata of the saved search.
+                              examples:
+                              - '{"object_type":["malware"],"query":[{"length":26,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"malware","name":"Malware"},"value":"\"Malware\""}]}'
+                            name:
+                              type: string
+                              description: Returns the name of the saved search.
+                              examples:
+                              - Malware
+                            order:
+                              type: number
+                              description: Returns the order of the saved search.
+                              examples:
+                              - 3
+                            pinned:
+                              type: boolean
+                              description: Returns true if the saved search is pinned.
+                              examples:
+                              - false
+                            query:
+                              type: string
+                              description: Returns the query of the saved search.
+                              examples:
+                              - type = "malware"
+                            shared_type:
+                              type: string
+                              description: Returns the shared type, such as global or private.
+                              examples:
+                              - global
+                            shared_users:
+                              type: array
+                              description: Returns the details of the users to whom the saved search is shared.
+                              items: {}
+                            type:
+                              type: string
+                              description: Returns the type of report, such as a basic or advanced.
+                              examples:
+                              - cql
+                        schedule:
+                          type: object
+                          description: Returns the details of the scheduled runs.
+                          properties:
+                            duration_value:
+                              type: number
+                              description: Returns the duration in days to capture data in the report.
+                              examples:
+                              - 7
+                            ends_on:
+                              type: object
+                              description: Returns the end type, number of attempts left, and end time.
+                              properties:
+                                attempts_left:
+                                  type: number
+                                  description: Returns the remaining number of times the report is scheduled to run.
+                                  examples:
+                                  - 10
+                                type:
+                                  type: string
+                                  description: Returns the termination condition for the schedule.
+                                  examples:
+                                  - occurrences
+                                value:
+                                  type: number
+                                  description: Returns the value associated with the end condition.
+                                  examples:
+                                  - 10
+                            id:
+                              type: string
+                              description: Returns the unique ID of the report.
+                              examples:
+                              - 36d479a0-6d8e-4722-bb98-c0ea6ec1808f
+                            repeat_on:
+                              type: object
+                              description: Returns the schedule pattern or specific days
+                            repeat_type:
+                              type: string
+                              description: Returns the time interval for the re-run of the report.
+                              examples:
+                              - once
+                            start_datetime:
+                              type: number
+                              description: Returns the starting date and time in epoch format from which the report captures the received data.
+                              examples:
+                              - 1690977183
+                        shared_type:
+                          type: string
+                          description: Returns the shared type, such as global or private.
+                          examples:
+                          - private
+                        type:
+                          type: string
+                          description: Returns the type of report, such as a basic or advanced.
+                          examples:
+                          - basic
+                  total:
+                    type: number
+                    description: Returns the total number of reports in the response.
+                    examples:
+                    - '1'
+              example:
+                next: reports/?page=2&page_size=2&type=basic
+                page_size: 2
+                previous: {}
+                results:
+                - basic_report_type: saved
+                  columns:
+                  - key: name
+                    label: Value
+                  created: 1690977181
+                  created_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8bxx
+                    last_name: doe
+                  date_last_run: 1690977526
+                  external_recipients:
+                    bcc: []
+                    cc: []
+                    to: []
+                  file_types:
+                  - csv
+                  id: 243558ea-b0e5-4290-a1dc-688d830f6e81
+                  internal_recipients:
+                    bcc: []
+                    cc: []
+                    to:
+                    - user: {}
+                  modified: 1690977526
+                  modified_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                    last_name: doe
+                  name: Malware report
+                  query_key: {}
+                  saved_search:
+                    created_by:
+                      email: john.doe@cyware.com
+                      first_name: john
+                      id: 76fbe1c3-5fd0-4674-9666-69921edafb94
+                      last_name: doe
+                    description: {}
+                    editable: false
+                    id: a8a01156-d63a-42ed-810f-041b5b8bc4e3
+                    is_threat_data_search: true
+                    meta_data: '{"object_type":["malware"],"query":[{"length":26,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"malware","name":"Malware"},"value":"\"Malware\""}]}'
+                    name: Malware
+                    order: 3
+                    pinned: false
+                    query: type = "malware"
+                    shared_type: global
+                    shared_users: []
+                    type: cql
+                  schedule:
+                    duration_value: 7
+                    ends_on:
+                      attempts_left: 10
+                      type: occurrences
+                      value: 10
+                    id: 36d479a0-6d8e-4722-bb98-c0ea6ec1808f
+                    repeat_on: {}
+                    repeat_type: once
+                    start_datetime: 1690977183
+                  shared_type: private
+                  type: basic
+                total: '1'
+  /ingestion/reports/{report_id}/:
+    delete:
+      operationId: deleteReport
+      summary: Delete Report
+      tags:
+      - Reports
+      description: Delete a report from the Intel Exchange application. You can only delete reports that are created by you. Retrieve the `report_id` using **List Reports** or **Report Details** APIs.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/delete-report
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to be deleted.
+          enum:
+          - basic
+          - advanced
+          examples:
+          - basic
+        description: Pass the type of report to be deleted.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'Pass the ID of the report to delete. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+        description: 'Pass the ID of the report to delete. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+      responses:
+        '204':
+          description: This request doesn't return any response body. 204 status indicates that the report is deleted from Intel Exchange
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  raw:
+                    type: string
+              example:
+                raw: ''
+    get:
+      operationId: reportDetails
+      summary: Get Report Details
+      tags:
+      - Reports
+      description: Returns the details of a report.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/report-details
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to be retrieved.
+          enum:
+          - basic
+          - advanced
+          examples:
+          - basic
+        description: Pass the type of report to be retrieved.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'Pass the ID of a report.
+
+            For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+        description: 'Pass the ID of a report.
+
+          For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  basic_report_type:
+                    type: string
+                    description: Returns the type of basic report, such as saved or custom.
+                    examples:
+                    - custom
+                  columns:
+                    type: array
+                    description: Returns the list of columns in a report.
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          description: Returns the internal key used to identify the data field for the column.
+                          examples:
+                          - name
+                        label:
+                          type: string
+                          description: Returns the display name or label for the column in the report.
+                          examples:
+                          - Value
+                  created:
+                    type: number
+                    description: Returns the Unix timestamp of when the report was created.
+                    examples:
+                    - 1689156499
+                  created_by:
+                    type: object
+                    description: Returns the details of the user who created the report.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the report.
+                        examples:
+                        - divya.jadhav@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the report.
+                        examples:
+                        - divya
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the report.
+                        examples:
+                        - 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the report.
+                        examples:
+                        - j
+                  date_last_run:
+                    type: number
+                    description: Returns the date and time in epoch format at which the report was manually run.
+                    examples:
+                    - 1690107360
+                  external_recipients:
+                    type: object
+                    description: Returns the list of external recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the bcc email addresses for the external recipients.
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the cc email addresses for the external recipients.
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns details of the external recipient of the report.
+                        items: {}
+                  file_types:
+                    type: array
+                    description: Returns the report formats, such as CSV, XLS.
+                    items:
+                      type: string
+                      description: This is an example of file type.
+                      examples:
+                      - csv
+                  id:
+                    type: string
+                    description: Returns the unique ID of the report.
+                    examples:
+                    - 0870234e-9224-4a30-a6aa-03d3e1869b68
+                  internal_recipients:
+                    type: object
+                    description: Returns the list of internal recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the bcc email addresses for the internal recipients.
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the cc email addresses for the internal recipients.
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns details of the internal recipient of the report.
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: object
+                              description: Returns the user object representing the internal recipient.
+                              properties:
+                                email:
+                                  type: string
+                                  description: Returns the email address of the internal recipient.
+                                  examples:
+                                  - divya.jadhav@cyware.com
+                                first_name:
+                                  type: string
+                                  description: Returns the first name of the internal recipient.
+                                  examples:
+                                  - divya
+                                id:
+                                  type: string
+                                  description: Returns the unique identifier of the internal recipient.
+                                  examples:
+                                  - 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                                last_name:
+                                  type: string
+                                  description: Returns the last name of the internal recipient.
+                                  examples:
+                                  - j
+                  modified:
+                    type: number
+                    description: Returns the epoch time of the last modified date.
+                    examples:
+                    - 1690809887
+                  modified_by:
+                    type: object
+                    description: Returns the details of the user who modified the report.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who last modified the report.
+                        examples:
+                        - divya.jadhav@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who last modified the report.
+                        examples:
+                        - divya
+                      id:
+                        type: string
+                        description: Returns the user ID of the user who last modified the report.
+                        examples:
+                        - 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who last modified the report.
+                        examples:
+                        - j
+                  name:
+                    type: string
+                    description: Returns the name of the report.
+                    examples:
+                    - global - donot edit- daily
+                  saved_search:
+                    type: object
+                    description: Returns the saved search object for the corresponding report used for generating the report.
+                    properties:
+                      created_by:
+                        type: object
+                        description: Returns the details of the user who created the report.
+                        properties:
+                          email:
+                            type: string
+                            description: Returns the email address of the user who created the report.
+                            examples:
+                            - divya.jadhav@cyware.com
+                          first_name:
+                            type: string
+                            description: Returns the first name of the user who created the report.
+                            examples:
+                            - divya
+                          id:
+                            type: string
+                            description: Returns the ID of the user who created the report.
+                            examples:
+                            - 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                          last_name:
+                            type: string
+                            description: Returns the last name of the user who created the report.
+                            examples:
+                            - j
+                      description:
+                        type: object
+                        description: Returns the optional description of the saved search.
+                      editable:
+                        type: boolean
+                        description: Returns a boolean indicating whether the saved search can be modified.
+                        examples:
+                        - false
+                      id:
+                        type: string
+                        description: Returns the unique ID of the report.
+                        examples:
+                        - ce7dcaeb-3cff-4c0a-96cf-09610aa11c55
+                      is_threat_data_search:
+                        type: boolean
+                        description: Returns a boolean indicating if the search is for threat data.
+                        examples:
+                        - false
+                      meta_data:
+                        type: string
+                        description: Returns metadata in JSON string format, usually describing filters and object types.
+                        examples:
+                        - '{"panelFilters":{"type":{"value":[{"id":"indicator","name":"Indicator"}]},"ioc_type":{"value":[{"name":"Ipv4 addr","id":"ipv4-addr"}]}},"object_type":{"id":"indicator","name":"Indicator"}}'
+                      name:
+                        type: string
+                        description: Returns the name of the report.
+                        examples:
+                        - 6d440e55-eba3-4f5f-99e3-fec281b31cda
+                      order:
+                        type: number
+                        description: Returns the order index used to sort or pin saved searches.
+                        examples:
+                        - -1
+                      pinned:
+                        type: boolean
+                        description: Returns a boolean indicating if the saved search is pinned for quick access.
+                        examples:
+                        - false
+                      query:
+                        type: string
+                        description: Returns the raw query string used in the saved search.
+                        examples:
+                        - type = "indicator" AND ioc_type = "ipv4-addr"
+                      shared_type:
+                        type: string
+                        description: Returns the shared type, such as global or private.
+                        examples:
+                        - private
+                      shared_users:
+                        type: array
+                        description: Returns the list of users the saved search is shared with.
+                        items: {}
+                      type:
+                        type: string
+                        description: Returns the type of report, such as basic or advanced.
+                        examples:
+                        - basic
+                  schedule:
+                    type: object
+                    description: Returns the object that defines the schedule on which the report runs.
+                    properties:
+                      duration_value:
+                        type: number
+                        description: Returns the duration in days to capture data in the report.
+                        examples:
+                        - 1
+                      ends_on:
+                        type: object
+                        description: Returns the object specifying the schedule's end condition.
+                        properties:
+                          type:
+                            type: string
+                            description: Returns the type of report, such as basic or advanced.
+                            examples:
+                            - end_date
+                          value:
+                            type: number
+                            description: Returns the value associated with the end condition.
+                            examples:
+                            - 1689618600
+                      id:
+                        type: string
+                        description: Returns the unique ID of the report.
+                        examples:
+                        - 7e484745-b116-4c8d-998d-a01efdc14d18
+                      repeat_on:
+                        type: object
+                        description: Returns the object specifying specific days or patterns for recurrence.
+                      repeat_type:
+                        type: string
+                        description: Returns the time interval for the re-run of the report.
+                        examples:
+                        - daily
+                      start_datetime:
+                        type: number
+                        description: Returns the starting date and time in epoch format from which the report captures the received data.
+                        examples:
+                        - 1689156516
+                  shared_type:
+                    type: string
+                    description: Returns the shared type, such as global or private.
+                    examples:
+                    - global
+                  type:
+                    type: string
+                    description: Returns the type of report, such as basic or advanced.
+                    examples:
+                    - basic
+              example:
+                basic_report_type: custom
+                columns:
+                - key: name
+                  label: Value
+                created: 1689156499
+                created_by:
+                  email: divya.jadhav@cyware.com
+                  first_name: divya
+                  id: 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                  last_name: j
+                date_last_run: 1690107360
+                external_recipients:
+                  bcc: []
+                  cc: []
+                  to: []
+                file_types:
+                - csv
+                id: 0870234e-9224-4a30-a6aa-03d3e1869b68
+                internal_recipients:
+                  bcc: []
+                  cc: []
+                  to:
+                  - user:
+                      email: divya.jadhav@cyware.com
+                      first_name: divya
+                      id: 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                      last_name: j
+                modified: 1690809887
+                modified_by:
+                  email: divya.jadhav@cyware.com
+                  first_name: divya
+                  id: 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                  last_name: j
+                name: global - donot edit- daily
+                saved_search:
+                  created_by:
+                    email: divya.jadhav@cyware.com
+                    first_name: divya
+                    id: 8fba2055-e44a-4521-a68e-3d3b8b4bafd0
+                    last_name: j
+                  description: {}
+                  editable: false
+                  id: ce7dcaeb-3cff-4c0a-96cf-09610aa11c55
+                  is_threat_data_search: false
+                  meta_data: '{"panelFilters":{"type":{"value":[{"id":"indicator","name":"Indicator"}]},"ioc_type":{"value":[{"name":"Ipv4 addr","id":"ipv4-addr"}]}},"object_type":{"id":"indicator","name":"Indicator"}}'
+                  name: 6d440e55-eba3-4f5f-99e3-fec281b31cda
+                  order: -1
+                  pinned: false
+                  query: type = "indicator" AND ioc_type = "ipv4-addr"
+                  shared_type: private
+                  shared_users: []
+                  type: basic
+                schedule:
+                  duration_value: 1
+                  ends_on:
+                    type: end_date
+                    value: 1689618600
+                  id: 7e484745-b116-4c8d-998d-a01efdc14d18
+                  repeat_on: {}
+                  repeat_type: daily
+                  start_datetime: 1689156516
+                shared_type: global
+                type: basic
+    put:
+      operationId: updateReport
+      summary: Update Report
+      tags:
+      - Reports
+      description: "Updates specific fields of a report.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Do not use this endpoint to update advanced reports.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/update-report
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to be created.
+          enum:
+          - basic
+          examples:
+          - basic
+        description: Pass the type of report to be created.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+        description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedule:
+                  type: object
+                  description: Pass the schedule details such as repeat type, start date and time, duration time, duration value, and repeat value.
+                  properties:
+                    repeat_type:
+                      type: string
+                      description: Pass the frequency of the schedule.
+                      enum:
+                      - once
+                      - daily
+                      - weekly
+                      - monthly
+                      examples:
+                      - monthly
+                    start_datetime:
+                      type: number
+                      description: Pass the start time of the report in epoch format.
+                      examples:
+                      - '1638124200'
+                    repeat_value:
+                      type: number
+                      description: Pass the interval for the schedule.
+                      examples:
+                      - '2'
+                    duration_value:
+                      type: number
+                      description: Pass the time frame in days to include the data in the report.
+                      examples:
+                      - '2'
+                  required:
+                  - repeat_type
+                name:
+                  type: string
+                  description: Pass the name of the report.
+                  examples:
+                  - test_edited
+                query_key:
+                  type: string
+                  description: Pass the key to sort data in the report.
+                  enum:
+                  - ctix_created
+                  - ctix_modified
+                  default: ctix_created
+                  examples:
+                  - ctix_created
+                columns:
+                  type: array
+                  description: Pass the list of columns of the report.
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        description: Pass the key identifying the specific data field for the column.
+                        examples:
+                        - valid_until
+                      label:
+                        type: string
+                        description: Pass the display name or label for the column.
+                        examples:
+                        - Valid Until
+                internal_recipients:
+                  type: object
+                  description: Pass the list of internal recipients with whom to share the report.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass details of the internal recipient of the report
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: Pass the user ID.
+                            examples:
+                            - 3504aa4a-1e56-40c6-89d7-fc3c6adc2b03
+                          first_name:
+                            type: string
+                            description: Pass the first name of the internal recipient.
+                            examples:
+                            - Aakriti
+                          last_name:
+                            type: string
+                            description: Pass the last name of the internal recipient.
+                            examples:
+                            - Arya
+                          email:
+                            type: string
+                            description: Pass the email address.
+                            examples:
+                            - aakriti@cyware.com
+                    cc:
+                      type: array
+                      description: Enter the cc email addresses for the internal recipients.
+                      items: {}
+                    bcc:
+                      type: array
+                      description: Enter the bcc email addresses for the internal recipients.
+                      items: {}
+                external_recipients:
+                  type: object
+                  description: Pass the list of external recipients with whom to share the report.
+                  properties:
+                    to:
+                      type: array
+                      description: Pass details of the external recipient of the report.
+                      items:
+                        type: string
+                        description: This is an example email.
+                        examples:
+                        - bca@cyware.com
+                    cc:
+                      type: array
+                      description: Enter the cc email addresses for the external recipients.
+                      items: {}
+                    bcc:
+                      type: array
+                      description: Enter the bcc email addresses for the external recipients.
+                      items: {}
+                type:
+                  type: string
+                  description: Pass the type of report.
+                  enum:
+                  - basic
+                  examples:
+                  - basic
+                file_types:
+                  type: array
+                  description: Pass the report type, such as CSV, XLS.
+                  items:
+                    type: string
+                    description: This is an example file type.
+                    examples:
+                    - csv
+                shared_type:
+                  type: string
+                  description: Pass the share type value.
+                  enum:
+                  - private
+                  - global
+                  examples:
+                  - global
+                saved_search:
+                  type: object
+                  description: Pass the saved search or custom query details used for generating the report.
+                  properties:
+                    name:
+                      type: string
+                      description: Pass the name of the saved search.
+                      examples:
+                      - test_edited
+                    type:
+                      type: string
+                      description: Pass the type of saved search query.
+                      examples:
+                      - cql
+                    query:
+                      type: string
+                      description: Pass the query to generate the report.
+                      examples:
+                      - type = "malware"
+                    meta_data:
+                      type: string
+                      description: Pass any metadata to include.
+                      examples:
+                      - '{"panelFilters":{"type":{"value":["indicator","malware"]}},"object_type":["indicator","malware"]}'
+                  required:
+                  - query
+            example:
+              schedule:
+                repeat_type: monthly
+                start_datetime: '1638124200'
+                repeat_value: '2'
+                duration_value: '2'
+              name: test_edited
+              query_key: ctix_created
+              columns:
+              - key: valid_until
+                label: Valid Until
+              internal_recipients:
+                to:
+                - user_id: 3504aa4a-1e56-40c6-89d7-fc3c6adc2b03
+                  first_name: Aakriti
+                  last_name: Arya
+                  email: aakriti@cyware.com
+                cc: []
+                bcc: []
+              external_recipients:
+                to:
+                - bca@cyware.com
+                cc: []
+                bcc: []
+              type: basic
+              file_types:
+              - csv
+              shared_type: global
+              saved_search:
+                name: test_edited
+                type: cql
+                query: type = "malware"
+                meta_data: '{"panelFilters":{"type":{"value":["indicator","malware"]}},"object_type":["indicator","malware"]}'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  basic_report_type:
+                    type: string
+                    description: Returns the type of basic report, such as saved or custom.
+                    examples:
+                    - custom
+                  columns:
+                    type: array
+                    description: Returns the list of columns in a report.
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          description: Returns the data field key used in the report.
+                          examples:
+                          - valid_until
+                        label:
+                          type: string
+                          description: Returns the display label for the column.
+                          examples:
+                          - Valid Until
+                  created:
+                    type: number
+                    description: Returns the timestamp (in Unix format) when the report was created.
+                    examples:
+                    - '1692188813'
+                  created_by:
+                    type: object
+                    description: Returns the details of the user who created the report.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who created the report.
+                        examples:
+                        - john.doe@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who created the report.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the ID of the user who created the report.
+                        examples:
+                        - 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who created the report.
+                  date_last_run:
+                    type: object
+                    description: Returns the date and time in epoch format at which the report was manually run.
+                  external_recipients:
+                    type: object
+                    description: Returns the list of external recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the bcc email addresses for the external recipients.
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the cc email addresses for the external recipients.
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns details of the external recipient of the report.
+                        items:
+                          type: string
+                          description: This is an example value.
+                          examples:
+                          - bca@cyware.com
+                  file_types:
+                    type: array
+                    description: Returns the report formats, such as CSV, XLS.
+                    items:
+                      type: string
+                      description: This is an example value.
+                      examples:
+                      - csv
+                  id:
+                    type: string
+                    description: Returns the unique ID of the report.
+                    examples:
+                    - 334c3ff3-bfcc-402c-ad6a-e13cb830a602
+                  internal_recipients:
+                    type: object
+                    description: Returns the list of internal recipients with whom to share the report.
+                    properties:
+                      bcc:
+                        type: array
+                        description: Returns the bcc email addresses for the internal recipients.
+                        items: {}
+                      cc:
+                        type: array
+                        description: Returns the cc email addresses for the internal recipients.
+                        items: {}
+                      to:
+                        type: array
+                        description: Returns details of the internal recipient of the report.
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: object
+                              description: Returns the user object for the internal recipient.
+                  modified:
+                    type: number
+                    description: Returns the Unix timestamp when the report was last modified.
+                    examples:
+                    - '1692188813'
+                  modified_by:
+                    type: object
+                    description: Returns the details of the user who modified the report.
+                    properties:
+                      email:
+                        type: string
+                        description: Returns the email address of the user who last modified the report.
+                        examples:
+                        - john.doe@cyware.com
+                      first_name:
+                        type: string
+                        description: Returns the first name of the user who last modified the report.
+                        examples:
+                        - john
+                      id:
+                        type: string
+                        description: Returns the user ID of the user who last modified the report.
+                        examples:
+                        - 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                      last_name:
+                        type: string
+                        description: Returns the last name of the user who last modified the report.
+                        examples:
+                        - doe
+                  name:
+                    type: string
+                    description: Returns the name of the report.
+                    examples:
+                    - Vulnerability Report
+                  query_key:
+                    type: string
+                    description: Returns the sorting type in basic reports
+                    enum:
+                    - ctix_created
+                    - ctix_modified
+                    examples:
+                    - ctix_created
+                  saved_search:
+                    type: object
+                    description: Returns the saved search object for the corresponding report used for generating the report.
+                    properties:
+                      created_by:
+                        type: object
+                        description: Returns the details of the user who created the report.
+                        properties:
+                          email:
+                            type: string
+                            description: Returns the email address of the user who created the report.
+                            examples:
+                            - john.doe@cyware.com
+                          first_name:
+                            type: string
+                            description: Returns the first name of the user who created the report.
+                            examples:
+                            - john
+                          id:
+                            type: string
+                            description: Returns the ID of the user who created the report.
+                            examples:
+                            - 76fbe1c3-5fd0-4674-9666-69921edafb94
+                          last_name:
+                            type: string
+                            description: Returns the last name of the user who created the report.
+                            examples:
+                            - doe
+                      description:
+                        type: object
+                        description: Returns the description of the saved search.
+                      editable:
+                        type: boolean
+                        description: Returns whether the saved search is editable
+                        examples:
+                        - 'false'
+                      id:
+                        type: string
+                        description: Returns the unique ID of the report.
+                        examples:
+                        - 57d957a8-c468-4a94-8c23-b74aa3540fb0
+                      is_threat_data_search:
+                        type: boolean
+                        description: Returns whether it's a threat data search.
+                        examples:
+                        - 'true'
+                      meta_data:
+                        type: string
+                        description: Returns the metadata of the saved search as a JSON string.
+                        examples:
+                        - '{"object_type":["vulnerability"],"query":[{"length":32,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"vulnerability","name":"Vulnerability"},"value":"\"Vulnerability\""}]}'
+                      name:
+                        type: string
+                        description: Returns the name of the report.
+                        examples:
+                        - Vulnerability
+                      order:
+                        type: number
+                        description: Returns the display order of the saved search.
+                        examples:
+                        - '1'
+                      pinned:
+                        type: boolean
+                        description: Returns whether the search is pinned for quick access.
+                        examples:
+                        - 'false'
+                      query:
+                        type: string
+                        description: Returns the search query string.
+                        examples:
+                        - type = "vulnerability"
+                      shared_type:
+                        type: string
+                        description: Returns the shared type, such as global or private.
+                        examples:
+                        - global
+                      shared_users:
+                        type: array
+                        description: Returns a list of shared users.
+                        items: {}
+                      type:
+                        type: string
+                        description: Returns the type of report, such as basic or advanced.
+                        examples:
+                        - cql
+                  schedule:
+                    type: object
+                    description: Returns the scheduling details for the report, including how often it runs, when it starts, and when it ends.
+                    properties:
+                      duration_value:
+                        type: number
+                        description: Returns the duration in days to capture data in the report.
+                        examples:
+                        - '2'
+                      ends_on:
+                        type: object
+                        description: Returns the end condition for the schedule.
+                        properties:
+                          attempts_left:
+                            type: number
+                            description: Returns the number of occurrences left.
+                            examples:
+                            - '10'
+                          type:
+                            type: string
+                            description: Returns the type of end condition.
+                            examples:
+                            - occurrences
+                          value:
+                            type: number
+                            description: Returns the numeric value of end condition.
+                            examples:
+                            - '10'
+                      id:
+                        type: string
+                        description: Returns the unique ID of the report.
+                        examples:
+                        - 37bbeaac-a8d2-4571-a259-ee710342213e
+                      repeat_on:
+                        type: object
+                        description: Returns the repeat-on field.
+                      repeat_type:
+                        type: string
+                        description: Returns the time interval for the re-run of the report.
+                        examples:
+                        - daily
+                      start_datetime:
+                        type: number
+                        description: Returns the starting date and time in epoch format from which the report captures the received data.
+                        examples:
+                        - '1638124200'
+                  shared_type:
+                    type: string
+                    description: Returns the shared type, such as global or private.
+                    examples:
+                    - global
+                  type:
+                    type: string
+                    description: Returns the type of report, such as basic or advanced.
+                    examples:
+                    - basic
+              example:
+                basic_report_type: custom
+                columns:
+                - key: valid_until
+                  label: Valid Until
+                created: '1692188813'
+                created_by:
+                  email: john.doe@cyware.com
+                  first_name: john
+                  id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                  last_name: ''
+                date_last_run: {}
+                external_recipients:
+                  bcc: []
+                  cc: []
+                  to:
+                  - bca@cyware.com
+                file_types:
+                - csv
+                id: 334c3ff3-bfcc-402c-ad6a-e13cb830a602
+                internal_recipients:
+                  bcc: []
+                  cc: []
+                  to:
+                  - user: {}
+                modified: '1692188813'
+                modified_by:
+                  email: john.doe@cyware.com
+                  first_name: john
+                  id: 0d4408bd-9f94-47ec-98eb-6f32ecfd8b13
+                  last_name: doe
+                name: Vulnerability Report
+                query_key: ctix_created
+                saved_search:
+                  created_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: 76fbe1c3-5fd0-4674-9666-69921edafb94
+                    last_name: doe
+                  description: {}
+                  editable: 'false'
+                  id: 57d957a8-c468-4a94-8c23-b74aa3540fb0
+                  is_threat_data_search: 'true'
+                  meta_data: '{"object_type":["vulnerability"],"query":[{"length":32,"dataKey":{"id":"type","type":"select","addAll":true,"reset":true,"multiple":true,"value":"id","label":"Object Type","values":[{"id":"indicator","name":"Indicator"},{"id":"malware","name":"Malware"},{"id":"threat-actor","name":"Threat Actor"},{"id":"vulnerability","name":"Vulnerability"},{"id":"attack-pattern","name":"Attack Pattern"},{"id":"campaign","name":"Campaign"},{"id":"course-of-action","name":"Course of Action"},{"id":"identity","name":"Identity"},{"id":"infrastructure","name":"Infrastructure"},{"id":"intrusion-set","name":"Intrusion Set"},{"id":"location","name":"Location"},{"id":"malware-analysis","name":"Malware Analysis"},{"id":"observed-data","name":"Observed Data"},{"id":"opinion","name":"Opinion"},{"id":"tool","name":"Tool"},{"id":"report","name":"Report"},{"id":"custom-object","name":"Custom Object"},{"id":"observable","name":"Observable"},{"id":"incident","name":"Incident"}]},"key":"''Object Type''","keyType":"select","dataOperator":{"id":"=","label":"="},"operator":"=","dataValue":{"id":"vulnerability","name":"Vulnerability"},"value":"\"Vulnerability\""}]}'
+                  name: Vulnerability
+                  order: '1'
+                  pinned: 'false'
+                  query: type = "vulnerability"
+                  shared_type: global
+                  shared_users: []
+                  type: cql
+                schedule:
+                  duration_value: '2'
+                  ends_on:
+                    attempts_left: '10'
+                    type: occurrences
+                    value: '10'
+                  id: 37bbeaac-a8d2-4571-a259-ee710342213e
+                  repeat_on: {}
+                  repeat_type: daily
+                  start_datetime: '1638124200'
+                shared_type: global
+                type: basic
+  /ingestion/external_download/{file_id}/:
+    get:
+      operationId: downloadFile
+      summary: Get Download File
+      tags:
+      - Reports
+      description: Downloads a file.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/download-file
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the unique token to authorize the request.
+        description: Pass the unique token to authorize the request.
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the external file ID to download. Example, *3cd05d6d-3ed4-49ae-8866-4d8f87542fa1*
+        description: Pass the external file ID to download. Example, *3cd05d6d-3ed4-49ae-8866-4d8f87542fa1*
+      responses:
+        '200':
+          description: Returns the content of the file.
+          content:
+            html:
+              schema:
+                type: object
+                properties:
+                  raw:
+                    type: string
+                    examples:
+                    - ',Valid Until,Tags
+
+                      0,,
+
+                      1,,cryptolocker | zipbomb
+
+                      2,,test_tag | heartbleed'
+              example:
+                raw: ',Valid Until,Tags
+
+                  0,,
+
+                  1,,cryptolocker | zipbomb
+
+                  2,,test_tag | heartbleed'
+      x-alternate-documents:
+      - title: Get Export File
+        operationId: downloadExportFile
+        url: https://ctixapiv3.cyware.com/threat-data/export/download-export-file
+  /ingestion/reports/{report_id}/run/:
+    get:
+      operationId: listReportRunLogs
+      summary: Get Report Run Logs List
+      tags:
+      - Reports
+      description: Returns the run logs of a report.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/list-report-run-logs
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to retrieve run logs.
+          enum:
+          - basic
+          - advanced
+          examples:
+          - basic
+        description: Pass the type of report to retrieve run logs.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+          examples:
+          - '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*.'
+          examples:
+          - '{{report_id}}'
+        description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*.'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns the URL of the next page.
+                  previous:
+                    type: object
+                    description: Returns the URL of the previous page.
+                  total:
+                    type: number
+                    description: Returns the total number of run logs available for a report.
+                    examples:
+                    - '3'
+                  page_size:
+                    type: number
+                    description: Returns the number of results per page as defined in the pagination.
+                    examples:
+                    - '10'
+                  results:
+                    type: array
+                    description: Returns the list of individual report executions.
+                    items:
+                      type: object
+                      properties:
+                        files:
+                          type: array
+                          description: Returns the file object that contains meta-information for generating the downloadable link of the report.
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                description: Returns the type of file, such as CSV or XLSX.
+                                examples:
+                                - xls
+                              id:
+                                type: string
+                                description: Returns the unique ID of the file.
+                                examples:
+                                - fa3b65eb-d385-45b3-bbdd-6e63572cdfe0
+                              url:
+                                type: string
+                                description: Returns the download URL of the file.
+                                examples:
+                                - file/fa3b65eb-d385-45b3-bbdd-6e63572cdfe0/
+                              name:
+                                type: string
+                                description: Returns the name of the report.
+                                examples:
+                                - DONOT Edit - hourly report
+                        id:
+                          type: string
+                          description: Returns the unique ID of the run log.
+                          examples:
+                          - 06ebeae3-09c2-4fa0-80c1-afcc51a13064
+                        last_run:
+                          type: number
+                          description: Returns the date and time at which the file was last run.
+                          examples:
+                          - '1650532503'
+                        download_link:
+                          type: object
+                          description: Returns the URL to download the report.
+                        run_type:
+                          type: string
+                          description: Returns the run-type applied on the report, such as scheduled, instant.
+                          examples:
+                          - scheduled
+                        file_types:
+                          type: array
+                          description: Returns the list of file types in a run log, such as CSV, and XLS.
+                          items:
+                            type: string
+                            description: This is an example file type.
+                            examples:
+                            - xls
+              example:
+                next: {}
+                previous: {}
+                total: '3'
+                page_size: '10'
+                results:
+                - files:
+                  - type: xls
+                    id: fa3b65eb-d385-45b3-bbdd-6e63572cdfe0
+                    url: file/fa3b65eb-d385-45b3-bbdd-6e63572cdfe0/
+                    name: DONOT Edit - hourly report
+                  id: 06ebeae3-09c2-4fa0-80c1-afcc51a13064
+                  last_run: '1650532503'
+                  download_link: {}
+                  run_type: scheduled
+                  file_types:
+                  - xls
+    post:
+      operationId: runReport
+      summary: Run Report
+      tags:
+      - Reports
+      description: Runs a report and sends the file to the recipients.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/reports/run-report
+      parameters:
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass the type of report to run.
+          enum:
+          - basic
+          - advanced
+          examples:
+          - basic
+        description: Pass the type of report to run.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*.'
+          examples:
+          - '{{report_id}}'
+        description: 'Pass the ID of a report. For example: *87c07bb3-b60c-4279-a5ec-8a38f73f7ea4*.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_types:
+                  type: array
+                  description: Pass the report types.
+                  enum:
+                  - csv
+                  - xls
+                  items:
+                    type: string
+                    description: This is an example of file type.
+                    enum:
+                    - csv
+                    - xls
+                    examples:
+                    - csv
+                internal_recipients:
+                  type: object
+                  description: 'Pass the list of details of internal users to share the report.
+
+                    **Note**: At least one internal or external recipient is required.'
+                  properties:
+                    to:
+                      type: array
+                      description: Pass the details of an internal user to share the report.
+                      items:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                            description: Pass the first name of the internal recipient.
+                            examples:
+                            - John
+                          last_name:
+                            type: string
+                            description: Pass the last name of the internal recipient.
+                            examples:
+                            - Doe
+                          email:
+                            type: string
+                            description: Pass the email address of the internal recipient.
+                            examples:
+                            - john.doe@orgname.com
+                          id:
+                            type: string
+                            description: Pass the unique identifier of the internal recipient.
+                            examples:
+                            - af4d8750-b8a4-4197-9a61-6b416b48f752
+                query_key:
+                  type: string
+                  description: Pass the value to specify whether the report must run based on the created time or the last modified time of threat data in CTIX.
+                  enum:
+                  - ctix_created
+                  - ctix_modified
+                  examples:
+                  - ctix_created
+                starttime:
+                  type: number
+                  description: Pass the start date and time in EPOCH format from which the report captures data available in CTIX.
+                  examples:
+                  - 1752834255
+                endtime:
+                  type: number
+                  description: Pass the end date and time in EPOCH format until which the report captures data available in CTIX.
+                  examples:
+                  - 1753439055
+                external_recipients:
+                  type: object
+                  description: 'Pass the list of external users to share the report.
+
+                    **Note**: At least one internal or external recipient is required.'
+                  properties:
+                    to:
+                      type: array
+                      description: Pass the email addresses of the external recipients.
+                      items:
+                        type: string
+                        description: Pass the email address of the external recipient.
+                        examples:
+                        - jane.smith@orgname.com
+              required:
+              - internal_recipients
+              - query_key
+              - starttime
+              - endtime
+              - external_recipients
+            example:
+              file_types:
+              - csv
+              internal_recipients:
+                to:
+                - first_name: John
+                  last_name: Doe
+                  email: john.doe@orgname.com
+                  id: af4d8750-b8a4-4197-9a61-6b416b48f752
+              query_key: ctix_created
+              starttime: 1752834255
+              endtime: 1753439055
+              external_recipients:
+                to:
+                - jane.smith@orgname.com
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    description: Returns the success message
+                    examples:
+                    - Your Report will be mailed to you as soon as it is ready.
+              example:
+                result: Your Report will be mailed to you as soon as it is ready.
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

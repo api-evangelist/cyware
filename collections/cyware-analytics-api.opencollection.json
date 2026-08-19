@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Analytics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Most Active Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/analytics/data-source/",
+            "params": [
+              {
+                "name": "AccessID",
+                "value": "",
+                "type": "query",
+                "description": "The Access ID is used to authenticate the Cyware Orchestrate API endpoint."
+              },
+              {
+                "name": "Signature",
+                "value": "",
+                "type": "query",
+                "description": "The Signature is used to authenticate the Cyware Orchestrate API endpoint."
+              },
+              {
+                "name": "Expires",
+                "value": "",
+                "type": "query",
+                "description": "This parameter is used to define an expiry time for the API call."
+              },
+              {
+                "name": "categorize_by",
+                "value": "",
+                "type": "query",
+                "description": "Pass`categorize_by=most_active_instances` to retrieve the most active instances."
+              },
+              {
+                "name": "created__gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the start time in unix time format to retrieve the most active instances."
+              },
+              {
+                "name": "created__lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the end time in unix time format to retrieve the most active instances."
+              }
+            ]
+          },
+          "docs": "Returns the most frequently used instances in playbook executions for the non-purged data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

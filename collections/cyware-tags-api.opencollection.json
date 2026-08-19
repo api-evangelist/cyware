@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Tags API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "AccessID",
+              "value": "{{AccessID}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Creates a tag in the Intel Exchange platform."
+        },
+        {
+          "info": {
+            "name": "Get Tag Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/:tag_id/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              },
+              {
+                "name": "tag_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the ID of a tag to retrieve the details."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "AccessID",
+              "value": "{{AccessID}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Returns the details of a tag."
+        },
+        {
+          "info": {
+            "name": "Get Allowed Tag Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/ingestion/tags/tag-category/allowed/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve records."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of records to retrieve on each page."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "AccessID",
+              "value": "{{AccessID}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Returns a list of tag categories that the current user has access to."
+        },
+        {
+          "info": {
+            "name": "Get Tags List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/v1/tags/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the tags list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve per page."
+              },
+              {
+                "name": "modified__gte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the custom date in Unix timestamp format. Returns a list of tags modified after the specified time."
+              },
+              {
+                "name": "modified__lte",
+                "value": "",
+                "type": "query",
+                "description": "Pass the custom date in Unix timestamp format. Returns a list of tags modified before the specified time."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Pass a sorting option to filter tags based on it. For example: *title*."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Pass the last modified value to filter tags."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "access_id",
+              "value": "{{access_id}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Returns the list of tags."
+        },
+        {
+          "info": {
+            "name": "Get Tag Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ctix_host}/ctixapi/v1/tags/:tag_unique_id/",
+            "params": [
+              {
+                "name": "tag_unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the tag to retrieve the details. You can retrieve the unique ID of tags using the **Get Tags List** endpoint."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "access_id",
+              "value": "{{access_id}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Returns the details of a specific tag."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

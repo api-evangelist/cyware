@@ -1,0 +1,1337 @@
+openapi: 3.2.0
+info:
+  title: Cyware Intel Exchange (CTIX) v3 Open Quick Add Intel API
+  version: 3.6.2
+  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
+
+
+    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
+
+
+    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  contact:
+    name: Cyware
+    url: https://www.cyware.com/contact-us
+  termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-source: https://ctixapiv3.cyware.com/llms.txt
+  x-apievangelist-method: generated
+servers:
+- url: https://{ctix_host}/ctixapi
+  description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
+  variables:
+    ctix_host:
+      default: demo.cyware.com
+security:
+- ctixOpenApiSignature: []
+tags:
+- name: Quick Add Intel
+  description: Quick Add Intel
+paths:
+  /conversion/quick-intel/free-text/:
+    post:
+      operationId: createParseIocsTask
+      summary: Create Parse IOCs Task
+      tags:
+      - Quick Add Intel
+      description: "Creates an IOC parsing task to extract STIX objects from free text data or a web page.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Currently, this API endpoint does not support parsing IOCs from files such as PDF, CSV, XLS, and others.</p>\n</Callout>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/create-parse-iocs-task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  description: Pass the free text data within 50,000 characters or a web page URL to extract STIX objects.  If the number of characters in the passed text data or the web page exceeds the character limit, then the initial 50,000 characters are parsed.
+                  examples:
+                  - 1.2.3.11, 1.1.2.1, domain.com
+                url:
+                  type: boolean
+                  description: Pass `true` to extract STIX objects from a web page. If you pass `false`, then the URL passed in the data parameter is parsed as free text.
+                  examples:
+                  - 'true'
+              required:
+              - data
+            example:
+              data: 1.2.3.11, 1.1.2.1, domain.com
+              url: 'true'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_id:
+                    type: string
+                    description: Returns the ID of the parsing task. To retrieve the parsing task status, use the **Retrieve Parse IOCs Task Status** endpoint.
+                    examples:
+                    - 4310c8e6-c26e-4526-a3b2-7445c6798511
+              example:
+                task_id: 4310c8e6-c26e-4526-a3b2-7445c6798511
+  /conversion/quick-intel/vocabs/country_enum/:
+    get:
+      operationId: listCountryCodes
+      summary: Get Country Codes List
+      tags:
+      - Quick Add Intel
+      description: Returns a list of country codes based on the [STIX 2.1 enumeration](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These country codes can be used to specify locations in the **Quick Add Intel** endpoint.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/list-country-codes
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '0':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        description: Returns the ISO country or region code.
+                        examples:
+                        - AC
+                      label:
+                        type: string
+                        description: Returns the label of the country or region.
+                        examples:
+                        - AC
+                  '1':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        examples:
+                        - AN
+                      label:
+                        type: string
+                        examples:
+                        - AN
+                  '2':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        examples:
+                        - ZM
+                      label:
+                        type: string
+                        examples:
+                        - Zambia
+              example:
+                '0':
+                  value: AC
+                  label: AC
+                '1':
+                  value: AN
+                  label: AN
+                '2':
+                  value: ZM
+                  label: Zambia
+  /conversion/intel-history/:
+    get:
+      operationId: listQuickAddIntelHistory
+      summary: Get Quick Add Intel History List
+      tags:
+      - Quick Add Intel
+      description: Returns a list of intel added using quick add intel.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/list-quick-add-intel-history
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a query text to search for an intel based on the title.
+          examples:
+          - ip
+        description: Pass a query text to search for an intel based on the title.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a comma-separated list of fields to sort the history.
+          enum:
+          - created
+          - title
+          examples:
+          - created
+        description: Pass a comma-separated list of fields to sort the history.
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the time in epoch format to apply the created after (inclusive) filter.
+          examples:
+          - '1633521911.678808'
+        description: Pass the time in epoch format to apply the created after (inclusive) filter.
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the time in epoch format to apply the created before (inclusive) filter.
+          examples:
+          - '1633521911.678808'
+        description: Pass the time in epoch format to apply the created before (inclusive) filter.
+      - name: published_from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the time in epoch format to apply the published after (inclusive) filter.
+          examples:
+          - '1633521911.678808'
+        description: Pass the time in epoch format to apply the published after (inclusive) filter.
+      - name: published_to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the time in epoch format to apply the published before (inclusive) filter.
+          examples:
+          - '1633521911.678808'
+        description: Pass the time in epoch format to apply the published before (inclusive) filter.
+      - name: created_by_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the user ID to apply the created by filter.
+          examples:
+          - 524129ab-bb5d-4366-9ad6-1c9f77e8685a
+        description: Pass the user ID to apply the created by filter.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass a status to apply the status filter.
+          enum:
+          - PENDING
+          - PROCESSING
+          - CREATED
+          - DRAFT
+          - FAILED
+          - PUBLISHED
+          examples:
+          - CREATED
+        description: Pass a status to apply the status filter.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the number of records to retrieve on each page.
+          default: '10'
+          examples:
+          - '50'
+        description: Pass the number of records to retrieve on each page.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pass the page number to retrieve the records.
+          default: '1'
+          examples:
+          - '3'
+        description: Pass the page number to retrieve the records.
+      - name: component
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass `quick-add-intel` to retrieve the quick add intel history.
+          enum:
+          - quick-add-intel
+          examples:
+          - quick-add-intel
+        description: Pass `quick-add-intel` to retrieve the quick add intel history.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: string
+                    description: Returns a link to the next page of the intel history.
+                    examples:
+                    - intel-history/?page=2&page_size=1
+                  page_size:
+                    type: number
+                    description: Returns the number of records per page.
+                    examples:
+                    - 1
+                  previous:
+                    type: object
+                    description: Returns a link to the previous page of the intel history.
+                  results:
+                    type: array
+                    description: Returns the details of the quick add intel history.
+                    items:
+                      type: object
+                      properties:
+                        client_collections:
+                          type: object
+                          description: Returns a list of client collections in the platform. For quick add intel submissions, this value is `null`.
+                        component:
+                          type: string
+                          description: Returns the component of the intel submission. For quick add intel submission, the value is `quick-add-intel`.
+                          examples:
+                          - quick-add-intel
+                        created:
+                          type: number
+                          description: Returns the created date of the intel.
+                          examples:
+                          - 1706707031.759591
+                        created_by:
+                          type: object
+                          description: Returns the details of the creator of the intel.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email of the creator.
+                              examples:
+                              - john.doe@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the creator.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the unique ID of the creator.
+                              examples:
+                              - a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                            last_name:
+                              type: string
+                              description: Returns the last name of the creator.
+                              examples:
+                              - doe
+                        error_message:
+                          type: string
+                          description: Returns an error message if the intel creation fails. Else, returns null.
+                        feed_id:
+                          type: object
+                          description: Returns the ID of the intel source. For Quick Add Intel, the default source is Import.
+                        id:
+                          type: string
+                          description: Returns the ID of the quick add intel submission.
+                          examples:
+                          - 9fae8850-5956-4479-834c-8cd4d51c28aa
+                        metadata:
+                          type: object
+                          description: Returns the metadata details of the intel, such as the Confidence Score, tags, and description.
+                        modified:
+                          type: number
+                          description: Returns the last modified date of the intel.
+                          examples:
+                          - 1706707049.743087
+                        modified_by:
+                          type: object
+                          description: Returns the details of the modifier of the intel.
+                          properties:
+                            email:
+                              type: string
+                              description: Returns the email of the modifier.
+                              examples:
+                              - john.doe@cyware.com
+                            first_name:
+                              type: string
+                              description: Returns the first name of the modifier.
+                              examples:
+                              - john
+                            id:
+                              type: string
+                              description: Returns the unique ID of the modifier.
+                              examples:
+                              - a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                            last_name:
+                              type: string
+                              description: Returns the last name of the modifier.
+                              examples:
+                              - doe
+                        published_on:
+                          type: object
+                          description: Returns the published date of the intel to a STIX collection in the platform.
+                        report_id:
+                          type: string
+                          description: Returns the ID of the report objected that is created as part of the quick add intel submission.
+                          examples:
+                          - e121fe2f-4ecf-42ab-ac87-8e7c0ba8d24d
+                        server_collections:
+                          type: object
+                          description: Returns a list of server collections in the platform. For quick add intel submissions, this value is null.
+                        status:
+                          type: string
+                          description: Returns the intel creation status.
+                          examples:
+                          - CREATED
+                        title:
+                          type: string
+                          description: Returns the title of the intel.
+                          examples:
+                          - ips
+                        tlp:
+                          type: string
+                          description: Returns the TLP of the intel.
+                          examples:
+                          - NONE
+                  total:
+                    type: number
+                    description: Returns the number of records available in the quick add history.
+                    examples:
+                    - 168553
+              example:
+                next: intel-history/?page=2&page_size=1
+                page_size: 1
+                previous: {}
+                results:
+                - client_collections: {}
+                  component: quick-add-intel
+                  created: 1706707031.759591
+                  created_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                    last_name: doe
+                  error_message: ''
+                  feed_id: {}
+                  id: 9fae8850-5956-4479-834c-8cd4d51c28aa
+                  metadata: {}
+                  modified: 1706707049.743087
+                  modified_by:
+                    email: john.doe@cyware.com
+                    first_name: john
+                    id: a2b82e81-8e7d-4e68-8a36-3d2d9cd518ad
+                    last_name: doe
+                  published_on: {}
+                  report_id: e121fe2f-4ecf-42ab-ac87-8e7c0ba8d24d
+                  server_collections: {}
+                  status: CREATED
+                  title: ips
+                  tlp: NONE
+                total: 168553
+      x-alternate-documents:
+      - title: Get Intel History Investigations
+        operationId: intelHistoryInvestigations
+        url: https://ctixapiv3.cyware.com/threat-investigation/publishing/intel-history-investigations
+  /conversion/quick-intel/vocabs/region_ov/:
+    get:
+      operationId: listRegions
+      summary: Get Regions List
+      tags:
+      - Quick Add Intel
+      description: Returns the list of [STIX 2.1 region open vocabulary](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These regions can be used to specify locations in the **Quick Add Intel** endpoint.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/list-regions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '0':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        description: Returns the value of the world region based on the United Nations geoscheme.
+                        examples:
+                        - africa
+                      label:
+                        type: string
+                        description: Returns the label of the world region.
+                        examples:
+                        - africa
+                  '1':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        examples:
+                        - eastern-africa
+                      label:
+                        type: string
+                        examples:
+                        - eastern-africa
+                  '2':
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        examples:
+                        - middle-africa
+                      label:
+                        type: string
+                        examples:
+                        - middle-africa
+              example:
+                '0':
+                  value: africa
+                  label: africa
+                '1':
+                  value: eastern-africa
+                  label: eastern-africa
+                '2':
+                  value: middle-africa
+                  label: middle-africa
+  /conversion/quick-intel/create-stix/:
+    post:
+      operationId: quickAddIntel
+      summary: Quick Add Intel
+      tags:
+      - Quick Add Intel
+      description: "Creates intel by providing minimal details of indicators, SDOs, relations, custom objects, and indicators parsed from free text.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Default Source</strong>: Import</p>\n  <p><strong class=\"slate-bold\">Default Collection</strong>: Free Text</p>\n</Callout>\n\n**Note**: At least one of the `indicators`, `sdos`, `observables`, or `custom_objects` is required to create an intel.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"The Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">indicators</code> object in Quick Add Intel accepts the IOC type as the key and a comma-separated list of IOC values as the value. You can pass a maximum of 5000 characters as the IOC value per IOC type.</p>\n<p>For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ipv4-addr</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6-addr</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domain</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">url</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">email</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p></AccordionItem>\n<AccordionItem title=\"The Parse Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">parse_indicators</code> object in Quick Add Intel accepts the IOC type as the key and a list of parsed IOC values as the value. For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">parse_indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ips</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domains</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">urls</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">emails</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p>\n<p>CVE IDs</p>\n<p><code class=\"slate-code\">cve_ids</code></p>\n<p>Windows Registry Key</p>\n<p><code class=\"slate-code\">registry_key_path</code></p>\n<p>File Paths</p>\n<p><code class=\"slate-code\">file_paths</code></p>\n<p>Autonomous System</p>\n<p><code class=\"slate-code\">as</code></p>\n<p>X.509 certificates</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p></AccordionItem>\n<AccordionItem title=\"The Custom Objects Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">custom_objects</code> object in Quick Add Intel accepts the ID of a custom object as the key and a list of custom attribute objects as the value.</p>\n<p>The custom attribute object accepts the name of the primary attribute of a custom object as the key and the attribute value as the value.</p>\n<p>To retrieve the custom object IDs and the respective primary attribute, use the <em class=\"slate-italic\">GET Custom Object Details</em> API in <strong class=\"slate-bold\">Administration</strong> > <strong class=\"slate-bold\">Custom Entities Management</strong> > <strong class=\"slate-bold\">Custom Objects</strong>.</p></AccordionItem>\n<AccordionItem title=\"The SDOs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">sdos</code> object in Quick Add Intel accepts the STIX Domain Object (SDO) type as the key and a comma-separated list of SDO values as the value. You can pass a maximum of 5000 characters as the SDO value per SDO type.</p>\n<p>For the allowed list of SDO types and the respective key to pass in the <code class=\"slate-code\">sdos</code> object, refer to the following table:</p>\n<p>SDO Type</p>\n<p>SDO Key</p>\n<p>Vulnerability</p>\n<p><code class=\"slate-code\">vulnerability</code></p>\n<p>Malware</p>\n<p><code class=\"slate-code\">malware</code></p>\n<p>Campaign</p>\n<p><code class=\"slate-code\">campaign</code></p>\n<p>Threat Actor</p>\n<p><code class=\"slate-code\">threat-actor</code></p>\n<p>Intrusion Set</p>\n<p><code class=\"slate-code\">intrusion-set</code></p>\n<p>Attack Pattern</p>\n<p><code class=\"slate-code\">attack-pattern</code></p>\n<p>Incident</p>\n<p><code class=\"slate-code\">incident</code></p>\n<p>Course of Action</p>\n<p><code class=\"slate-code\">course-of-action</code></p>\n<p>Identity</p>\n<p><code class=\"slate-code\">identity</code></p>\n<p>Tool</p>\n<p><code class=\"slate-code\">tool</code></p>\n<p>Infrastructure</p>\n<p><code class=\"slate-code\">infrastructure</code></p>\n<p>Location</p>\n<p><code class=\"slate-code\">location</code></p>\n<p>Malware Analysis</p>\n<p><code class=\"slate-code\">malware-analysis</code></p></AccordionItem>\n<AccordionItem title=\"The Observables Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">observables</code> object in Quick Add Intel accepts the STIX Cyber Observable Object (SCO) type as the key and a comma-separated list of SCO values as the value. You can pass a maximum of 5000 characters as the SCO value per SCO type.</p>\n<p>For the allowed list of SCO types and the respective key to pass in the <code class=\"slate-code\">observables</code> object, refer to the following table:</p>\n<p>SCO Type</p>\n<p>SCO Key</p>\n<p>Artifact</p>\n<p><code class=\"slate-code\">artifact</code></p>\n<p>Directory</p>\n<p><code class=\"slate-code\">directory</code></p>\n<p>Email Message</p>\n<p><code class=\"slate-code\">email-message</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p>\n<p>Mutex</p>\n<p><code class=\"slate-code\">mutex</code></p>\n<p>​Network Traffic</p>\n<p><code class=\"slate-code\">network-traffic</code></p>\n<p>Process</p>\n<p><code class=\"slate-code\">process</code></p>\n<p>Software</p>\n<p><code class=\"slate-code\">software</code></p>\n<p>User Account</p>\n<p><code class=\"slate-code\">user-account</code></p>\n<p>X.509 Certificate</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>File</p>\n<p><code class=\"slate-code\">file</code></p></AccordionItem>\n</Accordion>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/quick-add-intel
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parsed_indicators:
+                  type: object
+                  description: Pass the IOC types and indicators parsed from free text. For more information, see *The Parse Indicators Object*.
+                metadata:
+                  type: object
+                  description: Pass the additional information to add to the intel.
+                  properties:
+                    tlp:
+                      type: string
+                      description: Pass the TLP value for the intel.
+                      enum:
+                      - GREEN
+                      - AMBER
+                      - RED
+                      - WHITE
+                      - NONE
+                    is_apply_all:
+                      type: boolean
+                      description: Pass true to apply the metadata to all intel objects. Else, pass false to apply the metadata to the report object that is created as part of the quick add intel submission only.
+                      default: 'false'
+                      examples:
+                      - 'true'
+                    custom_scores:
+                      type: object
+                      description: Pass the custom score key and the score in key-value pairs.
+                      properties:
+                        x_ctix_customscore_2:
+                          type: number
+                          description: This is an example value.
+                          examples:
+                          - '2'
+                    confidence:
+                      type: number
+                      description: Pass a Source Confidence Score for the intel between 0 and 100.
+                      examples:
+                      - '91'
+                    labels:
+                      type: array
+                      description: Pass a list of tag IDs to add to the intel. To retrieve the list of tags, use the **List Tags** API in the **Tags** section.
+                      items: {}
+                    description:
+                      type: string
+                      description: Pass a description for the intel within 1000 characters.
+                      examples:
+                      - Sample source vulnerability description
+                import:
+                  type: object
+                  description: Returns import-specific configuration or metadata.
+                indicators:
+                  type: object
+                  description: Pass the IOC types and IOC values in key-value pairs. For more information, see *The Indicators Object*.
+                  properties:
+                    ipv4-addr:
+                      type: string
+                      description: Pass the value for the IOC type.
+                      examples:
+                      - 112.121.123.222
+                title:
+                  type: string
+                  description: Pass a title for the intel within 100 characters. The title is added to the report object that is created as part of the quick add intel submission.
+                  examples:
+                  - Vulnerability Report
+                sdos:
+                  type: object
+                  description: Pass the SDO types and comma-separated SDO values. For more information, see *The SDOs Object*.
+                  properties:
+                    vulnerability:
+                      type: string
+                      description: Pass the SDO value for the SDO type.
+                      examples:
+                      - CVE-2021-21913
+                observables:
+                  type: object
+                  description: Pass the STIX Cyber Observable Object (SCO) types and comma-separated SCO values. For more information, see *The Observables Object*.
+                relations:
+                  type: array
+                  description: 'Pass the objects to be associated with the report object created as part of this Quick Add submission.
+
+                    The following object types are not supported for adding as relations: <br>
+
+                    Domain Objects: Observed Data, Opinion, Report, Note, Custom Object, and Location
+
+                    <br>Observables: Network Traffic and X.509 Certificate
+
+                    <br>Indicators: MD5, SHA1, SHA224, SHA384, SHA256, SHA512, and SSDEEP'
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Pass the name of the object.
+                        examples:
+                        - 1.1.1.100
+                      type:
+                        type: string
+                        description: Pass the type of the object.
+                        examples:
+                        - indicator
+                      ioc_type:
+                        type: string
+                        description: Pass the IOC type of the object.
+                        examples:
+                        - ipv4-addr
+                      id:
+                        type: string
+                        description: Pass the ID of the object.
+                        examples:
+                        - 30bafaad-b70d-4881-97f2-7915df322332
+                custom_objects:
+                  type: object
+                  description: Pass the ID of the custom objects and the corresponding custom attributes. For more information, see *The Custom Objects Object*.
+                  properties:
+                    7e081615-a44b-4d52-bd8d-48b9bbbd37a8:
+                      type: array
+                      description: Pass the ID of the custom object.
+                      items:
+                        type: object
+                        properties:
+                          action:
+                            type: string
+                            description: Pass the action of the custom object.
+                            examples:
+                            - sample action
+                create_intel_feed:
+                  type: boolean
+                  description: Pass true to create an intel feed. Else, pass false to create a draft intel.
+                  default: 'False'
+                  examples:
+                  - 'true'
+            example:
+              parsed_indicators: {}
+              metadata:
+                tlp: ''
+                is_apply_all: 'true'
+                custom_scores:
+                  x_ctix_customscore_2: '2'
+                confidence: '91'
+                labels: []
+                description: Sample source vulnerability description
+              import: {}
+              indicators:
+                ipv4-addr: 112.121.123.222
+              title: Vulnerability Report
+              sdos:
+                vulnerability: CVE-2021-21913
+              observables: {}
+              relations:
+              - name: 1.1.1.100
+                type: indicator
+                ioc_type: ipv4-addr
+                id: 30bafaad-b70d-4881-97f2-7915df322332
+              custom_objects:
+                7e081615-a44b-4d52-bd8d-48b9bbbd37a8:
+                - action: sample action
+              create_intel_feed: 'true'
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: string
+                    description: Returns that the details are successfully added to the intel creation queue.
+                    examples:
+                    - You will be notified once the STIX is created
+                  task_id:
+                    type: string
+                    description: Returns the unique ID of the background task that is created to track the intel creation status.
+                    examples:
+                    - 139e97e9-51fa-4717-bcfa-1cd226a8a76d
+              example:
+                details: You will be notified once the STIX is created
+                task_id: 139e97e9-51fa-4717-bcfa-1cd226a8a76d
+  /conversion/tasks/{task_id}/:
+    get:
+      operationId: retrieveParseIocsTaskStatus
+      summary: Get Parse IOCs Task Status
+      tags:
+      - Quick Add Intel
+      description: "Returns the status of a parse IOCs task.\n\n### Parsing Task Status Codes\n\nThe following table provides an overview of the different statuses for a parsing task\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"121px\",\"143px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"8f70bc14-bb07-48b1-bd12-f249c90f8a7a\",\"title\":\"Numeric Status\"},{\"id\":\"d40d086a-e785-40d2-8529-69e9f3c6027d\",\"title\":\"Status Value\"},{\"id\":\"b3c11ff0-e7e2-496f-949c-12ea98e41749\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">0</p></table-cell>\n    <table-cell><p class=\"slate-p \">enqueued</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is in the queue for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">1</p></table-cell>\n    <table-cell><p class=\"slate-p \">running</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is being processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">2</p></table-cell>\n    <table-cell><p class=\"slate-p \">failed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Failed to process parsing due to invalid input.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">3</p></table-cell>\n    <table-cell><p class=\"slate-p \">done</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task has been completed. Use the <strong class=\"slate-bold\">Get Parsed IOCs</strong> endpoint to retrieve the parsed IOCs.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">5</p></table-cell>\n    <table-cell><p class=\"slate-p \">delayed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing is delayed due to too many tasks in the queue. Try again after some time.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">6</p></table-cell>\n    <table-cell><p class=\"slate-p \">cancelled</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing has been manually cancelled by the user.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">7</p></table-cell>\n    <table-cell><p class=\"slate-p \">aborted</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing was aborted due to some unexpected error. Create a new parsing task.</p></table-cell>\n  </table-row>\n</Table>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-parse-iocs-task-status
+      parameters:
+      - name: fields
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass `status` to retrieve the status of a task.
+          enum:
+          - status
+          examples:
+          - status
+        description: Pass `status` to retrieve the status of a task.
+      - name: num_status
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Pass `true` to retrieve the numeric status of the task.
+          examples:
+          - 'false'
+        description: Pass `true` to retrieve the numeric status of the task.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a parse IOCs task.
+          examples:
+          - 4310c8e6-c26e-4526-a3b2-7445c6798511
+        description: Pass the ID of a parse IOCs task.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Returns the status of the parsing task.
+                    examples:
+                    - done
+              example:
+                status: done
+  /conversion/tasks/{task_id}/parse-iocs/:
+    get:
+      operationId: retrieveParsedIocs
+      summary: Get Parsed IOCs List
+      tags:
+      - Quick Add Intel
+      description: Returns a list of parsed IOCs as STIX objects after successfully processing the **Create Parse IOCs Task** endpoint. Also indicates whether each IOC exists in the platform’s Allowed Indicators list.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-parsed-iocs
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the ID of a parse IOCs task.
+          examples:
+          - a53b8d3b-e1aa-465e-a4af-a45ae81ece56
+        description: Pass the ID of a parse IOCs task.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  registry_key_path:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed Windows registry keys.
+                    items: {}
+                  urls:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed URLs.
+                    items: {}
+                  ips:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed IPv4 addresses.
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Returns the value of the parsed IPv4 address.
+                          examples:
+                          - 1.1.2.1
+                        is_whitelisted:
+                          type: boolean
+                          description: Returns `true` if the value exists in the Allowed Indicators list in the platform.
+                          examples:
+                          - false
+                  ipv6:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed IPv6 addresses.
+                    items: {}
+                  emails:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed email addresses.
+                    items: {}
+                  domains:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed domains.
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Returns the value of the domain.
+                          examples:
+                          - domain.com
+                        is_whitelisted:
+                          type: boolean
+                          description: Returns `true` if the value exists in the Allowed Indicators list in the platform.
+                          examples:
+                          - true
+                  file_paths:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed file paths.
+                    items: {}
+                  sha512:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SHA512 hashes.
+                    items: {}
+                  sha256:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SHA256 hashes.
+                    items: {}
+                  sha1:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SHA1 hashes.
+                    items: {}
+                  md5:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed MD5 hashes.
+                    items: {}
+                  sha224:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SHA224 hashes.
+                    items: {}
+                  sha384:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SHA384 hashes.
+                    items: {}
+                  ssdeeps:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed SSDEEP hashes.
+                    items: {}
+                  cve_ids:
+                    type: array
+                    description: Returns a list of JSON objects for the parsed CVE IDs.
+                    items: {}
+                  description:
+                    type: string
+                    description: Returns the text data passed in the payload for parsing.
+                    examples:
+                    - 1.2.3.11, 1.1.2.1, domain.com
+              example:
+                registry_key_path: []
+                urls: []
+                ips:
+                - value: 1.1.2.1
+                  is_whitelisted: false
+                ipv6: []
+                emails: []
+                domains:
+                - value: domain.com
+                  is_whitelisted: true
+                file_paths: []
+                sha512: []
+                sha256: []
+                sha1: []
+                md5: []
+                sha224: []
+                sha384: []
+                ssdeeps: []
+                cve_ids: []
+                description: 1.2.3.11, 1.1.2.1, domain.com
+  /ingestion/threat-data/report/{report_id}/relations/:
+    get:
+      operationId: retrieveQuickAddIntelRelationObjects
+      summary: Get Quick Add Intel Relation Objects
+      tags:
+      - Quick Add Intel
+      description: Retrieve the details of the threat objects (indicators, SDOs, SCOs, relations, and custom objects) that are ingested and added as relationship objects of the report that is created as part of the quick add intel submission.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-quick-add-intel-relation-objects
+      parameters:
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of objects to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of objects to retrieve on each page.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the keyword to search based on the object name.
+        description: Pass the keyword to search based on the object name.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve objects.
+          default: '1'
+        description: Pass the page number to retrieve objects.
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Pass the unique ID of a report object to retrieve the related objects. You can retrieve the report ID using the **List Quick Add Intel History** endpoint.
+          examples:
+          - d42fb454-62c7-4b5f-9330-40036bd2da1f
+        description: Pass the unique ID of a report object to retrieve the related objects. You can retrieve the report ID using the **List Quick Add Intel History** endpoint.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next:
+                    type: object
+                    description: Returns a link to the next page of the response.
+                  page_size:
+                    type: number
+                    description: Returns the number of objects returned per page.
+                    examples:
+                    - '10'
+                  previous:
+                    type: object
+                    description: Returns a link to the previous page of the response.
+                  results:
+                    type: array
+                    description: Returns a list of JSON objects for each threat data object.
+                    items:
+                      type: object
+                      properties:
+                        is_redacted:
+                          type: boolean
+                          description: 'Returns true if the object includes restricted tags.
+
+                            If `is_redacted=true`, then the name of the related object is masked.'
+                          examples:
+                          - 'false'
+                        relationship_type:
+                          type: string
+                          description: Returns the relationship type of the object with the report object.
+                          examples:
+                          - related-to
+                        sources:
+                          type: array
+                          description: Returns a list of JSON objects for each source of the threat data object.
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: Returns the ID of the source of the threat data object.
+                                examples:
+                                - e5cc6128-494f-40ff-bec7-f3c347664839
+                              name:
+                                type: string
+                                description: Returns the name of the source of the threat data object.
+                                examples:
+                                - Import
+                              source_type:
+                                type: string
+                                description: Returns the type of the source of the threat data object.
+                                examples:
+                                - CUSTOM_STIX_SOURCES
+                        target_ref:
+                          type: object
+                          description: Returns the details of the object ingested as part of the quick add intel submission.
+                          properties:
+                            created:
+                              type: number
+                              description: Returns the epoch timestamp of when the object was created in Intel Exchange.
+                              examples:
+                              - '1716973369'
+                            id:
+                              type: string
+                              description: Returns the ID of the object.
+                              examples:
+                              - 6e573ee8-e53d-46ea-bc1e-9ca135fda709
+                            modified:
+                              type: number
+                              description: Returns the epoch timestamp of when the object was modified in Intel Exchange.
+                              examples:
+                              - '1716973369'
+                            name:
+                              type: string
+                              description: Returns the name of the object.
+                              examples:
+                              - sampledomain.com
+                            object_type:
+                              type: string
+                              description: Returns the object type.
+                              examples:
+                              - indicator
+                            sub_type:
+                              type: string
+                              description: Returns the object sub-type.
+                              examples:
+                              - domain-name
+                            tlp:
+                              type: string
+                              description: Returns the TLP associated with the object.
+                              examples:
+                              - NONE
+                  total:
+                    type: number
+                    description: Returns the total number of objects related to the report object.
+                    examples:
+                    - '1'
+              example:
+                next: {}
+                page_size: '10'
+                previous: {}
+                results:
+                - is_redacted: 'false'
+                  relationship_type: related-to
+                  sources:
+                  - id: e5cc6128-494f-40ff-bec7-f3c347664839
+                    name: Import
+                    source_type: CUSTOM_STIX_SOURCES
+                  target_ref:
+                    created: '1716973369'
+                    id: 6e573ee8-e53d-46ea-bc1e-9ca135fda709
+                    modified: '1716973369'
+                    name: sampledomain.com
+                    object_type: indicator
+                    sub_type: domain-name
+                    tlp: NONE
+                total: '1'
+  /conversion/intel-history-stat/:
+    get:
+      operationId: retrieveQuickAddIntelStatistics
+      summary: Get Quick Add Intel Statistics
+      tags:
+      - Quick Add Intel
+      description: "Returns the statistics of the Quick Add Intel history.\n\n### Intel Processing Statuses\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"cf4b84a4-8824-4fb2-88a3-743338792450\",\"title\":\"Status\"},{\"id\":\"e1e57983-1f94-4270-bde4-ace3385a5640\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DRAFT</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been created but has not yet been submitted for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PENDING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is awaiting processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARSED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PUBLISHED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PROCESSING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is currently being analyzed and processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">CREATED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been added to the system but has not yet moved to further stages.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DELETED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been removed from the system.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">FAILED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The processing attempt was unsuccessful.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARTIALLY SUCCESSFUL</p></table-cell>\n    <table-cell><p class=\"slate-p \">Some elements of the intel were processed successfully, but others encountered issues.</p></table-cell>\n  </table-row>\n</Table>"
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-quick-add-intel-statistics
+      parameters:
+      - name: component
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Pass `quick-add-intel` to retrieve the statistics of the Quick Add Intel history.
+          enum:
+          - quick-add-intel
+          examples:
+          - quick-add-intel
+        description: Pass `quick-add-intel` to retrieve the statistics of the Quick Add Intel history.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '0':
+                    type: object
+                    description: Retrieves the total number of intel in drafted state. The intel has been created but has not yet been submitted for processing.
+                    properties:
+                      label:
+                        type: string
+                        description: Retrieves the label of the status.
+                        enum:
+                        - Draft
+                        - Parsed
+                        - Published
+                        - Processing
+                        - Pending
+                        - Created
+                        - Deleted
+                        - Failed
+                        - Partially Successful
+                        examples:
+                        - Draft
+                      key:
+                        type: string
+                        description: Returns the key of the corresponding status.
+                        examples:
+                        - DRAFT
+                      value:
+                        type: number
+                        description: Returns the number of intel in the associated status.
+                        examples:
+                        - 6
+                  '1':
+                    type: object
+                    description: Retrieves the total number of intel in parsed state. The intel has been successfully processed and parsed into relevant data structures.
+                    properties:
+                      label:
+                        type: string
+                        examples:
+                        - Parsed
+                      key:
+                        type: string
+                        examples:
+                        - PARSED
+                      value:
+                        type: number
+                        examples:
+                        - 30
+                  '2':
+                    type: object
+                    description: Retrieves the total number of intel in published state. The intel has been successfully processed and parsed into relevant data structures.
+                    properties:
+                      label:
+                        type: string
+                        examples:
+                        - Published
+                      key:
+                        type: string
+                        examples:
+                        - PUBLISHED
+                      value:
+                        type: number
+                        examples:
+                        - 50
+                  '3':
+                    type: object
+                    description: Retrieves the total number of intel still being processed. The intel is currently being analyzed and processed.
+                    properties:
+                      label:
+                        type: string
+                        examples:
+                        - Processing
+                      key:
+                        type: string
+                        examples:
+                        - PROCESSING
+                      value:
+                        type: number
+                        examples:
+                        - 2
+              example:
+                '0':
+                  label: Draft
+                  key: DRAFT
+                  value: 6
+                '1':
+                  label: Parsed
+                  key: PARSED
+                  value: 30
+                '2':
+                  label: Published
+                  key: PUBLISHED
+                  value: 50
+                '3':
+                  label: Processing
+                  key: PROCESSING
+                  value: 2
+  /conversion/quick-intel/receive-report/:
+    get:
+      operationId: retrieveQuickAddIntelStatus
+      summary: Get Quick Add Intel Status
+      tags:
+      - Quick Add Intel
+      description: Retrieve the intel creation status of a quick add intel submission. This API requires the unique ID of the background task created by the system to create intel.
+      externalDocs:
+        description: Cyware Intel Exchange API reference
+        url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-quick-add-intel-status
+      parameters:
+      - name: task_id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the quick add intel task ID to retrieve the intel creation status. You can retrieve the ID using the **Quick Add Intel API**.
+        description: Pass the quick add intel task ID to retrieve the intel creation status. You can retrieve the ID using the **Quick Add Intel API**.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the page number to retrieve records.
+          default: '1'
+        description: Pass the page number to retrieve records.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Pass the number of records to retrieve on each page.
+          maxLength: 100
+          default: '10'
+        description: Pass the number of records to retrieve on each page.
+      responses:
+        '200':
+          description: HTTP 200 response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    type: string
+                    description: Returns the unique ID of the report object that is created as part of the quick add intel submission.
+                    examples:
+                    - d42fb454-62c7-4b5f-9330-40036bd2da1f
+                  report_status:
+                    type: string
+                    description: Returns the status of the intel creation.
+                    enum:
+                    - 'DRAFT '
+                    - PARSED
+                    - PUBLISHED
+                    - PROCESSING
+                    - PENDING
+                    - CREATED
+                    - DELETED
+                    - FAILED
+                    - PARTIALLY_SUCCESSFUL
+                    examples:
+                    - CREATED
+              example:
+                report_id: d42fb454-62c7-4b5f-9330-40036bd2da1f
+                report_status: CREATED
+components:
+  securitySchemes:
+    ctixOpenApiSignature:
+      type: apiKey
+      in: query
+      name: AccessID
+      description: 'Intel Exchange Open API credentials. Every request carries three query parameters: AccessID (the access ID of the Open API credential), Expires (an epoch timestamp, at most 30 seconds in the future) and Signature - an HMAC-SHA1 of "AccessID\nExpires" keyed with the secret key, Base64 encoded and then URL encoded. See https://ctixapiv3.cyware.com/authentication'
+externalDocs:
+  description: Cyware Intel Exchange API Reference
+  url: https://ctixapiv3.cyware.com/

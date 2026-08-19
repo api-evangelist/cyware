@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cyware Orchestrate (CO) Open Code Snippets API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_id",
+      "value": "{{access_id}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Code Snippets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Code Snippet Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/code-snippets/:unique_id/",
+            "params": [
+              {
+                "name": "unique_id",
+                "value": "",
+                "type": "path",
+                "description": "Pass the unique ID of the code snippet to retrieve the details. You can use the **Get Code Snippet List** endpoint to retrieve the unique ID of a code snippet."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific code snippet."
+        },
+        {
+          "info": {
+            "name": "Get Code Snippets List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{co_host}/soarapi/v1/code-snippets/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pass the page number to retrieve the code snippets list."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Pass the number of items to retrieve  per page."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Pass the title to search for a code snippet."
+              }
+            ]
+          },
+          "docs": "Returns the list of code snippets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
