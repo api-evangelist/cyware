@@ -21,6 +21,23 @@ specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
+  - Threat Intelligence
+  - cyber-threat-intelligence
+  - Cybersecurity
+  - Security Operations
+  - Threat Intelligence Platform
+  - STIX
+  - TAXII
+  - mitre-attack
+  - SOAR
+  - Security Orchestration
+  - Incident Response
+  - threat-intelligence-sharing
+  - isac
+  - Indicators of Compromise
+  - MCP
+  - Agentic AI
+tags_raw:
   - threat-intelligence
   - cyber-threat-intelligence
   - cybersecurity
@@ -48,6 +65,11 @@ apis:
   humanURL: https://github.com/cyware-labs/cyware-mcpserver
   baseURL: https://github.com/cyware-labs/cyware-mcpserver
   tags:
+  - MCP
+  - Agentic AI
+  - Threat Intelligence
+  - Security Operations
+  tags_raw:
   - mcp
   - agentic-ai
   - threat-intelligence
@@ -387,6 +409,8 @@ apis:
   humanURL: https://ctixapiv3.cyware.com/
   baseURL: https://demo.cyware.com/ctixapi
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -547,6 +571,8 @@ apis:
   humanURL: https://ctixapiv3.cyware.com/
   baseURL: https://demo.cyware.com/ctixapi
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -1123,6 +1149,8 @@ apis:
   humanURL: https://ctixapiv3.cyware.com/
   baseURL: https://demo.cyware.com/ctixapi
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
