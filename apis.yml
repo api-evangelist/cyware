@@ -13,6 +13,20 @@ description: >-
   Orchestrate Open API — both tenant-hosted, both authenticated with HMAC-SHA1 signed Open API
   credentials — plus an open-source Model Context Protocol server that exposes threat-intelligence and
   playbook actions to LLM agents.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.cyware.com/assets/images/cyware.svg
 url: https://raw.githubusercontent.com/api-evangelist/cyware/refs/heads/main/apis.yml
 x-type: company
