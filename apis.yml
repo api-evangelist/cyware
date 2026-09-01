@@ -38,19 +38,19 @@ tags:
   - Threat Intelligence
   - cyber-threat-intelligence
   - Cybersecurity
-  - security-operations
-  - threat-intelligence-platform
+  - Security Operations
+  - Threat Intelligence Platform
   - STIX
-  - taxii
+  - TAXII
   - mitre-attack
-  - soar
-  - security-orchestration
-  - incident-response
+  - SOAR
+  - Security Orchestration
+  - Incident Response
   - threat-intelligence-sharing
   - isac
-  - indicators-of-compromise
+  - Indicators of Compromise
   - MCP
-  - agentic-ai
+  - Agentic AI
 tags_raw:
   - threat-intelligence
   - cyber-threat-intelligence
@@ -80,9 +80,9 @@ apis:
   baseURL: https://github.com/cyware-labs/cyware-mcpserver
   tags:
   - MCP
-  - agentic-ai
+  - Agentic AI
   - Threat Intelligence
-  - security-operations
+  - Security Operations
   tags_raw:
   - mcp
   - agentic-ai
