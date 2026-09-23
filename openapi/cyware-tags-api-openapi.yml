@@ -5,6 +5,9 @@ info:
     name: Cyware
     url: https://www.cyware.com/contact-us
   termsOfService: https://www.cyware.com/legal/terms-of-use
+  x-apievangelist-method: generated
+  x-refined-note:
+  - x-apievangelist-source differs across the merged source definitions and was not carried
   version: '1.0'
   description: 'Operations tagged Tags across 2 of this provider''s published API definitions: cyware-intel-exchange-openapi.yml, cyware-orchestrate-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
@@ -23,12 +26,6 @@ tags:
   description: Tags
 paths:
   /ingestion/tags/:
-    servers:
-    - url: https://{ctix_host}/ctixapi
-      description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
-      variables:
-        ctix_host:
-          default: demo.cyware.com
     post:
       operationId: createTag
       summary: Create Tag
@@ -145,13 +142,13 @@ paths:
                 is_active: true
       security:
       - ctixOpenApiSignature: []
-  /ingestion/tags/{tag_id}/:
     servers:
     - url: https://{ctix_host}/ctixapi
       description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
       variables:
         ctix_host:
           default: demo.cyware.com
+  /ingestion/tags/{tag_id}/:
     get:
       operationId: tagDetails
       summary: Get Tag Details
@@ -318,13 +315,13 @@ paths:
         url: https://ctixapiv3.cyware.com/tag-groups/get-tag-group-details
       security:
       - ctixOpenApiSignature: []
-  /ingestion/tags/tag-category/allowed/:
     servers:
     - url: https://{ctix_host}/ctixapi
       description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
       variables:
         ctix_host:
           default: demo.cyware.com
+  /ingestion/tags/tag-category/allowed/:
     get:
       operationId: getAllowedTagGroupCategories
       summary: Get Allowed Tag Categories
@@ -387,13 +384,13 @@ paths:
                   colour_code: '#0068FA'
       security:
       - ctixOpenApiSignature: []
-  /v1/tags/:
     servers:
-    - url: https://{co_host}/soarapi
-      description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+    - url: https://{ctix_host}/ctixapi
+      description: Tenant Intel Exchange deployment. Replace {ctix_host} with your own Intel Exchange host. Cyware documents the base URL form https://sample.domain.com/ctixapi in its authentication guide and uses https://demo.cyware.com/ctix/ as the example host in the config of its open-source MCP server.
       variables:
-        co_host:
+        ctix_host:
           default: demo.cyware.com
+  /v1/tags/:
     get:
       operationId: getListOfTags
       summary: Get Tags List
@@ -596,13 +593,13 @@ paths:
                   playbook_count: 0
       security:
       - coOpenApiSignature: []
-  /v1/tags/{tag_unique_id}/:
     servers:
     - url: https://{co_host}/soarapi
       description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
       variables:
         co_host:
           default: demo.cyware.com
+  /v1/tags/{tag_unique_id}/:
     get:
       operationId: getTagDetails
       summary: Get Tag Details
@@ -731,6 +728,12 @@ paths:
                 playbook_count: '3'
       security:
       - coOpenApiSignature: []
+    servers:
+    - url: https://{co_host}/soarapi
+      description: Tenant Orchestrate deployment. Replace {co_host} with your own Orchestrate host. Cyware uses https://demo.cyware.com/soar/ as the example host in the config of its open-source MCP server, and its docs reference the /soarapi base path.
+      variables:
+        co_host:
+          default: demo.cyware.com
 components:
   securitySchemes:
     ctixOpenApiSignature:

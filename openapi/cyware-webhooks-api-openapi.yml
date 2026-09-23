@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Orchestrate (CO) Open Webhooks API
   version: v1
-  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
-
-
-    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us
@@ -33,7 +27,13 @@ paths:
       summary: Create Event (v2)
       tags:
       - Webhooks
-      description: "Creates an event by passing the app identifier and action identifier through the URL and data through the payload. This API provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The following is the example webhook URL that retrieves the detailed response: <code class=\"slate-code\">https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356</code>.</p>\n</Callout>"
+      description: 'Creates an event by passing the app identifier and action identifier through the URL and data through the payload. This API provides a concise response with key parameters.
+
+
+        Note: This API is available in Orchestrate v3.5.9 onwards.
+
+
+        To retrieve a detailed response, remove the /v2 from the webhook URL. The following is the example webhook URL that retrieves the detailed response: https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356.'
       externalDocs:
         description: Cyware Orchestrate API reference
         url: https://orchestrateapi.cyware.com/webhooks/create-event-v2
@@ -149,7 +149,13 @@ paths:
       summary: Create Events through Payload (v2)
       tags:
       - Webhooks
-      description: "Creates an event by passing the app identifier, action identifier, and data through the payload. This API endpoint provides a concise response with key parameters.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Note</strong>: This API is available in Orchestrate v3.5.9 onwards.</p>\n  <p>To retrieve a detailed response, remove the <code class=\"slate-code\">/v2</code> from the webhook URL. The following is the example webhook URL that retrieves the detailed response: <code class=\"slate-code\">https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356.</code></p>\n</Callout>"
+      description: 'Creates an event by passing the app identifier, action identifier, and data through the payload. This API endpoint provides a concise response with key parameters.
+
+
+        Note: This API is available in Orchestrate v3.5.9 onwards.
+
+
+        To retrieve a detailed response, remove the /v2 from the webhook URL. The following is the example webhook URL that retrieves the detailed response: https://soarapi/webhooks_auth/events/?token=1df121212-121x-1212-3434-a67823232356.'
       externalDocs:
         description: Cyware Orchestrate API reference
         url: https://orchestrateapi.cyware.com/webhooks/create-events-through-payload-v2

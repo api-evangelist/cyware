@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Intel Exchange (CTIX) v3 Open PIR API
   version: 3.6.2
-  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
-
-
-    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us
@@ -33,7 +27,10 @@ paths:
       summary: Login
       tags:
       - PIR
-      description: "Authenticates a user against the API Gateway and returns a session token. Store the token and pass it as `CYW <token>` in the `Authorization` header for all subsequent API calls.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>The login endpoint is served under <code class=\"slate-code\">/cpapi</code>, not under the <code class=\"slate-code\">/cpapi/cpir</code> prefix used by all other PIR endpoints.</p>\n</Callout>"
+      description: 'Authenticates a user against the API Gateway and returns a session token. Store the token and pass it as `CYW ` in the `Authorization` header for all subsequent API calls.
+
+
+        The login endpoint is served under /cpapi, not under the /cpapi/cpir prefix used by all other PIR endpoints.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/auth/login
@@ -191,7 +188,10 @@ paths:
       summary: List Entity Matches for PIR
       tags:
       - PIR
-      description: "Returns the intelligence objects currently matched to a specific PIR, ordered by relevance score in descending by default. At least one of `include__object_type`, `object_type`, or `entity_kind` is required; omitting all three returns `400` `CPIR-002`.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">object_type</code> now applies AND semantics across multiple values. Because each matched row holds a single object type, a multi-value AND is structurally unsatisfiable and always returns an empty result. Use <code class=\"slate-code\">include__object_type</code> for OR filtering across multiple types. Single-value <code class=\"slate-code\">object_type</code> is unaffected.</p>\n</Callout>"
+      description: 'Returns the intelligence objects currently matched to a specific PIR, ordered by relevance score in descending by default. At least one of `include__object_type`, `object_type`, or `entity_kind` is required; omitting all three returns `400` `CPIR-002`.
+
+
+        object_type now applies AND semantics across multiple values. Because each matched row holds a single object type, a multi-value AND is structurally unsatisfiable and always returns an empty result. Use include__object_type for OR filtering across multiple types. Single-value object_type is unaffected.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/matches/list-entity-matches-for-pir
@@ -853,7 +853,10 @@ paths:
       summary: Create PIR
       tags:
       - PIR
-      description: "Creates a new Priority Intelligence Requirement for the authenticated tenant. On creation, an embedding job is queued in the Central Embedding Service (CES), and a match sweep runs automatically once the embedding completes.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><code class=\"slate-code\">category_ids</code> is required when <code class=\"slate-code\">status</code> is <code class=\"slate-code\">active</code>. A PIR activated without categories returns <code class=\"slate-code\">400 CPIR-002</code>.</p>\n</Callout>"
+      description: 'Creates a new Priority Intelligence Requirement for the authenticated tenant. On creation, an embedding job is queued in the Central Embedding Service (CES), and a match sweep runs automatically once the embedding completes.
+
+
+        category_ids is required when status is active. A PIR activated without categories returns 400 CPIR-002.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/pir-management/create-pir
@@ -1232,7 +1235,10 @@ paths:
       summary: Enhance Intent
       tags:
       - PIR
-      description: "Rewrites a vague or incomplete intent into a precise, well-structured monitoring requirement using an LLM. Returns the enhanced text for analyst review before it is committed. Only `intent` is required. Passing quality context from a prior Analyze Intent call focuses the rewrite on the weakest dimensions.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"success\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Returns <code class=\"slate-code\">500</code> when LiteLLM is unavailable.</p>\n</Callout>"
+      description: 'Rewrites a vague or incomplete intent into a precise, well-structured monitoring requirement using an LLM. Returns the enhanced text for analyst review before it is committed. Only `intent` is required. Passing quality context from a prior Analyze Intent call focuses the rewrite on the weakest dimensions.
+
+
+        Returns 500 when LiteLLM is unavailable.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/pir-management/enhance-intent
@@ -1659,47 +1665,58 @@ paths:
       description: 'Transitions a PIR to a new lifecycle status. Status changes affect whether the PIR participates in match sweeps and signal evaluation and may trigger side effects such as auto-resolving open signals.
 
 
-        <Accordion attributes=''{"style":{"width":"100%"}}''>
+        State
 
-        <AccordionItem title="Lifecycle States" iconUrl=""><p>State</p>
 
-        <p>Behaviour</p>
+        Behaviour
 
-        <p>Match Sweeps</p>
 
-        <p><code class="slate-code">draft</code></p>
+        Match Sweeps
 
-        <p>Saved but not yet submitted for monitoring.</p>
 
-        <p>Excluded</p>
+        draft
 
-        <p><code class="slate-code">active</code></p>
 
-        <p>Fully operational. Requires at least one category; returns <code class="slate-code">400</code> <code class="slate-code">CPIR-002</code> otherwise.</p>
+        Saved but not yet submitted for monitoring.
 
-        <p>Included</p>
 
-        <p><code class="slate-code">inactive</code></p>
+        Excluded
 
-        <p>Temporarily suspended. Open signals are auto-resolved on transition.</p>
 
-        <p>Excluded</p>
+        active
 
-        <p><code class="slate-code">expired</code></p>
 
-        <p>End-of-life. Open signals are auto-resolved and the CES record is deprecated.</p>
+        Fully operational. Requires at least one category; returns 400 CPIR-002 otherwise.
 
-        <p>Excluded</p>
 
-        <p><code class="slate-code">deleted</code></p>
+        Included
 
-        <p>Soft-deleted. Excluded from list results. Open signals are auto-resolved and matches are marked removed.</p>
 
-        <p>Excluded</p>
+        inactive
 
-        <p></p></AccordionItem>
 
-        </Accordion>'
+        Temporarily suspended. Open signals are auto-resolved on transition.
+
+
+        Excluded
+
+
+        expired
+
+
+        End-of-life. Open signals are auto-resolved and the CES record is deprecated.
+
+
+        Excluded
+
+
+        deleted
+
+
+        Soft-deleted. Excluded from list results. Open signals are auto-resolved and matches are marked removed.
+
+
+        Excluded'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/pir-management/update-pir-status
@@ -2625,35 +2642,40 @@ paths:
       description: 'Transitions a signal to a new status. Not all transitions are permitted; see the transition rules below. Returns `409` `CPIR-007` when the transition is not allowed from the signal''s current state.
 
 
-        <Accordion attributes=''{"style":{"width":"100%"}}''>
+        Target status
 
-        <AccordionItem title="Transition Rules" iconUrl=""><p>Target status</p>
 
-        <p>Allowed from</p>
+        Allowed from
 
-        <p>Failure</p>
 
-        <p><code class="slate-code">acknowledged</code></p>
+        Failure
 
-        <p><code class="slate-code">triggered</code> only</p>
 
-        <p><code class="slate-code">409</code> <code class="slate-code">CPIR-007</code> with "signal is not in triggered state"</p>
+        acknowledged
 
-        <p><code class="slate-code">resolved</code></p>
 
-        <p><code class="slate-code">triggered</code> or <code class="slate-code">acknowledged</code></p>
+        triggered only
 
-        <p><code class="slate-code">409</code> <code class="slate-code">CPIR-007</code> with "signal cannot be resolved from its current state"</p>
 
-        <p><code class="slate-code">dismissed</code></p>
+        409 CPIR-007 with "signal is not in triggered state"
 
-        <p>Any status</p>
 
-        <p>N/A</p>
+        resolved
 
-        <p></p></AccordionItem>
 
-        </Accordion>'
+        triggered or acknowledged
+
+
+        409 CPIR-007 with "signal cannot be resolved from its current state"
+
+
+        dismissed
+
+
+        Any status
+
+
+        N/A'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/pir/signals/update-signal-status

@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Intel Exchange (CTIX) v3 Open Threat Data Objects API
   version: 3.6.2
-  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
-
-
-    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us

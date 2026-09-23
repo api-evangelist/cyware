@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Orchestrate (CO) Open Authentication API
   version: v1
-  description: 'Public Open API for Cyware Orchestrate, Cyware''s security orchestration, automation and response (SOAR) platform. The API covers playbooks (listing, running, run logs, node results, exports, bulk terminate), app integrations (apps, app actions, app instances, action execution, custom app import), source events, persistent lists (storage manager), code snippets, custom email templates, tags, analytics and connectivity/version checks, plus the inbound webhook endpoints used to push events into Orchestrate.
-
-
-    Orchestrate is deployed per tenant, so the server host is the customer''s own Orchestrate deployment; the API is mounted under `/soarapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://orchestrateapi.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Orchestrate, Cyware's security orchestration, automation and response (SOAR) platform.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us

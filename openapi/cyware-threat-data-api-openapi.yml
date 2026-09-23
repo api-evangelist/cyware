@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Intel Exchange (CTIX) v3 Open Threat Data API
   version: 3.6.2
-  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
-
-
-    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us
@@ -95,11 +89,7 @@ paths:
         ### Changelog
 
 
-        <Accordion attributes=''{"style":{"width":"100%"}}''>
-
-        <AccordionItem title="Release v3.7.7.0" iconUrl=""><p>Added a new endpoint for AI-assisted search in Threat Data.</p></AccordionItem>
-
-        </Accordion>'
+        Added a new endpoint for AI-assisted search in Threat Data.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/threat-data/ai-assisted-search
@@ -809,7 +799,40 @@ paths:
       summary: Bulk IOC Lookup and Create Intel
       tags:
       - Threat Data
-      description: "Perform a lookup for IOCs to retrieve the list of objects available in Intel Exchange. If some IOCs are not available in the platform, you can choose to create intel and ingest the missing IOCs. You can look up and ingest a maximum of 1000 IOCs in an API request.\n\nYou can perform a lookup for the following IOC types:\n\n*   IPv4\n    \n*   IPv6\n    \n*   Email Address\n    \n*   MD5\n    \n*   SHA1\n    \n*   SHA256\n    \n*   SHA512\n    \n*   SSDEEP\n    \n*   URL\n    \n*   Domain"
+      description: 'Perform a lookup for IOCs to retrieve the list of objects available in Intel Exchange. If some IOCs are not available in the platform, you can choose to create intel and ingest the missing IOCs. You can look up and ingest a maximum of 1000 IOCs in an API request.
+
+
+        You can perform a lookup for the following IOC types:
+
+
+        * IPv4
+
+
+        * IPv6
+
+
+        * Email Address
+
+
+        * MD5
+
+
+        * SHA1
+
+
+        * SHA256
+
+
+        * SHA512
+
+
+        * SSDEEP
+
+
+        * URL
+
+
+        * Domain'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/threat-data/bulk-actions/bulk-ioc-lookup-and-create-intel
@@ -1402,7 +1425,85 @@ paths:
       summary: Generate Export File
       tags:
       - Threat Data
-      description: "Initiates export of threat data objects to a CSV file based on the CQL input. This API returns a file ID to retrieve the export file download link. You can export a maximum of 100,000 threat data objects in one API request.\n\n### **The Column Object**\n\nEach column object includes the key and value of a column. You can include the following columns in the export file:\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"3a18cb23-fae9-44c8-8f15-5f368bf40d32\",\"title\":\"Key\"},{\"id\":\"5f5960de-5003-46c4-9690-cae7eb63927b\",\"title\":\"Value\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">name</p></table-cell>\n    <table-cell><p class=\"slate-p \">Value</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">type</p></table-cell>\n    <table-cell><p class=\"slate-p \">Type</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">tlp</p></table-cell>\n    <table-cell><p class=\"slate-p \">TLP</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">tags</p></table-cell>\n    <table-cell><p class=\"slate-p \">Tags</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">sources</p></table-cell>\n    <table-cell><p class=\"slate-p \">Source</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">source_collections</p></table-cell>\n    <table-cell><p class=\"slate-p \">Source Collection</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">published_collections</p></table-cell>\n    <table-cell><p class=\"slate-p \">Published Collections</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">ctix_created</p></table-cell>\n    <table-cell><p class=\"slate-p \">System Created Date</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">ctix_modified</p></table-cell>\n    <table-cell><p class=\"slate-p \">System Modified Date</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">country</p></table-cell>\n    <table-cell><p class=\"slate-p \">Country</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">analyst_score</p></table-cell>\n    <table-cell><p class=\"slate-p \">Analyst Score</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">source_confidence</p></table-cell>\n    <table-cell><p class=\"slate-p \">Source Confidence</p></table-cell>\n  </table-row>\n</Table>"
+      description: 'Initiates export of threat data objects to a CSV file based on the CQL input. This API returns a file ID to retrieve the export file download link. You can export a maximum of 100,000 threat data objects in one API request.
+
+
+        ### **The Column Object**
+
+
+        Each column object includes the key and value of a column. You can include the following columns in the export file:
+
+
+        name
+
+
+        Value
+
+
+        type
+
+
+        Type
+
+
+        tlp
+
+
+        TLP
+
+
+        tags
+
+
+        Tags
+
+
+        sources
+
+
+        Source
+
+
+        source_collections
+
+
+        Source Collection
+
+
+        published_collections
+
+
+        Published Collections
+
+
+        ctix_created
+
+
+        System Created Date
+
+
+        ctix_modified
+
+
+        System Modified Date
+
+
+        country
+
+
+        Country
+
+
+        analyst_score
+
+
+        Analyst Score
+
+
+        source_confidence
+
+
+        Source Confidence'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/threat-data/export/generate-export-file
@@ -1489,476 +1590,7 @@ paths:
       summary: Get Threat Data List
       tags:
       - Threat Data
-      description: 'Returns a list of threat data objects from Intel Exchange using a CQL query. You can retrieve a maximum of 500,000 threat data objects using this API.
-
-
-        Use the following field mapping and operator references to write accurate CQL queries for this endpoint.
-
-
-        <Accordion attributes=''{"style":{"width":"100%"}}''>
-
-        <AccordionItem title="CQL Field Mapping: UI vs API" iconUrl=""><p>The following table maps UI field labels and their associated values to the corresponding API field keys and values used in the CQL module. Use this mapping to write accurate CQL queries in the API.</p>
-
-        <p>UI Label</p>
-
-        <p>API Query Key</p>
-
-        <p>Accepted Values (UI label -> API Query Key)</p>
-
-        <p>Object Type</p>
-
-        <p><code class="slate-code">type</code></p>
-
-        *   Indicator → `indicator`
-
-        *   Malware → `malware`
-
-        *   Threat Actor → `threat-actor`
-
-        *   Vulnerability → `vulnerability`
-
-        *   Attack Pattern → `attack-pattern`
-
-        *   Campaign → `campaign`
-
-        *   Course of Action → `course-of-action`
-
-        *   Identity → `identity`
-
-        *   Infrastructure → `infrastructure`
-
-        *   Intrusion Set → `intrusion-set`
-
-        *   Location → `location`
-
-        *   Malware Analysis → `malware-analysis`
-
-        *   Observed Data → `observed-data`
-
-        *   Opinion → `opinion`
-
-        *   Tool → `tool`
-
-        *   Report → `report`
-
-        <p>IOC type</p>
-
-        <p><code class="slate-code">ioc_type</code></p>
-
-        *   Artifact → `artifact`
-
-        *   Autonomous system → `autonomous-system`
-
-        *   Directory → `directory`
-
-        *   Domain → `domain-name`
-
-        *   Email addr → `email-addr`
-
-        *   Email message → `email-message`
-
-        *   File → `file`
-
-        *   Ipv4 addr → `ipv4-addr`
-
-        *   Ipv6 addr → `ipv6-addr`
-
-        *   Mac addr → `mac-addr`
-
-        *   MD5 → `MD5`
-
-        *   Mutex → `mutex`
-
-        *   Network traffic → `network-traffic`
-
-        *   Process → `process`
-
-        *   SHA1 → `SHA-1`
-
-        *   SHA224 → `SHA-224`
-
-        *   SHA384 → `SHA-384`
-
-        *   SHA512 → `SHA-512`
-
-        *   Software → `software`
-
-        *   SSDEEP → `SSDEEP`
-
-        *   URL → `url`
-
-        *   User account → `user-account`
-
-        *   Windows registry key → `windows-registry-key`
-
-        *   X509 certificate → `x509-certificate`
-
-        *   YARA → `yara`
-
-        <p>Custom Object Type</p>
-
-        <p><code class="slate-code">custom_object_type</code></p>
-
-        <p>Custom object types are platform-defined. For example, <code class="slate-code">text</code> will appear as <code class="slate-code">x-test</code> in API queries.</p>
-
-        <p>Source</p>
-
-        <p><code class="slate-code">source</code></p>
-
-        <p>Each source in the UI maps to a unique source ID in the API. These IDs vary based on the sources configured in your instance.</p>
-
-        <p>Source Type</p>
-
-        <p><code class="slate-code">source_type</code></p>
-
-        *   STIX → `CUSTOM_STIX_SOURCES`
-
-        *   APIs → `API_FEEDS`
-
-        *   Email → `EMAIL_ACCOUNTS`
-
-        *   RSS → `RSS_FEED`
-
-        *   X (Twitter) → `TWITTER_FEEDS`
-
-        *   Web Scraper → `WEB_SCRAPPER`
-
-        *   Sandbox → `MALWARE_SANDBOX`
-
-        *   Miscellaneous → `MISCELLANEOUS`
-
-        <p>Source Collections</p>
-
-        <p><code class="slate-code">source_collection</code></p>
-
-        <p>Each source collection maps to a unique ID used in API queries. These values vary based on the collections configured in your instance.</p>
-
-        <p>Source Confidence</p>
-
-        <p><code class="slate-code">source_confidence</code></p>
-
-        *   High → `HIGH`
-
-        *   Medium → `MEDIUM`
-
-        *   Low → `LOW`
-
-        *   None → `NONE`
-
-        <p>Source Confidence Value</p>
-
-        <p><code class="slate-code">source_confidence_value</code></p>
-
-        <p>Pass an integer value representing the confidence score in the API.</p>
-
-        <p>Source Created</p>
-
-        <p><code class="slate-code">source_created</code></p>
-
-        <p>Use an EPOCH timestamp to filter results by the created date in your API query.</p>
-
-        <p>Source Modified</p>
-
-        <p><code class="slate-code">source_modified</code></p>
-
-        <p>Use an EPOCH timestamp to filter results by the modified date in your API query.</p>
-
-        <p>Value</p>
-
-        <p><code class="slate-code">value</code></p>
-
-        <p>Pass a custom string to match or filter against user-defined input.</p>
-
-        <p>Published Collection</p>
-
-        <p><code class="slate-code">published_collection</code></p>
-
-        <p>Use the collection’s unique ID to filter by a specific published collection.</p>
-
-        <p>Published Date</p>
-
-        <p><code class="slate-code">published_on</code></p>
-
-        <p>Pass an EPOCH timestamp to filter indicators by their published date.</p>
-
-        <p>Imported File Date</p>
-
-        <p><code class="slate-code">imported_file_on</code></p>
-
-        <p>Pass an EPOCH timestamp to filter indicators by their imported file date.</p>
-
-        <p>Imported File</p>
-
-        <p><code class="slate-code">imported_file</code></p>
-
-        <p>Provide any string value as the label for the imported file.</p>
-
-        <p>System Created Date</p>
-
-        <p><code class="slate-code">ctix_created</code></p>
-
-        <p>Use an EPOCH timestamp to filter by the system creation date in API queries.</p>
-
-        <p>System Modified Date</p>
-
-        <p><code class="slate-code">ctix_modified</code></p>
-
-        <p>Use an EPOCH timestamp to filter by the system modification date in API queries.</p>
-
-        <p>Risk Score</p>
-
-        <p><code class="slate-code">confidence_score</code></p>
-
-        <p>Provide an integer value to represent the risk or confidence level in your API query.</p>
-
-        <p>TLP</p>
-
-        <p><code class="slate-code">tlp</code></p>
-
-        *   Red → `RED`
-
-        *   Amber+Strict → `AMBER_STRICT`
-
-        *   Amber → `AMBER`
-
-        *   Green → `GREEN`
-
-        *   Clear → `CLEAR`
-
-        *   None → `NONE`
-
-        <p>Valid Until</p>
-
-        <p><code class="slate-code">valid_until</code></p>
-
-        <p>Pass an EPOCH timestamp to specify the expiry date of the indicator in your API query</p>
-
-        <p>Valid From</p>
-
-        <p><code class="slate-code">valid_from</code></p>
-
-        <p>Pass an EPOCH timestamp to define when the indicator becomes valid in your API query.</p>
-
-        <p>Tag Category</p>
-
-        <p><code class="slate-code">tag_type</code></p>
-
-        *   Source → `source`
-
-        *   User → `user`
-
-        *   System → `system`
-
-        *   Privileged Access → `privileged`
-
-        *   Group → `group`
-
-        <p>Tags</p>
-
-        <p><code class="slate-code">tags</code></p>
-
-        <p>Pass the unique tag ID in your API query. Each tag in the UI corresponds to a specific ID.</p>
-
-        <p>Analyst Score</p>
-
-        <p><code class="slate-code">analyst_score</code></p>
-
-        <p>Provide an integer value in the API to indicate the analyst-assigned score.</p>
-
-        <p>Analyst CVSS Score</p>
-
-        <p><code class="slate-code">analyst_cvss_score</code></p>
-
-        <p>Pass an integer value to represent the analyst-assigned CVSS score.</p>
-
-        <p>Countries</p>
-
-        <p><code class="slate-code">countries</code></p>
-
-        <p>Use the exact country name as shown in the UI. The API expects the same value without any change in casing or format.</p>
-
-        <p>First Seen</p>
-
-        <p><code class="slate-code">first_seen</code></p>
-
-        <p>Pass the date as an EPOCH timestamp when querying through the API.</p>
-
-        <p>Last Seen</p>
-
-        <p><code class="slate-code">last_seen</code></p>
-
-        <p>Pass the date as an EPOCH timestamp when querying through the API.</p>
-
-        <p>Deprecation Status</p>
-
-        <p><code class="slate-code">is_deprecated</code></p>
-
-        *   Deprecated → `true`
-
-        *   Not Deprecated → `false`
-
-        <p>False Positive Status</p>
-
-        <p><code class="slate-code">is_false_positive</code></p>
-
-        *   True → `true`
-
-        *   False → `false`
-
-        <p>Review Status</p>
-
-        <p><code class="slate-code">is_reviewed</code></p>
-
-        *   Reviewed → `true`
-
-        *   Not Reviewed → `false`
-
-        <p>Revoke Status</p>
-
-        <p><code class="slate-code">is_revoked</code></p>
-
-        *   Revoked → `true`
-
-        *   Not Revoked → `false`
-
-        <p>Manual Review</p>
-
-        <p><code class="slate-code">is_under_review</code></p>
-
-        *   Yes → `true`
-
-        *   No → `false`
-
-        <p>Included in Allowed Indicators</p>
-
-        <p><code class="slate-code">is_whitelisted</code></p>
-
-        *   Yes → `true`
-
-        *   No → `false`
-
-        <p>Actioned By</p>
-
-        <p><code class="slate-code">actioned_by</code></p>
-
-        <p>Pass the system-generated user ID when querying through the API.</p>
-
-        <p>Actioned Date</p>
-
-        <p><code class="slate-code">actioned_on</code></p>
-
-        <p>Use an EPOCH timestamp to filter results by actioned date in the API.</p>
-
-        <p>Action Medium</p>
-
-        <p><code class="slate-code">action_type</code></p>
-
-        *   Manual → `manual`
-
-        *   Rule → `automatic`
-
-        <p>Actioned App Type</p>
-
-        <p><code class="slate-code">aapp_type</code></p>
-
-        *   CTIX → `ctix`
-
-        *   3rd Party → `third_party`
-
-        <p>Actioned App</p>
-
-        <p><code class="slate-code">app_name</code></p>
-
-        <p>Use the app name exactly as shown in the UI. The API expects the value with the same casing and format, without any changes.</p>
-
-        <p>Relation Created Date</p>
-
-        <p><code class="slate-code">relation_created</code></p>
-
-        <p>Pass the date as an EPOCH timestamp in the API.</p>
-
-        <p>Relation Modified Date</p>
-
-        <p><code class="slate-code">relation_modified</code></p>
-
-        <p>Pass the date as an EPOCH timestamp in the API.</p>
-
-        <p>Relation Type</p>
-
-        <p><code class="slate-code">relationship_type</code></p>
-
-        <p>Pass either predefined or custom relationship types in the API. Common default types include <code class="slate-code">duplicate-of</code>, <code class="slate-code">derived-from</code>, and <code class="slate-code">related-to</code>.</p>
-
-        <p>Related Object Property</p>
-
-        <p><code class="slate-code">related_object_property</code></p>
-
-        <p>Values are populated dynamically based on platform configuration for related object properties.</p>
-
-        <p>Related Object</p>
-
-        <p><code class="slate-code">related_object</code></p>
-
-        <p>Use this key in your API queries. Values are the same as those used in the Object Type field.</p>
-
-        <p>Has Relations</p>
-
-        <p><code class="slate-code">has_relations</code></p>
-
-        *   Yes → `true`
-
-        *   No → `false`
-
-        <p>Sighting Located</p>
-
-        <p><code class="slate-code">sighting_located</code></p>
-
-        *   Yes → `true`
-
-        *   No → `false`
-
-        <p>Sighting Observed</p>
-
-        <p><code class="slate-code">sighting_observed</code></p>
-
-        *   Yes → `true`
-
-        *   No → `false`
-
-        <p>Sighting First Seen</p>
-
-        <p><code class="slate-code">sighting_first_seen</code></p>
-
-        <p>Pass an EPOCH timestamp in your API query to specify when the sighting was first observed.</p>
-
-        <p>Sighting Last Seen</p>
-
-        <p><code class="slate-code">sighting_last_seen</code></p>
-
-        <p>Pass an EPOCH timestamp in your API query to specify when the sighting was last observed.</p>
-
-        <p>Sighting Source Created</p>
-
-        <p><code class="slate-code">sighting_source_created</code></p>
-
-        <p>Pass an EPOCH timestamp in your API query to define when the source created the sighting.</p>
-
-        <p>Sighting Source Modified</p>
-
-        <p><code class="slate-code">sighting_source_modified</code></p>
-
-        <p>Pass an EPOCH timestamp in your API query to define when the source last modified the sighting.</p></AccordionItem>
-
-        </Accordion>
-
-
-        **CQL Conditions**: Learn about conditional operators used in CQL expressions.
-
-
-        **CQL Operators**: Understand the supported comparison and logical operators in CQL.
-
-
-        For more information, see [CQL documentation](https://techdocs.cyware.com/en/index-en.html?contextId=ctix_understand_cql_grammar).'
+      description: Returns a list of threat data objects from Intel Exchange using a CQL query.
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/threat-data/list-threat-data

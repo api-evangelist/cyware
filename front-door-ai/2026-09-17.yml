@@ -1,0 +1,30 @@
+# Front Door AI Index — cyware — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: cyware
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.cyware.com
+  final_host: www.cyware.com
+  ownership: own
+  owner: cyware
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 43
+  host_score: 43
+  density: 44.98
+  words: 956
+  tiers:
+    agentic: 20
+    core: 23
+    model: 0
+  ambiguous: 62
+  top_terms:
+    intelligence: 49
+    AI: 23
+    agent: 13
+    agentic: 10
+    AI agent: 7
+    MCP: 3

@@ -2,13 +2,7 @@ openapi: 3.2.0
 info:
   title: Cyware Intel Exchange (CTIX) v3 Open Quick Add Intel API
   version: 3.6.2
-  description: 'Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware''s threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x. The API covers threat data objects, intel creation and import, enrichment, rules, tags, watchlists, threat bulletins, threat investigation, dashboards, reports, PIR management, MITRE ATT&CK navigator data and platform administration.
-
-
-    Intel Exchange is deployed per tenant, so the server host is the customer''s own Intel Exchange deployment; the API is mounted under `/ctixapi`.
-
-
-    This document was assembled by API Evangelist from Cyware''s own published, structured API reference documents at https://ctixapiv3.cyware.com — each endpoint page is served as machine-readable markdown carrying a JSON endpoint model, and every page is indexed from that host''s llms.txt. Paths, methods, parameters, descriptions, enumerations and examples are reproduced from those documents; nothing is invented.'
+  description: Public Open API for Cyware Intel Exchange (formerly CTIX), Cyware's threat intelligence platform for the ingestion, enrichment, analysis, correlation and bi-directional sharing of structured and unstructured threat intelligence using STIX 2.x and TAXII 2.x.
   contact:
     name: Cyware
     url: https://www.cyware.com/contact-us
@@ -33,7 +27,10 @@ paths:
       summary: Create Parse IOCs Task
       tags:
       - Quick Add Intel
-      description: "Creates an IOC parsing task to extract STIX objects from free text data or a web page.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p>Currently, this API endpoint does not support parsing IOCs from files such as PDF, CSV, XLS, and others.</p>\n</Callout>"
+      description: 'Creates an IOC parsing task to extract STIX objects from free text data or a web page.
+
+
+        Currently, this API endpoint does not support parsing IOCs from files such as PDF, CSV, XLS, and others.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/create-parse-iocs-task
@@ -80,7 +77,7 @@ paths:
       summary: Get Country Codes List
       tags:
       - Quick Add Intel
-      description: Returns a list of country codes based on the [STIX 2.1 enumeration](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These country codes can be used to specify locations in the **Quick Add Intel** endpoint.
+      description: Returns a list of country codes based on the STIX 2.1 enumeration. These country codes can be used to specify locations in the **Quick Add Intel** endpoint.
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/list-country-codes
@@ -457,7 +454,7 @@ paths:
       summary: Get Regions List
       tags:
       - Quick Add Intel
-      description: Returns the list of [STIX 2.1 region open vocabulary](https://docs.oasis-open.org/cti/stix/v2.1/csprd01/stix-v2.1-csprd01.html#:~:text=bit%20x86%20architecture.-,10.20%20%E2%80%8BRegion%20Vocabulary,-Vocabulary%20Name:%20region). These regions can be used to specify locations in the **Quick Add Intel** endpoint.
+      description: Returns the list of STIX 2.1 region open vocabulary. These regions can be used to specify locations in the **Quick Add Intel** endpoint.
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/list-regions
@@ -538,7 +535,394 @@ paths:
       summary: Quick Add Intel
       tags:
       - Quick Add Intel
-      description: "Creates intel by providing minimal details of indicators, SDOs, relations, custom objects, and indicators parsed from free text.\n\n<Callout attributes='{\"isFitToPage\":true,\"dataType\":\"info\",\"style\":{\"width\":\"100%\",\"minWidth\":\"100%\"}}'>\n  <p><strong class=\"slate-bold\">Default Source</strong>: Import</p>\n  <p><strong class=\"slate-bold\">Default Collection</strong>: Free Text</p>\n</Callout>\n\n**Note**: At least one of the `indicators`, `sdos`, `observables`, or `custom_objects` is required to create an intel.\n\n<Accordion attributes='{\"style\":{\"width\":\"100%\"}}'>\n<AccordionItem title=\"The Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">indicators</code> object in Quick Add Intel accepts the IOC type as the key and a comma-separated list of IOC values as the value. You can pass a maximum of 5000 characters as the IOC value per IOC type.</p>\n<p>For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ipv4-addr</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6-addr</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domain</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">url</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">email</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p></AccordionItem>\n<AccordionItem title=\"The Parse Indicators Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">parse_indicators</code> object in Quick Add Intel accepts the IOC type as the key and a list of parsed IOC values as the value. For the allowed list of IOC types and the respective key to pass in the <code class=\"slate-code\">parse_indicators</code> object, refer to the following table:</p>\n<p>IOC Type</p>\n<p>IOC Key</p>\n<p>IPv4</p>\n<p><code class=\"slate-code\">ips</code></p>\n<p>IPv6</p>\n<p><code class=\"slate-code\">ipv6</code></p>\n<p>Domain</p>\n<p><code class=\"slate-code\">domains</code></p>\n<p>URL</p>\n<p><code class=\"slate-code\">urls</code></p>\n<p>Email Address</p>\n<p><code class=\"slate-code\">emails</code></p>\n<p>MD5</p>\n<p><code class=\"slate-code\">md5</code></p>\n<p>SHA1</p>\n<p><code class=\"slate-code\">sha1</code></p>\n<p>SHA224</p>\n<p><code class=\"slate-code\">sha224</code></p>\n<p>SHA256</p>\n<p><code class=\"slate-code\">sha256</code></p>\n<p>SHA384</p>\n<p><code class=\"slate-code\">sha384</code></p>\n<p>SHA512</p>\n<p><code class=\"slate-code\">sha512</code></p>\n<p>SSDEEP</p>\n<p><code class=\"slate-code\">ssdeep</code></p>\n<p>CVE IDs</p>\n<p><code class=\"slate-code\">cve_ids</code></p>\n<p>Windows Registry Key</p>\n<p><code class=\"slate-code\">registry_key_path</code></p>\n<p>File Paths</p>\n<p><code class=\"slate-code\">file_paths</code></p>\n<p>Autonomous System</p>\n<p><code class=\"slate-code\">as</code></p>\n<p>X.509 certificates</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p></AccordionItem>\n<AccordionItem title=\"The Custom Objects Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">custom_objects</code> object in Quick Add Intel accepts the ID of a custom object as the key and a list of custom attribute objects as the value.</p>\n<p>The custom attribute object accepts the name of the primary attribute of a custom object as the key and the attribute value as the value.</p>\n<p>To retrieve the custom object IDs and the respective primary attribute, use the <em class=\"slate-italic\">GET Custom Object Details</em> API in <strong class=\"slate-bold\">Administration</strong> > <strong class=\"slate-bold\">Custom Entities Management</strong> > <strong class=\"slate-bold\">Custom Objects</strong>.</p></AccordionItem>\n<AccordionItem title=\"The SDOs Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">sdos</code> object in Quick Add Intel accepts the STIX Domain Object (SDO) type as the key and a comma-separated list of SDO values as the value. You can pass a maximum of 5000 characters as the SDO value per SDO type.</p>\n<p>For the allowed list of SDO types and the respective key to pass in the <code class=\"slate-code\">sdos</code> object, refer to the following table:</p>\n<p>SDO Type</p>\n<p>SDO Key</p>\n<p>Vulnerability</p>\n<p><code class=\"slate-code\">vulnerability</code></p>\n<p>Malware</p>\n<p><code class=\"slate-code\">malware</code></p>\n<p>Campaign</p>\n<p><code class=\"slate-code\">campaign</code></p>\n<p>Threat Actor</p>\n<p><code class=\"slate-code\">threat-actor</code></p>\n<p>Intrusion Set</p>\n<p><code class=\"slate-code\">intrusion-set</code></p>\n<p>Attack Pattern</p>\n<p><code class=\"slate-code\">attack-pattern</code></p>\n<p>Incident</p>\n<p><code class=\"slate-code\">incident</code></p>\n<p>Course of Action</p>\n<p><code class=\"slate-code\">course-of-action</code></p>\n<p>Identity</p>\n<p><code class=\"slate-code\">identity</code></p>\n<p>Tool</p>\n<p><code class=\"slate-code\">tool</code></p>\n<p>Infrastructure</p>\n<p><code class=\"slate-code\">infrastructure</code></p>\n<p>Location</p>\n<p><code class=\"slate-code\">location</code></p>\n<p>Malware Analysis</p>\n<p><code class=\"slate-code\">malware-analysis</code></p></AccordionItem>\n<AccordionItem title=\"The Observables Object\" iconUrl=\"\"><p>The <code class=\"slate-code\">observables</code> object in Quick Add Intel accepts the STIX Cyber Observable Object (SCO) type as the key and a comma-separated list of SCO values as the value. You can pass a maximum of 5000 characters as the SCO value per SCO type.</p>\n<p>For the allowed list of SCO types and the respective key to pass in the <code class=\"slate-code\">observables</code> object, refer to the following table:</p>\n<p>SCO Type</p>\n<p>SCO Key</p>\n<p>Artifact</p>\n<p><code class=\"slate-code\">artifact</code></p>\n<p>Directory</p>\n<p><code class=\"slate-code\">directory</code></p>\n<p>Email Message</p>\n<p><code class=\"slate-code\">email-message</code></p>\n<p>MAC Address</p>\n<p><code class=\"slate-code\">mac-addr</code></p>\n<p>Mutex</p>\n<p><code class=\"slate-code\">mutex</code></p>\n<p>​Network Traffic</p>\n<p><code class=\"slate-code\">network-traffic</code></p>\n<p>Process</p>\n<p><code class=\"slate-code\">process</code></p>\n<p>Software</p>\n<p><code class=\"slate-code\">software</code></p>\n<p>User Account</p>\n<p><code class=\"slate-code\">user-account</code></p>\n<p>X.509 Certificate</p>\n<p><code class=\"slate-code\">x509-certificate</code></p>\n<p>File</p>\n<p><code class=\"slate-code\">file</code></p></AccordionItem>\n</Accordion>"
+      description: 'Creates intel by providing minimal details of indicators, SDOs, relations, custom objects, and indicators parsed from free text.
+
+
+        Default Source: Import
+
+
+        Default Collection: Free Text
+
+
+        **Note**: At least one of the `indicators`, `sdos`, `observables`, or `custom_objects` is required to create an intel.
+
+
+        The indicators object in Quick Add Intel accepts the IOC type as the key and a comma-separated list of IOC values as the value. You can pass a maximum of 5000 characters as the IOC value per IOC type.
+
+
+        For the allowed list of IOC types and the respective key to pass in the indicators object, refer to the following table:
+
+
+        IOC Type
+
+
+        IOC Key
+
+
+        IPv4
+
+
+        ipv4-addr
+
+
+        IPv6
+
+
+        ipv6-addr
+
+
+        Domain
+
+
+        domain
+
+
+        URL
+
+
+        url
+
+
+        Email Address
+
+
+        email
+
+
+        MD5
+
+
+        md5
+
+
+        SHA1
+
+
+        sha1
+
+
+        SHA224
+
+
+        sha224
+
+
+        SHA256
+
+
+        sha256
+
+
+        SHA384
+
+
+        sha384
+
+
+        SHA512
+
+
+        sha512
+
+
+        SSDEEP
+
+
+        ssdeep
+
+
+        The parse_indicators object in Quick Add Intel accepts the IOC type as the key and a list of parsed IOC values as the value. For the allowed list of IOC types and the respective key to pass in the parse_indicators object, refer to the following table:
+
+
+        IOC Type
+
+
+        IOC Key
+
+
+        IPv4
+
+
+        ips
+
+
+        IPv6
+
+
+        ipv6
+
+
+        Domain
+
+
+        domains
+
+
+        URL
+
+
+        urls
+
+
+        Email Address
+
+
+        emails
+
+
+        MD5
+
+
+        md5
+
+
+        SHA1
+
+
+        sha1
+
+
+        SHA224
+
+
+        sha224
+
+
+        SHA256
+
+
+        sha256
+
+
+        SHA384
+
+
+        sha384
+
+
+        SHA512
+
+
+        sha512
+
+
+        SSDEEP
+
+
+        ssdeep
+
+
+        CVE IDs
+
+
+        cve_ids
+
+
+        Windows Registry Key
+
+
+        registry_key_path
+
+
+        File Paths
+
+
+        file_paths
+
+
+        Autonomous System
+
+
+        as
+
+
+        X.509 certificates
+
+
+        x509-certificate
+
+
+        MAC Address
+
+
+        mac-addr
+
+
+        The custom_objects object in Quick Add Intel accepts the ID of a custom object as the key and a list of custom attribute objects as the value.
+
+
+        The custom attribute object accepts the name of the primary attribute of a custom object as the key and the attribute value as the value.
+
+
+        To retrieve the custom object IDs and the respective primary attribute, use the GET Custom Object Details API in Administration > Custom Entities Management > Custom Objects.
+
+
+        The sdos object in Quick Add Intel accepts the STIX Domain Object (SDO) type as the key and a comma-separated list of SDO values as the value. You can pass a maximum of 5000 characters as the SDO value per SDO type.
+
+
+        For the allowed list of SDO types and the respective key to pass in the sdos object, refer to the following table:
+
+
+        SDO Type
+
+
+        SDO Key
+
+
+        Vulnerability
+
+
+        vulnerability
+
+
+        Malware
+
+
+        malware
+
+
+        Campaign
+
+
+        campaign
+
+
+        Threat Actor
+
+
+        threat-actor
+
+
+        Intrusion Set
+
+
+        intrusion-set
+
+
+        Attack Pattern
+
+
+        attack-pattern
+
+
+        Incident
+
+
+        incident
+
+
+        Course of Action
+
+
+        course-of-action
+
+
+        Identity
+
+
+        identity
+
+
+        Tool
+
+
+        tool
+
+
+        Infrastructure
+
+
+        infrastructure
+
+
+        Location
+
+
+        location
+
+
+        Malware Analysis
+
+
+        malware-analysis
+
+
+        The observables object in Quick Add Intel accepts the STIX Cyber Observable Object (SCO) type as the key and a comma-separated list of SCO values as the value. You can pass a maximum of 5000 characters as the SCO value per SCO type.
+
+
+        For the allowed list of SCO types and the respective key to pass in the observables object, refer to the following table:
+
+
+        SCO Type
+
+
+        SCO Key
+
+
+        Artifact
+
+
+        artifact
+
+
+        Directory
+
+
+        directory
+
+
+        Email Message
+
+
+        email-message
+
+
+        MAC Address
+
+
+        mac-addr
+
+
+        Mutex
+
+
+        mutex
+
+
+        ​Network Traffic
+
+
+        network-traffic
+
+
+        Process
+
+
+        process
+
+
+        Software
+
+
+        software
+
+
+        User Account
+
+
+        user-account
+
+
+        X.509 Certificate
+
+
+        x509-certificate
+
+
+        File
+
+
+        file'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/quick-add-intel
@@ -731,7 +1115,76 @@ paths:
       summary: Get Parse IOCs Task Status
       tags:
       - Quick Add Intel
-      description: "Returns the status of a parse IOCs task.\n\n### Parsing Task Status Codes\n\nThe following table provides an overview of the different statuses for a parsing task\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"121px\",\"143px\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"8f70bc14-bb07-48b1-bd12-f249c90f8a7a\",\"title\":\"Numeric Status\"},{\"id\":\"d40d086a-e785-40d2-8529-69e9f3c6027d\",\"title\":\"Status Value\"},{\"id\":\"b3c11ff0-e7e2-496f-949c-12ea98e41749\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">0</p></table-cell>\n    <table-cell><p class=\"slate-p \">enqueued</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is in the queue for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">1</p></table-cell>\n    <table-cell><p class=\"slate-p \">running</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task is being processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">2</p></table-cell>\n    <table-cell><p class=\"slate-p \">failed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Failed to process parsing due to invalid input.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">3</p></table-cell>\n    <table-cell><p class=\"slate-p \">done</p></table-cell>\n    <table-cell><p class=\"slate-p \">The parsing task has been completed. Use the <strong class=\"slate-bold\">Get Parsed IOCs</strong> endpoint to retrieve the parsed IOCs.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">5</p></table-cell>\n    <table-cell><p class=\"slate-p \">delayed</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing is delayed due to too many tasks in the queue. Try again after some time.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">6</p></table-cell>\n    <table-cell><p class=\"slate-p \">cancelled</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing has been manually cancelled by the user.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">7</p></table-cell>\n    <table-cell><p class=\"slate-p \">aborted</p></table-cell>\n    <table-cell><p class=\"slate-p \">Parsing was aborted due to some unexpected error. Create a new parsing task.</p></table-cell>\n  </table-row>\n</Table>"
+      description: 'Returns the status of a parse IOCs task.
+
+
+        ### Parsing Task Status Codes
+
+
+        The following table provides an overview of the different statuses for a parsing task
+
+
+        0
+
+
+        enqueued
+
+
+        The parsing task is in the queue for processing.
+
+
+        1
+
+
+        running
+
+
+        The parsing task is being processed.
+
+
+        2
+
+
+        failed
+
+
+        Failed to process parsing due to invalid input.
+
+
+        3
+
+
+        done
+
+
+        The parsing task has been completed. Use the Get Parsed IOCs endpoint to retrieve the parsed IOCs.
+
+
+        5
+
+
+        delayed
+
+
+        Parsing is delayed due to too many tasks in the queue. Try again after some time.
+
+
+        6
+
+
+        cancelled
+
+
+        Parsing has been manually cancelled by the user.
+
+
+        7
+
+
+        aborted
+
+
+        Parsing was aborted due to some unexpected error. Create a new parsing task.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-parse-iocs-task-status
@@ -1124,7 +1577,64 @@ paths:
       summary: Get Quick Add Intel Statistics
       tags:
       - Quick Add Intel
-      description: "Returns the statistics of the Quick Add Intel history.\n\n### Intel Processing Statuses\n\n<Table style=\"width:100%;min-width:100%\" colSizes='[\"initial\",\"initial\"]' isHeaderAdded='true' tableHeader='[{\"id\":\"cf4b84a4-8824-4fb2-88a3-743338792450\",\"title\":\"Status\"},{\"id\":\"e1e57983-1f94-4270-bde4-ace3385a5640\",\"title\":\"Description\"}]'>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DRAFT</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been created but has not yet been submitted for processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PENDING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is awaiting processing.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARSED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PUBLISHED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been successfully processed and parsed into relevant data structures.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PROCESSING</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel is currently being analyzed and processed.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">CREATED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been added to the system but has not yet moved to further stages.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">DELETED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The intel has been removed from the system.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">FAILED</p></table-cell>\n    <table-cell><p class=\"slate-p \">The processing attempt was unsuccessful.</p></table-cell>\n  </table-row>\n  <table-row>\n    <table-cell><p class=\"slate-p \">PARTIALLY SUCCESSFUL</p></table-cell>\n    <table-cell><p class=\"slate-p \">Some elements of the intel were processed successfully, but others encountered issues.</p></table-cell>\n  </table-row>\n</Table>"
+      description: 'Returns the statistics of the Quick Add Intel history.
+
+
+        ### Intel Processing Statuses
+
+
+        DRAFT
+
+
+        The intel has been created but has not yet been submitted for processing.
+
+
+        PENDING
+
+
+        The intel is awaiting processing.
+
+
+        PARSED
+
+
+        The intel has been successfully processed and parsed into relevant data structures.
+
+
+        PUBLISHED
+
+
+        The intel has been successfully processed and parsed into relevant data structures.
+
+
+        PROCESSING
+
+
+        The intel is currently being analyzed and processed.
+
+
+        CREATED
+
+
+        The intel has been added to the system but has not yet moved to further stages.
+
+
+        DELETED
+
+
+        The intel has been removed from the system.
+
+
+        FAILED
+
+
+        The processing attempt was unsuccessful.
+
+
+        PARTIALLY SUCCESSFUL
+
+
+        Some elements of the intel were processed successfully, but others encountered issues.'
       externalDocs:
         description: Cyware Intel Exchange API reference
         url: https://ctixapiv3.cyware.com/quick-add-intel/retrieve-quick-add-intel-statistics
