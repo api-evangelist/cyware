@@ -62,7 +62,7 @@ tags:
 - isac
 - Indicators of Compromise
 - MCP
-- Agentic AI
+- AI Agents
 tags_raw:
 - threat-intelligence
 - cyber-threat-intelligence
@@ -80,6 +80,7 @@ tags_raw:
 - indicators-of-compromise
 - mcp
 - agentic-ai
+- Agentic AI
 apis:
 - name: Cyware MCP Server
   description: Open-source Model Context Protocol server, written in Go and published under MIT by Cyware
@@ -91,7 +92,7 @@ apis:
   baseURL: https://github.com/cyware-labs/cyware-mcpserver
   tags:
   - MCP
-  - Agentic AI
+  - AI Agents
   - Threat Intelligence
   - Security Operations
   tags_raw:
@@ -99,6 +100,7 @@ apis:
   - agentic-ai
   - threat-intelligence
   - security-operations
+  - Agentic AI
   properties:
   - type: MCPServer
     url: mcp/cyware-mcp.yml
