@@ -22,6 +22,8 @@ checked:
 - https://addons.mozilla.org/api/v5/addons/addon/<slug>/
 - https://addons.mozilla.org/api/v5/addons/search/?type=extension&app=firefox
 - https://chromewebstore.google.com/sitemap
+- https://store.servicenow.com/store/app/
+- https://store.servicenow.com/store/sitemap_xml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -265,6 +267,45 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-browser-extension-stores.py
   first_seen: '2026-10-21'
+- partner_name: ServiceNow Store (partner apps)
+  partner: servicenow
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://store.servicenow.com/store/seller/d2f6824ddb052814c9c302d5ca961901
+  category: ServiceNow Store partner app / app certification
+  contract_reference:
+    register: ServiceNow Store (store.servicenow.com/store/sitemap_xml -> /store/app/<id> server-rendered pages)
+    standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+    spec_file: null
+    role: servicenow-store-partner
+    registered_name: Cyware Labs
+    register_id: d2f6824ddb052814c9c302d5ca961901
+    matched_domain: cyware.com
+    matched_by: domain
+    identity_source: the listing's own seller website link (no lookup)
+    certified_products:
+    - product: ServiceNow Certified App (scoped_app / integration)
+      product_type: scoped_app / integration
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: true
+      products_sample:
+      - Cyware Threat Intelligence Exchange-CTIX
+      releases:
+      - Yokohama
+      - Zurich
+    products_sample:
+    - Cyware Threat Intelligence Exchange-CTIX
+    signal_note: 'listing alone = standard-participant; certified_products = one entry per Application type the
+      seller holds a ServiceNow Certified App badge for, standard named on each; lapsed: true when none of that
+      type''s certified apps lists either of the two newest release families on the Store; app counts are context,
+      never counted'
+    detected_by: sweep-servicenow-store.py
+    detected: '2026-10-23'
+  detected_by: sweep-servicenow-store.py
+  first_seen: '2026-10-23'
 source:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
