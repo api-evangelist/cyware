@@ -64,29 +64,188 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cyware is a New York-headquartered cybersecurity company, founded in 2016, that builds an AI-powered
-threat intelligence and security operations platform for enterprise SOC teams, ISACs and ISAOs,
-government agencies, CERTs and MSSPs. The Cyware Intelligence Suite spans Intel Exchange (its threat
-intelligence platform, formerly CTIX), Collaborate, Orchestrate, Respond and Cyware AI.
+Cyware is a New York-headquartered cybersecurity company, founded in 2016, that builds an AI-powered threat intelligence and security operations platform for enterprise SOC teams, ISACs and ISAOs, government agencies, CERTs and MSSPs. The Cyware Intelligence Suite spans Intel Exchange (its threat intelligence platform, formerly CTIX), Collaborate (bi-directional threat sharing for member communities), Orchestrate (security orchestration and automation), Respond (incident case management) and Cyware AI (agentic security analyst workflows). The platform ingests, deduplicates, enriches, scores and operationalizes structured and unstructured cyber threat intelligence using STIX 2.x, TAXII 2.x and MITRE ATT&CK, and pushes it into SIEM, EDR, firewall and ITSM tooling through 400+ integrations. Programmatic access is delivered through the Intel Exchange v3 Open API and the Orchestrate Open API — both tenant-hosted, both authenticated with HMAC-SHA1 signed Open API credentials — plus an open-source Model Context Protocol server that exposes threat-intelligence and playbook actions to LLM agents.
 
-## What this profile covers
+**Areas:** Threat Intelligence · Cybersecurity · Security Operations · Threat Intelligence Platform · STIX · TAXII · mitre-attack · SOAR · Security Orchestration · Incident Response · threat-intelligence-sharing · isac
 
-| Surface | Where |
+## Cyware on APIs.io
+
+Everything profiled for Cyware is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cyware/](https://apis.io/providers/cyware/)** — or go straight to one of the APIs or properties below.
+
+### APIs (35)
+
+- [Cyware MCP Server](https://apis.io/apis/cyware/cyware-mcp-server/) — Open-source Model Context Protocol server, written in Go and published under MIT by Cyware Labs, that exposes Cyware Intel Exchange and Cyware Orchestrate…
+- [Cyware Administration API](https://apis.io/apis/cyware/cyware-administration-api/) — Administration
+- [Cyware Allowed Indicators API](https://apis.io/apis/cyware/cyware-allowed-indicators-api/) — Allowed Indicators
+- [Cyware Analytics API](https://apis.io/apis/cyware/cyware-analytics-api/) — Analytics
+- [Cyware ATT&CK Navigator API](https://apis.io/apis/cyware/cyware-att-ck-navigator-api/) — ATT&CK Navigator
+- [Cyware Authentication API](https://apis.io/apis/cyware/cyware-authentication-api/) — Authentication
+- [Cyware Code Snippets API](https://apis.io/apis/cyware/cyware-code-snippets-api/) — Code Snippets
+- [Cyware Create Intel via Open API](https://apis.io/apis/cyware/cyware-create-intel-via-open-api-api/) — Create Intel via Open API
+- [Cyware Custom Email Templates API](https://apis.io/apis/cyware/cyware-custom-email-templates-api/) — Custom Email Templates
+- [Cyware Dashboards API](https://apis.io/apis/cyware/cyware-dashboards-api/) — Dashboards
+- [Cyware Detailed Submission API](https://apis.io/apis/cyware/cyware-detailed-submission-api/) — Detailed Submission
+- [Cyware Events API](https://apis.io/apis/cyware/cyware-events-api/) — Events
+- [Cyware Fang/Defang API](https://apis.io/apis/cyware/cyware-fang-defang-api/) — Fang/Defang
+- [Cyware Global Notes API](https://apis.io/apis/cyware/cyware-global-notes-api/) — Global Notes
+- [Cyware Global Tasks API](https://apis.io/apis/cyware/cyware-global-tasks-api/) — Global Tasks
+- [Cyware Import Intel API](https://apis.io/apis/cyware/cyware-import-intel-api/) — Import Intel
+- [Cyware Integrations API](https://apis.io/apis/cyware/cyware-integrations-api/) — Integrations
+- [Cyware Persistent List API](https://apis.io/apis/cyware/cyware-persistent-list-api/) — Persistent List
+- [Cyware Ping API](https://apis.io/apis/cyware/cyware-ping-api/) — Ping
+- [Cyware PIR API](https://apis.io/apis/cyware/cyware-pir-api/) — PIR
+- [Cyware Playbooks API](https://apis.io/apis/cyware/cyware-playbooks-api/) — Playbooks
+- [Cyware Quick Add Intel API](https://apis.io/apis/cyware/cyware-quick-add-intel-api/) — Quick Add Intel
+- [Cyware Reports API](https://apis.io/apis/cyware/cyware-reports-api/) — Reports
+- [Cyware RSS Feeds API](https://apis.io/apis/cyware/cyware-rss-feeds-api/) — RSS Feeds
+- [Cyware Rules API](https://apis.io/apis/cyware/cyware-rules-api/) — Rules
+- [Cyware Status Check API](https://apis.io/apis/cyware/cyware-status-check-api/) — Status Check
+- [Cyware Tag Groups API](https://apis.io/apis/cyware/cyware-tag-groups-api/) — Tag Groups
+- [Cyware Tags API](https://apis.io/apis/cyware/cyware-tags-api/) — Tags
+- [Cyware Threat Bulletin API](https://apis.io/apis/cyware/cyware-threat-bulletin-api/) — Threat Bulletin
+- [Cyware Threat Data API](https://apis.io/apis/cyware/cyware-threat-data-api/) — Threat Data
+- [Cyware Threat Data Objects API](https://apis.io/apis/cyware/cyware-threat-data-objects-api/) — Threat Data Objects
+- [Cyware Threat Investigation API](https://apis.io/apis/cyware/cyware-threat-investigation-api/) — Threat Investigation
+- [Cyware Threat Mailbox API](https://apis.io/apis/cyware/cyware-threat-mailbox-api/) — Threat Mailbox
+- [Cyware Watchlist API](https://apis.io/apis/cyware/cyware-watchlist-api/) — Watchlist
+- [Cyware Webhooks API](https://apis.io/apis/cyware/cyware-webhooks-api/) — Webhooks
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Cyware Orchestrate Webhooks](https://apis.io/asyncapis/cyware/cyware-orchestrate-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [cywaremcp](https://apis.io/servers/cyware/cywaremcp/)
+
+#### Collections (34)
+
+Postman and Open Collection request collections.
+
+- [Cyware Intel Exchange (CTIX) v3 Open Administration API](https://apis.io/collections/cyware/open-cyware-administration-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Allowed Indicators API](https://apis.io/collections/cyware/open-cyware-allowed-indicators-api/)
+- [Cyware Orchestrate (CO) Open Analytics API](https://apis.io/collections/cyware/open-cyware-analytics-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open ATT&CK Navigator API](https://apis.io/collections/cyware/open-cyware-att-ck-navigator-api/)
+- [Cyware Orchestrate (CO) Open Authentication API](https://apis.io/collections/cyware/open-cyware-authentication-api/)
+- [Cyware Orchestrate (CO) Open Code Snippets API](https://apis.io/collections/cyware/open-cyware-code-snippets-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Create Intel via Open API API](https://apis.io/collections/cyware/open-cyware-create-intel-via-open-api-api/)
+- [Cyware Orchestrate (CO) Open Custom Email Templates API](https://apis.io/collections/cyware/open-cyware-custom-email-templates-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Dashboards API](https://apis.io/collections/cyware/open-cyware-dashboards-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Detailed Submission API](https://apis.io/collections/cyware/open-cyware-detailed-submission-api/)
+- [Cyware Orchestrate (CO) Open Events API](https://apis.io/collections/cyware/open-cyware-events-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Fang/Defang API](https://apis.io/collections/cyware/open-cyware-fang-defang-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Global Notes API](https://apis.io/collections/cyware/open-cyware-global-notes-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Global Tasks API](https://apis.io/collections/cyware/open-cyware-global-tasks-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Import Intel API](https://apis.io/collections/cyware/open-cyware-import-intel-api/)
+- [Cyware Orchestrate (CO) Open Integrations API](https://apis.io/collections/cyware/open-cyware-integrations-api/)
+- [Cyware Orchestrate (CO) Open Persistent List API](https://apis.io/collections/cyware/open-cyware-persistent-list-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Ping API](https://apis.io/collections/cyware/open-cyware-ping-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open PIR API](https://apis.io/collections/cyware/open-cyware-pir-api/)
+- [Cyware Orchestrate (CO) Open Playbooks API](https://apis.io/collections/cyware/open-cyware-playbooks-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Quick Add Intel API](https://apis.io/collections/cyware/open-cyware-quick-add-intel-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Reports API](https://apis.io/collections/cyware/open-cyware-reports-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open RSS Feeds API](https://apis.io/collections/cyware/open-cyware-rss-feeds-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Rules API](https://apis.io/collections/cyware/open-cyware-rules-api/)
+- [Cyware Intel Exchange (CTIX) v3 Open Status Check API](https://apis.io/collections/cyware/open-cyware-status-check-api/)
+- …and 9 more published on APIs.io
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Cyware Intel Exchange Overlay](https://apis.io/overlays/cyware/cyware-intel-exchange-overlay/)
+- [Cyware Orchestrate Overlay](https://apis.io/overlays/cyware/cyware-orchestrate-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Cyware Authentication](https://apis.io/security/cyware/cyware-authentication/)
+- [Cyware Domain Security](https://apis.io/security/cyware/cyware-domain-security/)
+- [Cyware Trust Center](https://apis.io/security/cyware/cyware-trust-center/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Cyware Rate Limits](https://apis.io/rate-limits/cyware/cyware-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cyware.com/)
+- [Documentation](https://techdocs.cyware.com/index.html)
+- [Getting started](https://techdocs.cyware.com/ctix/en/api-documentation.html)
+- [API reference](https://ctixapiv3.cyware.com/)
+- [Pricing](https://www.cyware.com/pricing)
+- [Sign up](https://www.cyware.com/book-a-demo)
+- [Support](https://www.cyware.com/support)
+- [Blog](https://www.cyware.com/blog)
+- [Compliance](https://www.cyware.com/compliance)
+- [Terms of service](https://www.cyware.com/legal/acceptable-use-policy)
+- [Privacy policy](https://www.cyware.com/legal/privacy-policy)
+- [GitHub](https://github.com/cyware-labs)
+
+## API Evangelist rating
+
+**Kin Score 49.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| Intel Exchange (CTIX) v3 Open API — 391 operations | `openapi/cyware-intel-exchange-openapi.yml` |
-| Orchestrate (CO) Open API — 47 operations | `openapi/cyware-orchestrate-openapi.yml` |
-| Cyware MCP Server — 40 tools, open source (MIT, Go) | `mcp/cyware-mcp.yml` |
-| MCP tool -> REST operation crosswalk | `mcp/cyware-tool-crosswalk.yml` |
-| Authentication (HMAC-SHA1 signed query string) | `authentication/cyware-authentication.yml` |
-| Cross-cutting conventions | `conventions/cyware-conventions.yml` |
-| Agent skills for five marquee flows | `skills/` |
+| Discoverability | 75.0 |
+| Contract quality | 22.4 |
+| Contract governance | 18.2 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 60.5 |
 
-Cyware publishes **no OpenAPI document**. The two specifications here were assembled from Cyware's
-own published, structured API reference documents at `ctixapiv3.cyware.com` and
-`orchestrateapi.cyware.com` — each endpoint page is served as machine-readable markdown carrying a
-JSON endpoint model, and every page is indexed from that host's `llms.txt`. Paths, methods,
-parameters, descriptions, enumerations and examples are reproduced from those documents.
+**Agent readiness 36.1** — agent-ready
 
-- https://www.cyware.com/
-- https://techdocs.cyware.com/
-- https://forgeglobal.com/cyware_stock/ (secondary-market listing that surfaced this company)
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cyware/](https://apis.io/providers/cyware/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cyware: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cyware/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
